@@ -1,8 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REST", "REST\REST.csproj", "{FFCF7750-7227-7660-7405-3CA7A2A4DBFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTDB", "RESTDB\RESTDB.csproj", "{C54AC425-F0EB-4F7C-B584-C53109267B78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{FFCF7750-7227-7660-7405-3CA7A2A4DBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFCF7750-7227-7660-7405-3CA7A2A4DBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFCF7750-7227-7660-7405-3CA7A2A4DBFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54AC425-F0EB-4F7C-B584-C53109267B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54AC425-F0EB-4F7C-B584-C53109267B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54AC425-F0EB-4F7C-B584-C53109267B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54AC425-F0EB-4F7C-B584-C53109267B78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
