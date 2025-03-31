@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/travis/atlas-capstone/RESTDB/RESTDB.csproj": {}
+    "/home/devunix2/atlas-capstone/RESTDB/RESTDB.csproj": {}
   },
   "projects": {
-    "/home/travis/atlas-capstone/RESTDB/RESTDB.csproj": {
+    "/home/devunix2/atlas-capstone/RESTDB/RESTDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/travis/atlas-capstone/RESTDB/RESTDB.csproj",
+        "projectUniqueName": "/home/devunix2/atlas-capstone/RESTDB/RESTDB.csproj",
         "projectName": "RESTDB",
-        "projectPath": "/home/travis/atlas-capstone/RESTDB/RESTDB.csproj",
-        "packagesPath": "/home/travis/.nuget/packages/",
-        "outputPath": "/home/travis/atlas-capstone/RESTDB/obj/",
+        "projectPath": "/home/devunix2/atlas-capstone/RESTDB/RESTDB.csproj",
+        "packagesPath": "/home/devunix2/.nuget/packages/",
+        "outputPath": "/home/devunix2/atlas-capstone/RESTDB/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/travis/.nuget/NuGet/NuGet.Config"
+          "/home/devunix2/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -41,6 +41,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.3, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
             }
           },
           "imports": [

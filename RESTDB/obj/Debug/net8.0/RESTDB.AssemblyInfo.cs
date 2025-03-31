@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RESTDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8db2224efb2471e79d49e42ff544ef9a26e2071b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+738309e64a0542752b177334dca832368ccdacf0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RESTDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RESTDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/travis/atlas-capstone/REST/REST.csproj": {}
+    "/home/devunix2/atlas-capstone/REST/REST.csproj": {}
   },
   "projects": {
-    "/home/travis/atlas-capstone/REST/REST.csproj": {
+    "/home/devunix2/atlas-capstone/REST/REST.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/travis/atlas-capstone/REST/REST.csproj",
+        "projectUniqueName": "/home/devunix2/atlas-capstone/REST/REST.csproj",
         "projectName": "REST",
-        "projectPath": "/home/travis/atlas-capstone/REST/REST.csproj",
-        "packagesPath": "/home/travis/.nuget/packages/",
-        "outputPath": "/home/travis/atlas-capstone/REST/obj/",
+        "projectPath": "/home/devunix2/atlas-capstone/REST/REST.csproj",
+        "packagesPath": "/home/devunix2/.nuget/packages/",
+        "outputPath": "/home/devunix2/atlas-capstone/REST/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/travis/.nuget/NuGet/NuGet.Config"
+          "/home/devunix2/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
