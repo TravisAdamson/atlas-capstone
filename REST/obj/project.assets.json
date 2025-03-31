@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/travis/.nuget/packages/": {}
+    "/Users/admin/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/travis/atlas-capstone/REST/REST.csproj",
+      "projectUniqueName": "/Users/admin/atlas-capstone/REST/REST.csproj",
       "projectName": "REST",
-      "projectPath": "/home/travis/atlas-capstone/REST/REST.csproj",
-      "packagesPath": "/home/travis/.nuget/packages/",
-      "outputPath": "/home/travis/atlas-capstone/REST/obj/",
+      "projectPath": "/Users/admin/atlas-capstone/REST/REST.csproj",
+      "packagesPath": "/Users/admin/.nuget/packages/",
+      "outputPath": "/Users/admin/atlas-capstone/REST/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/travis/.nuget/NuGet/NuGet.Config"
+        "/Users/admin/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -38,7 +38,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -62,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.114/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

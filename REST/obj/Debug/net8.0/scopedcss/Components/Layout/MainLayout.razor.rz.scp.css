@@ -10,6 +10,11 @@ main[b-wt0qkdbvk9] {
 
 .sidebar[b-wt0qkdbvk9] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    width: 50px;
+    height: 100vh;
+    overflow-x: hidden;
+    position: fixed;
+    transition: width 0.3s ease;
 }
 
 .top-row[b-wt0qkdbvk9] {
@@ -94,3 +99,24 @@ main[b-wt0qkdbvk9] {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+/* Header (top nav bar) */
+.top-header[b-wt0qkdbvk9] {
+    background-color: #090846;
+    height: 3.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    top: 0;
+    z-index: 1000;
+    color:#f7f7f7;
+}
+
+.header-content[b-wt0qkdbvk9] {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

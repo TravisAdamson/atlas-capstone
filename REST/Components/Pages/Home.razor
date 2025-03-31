@@ -2,6 +2,36 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Start Page</h1>
 
-Welcome to your new app.
+<div>
+    <div>
+        <!-- Search -->
+        <span>Search</span>
+        <input
+            class="searchbar"
+            type="text"
+            placeholder="Search"
+            @bind="searchText"
+            @oninput="Search"
+            />
+    </div>
+    <div class="homebuttons m-4">
+        <button>Create service records</button>
+        <button>First Call</button>
+        <button>Create Death Certifficate</button>
+        <button>Import Death Certifficate</button>
+        <button>Schedule Service</button>
+        <button>View All Records</button>
+        <button>Contract</button>
+    </div>
+</div>
+
+@code {
+    private string searchText = string.Empty;
+
+    private void Search()
+    {
+        Console.WriteLine(searchText);
+    }
+}
