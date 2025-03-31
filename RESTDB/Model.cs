@@ -3,6 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 
+public class BlogDataContext : DbContext
+{
+    static readonly string connectionString = "Server=localhost; User ID=root; Password=pass; Database=blog";
+
+    public DbSet<Deceased> Deceased { get; set; }
+    public DbSet<Informant> Informant { get; set; }
+	public DbSet<Address> Address { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
+}
+
 public class Deceased
 {
 	public int ClientID { get; set; }
@@ -12,6 +26,7 @@ public class Deceased
 	public string Title { get; set; }
 	public string Suffix { get; set; }
 	public string Status { get; set; }
+	public Address Address { get; set; }
 	public string ContractBalance { get; set; }
 	public required DateTime DoD { get; set; }
 	public required DateTime TimeOfDeath { get; set; }
@@ -22,9 +37,10 @@ public class Deceased
 	public int PhoneNum { get; set; }
 	public int Vet { get; set; }
 	public string War { get; set; }
-	public string Informant { get; set; }
+	public Informant Informant { get; set; }
 	public string InformEmail { get; set; }
 	public DateTime InfoNotified { get; set; }
+	public string Notes { get; set; }
 
 }
 
@@ -33,7 +49,7 @@ public class Informant
 	public required string FirstName { get; set; }
 	public required string LastName { get; set; }
 	public string MiddleName { get; set; }
-	public string Address { get; set; }
+	public Address Address { get; set; }
 	public string Email { get; set; }
 
 }
