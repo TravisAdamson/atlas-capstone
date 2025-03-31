@@ -1,0 +1,16 @@
+.searchbar {
+    flex: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.home-page {
+    background-color: #f3f3f3;
+}
+
+.homebuttons {
+    flex: auto;
+    justify-content: space-between;
+
+}

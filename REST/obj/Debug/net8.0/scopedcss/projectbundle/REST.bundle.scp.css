@@ -11,6 +11,11 @@ main[b-wt0qkdbvk9] {
 
 .sidebar[b-wt0qkdbvk9] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    width: 50px;
+    height: 100vh;
+    overflow-x: hidden;
+    position: fixed;
+    transition: width 0.3s ease;
 }
 
 .top-row[b-wt0qkdbvk9] {
@@ -95,6 +100,27 @@ main[b-wt0qkdbvk9] {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+/* Header (top nav bar) */
+.top-header[b-wt0qkdbvk9] {
+    background-color: #090846;
+    height: 3.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    top: 0;
+    z-index: 1000;
+    color:#f7f7f7;
+}
+
+.header-content[b-wt0qkdbvk9] {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 /* _content/REST/Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-icd43a5vlv] {
     appearance: none;
@@ -200,4 +226,21 @@ main[b-wt0qkdbvk9] {
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
+}
+/* _content/REST/Components/Pages/Home.razor.rz.scp.css */
+.searchbar[b-c3b17fdnzf] {
+    flex: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.home-page[b-c3b17fdnzf] {
+    background-color: #f3f3f3;
+}
+
+.homebuttons[b-c3b17fdnzf] {
+    flex: auto;
+    justify-content: space-between;
+    padding: 15px;
+    gap: 10px;
 }
