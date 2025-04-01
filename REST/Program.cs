@@ -1,10 +1,16 @@
 using REST.Components;
+using RESTDB.Data;
+using RESTDB.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseMySql(
+		builder.Configuration.GetConnectionString("DefaultConnection"),
+		new MySqlServerVersion(new Version(8, 0, 36)) // update to match your system
+	));
 
 var app = builder.Build();
 
