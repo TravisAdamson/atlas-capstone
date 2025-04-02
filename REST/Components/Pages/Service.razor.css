@@ -26,14 +26,14 @@
     background-color: rgb(187, 188, 188);
 }
 
-.service-group1 {
+.FirstCall-group1 {
     display: flex;
     flex-direction: column;
     margin-right: 1rem;
     margin-bottom: 1.5rem;
 }
 
-.service-group {
+.FirstCall-group {
     display: flex;
 }
 
