@@ -3,7 +3,7 @@
 }
 
 .form1 {
-    border: 2px solid #000000;
+    border: 1px solid #000000;
     border-radius: 10px;
     padding: 2rem;
     margin: 2rem auto;
@@ -11,7 +11,7 @@
 }
 
 .form2 {
-    border: 2px solid #000000;
+    border: 1px solid #000000;
     border-radius: 10px;
     padding: 2rem;
     margin: 2rem auto;
@@ -49,4 +49,21 @@
     width: 100px;
     height: 100px;
     background-color: #dbdada;
+}
+
+.d1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.genderlabel {
+    display: flex;
+    flex-direction: row;
+}
+
+.fcall {
+    border: 2px;
+    border-radius: .2rem;
 }
