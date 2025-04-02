@@ -1,0 +1,46 @@
+.forms {
+    padding: 1rem;
+}
+
+.form1 {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.form2 {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.form3 {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.service-group1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-group {
+    display: flex;
+}
+
+.name-group {
+    display: flex;
+}
+
+.display-name {
+    display: flex;
+}
