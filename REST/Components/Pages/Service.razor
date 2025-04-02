@@ -8,11 +8,19 @@
         <div class="FirstCall-group">
             <div class="FirstCall-group1">
                 <label for="client-id">Client ID</label>
-                <input id="client-id" class="clientid" type="text" name="client-id" />
+                <input
+                    id="client-id"
+                    class="fcall"
+                    type="text"
+                    name="client-id" />
             </div>
             <div class="FirstCall-group1">
                 <label for="director">Director</label>
-                <input id="director" class="director" type="text" name="director" />
+                <input
+                    id="director"
+                    class="fcall"
+                    type="text"
+                    name="director" />
             </div>
         </div>
 
@@ -20,15 +28,28 @@
         <div class="name-group">
             <div class="FirstCall-group1">
                 <label for="last-name">Last Name</label>
-                <input id="last-name" class="director" type="text" name="last-name" />
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name"
+                />
             </div>
             <div class="FirstCall-group1">
                 <label for="first-name">First Name</label>
-                <input id="first-name" class="director" type="text" name="first-name" />
+                <input
+                    id="first-name"
+                    class="fcall"
+                    type="text"
+                    name="first-name" />
             </div>
             <div class="FirstCall-group1">
                 <label for="middle-name">Middle Name</label>
-                <input id="middle-name" class="director" type="text" name="middle-name" />
+                <input
+                    id="middle-name"
+                    class="fcall"
+                    type="text"
+                    name="middle-name" />
             </div>
             <div class="FirstCall-group1">
                 <label for="suffix">Suffix</label>
@@ -44,7 +65,19 @@
         <div class="display-name">
             <div class="FirstCall-group1">
                 <label for="display">Display Name</label>
-                <input id="display" class="displayname" type="text" name="display" />
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+        </div>
+
+        <!-- Display Image -->
+        <div class="display-img">
+            <div>
+                <img class="img-class">
             </div>
         </div>
     </div>
@@ -52,24 +85,26 @@
     <!-- Deceased -->
     <div class="form2">
         <h5>Deceased</h5>
-        <div>
-            <div>
-                <label for="death date">Death Date </label>
-                <input
-                    id="death date"
-                    />
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label for="deathdate">Death Date</label>
+                <input id="deatedate" class="fcall" type="text" name="deathdate" />
             </div>
-            <div>
+
+            <div class="FirstCall-group1">
                 <label for="time">Time</label>
                 <input
+                    class="fcall"
                     type="number"
                     id="time"
                     placeholder="_:__"
                     />
             </div>
-            <div>
+
+            <div class="FirstCall-group1">
                 <label for="snn">Social Security Number</label>
                 <input
+                    class="fcall"
                     type="number"
                     id="ssn"
                     name="ssn"
@@ -79,82 +114,234 @@
             </div>
 
             <!-- Sex -->
+            <div class="FirstCall-group1">
+                <label>Sex</label>
+                <div class="genderlabel">
+                    <input type="radio" name="gender" value="Male" /> Male
+                    <input type="radio" name="gender" value="Female" /> Female
+                    <input type="radio" name="gender" value="Other" /> Other
+                </div>
+            </div>
 
-            <form>
+            <div class="FirstCall-group1">
+                <label for="display name">Maiden Name</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
 
-            </form>
+            <div class="FirstCall-group1">
+                <label for="display name">Alias</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
         </div>
-    </div>
 
-    <!-- Removal -->
-    <div class="form3">
-        <div>
-            <form>
-                <label for="display name">Name</label>
+        <!-- Street row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">Last Name</label>
                 <input
-                    id="display"
-                    class="displayname"
+                    id="last-name"
+                    class="fcall"
                     type="text"
-                    name="display"
-                />
-            </form>
+                    name="last-name" />
+            </div>
 
-            <form>
-                <label for="display name">Street Address</label>
-                <input
-                    id="display"
-                    class="displayname"
+            <div class="FirstCall-group1">
+                <label for="last-name">First Name</label>
+                <input 
+                    id="last-name"
+                    class="fcall"
                     type="text"
-                    name="display"
-                />
-            </form>
+                    name="last-name" />
+            </div>
 
-            <form>
+            <div class="FirstCall-group1">
                 <label for="display name">Zip</label>
                 <input
                     id="display"
-                    class="displayname"
+                    class="fcall"
                     type="text"
                     name="display"
                 />
-            </form>
+            </div>
 
-            <form>
+            <div class="FirstCall-group1">
                 <label for="display name">City</label>
                 <input
                     id="display"
-                    class="displayname"
+                    class="fcall"
                     type="text"
                     name="display"
                 />
-            </form>
+            </div>
 
-            <form>
+            <div class="FirstCall-group1">
                 <label for="display name">County</label>
                 <input
                     id="display"
-                    class="displayname"
+                    class="fcall"
                     type="text"
                     name="display"
                 />
-            </form>
+            </div>
+        </div>
 
-            <!-- State -->
+        <!-- State row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">State</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name" />
+            </div>
 
-            <!-- Country -->
+            <div class="FirstCall-group1">
+                <label for="state">Country</label>
+                <input
+                    id="country"
+                    class="fcall"
+                    type="text"
+                    name="country"
+                />
+            </div>
 
-            <!-- Locality Type -->
+            <div class="FirstCall-group1">
+                <label for="state">Locality Type</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
 
-            <!-- TownShip -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">Home City</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
 
-            <!-- Location -->
+            <div class="FirstCall-group1">
+                <label for="state">Home State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
 
-            <!-- Cross Street -->
+            <div class="FirstCall-group1">
+                <label for="state">Previous State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        
+            <div class="FirstCall-group1">
+                <label for="state">Phone Number</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
 
-            <!-- Directions -->
+            <div class="FirstCall-group1">
+                <label for="state">Veteran</label>
+                <input
+                    id="state"
+                />
+            </div>
 
-            <!-- Removal Phone -->
+            <div class="FirstCall-group1">
+                <label for="state">War Served</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">Informant</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
 
+            <div class="FirstCall-group1">
+                <label for="state">OriginType</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Date Information</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">date Amended</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
+
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">EmailAddress</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="email"
+                    name="state"
+                />
+            </div>
+        </div>
+        <div>
+            <div>
+                <button>Save</button>
+            </div>
         </div>
     </div>
 </div>
