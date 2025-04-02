@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorComponents()
+	.AddInteractiveServerComponents(); // razor components contain antiforgery
+
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseMySql(
@@ -25,6 +28,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
