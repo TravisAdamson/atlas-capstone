@@ -2,7 +2,6 @@ using REST.Components;
 using RESTDB.Data;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
@@ -10,7 +9,7 @@ builder.Services.AddRazorComponents()
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-     .AddInteractiveServerComponents();
+	.AddInteractiveServerComponents();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseMySql(
