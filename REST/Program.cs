@@ -9,6 +9,9 @@ builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents(); // razor components contain antiforgery
 
 // Add services to the container.
+builder.Services.AddRazorComponents()
+     .AddInteractiveServerComponents();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseMySql(
 		builder.Configuration.GetConnectionString("DefaultConnection"),
