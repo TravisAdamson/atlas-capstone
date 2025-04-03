@@ -95,7 +95,7 @@
                 <label for="time">Time</label>
                 <input
                     class="fcall"
-                    type="number"
+                    type="time"
                     id="time"
                     placeholder="_:__"
                     />
@@ -105,12 +105,16 @@
                 <label for="snn">Social Security Number</label>
                 <input
                     class="fcall"
-                    type="number"
+                    type="text"
                     id="ssn"
                     name="ssn"
                     placeholder="123-45-6789"
+                    pattern="\d{3}-\d{2}-\d{4}"
+                    title="Format: 123-45-6789"
                     maxlength="11"
-                    />
+                    value="@ssnValue"
+                    @oninput="FormatSSN"
+                />
             </div>
 
             <!-- Sex -->
@@ -345,3 +349,21 @@
         </div>
     </div>
 </div>
+
+@code {
+    private string ssnValue = "";
+    private void FormatSSN(ChangeEventArgs e)
+    {
+        string digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+
+        if (digits.Length > 9)
+            digits = digits.Substring(0, 9);
+
+        if (digits.Length >= 5)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3, 2)}-{digits.Substring(5)}";
+        else if (digits.Length >= 3)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
+        else
+            ssnValue = digits;
+    }
+}
