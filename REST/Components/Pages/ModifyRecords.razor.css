@@ -1,0 +1,69 @@
+.forms {
+    padding: 1rem;
+}
+
+.form1 {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.form2 {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.form3 {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.FirstCall-group1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.FirstCall-group {
+    display: flex;
+}
+
+.name-group {
+    display: flex;
+}
+
+.display-name {
+    display: flex;
+}
+
+.img-class {
+    width: 100px;
+    height: 100px;
+    background-color: #dbdada;
+}
+
+.d1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.genderlabel {
+    display: flex;
+    flex-direction: row;
+}
+
+.fcall {
+    border: 2px;
+    border-radius: .2rem;
+}
