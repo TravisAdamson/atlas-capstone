@@ -58,7 +58,7 @@ main {
 
     .sidebar {
         width: 250px;
-        height: 100vh;
+        height: 94vh;
         position: sticky;
         top: 0;
     }
@@ -108,9 +108,11 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 1rem;
     top: 0;
-    color:#f7f7f7;
+    left: 0;
+    color: #f7f7f7;
+    z-index: 1000;
 }
 
 .header-content {
@@ -125,3 +127,4 @@ main {
     color:#f7f7f7;
     background-color: #552f7a;
 }
+
