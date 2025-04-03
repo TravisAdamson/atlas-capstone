@@ -1,8 +1,14 @@
 using REST.Components;
 using RESTDB.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+
+builder.Services.AddAuthorization();
+builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents(); // Razor components contain antiforgery
