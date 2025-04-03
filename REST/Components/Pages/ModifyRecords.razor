@@ -1,64 +1,347 @@
 ﻿@page "/Modify Records"
-@attribute [StreamRendering]
 
 <PageTitle>Modify Records</PageTitle>
 
-<h1>Modify Records</h1>
+<div class="forms">
+    <div class="form1">
+        <!-- FirstCall -->
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label for="client-id">Client ID</label>
+                <input
+                    id="client-id"
+                    class="fcall"
+                    type="text"
+                    name="client-id" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="director">Director</label>
+                <input
+                    id="director"
+                    class="fcall"
+                    type="text"
+                    name="director" />
+            </div>
+        </div>
 
-<p>This component will display all created records, and allow for 'Read', 'Update', and 'Delete' actions on them.</p>
+        <!-- Name Info -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">Last Name</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name"
+                />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="first-name">First Name</label>
+                <input
+                    id="first-name"
+                    class="fcall"
+                    type="text"
+                    name="first-name" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="middle-name">Middle Name</label>
+                <input
+                    id="middle-name"
+                    class="fcall"
+                    type="text"
+                    name="middle-name" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="suffix">Suffix</label>
+                <select id="suffix" name="suffix">
+                    <option value="mr">Mr.</option>
+                    <option value="ms">Ms.</option>
+                    <option value="dr">Dr.</option>
+                </select>
+            </div>
+        </div>
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Index 1</th>
-                <th>Index 2</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        <!-- Display Name -->
+        <div class="display-name">
+            <div class="FirstCall-group1">
+                <label for="display">Display Name</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+        </div>
 
-@code {
-    private WeatherForecast[]? forecasts;
+        <!-- Display Image -->
+        <div class="display-img">
+            <div>
+                <img class="img-class">
+            </div>
+        </div>
+    </div>
 
-    protected override async Task OnInitializedAsync()
-    {
-        // Simulate asynchronous loading to demonstrate streaming rendering
-        await Task.Delay(500);
+    <!-- Deceased -->
+    <div class="form2">
+        <h5>Deceased</h5>
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label for="deathdate">Death Date</label>
+                <input id="deatedate" class="fcall" type="text" name="deathdate" />
+            </div>
 
-        var startDate = DateOnly.FromDateTime(DateTime.Now);
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
-    }
+            <div class="FirstCall-group1">
+                <label for="time">Time</label>
+                <input
+                    class="fcall"
+                    type="number"
+                    id="time"
+                    placeholder="_:__"
+                    />
+            </div>
 
-    private class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-}
+            <div class="FirstCall-group1">
+                <label for="snn">Social Security Number</label>
+                <input
+                    class="fcall"
+                    type="number"
+                    id="ssn"
+                    name="ssn"
+                    placeholder="123-45-6789"
+                    maxlength="11"
+                    />
+            </div>
+
+            <!-- Sex -->
+            <div class="FirstCall-group1">
+                <label>Sex</label>
+                <div class="genderlabel">
+                    <input type="radio" name="gender" value="Male" /> Male
+                    <input type="radio" name="gender" value="Female" /> Female
+                    <input type="radio" name="gender" value="Other" /> Other
+                </div>
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">Maiden Name</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">Alias</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+        </div>
+
+        <!-- Street row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">Last Name</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="last-name">First Name</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">Zip</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">City</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">County</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+        </div>
+
+        <!-- State row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">State</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Country</label>
+                <input
+                    id="country"
+                    class="fcall"
+                    type="text"
+                    name="country"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Locality Type</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
+
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">Home City</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Home State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Previous State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Phone Number</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Veteran</label>
+                <input
+                    id="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">War Served</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">Informant</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">OriginType</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Date Information</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">date Amended</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+        </div>
+
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">EmailAddress</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="email"
+                    name="state"
+                />
+            </div>
+        </div>
+        <div>
+            <div>
+                <button>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
