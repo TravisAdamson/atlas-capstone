@@ -35,14 +35,20 @@
 
 .FirstCall-group {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .name-group {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .display-name {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .img-class {
