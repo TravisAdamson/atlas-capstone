@@ -5,28 +5,9 @@
 <h1>Create Record</h1>
 
 <div class="forms">
-    <div class="form1">
-        <!-- FirstCall -->
-        <div class="FirstCall-group">
-            <div class="FirstCall-group1">
-                <label for="client-id">Client ID</label>
-                <input
-                    id="client-id"
-                    class="fcall"
-                    type="text"
-                    name="client-id" />
-            </div>
-            <div class="FirstCall-group1">
-                <label for="director">Director</label>
-                <input
-                    id="director"
-                    class="fcall"
-                    type="text"
-                    name="director" />
-            </div>
-        </div>
-
-        <!-- Name Info -->
+    <!-- Deceased -->
+    <div class="form2">
+        <h5>Deceased</h5>
         <div class="name-group">
             <div class="FirstCall-group1">
                 <label for="last-name">Last Name</label>
@@ -34,27 +15,27 @@
                     id="last-name"
                     class="fcall"
                     type="text"
-                    name="last-name"
-                />
+                    name="last-name" />
             </div>
+
             <div class="FirstCall-group1">
                 <label for="first-name">First Name</label>
                 <input
                     id="first-name"
                     class="fcall"
                     type="text"
-                    name="first-name"
-				/>
+                    name="first-name" />
             </div>
+
             <div class="FirstCall-group1">
                 <label for="middle-name">Middle Name</label>
                 <input
                     id="middle-name"
                     class="fcall"
                     type="text"
-                    name="middle-name"
-				/>
+                    name="middle-name" />
             </div>
+
             <div class="FirstCall-group1">
                 <label for="suffix">Suffix</label>
                 <select id="suffix" name="suffix">
@@ -63,35 +44,10 @@
                     <option value="dr">Dr.</option>
                 </select>
             </div>
-			
         </div>
-
-        <!-- Display Name -->
-        <div class="display-name">
-            <div class="FirstCall-group1">
-                <label for="display">Display Name</label>
-                <input
-                    id="display"
-                    class="fcall"
-                    type="text"
-                    name="display"
-                />
-            </div>
-			<!-- Display Image -->
-			<div class="display-img">
-				<div>
-					<img class="img-class">
-				</div>
-			</div>
-        </div>
-    </div>
-
-    <!-- Deceased -->
-    <div class="form2">
-        <h5>Deceased</h5>
         <div class="FirstCall-group">
             <div class="FirstCall-group1">
-                <label for="deathdate">Death Date</label>
+                <label for="deathdate">Date of Death</label>
                 <input id="deatedate" class="fcall" type="date" name="deathdate" />
             </div>
 
@@ -153,26 +109,28 @@
             </div>
         </div>
 
-        <!-- Street row -->
+        <!-- State row -->
         <div class="name-group">
             <div class="FirstCall-group1">
-                <label for="last-name">Last Name</label>
+                <label for="display name">City</label>
                 <input
-                    id="last-name"
+                    id="display"
                     class="fcall"
                     type="text"
-                    name="last-name" />
+                    name="display"
+                />
             </div>
-
             <div class="FirstCall-group1">
-                <label for="first-name">First Name</label>
+                <label for="state">State</label>
                 <input
-                    id="first-name"
+                    id="state"
                     class="fcall"
                     type="text"
-                    name="first-name" />
+                    name="state" />
             </div>
+        </div>
 
+      <div class="name-group">
             <div class="FirstCall-group1">
                 <label for="zipcode">Zip</label>
                 <input
@@ -189,54 +147,12 @@
             </div>
 
             <div class="FirstCall-group1">
-                <label for="display name">City</label>
-                <input
-                    id="display"
-                    class="fcall"
-                    type="text"
-                    name="display"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
                 <label for="county">County</label>
                 <input
                     id="county"
                     class="fcall"
                     type="text"
                     name="county"
-                />
-            </div>
-        </div>
-
-        <!-- State row -->
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="state">State</label>
-                <input
-                    id="state"
-                    class="fcall"
-                    type="text"
-                    name="state" />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="country">Country</label>
-                <input
-                    id="country"
-                    class="fcall"
-                    type="text"
-                    name="country"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="locality">Locality Type</label>
-                <input
-                    id="locality"
-                    class="fcall"
-                    type="text"
-                    name="locality"
                 />
             </div>
         </div>
@@ -271,20 +187,9 @@
                     name="state"
                 />
             </div>
+        </div>
 
-            <div class="FirstCall-group1">
-                <label for="phone">Phone Number</label>
-                <input
-                    id="phone"
-                    class="fcall"
-                    type="text"
-                    name="phone"
-                    maxlength="13"
-                    placeholder="(123)456-7890"
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                />
-            </div>
-
+        <div class="name-group">
             <div class="FirstCall-group1">
                 <label for="vet">Veteran</label>
                 <input
@@ -345,16 +250,14 @@
                 />
             </div>
         </div>
-
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="Email-address">Email Address</label>
-                <input
-                    id="Email-address"
-                    class="fcall"
-                    type="email"
-                    name="Email-address"
-                />
+        <div>
+            <div class="display-name">
+			    <!-- Display Image -->
+			    <div class="display-img">
+				    <div>
+					    <img class="img-class">
+				    </div>
+			    </div>
             </div>
         </div>
         <div>
