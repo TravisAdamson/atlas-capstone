@@ -391,19 +391,19 @@
     }
 }
 @code {
-    private List<RESTDB.Models.Deceased> RESTDB.Models.Deceased_list();
+    private List<RESTDB.Models.Deceased> Deceaseds;
 	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
 
     protected override async Task OnInitializedAsync()
     {
-        Deceased_list = await Context.Deceased.ToListAsync();
+        Deceaseds = await Context.Deceaseds.ToListAsync();
     }
     private async Task SaveRecord()
     {
 
-		Context.Deceased.Add(currentDeceased);
+		Context.Deceaseds.Add(currentDeceased);
         await Context.SaveChangesAsync();
-        Deceased_list = await Context.Deceased.ToListAsync();
+        Deceaseds = await Context.Deceaseds.ToListAsync();
         currentDeceased = new RESTDB.Models.Deceased();
     }
 }
