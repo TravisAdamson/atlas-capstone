@@ -31,7 +31,6 @@
     flex-direction: column;
     margin-right: 1rem;
     margin-bottom: 1rem;
-	
 }
 
 .FirstCall-group {
@@ -71,7 +70,7 @@
 
 .genderlabel {
     display: flex;
-    flex-direction: row;
+    flex-direction: row;;
 }
 
 .fcall {
