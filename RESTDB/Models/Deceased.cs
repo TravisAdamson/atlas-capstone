@@ -6,7 +6,6 @@ public class Deceased
 {
 	[Key]
 	public required int ClientID { get; set; }
-
 	public required string FirstName { get; set; }
 	public required string LastName { get; set; }
 	public string? MiddleName { get; set; }
@@ -28,5 +27,4 @@ public class Deceased
 	public string? InformEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
 	public string? Notes { get; set; }
-
 }

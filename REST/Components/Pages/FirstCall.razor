@@ -1,4 +1,5 @@
 ﻿@page "/First Call"
+@inject RESTDB.Data.ApplicationDbContext Db
 
 <PageTitle>First Call</PageTitle>
 
@@ -22,7 +23,8 @@
                     id="director"
                     class="fcall"
                     type="text"
-                    name="director" />
+                    name="director"
+				/>
             </div>
         </div>
 
@@ -102,7 +104,7 @@
                     type="time"
                     id="time"
                     placeholder="_:__"
-                    />
+                />
             </div>
 
             <div class="FirstCall-group1">
@@ -161,7 +163,8 @@
                     id="last-name"
                     class="fcall"
                     type="text"
-                    name="last-name" />
+                    name="last-name"
+				/>
             </div>
 
             <div class="FirstCall-group1">
@@ -170,7 +173,8 @@
                     id="first-name"
                     class="fcall"
                     type="text"
-                    name="first-name" />
+                    name="first-name"
+					/>
             </div>
 
             <div class="FirstCall-group1">
@@ -217,7 +221,8 @@
                     id="state"
                     class="fcall"
                     type="text"
-                    name="state" />
+                    name="state"
+				/>
             </div>
 
             <div class="FirstCall-group1">

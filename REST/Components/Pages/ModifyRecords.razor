@@ -1,5 +1,48 @@
 ﻿@page "/Modify Records"
 
+@if (deceasedList == null)
+{
+    <p>Loading...</p>
+}
+else if (!deceasedList.Any())
+{
+    <p>No records found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Client ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Death</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in deceasedList)
+            {
+                <tr>
+                    <td>@d.ClientID</td>
+                    <td>@d.FirstName</td>
+                    <td>@d.LastName</td>
+                    <td>@(d.DoD?.ToShortDateString() ?? "N/A")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Deceased>? deceasedList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        deceasedList = await Db.Deceased.ToListAsync();
+    }
+}
+
+
 <PageTitle>Modify Records</PageTitle>
 
 <h1>Modify Record</h1>
