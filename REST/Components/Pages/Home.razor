@@ -1,22 +1,10 @@
 ﻿@page "/"
+@using System.Security.Claims
 
 <PageTitle>Home</PageTitle>
 
 <h1>Start Page</h1>
-
 <div>
-    <div>
-        <!-- Search -->
-        <span class="label">Search</span>
-        <input
-            class="searchbar"
-            type="text"
-            placeholder="Search"
-            @bind="searchText"
-            @oninput="Search"
-            />
-    </div>
-
     <!-- Link tab -->
     <div class="homebuttons">
         <button class="btn" onclick="window.location.href='First Call'">First Call</button>
@@ -24,12 +12,3 @@
         <button class="btn">Contract</button>
     </div>
 </div>
-
-@code {
-    private string searchText = string.Empty;
-
-    private void Search()
-    {
-        Console.WriteLine(searchText);
-    }
-}
