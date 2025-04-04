@@ -1,4 +1,6 @@
 ﻿@page "/First Call"
+@inject RESTDB.Data.ApplicationDbContext Context
+
 
 <PageTitle>First Call</PageTitle>
 
@@ -59,16 +61,8 @@
                 <label for="suffix">Suffix</label>
                 <select id="suffix" name="suffix">
                     <option value="mr">Mr.</option>
-                    <option value="ms">Ms.</option>
-                    <option value="dr">Dr.</option>
-                </select>
-            </div>
-			
-        </div>
-
-        <!-- Display Name -->
-        <div class="display-name">
-            <div class="FirstCall-group1">
+                    <option value="ms">Ms.</option></select>
+	        <div class="FirstCall-group1">
                 <label for="display">Display Name</label>
                 <input
                     id="display"
@@ -85,6 +79,7 @@
 			</div>
         </div>
     </div>
+</div>
 
     <!-- Deceased -->
     <div class="form2">
@@ -359,7 +354,7 @@
         </div>
         <div>
             <div>
-                <button>Save</button>
+                <button @onclick=SaveRecord>Save</button>
             </div>
         </div>
     </div>
@@ -376,7 +371,7 @@
 
         if (digits.Length > 5)
             digits = digits[..5];
-        
+
         zipCode = digits;
     }
     private void FormatSSN(ChangeEventArgs e)
@@ -393,5 +388,22 @@
             ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
         else
             ssnValue = digits;
+    }
+}
+@code {
+    private List<RESTDB.Models.Deceased> RESTDB.Models.Deceased_list();
+	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Deceased_list = await Context.Deceased.ToListAsync();
+    }
+    private async Task SaveRecord()
+    {
+
+		Context.Deceased.Add(currentDeceased);
+        await Context.SaveChangesAsync();
+        Deceased_list = await Context.Deceased.ToListAsync();
+        currentDeceased = new RESTDB.Models.Deceased();
     }
 }
