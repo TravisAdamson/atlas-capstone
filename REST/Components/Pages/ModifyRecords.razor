@@ -59,6 +59,12 @@
                     <option value="dr">Dr.</option>
                 </select>
             </div>
+				<!-- Display Image -->
+        		<div class="display-img">
+            		<div>
+            		<img class="img-class">
+            	</div>
+        	</div>
         </div>
 
         <!-- Display Name -->
@@ -71,13 +77,6 @@
                     type="text"
                     name="display"
                 />
-            </div>
-        </div>
-
-        <!-- Display Image -->
-        <div class="display-img">
-            <div>
-                <img class="img-class">
             </div>
         </div>
     </div>
@@ -95,7 +94,7 @@
                 <label for="time">Time</label>
                 <input
                     class="fcall"
-                    type="number"
+                    type="time"
                     id="time"
                     placeholder="_:__"
                     />
@@ -105,12 +104,16 @@
                 <label for="snn">Social Security Number</label>
                 <input
                     class="fcall"
-                    type="number"
+                    type="text"
                     id="ssn"
                     name="ssn"
                     placeholder="123-45-6789"
+                    pattern="\d{3}-\d{2}-\d{4}"
+                    title="Format: 123-45-6789"
                     maxlength="11"
-                    />
+                    value="@ssnValue"
+                    @oninput="FormatSSN"
+                />
             </div>
 
             <!-- Sex -->
@@ -297,7 +300,7 @@
             </div>
 
             <div class="FirstCall-group1">
-                <label for="state">OriginType</label>
+                <label for="state">Origin Type</label>
                 <input
                     id="state"
                     class="fcall"
@@ -317,7 +320,7 @@
             </div>
 
             <div class="FirstCall-group1">
-                <label for="state">date Amended</label>
+                <label for="state">Date Amended</label>
                 <input
                     id="state"
                     class="fcall"
@@ -329,7 +332,7 @@
 
         <div class="name-group">
             <div class="FirstCall-group1">
-                <label for="state">EmailAddress</label>
+                <label for="state">Email Address</label>
                 <input
                     id="state"
                     class="fcall"
@@ -345,3 +348,21 @@
         </div>
     </div>
 </div>
+
+@code {
+    private string ssnValue = "";
+    private void FormatSSN(ChangeEventArgs e)
+    {
+        string digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+
+        if (digits.Length > 9)
+            digits = digits.Substring(0, 9);
+
+        if (digits.Length >= 5)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3, 2)}-{digits.Substring(5)}";
+        else if (digits.Length >= 3)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
+        else
+            ssnValue = digits;
+    }
+}
