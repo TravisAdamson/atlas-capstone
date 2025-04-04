@@ -1,28 +1,28 @@
 .forms {
-    padding: 1rem;
+    padding: 0rem;
 }
 
 .form1 {
     border: 1px solid #000000;
     border-radius: 10px;
-    padding: 2rem;
-    margin: 2rem auto;
+    padding: 1rem;
+    margin: 1rem auto;
     background-color: rgb(187, 188, 188);
 }
 
 .form2 {
     border: 1px solid #000000;
     border-radius: 10px;
-    padding: 2rem;
-    margin: 2rem auto;
+    padding: 1rem;
+    margin: 1rem auto;
     background-color: rgb(187, 188, 188);
 }
 
 .form3 {
     border: 2px solid #000000;
     border-radius: 10px;
-    padding: 2rem;
-    margin: 2rem auto;
+    padding: 1rem;
+    margin: 1rem auto;
     background-color: rgb(187, 188, 188);
 }
 
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     margin-right: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .FirstCall-group {
@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: column;
     margin-right: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .genderlabel {
