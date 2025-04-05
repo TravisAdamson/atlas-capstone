@@ -6,390 +6,49 @@
 
 <h1>Create Record</h1>
 
-<div class="forms">
-    <div class="form1">
-        <!-- FirstCall -->
-        <div class="FirstCall-group">
-            <div class="FirstCall-group1">
-                <label for="client-id">Client ID</label>
-                <input
-                    id="client-id"
-                    class="fcall"
-                    type="text"
-                    name="client-id" />
-            </div>
-            <div class="FirstCall-group1">
-                <label for="director">Director</label>
-                <input
-                    id="director"
-                    class="fcall"
-                    type="text"
-                    name="director" />
-            </div>
-        </div>
+<EditForm Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="FirstCallForm">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
 
-        <!-- Name Info -->
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="last-name">Last Name</label>
-                <input
-                    id="last-name"
-                    class="fcall"
-                    type="text"
-                    name="last-name"
-                />
-            </div>
-            <div class="FirstCall-group1">
-                <label for="first-name">First Name</label>
-                <input
-                    id="first-name"
-                    class="fcall"
-                    type="text"
-                    name="first-name"
-				/>
-            </div>
-            <div class="FirstCall-group1">
-                <label for="middle-name">Middle Name</label>
-                <input
-                    id="middle-name"
-                    class="fcall"
-                    type="text"
-                    name="middle-name"
-				/>
-            </div>
-            <div class="FirstCall-group1">
-                <label for="suffix">Suffix</label>
-                <select id="suffix" name="suffix">
-                    <option value="mr">Mr.</option>
-                    <option value="ms">Ms.</option></select>
-	        <div class="FirstCall-group1">
-                <label for="display">Display Name</label>
-                <input
-                    id="display"
-                    class="fcall"
-                    type="text"
-                    name="display"
-                />
-            </div>
-			<!-- Display Image -->
-			<div class="display-img">
-				<div>
-					<img class="img-class">
-				</div>
-			</div>
-        </div>
+	<div>
+		<label for="FirstName">First Name:</label>
+		<InputText id="FirstName" class="form-control" @bind-Value="currentDeceased.FirstName" />
+	</div>
+
+    <div>
+        <label for="LastName">Last Name:</label>
+        <InputText id="LastName" class="form-control" @bind-Value="currentDeceased.LastName" />
     </div>
-</div>
 
-    <!-- Deceased -->
-    <div class="form2">
-        <h5>Deceased</h5>
-        <div class="FirstCall-group">
-            <div class="FirstCall-group1">
-                <label for="deathdate">Death Date</label>
-                <input id="deatedate" class="fcall" type="date" name="deathdate" />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="time">Time</label>
-                <input
-                    class="fcall"
-                    type="time"
-                    id="time"
-                    placeholder="_:__"
-                    />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="snn">Social Security Number</label>
-                <input
-                    class="fcall"
-                    type="text"
-                    id="ssn"
-                    name="ssn"
-                    placeholder="123-45-6789"
-                    pattern="\d{3}-\d{2}-\d{4}"
-                    title="Format: 123-45-6789"
-                    maxlength="11"
-                    @bind="ssnValue"
-                    @oninput="FormatSSN"
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                />
-            </div>
-
-            <!-- Sex -->
-            <div class="FirstCall-group1">
-                <label>Sex</label>
-                <div class="genderlabel">
-                    <input type="radio" name="gender" value="Male" /> Male
-                    <input type="radio" name="gender" value="Female" /> Female
-                    <input type="radio" name="gender" value="Other" /> Other
-                </div>
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="maiden-name">Maiden Name</label>
-                <input
-                    id="maiden-name"
-                    class="fcall"
-                    type="text"
-                    name="maiden-name"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="alias">Alias</label>
-                <input
-                    id="alias"
-                    class="fcall"
-                    type="text"
-                    name="alias"
-                />
-            </div>
-        </div>
-
-        <!-- Street row -->
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="last-name">Last Name</label>
-                <input
-                    id="last-name"
-                    class="fcall"
-                    type="text"
-                    name="last-name" />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="first-name">First Name</label>
-                <input
-                    id="first-name"
-                    class="fcall"
-                    type="text"
-                    name="first-name" />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="zipcode">Zip</label>
-                <input
-                    id="zipcode"
-                    class="fcall"
-                    type="text"
-                    name="zipcode"
-                    maxlength="5"
-                    placeholder="12345"
-                    @bind="zipCode"
-                    @oninput="Zip"
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="display name">City</label>
-                <input
-                    id="display"
-                    class="fcall"
-                    type="text"
-                    name="display"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="county">County</label>
-                <input
-                    id="county"
-                    class="fcall"
-                    type="text"
-                    name="county"
-                />
-            </div>
-        </div>
-
-        <!-- State row -->
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="state">State</label>
-                <input
-                    id="state"
-                    class="fcall"
-                    type="text"
-                    name="state" />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="country">Country</label>
-                <input
-                    id="country"
-                    class="fcall"
-                    type="text"
-                    name="country"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="locality">Locality Type</label>
-                <input
-                    id="locality"
-                    class="fcall"
-                    type="text"
-                    name="locality"
-                />
-            </div>
-        </div>
-
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="city">Home City</label>
-                <input
-                    id="city"
-                    class="fcall"
-                    type="text"
-                    name="city"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="state">Home State</label>
-                <input
-                    id="state"
-                    class="fcall"
-                    type="text"
-                    name="state"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="state">Previous State</label>
-                <input
-                    id="state"
-                    class="fcall"
-                    type="text"
-                    name="state"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="phone">Phone Number</label>
-                <input
-                    id="phone"
-                    class="fcall"
-                    type="text"
-                    name="phone"
-                    maxlength="13"
-                    placeholder="(123)456-7890"
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="vet">Veteran</label>
-                <input
-                    id="vet"
-                    name="vet"
-                    type="checkbox"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="war">War Served</label>
-                <input
-                    id="war"
-                    class="fcall"
-                    type="text"
-                    name="war"
-                />
-            </div>
-        </div>
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="informant">Informant</label>
-                <input
-                    id="informant"
-                    class="fcall"
-                    type="text"
-                    name="informant"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="origin">Origin Type</label>
-                <input
-                    id="origin"
-                    class="fcall"
-                    type="text"
-                    name="origin"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="date-info">Date Information</label>
-                <input
-                    id="date-info"
-                    class="fcall"
-                    type="date"
-                    name="date-info"
-                />
-            </div>
-
-            <div class="FirstCall-group1">
-                <label for="date-amend">Date Amended</label>
-                <input
-                    id="date-amend"
-                    class="fcall"
-                    type="date"
-                    name="date-amend"
-                />
-            </div>
-        </div>
-
-        <div class="name-group">
-            <div class="FirstCall-group1">
-                <label for="Email-address">Email Address</label>
-                <input
-                    id="Email-address"
-                    class="fcall"
-                    type="email"
-                    name="Email-address"
-                />
-            </div>
-        </div>
-        <div>
-            <div>
-                <button @onclick=SaveRecord>Save</button>
-            </div>
-        </div>
+	<div>
+        <label for="MiddleName">Middle Name:</label>
+        <InputText id="MiddleName" class="form-control" @bind-Value="currentDeceased.MiddleName" />
     </div>
-</div>
 
-@code {
-    private string ssnValue = "";
-    private string zipCode = "";
+	<div>
+        <label for="Title">Title:</label>
+        <InputText id="Title" class="form-control" @bind-Value="currentDeceased.Title" />
+    </div>
 
-    private void Zip(ChangeEventArgs e)
+    <div>
+        <label for="Suffix">Suffix:</label>
+        <InputText id="Suffix" class="form-control" @bind-Value="currentDeceased.Suffix" />
+    </div>
+
+    <div>
+        <label for="Status">Status:</label>
+        <InputText id="Status" class="form-control" @bind-Value="currentDeceased.Status" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+<h3>Deceased List</h3>
+<ul>
+    @foreach (var Deceased in Deceased)
     {
-        var input = e.Value?.ToString() ?? "";
-        var digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
-
-        if (digits.Length > 5)
-            digits = digits[..5];
-
-        zipCode = digits;
+        <li>@Deceased.FirstName @Deceased.LastName</li>
     }
-    private void FormatSSN(ChangeEventArgs e)
-    {
-        var input = e.Value?.ToString() ?? "";
-        var digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+</ul>
 
-        if (digits.Length > 9)
-            digits = digits.Substring(0, 9);
-
-        if (digits.Length >= 5)
-            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3, 2)}-{digits.Substring(5)}";
-        else if (digits.Length >= 3)
-            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
-        else
-            ssnValue = digits;
-    }
-}
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
 	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
