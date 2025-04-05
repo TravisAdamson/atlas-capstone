@@ -7,17 +7,15 @@
 <h1>Create Record</h1>
 
 <EditForm Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="FirstCallForm">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
 
 	<div>
-		<label for="FirstName">First Name:</label>
-		<InputText id="FirstName" class="form-control" @bind-Value="currentDeceased.FirstName" />
+		<label for="FirstNameField">First Name:</label>
+		<InputText id="FirstNameField" class="form-control" @bind-Value="FirstNameValue" @onchange="HandleFirstNameChange"/>
 	</div>
 
     <div>
         <label for="LastName">Last Name:</label>
-        <InputText id="LastName" class="form-control" @bind-Value="currentDeceased.LastName" />
+        <InputText id="LastName" class="form-control" @bind-Value="LastNameValue" @onchange="HandleLastNameChange"/>
     </div>
 
 	<div>
@@ -53,12 +51,30 @@
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
 	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
 
+	private string FirstNameValue="David";
+	private string LastNameValue="Adam";
     protected override async Task OnInitializedAsync()
     {
         Deceased = await Context.Deceased.ToListAsync();
     }
+
+	private void HandleFirstNameChange(ChangeEventArgs e)
+	{
+    	Console.WriteLine($"First Name changed: {e.Value}");
+	}
+
+	private void HandleLastNameChange(ChangeEventArgs e)
+	{
+    	Console.WriteLine($"Last Name changed: {e.Value}");
+	}
     private async Task SaveRecord()
     {
+		currentDeceased.FirstName=FirstNameValue;
+		currentDeceased.LastName=LastNameValue;
+		if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
+        {
+        	Console.WriteLine($"Invalid data: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}' are required.");
+        }
 
 		Context.Deceased.Add(currentDeceased);
         await Context.SaveChangesAsync();
