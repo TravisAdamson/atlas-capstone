@@ -1,6 +1,6 @@
 ﻿@page "/First Call"
 @inject RESTDB.Data.ApplicationDbContext Context
-
+@rendermode InteractiveServer
 
 <PageTitle>First Call</PageTitle>
 
@@ -9,8 +9,8 @@
 <EditForm Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="FirstCallForm">
 
 	<div>
-		<label for="FirstNameField">First Name:</label>
-		<InputText id="FirstNameField" class="form-control" @bind-Value="currentDeceased.FirstName" />
+		<label for="FirstName">First Name:</label>
+		<InputText id="FirstName" class="form-control" @bind-Value="currentDeceased.FirstName" />
 	</div>
 
     <div>
@@ -58,6 +58,7 @@
 
     private async Task SaveRecord()
     {
+	    Console.WriteLine($"Saving Record: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}'");
 
 		if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
         {
