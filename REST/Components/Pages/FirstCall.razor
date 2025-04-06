@@ -6,50 +6,264 @@
 
 <h1>Create Record</h1>
 
-<EditForm Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="FirstCallForm">
+<style>
+    /* General Styles */
+    .forms {
+        padding: 1rem;
+    }
+    .ContactForm, .DeceasedForm, .ContractForm {
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem auto;
+        background-color: rgb(187, 188, 188);
+    }
 
-	<div>
-		<label for="FirstName">First Name:</label>
-		<InputText id="FirstName" class="form-control" @bind-Value="currentDeceased.FirstName" />
-	</div>
+    .FirstCall-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
 
-    <div>
-        <label for="LastName">Last Name:</label>
-        <InputText id="LastName" class="form-control" @bind-Value="currentDeceased.LastName" />
+    .FirstCall-group1 {
+        display: flex;
+        flex-direction: column;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .fcall {
+        border: 2px solidrgb(253, 251, 251);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+    }
+
+    .genderlabel {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .btn-submit {
+        margin-top: 1rem;
+    }
+
+    /* Hide number input incrementing arrows */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+<EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
+    <h5>FirstCall Information</h5>
+    <div class="FirstCall-group">
+        <!-- Director -->
+        <div class="FirstCall-group1">
+            <label for="Director">Director</label>
+                <select id="Director" name="Director">
+                    <option value="Travis">Travis</option>
+                    <option value="Nolan">Nolan</option>
+                    <option value="Kevin">Kevin</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Other">Other</option>
+                </select>    
+        </div>
+        <div class="FirstCall-group">
+        <!-- Status -->
+        <div class="FirstCall-group1">
+            <label for="Status">Status:</label>
+            <InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
+        </div>
+    </div>
+    <div class="FirstCall-group">
+        <!-- Phone Number -->
+        <div class="FirstCall-group1">
+            <label for="PhoneNum">Informant Phone Number:</label>
+            <InputNumber id="PhoneNum" class="fcall" @bind-Value="currentDeceased.PhoneNum" />
+        </div>
+    <!-- Informant Email -->
+        <div class="FirstCall-group1">
+            <label for="InformEmail">Informant Email:</label>
+            <InputText id="InformEmail" class="fcall" @bind-Value="currentDeceased.InformEmail" />
+        </div>
     </div>
 
-	<div>
-        <label for="MiddleName">Middle Name:</label>
-        <InputText id="MiddleName" class="form-control" @bind-Value="currentDeceased.MiddleName" />
+    <div class="FirstCall-group">
+        <!-- Info Notified -->
+        <div class="FirstCall-group1">
+            <label for="InfoNotified">Informant Notified:</label>
+            <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
+        </div>
     </div>
 
-	<div>
-        <label for="Title">Title:</label>
-        <InputText id="Title" class="form-control" @bind-Value="currentDeceased.Title" />
     </div>
-
-    <div>
-        <label for="Suffix">Suffix:</label>
-        <InputText id="Suffix" class="form-control" @bind-Value="currentDeceased.Suffix" />
-    </div>
-
-    <div>
-        <label for="Status">Status:</label>
-        <InputText id="Status" class="form-control" @bind-Value="currentDeceased.Status" />
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
 </EditForm>
-<h3>Deceased List</h3>
+<EditForm id="DeceasedForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="DeceasedForm" class="DeceasedForm">
+    <h5>Deceased Information</h5>
+    <div class="FirstCall-group">
+        <!-- First Name -->
+        <div class="FirstCall-group1">
+            <label for="FirstName">First Name:</label>
+            <InputText id="FirstName" class="fcall" @bind-Value="currentDeceased.FirstName" />
+        </div>
+
+        <!-- Last Name -->
+        <div class="FirstCall-group1">
+            <label for="LastName">Last Name:</label>
+            <InputText id="LastName" class="fcall" @bind-Value="currentDeceased.LastName" />
+        </div>
+
+        <!-- Middle Name -->
+        <div class="FirstCall-group1">
+            <label for="MiddleName">Middle Name:</label>
+            <InputText id="MiddleName" class="fcall" @bind-Value="currentDeceased.MiddleName" />
+        </div>
+    </div>
+
+    <div class="FirstCall-group">
+        <!-- Title -->
+        <div class="FirstCall-group1">
+            <label for="Title">Title:</label>
+            <InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
+        </div>
+
+        <!-- Suffix -->
+        <div class="FirstCall-group1">
+            <label for="suffix">Suffix</label>
+                <select id="suffix" name="suffix">
+                    <option value="mr">Mr.</option>
+                    <option value="ms">Ms.</option>
+                    <option value="dr">Dr.</option>
+                </select>
+        </div>
+        <!-- Display Image -->
+        <div class="display-img">
+            <div>
+                <img class="img-class">
+            </div>
+        </div>
+    </div>
+    <div class="FirstCall-group">
+        <!-- Date of Death -->
+        <div class="FirstCall-group1">
+            <label for="DoD">Date of Death:</label>
+            <InputDate id="DoD" class="fcall" @bind-Value="currentDeceased.DoD" />
+        </div>
+
+        <!-- Time of Death -->
+        <div class="FirstCall-group1">
+            <label for="TimeOfDeath">Time of Death:</label>
+            <InputDate id="TimeOfDeath" class="fcall" @bind-Value="currentDeceased.TimeOfDeath" />
+        </div>
+    </div>
+
+    <div class="FirstCall-group">
+        <!-- SSN -->
+        <div class="FirstCall-group1">
+            <label for="SSN">SSN:</label>
+            <InputNumber id="SSN" class="fcall" @bind-Value="currentDeceased.SSN" placeholder="123-45-6789" pattern="\d{3}-\d{2}-\d{4}" title="Format: 123-45-6789" maxlength="11" @oninput="FormatSSN" />
+        </div>
+
+        <!-- Gender -->
+        <div class="FirstCall-group1">
+            <div class="genderlabel">
+            <label>Gender:</label>
+            <InputRadioGroup @bind-Value="currentDeceased.Gender" class="genderlabel">
+                <InputRadio id="Male" TValue="string" value="Male" class="fcall" /> Male
+                <InputRadio id="Female" TValue="string" value="Female" class="fcall" /> Female
+                <InputRadio id="Other" TValue="string" value="Other" class="fcall" /> Other
+            </InputRadioGroup>
+            </div>
+        </div>
+    </div>
+
+    <div class="FirstCall-group">
+        <!-- Maiden Name -->
+        <div class="FirstCall-group1">
+            <label for="MaidenName">Maiden Name:</label>
+            <InputText id="MaidenName" class="fcall" @bind-Value="currentDeceased.MaidenName" />
+        </div>
+
+        <!-- Alias -->
+        <div class="FirstCall-group1">
+            <label for="Alias">Alias:</label>
+            <InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
+        </div>
+
+
+        <!-- Vet -->
+        <div class="FirstCall-group1">
+            <label for="Vet">Veteran Status (0 = No, 1 = Yes):</label>
+            <InputNumber id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
+        </div>
+    </div>
+
+    <div class="FirstCall-group">
+        <!-- War -->
+        <div class="FirstCall-group1">
+            <label for="War">War Served:</label>
+            <InputText id="War" class="fcall" @bind-Value="currentDeceased.War" />
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="FirstCall-group1">
+        <div class="FirstCall-group1">
+            <label for="Notes">Notes:</label>
+            <InputTextArea id="Notes" class="fcall" @bind-Value="currentDeceased.Notes" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-submit">Save</button>
+</EditForm>
+<EditForm id="ContractForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContractForm" class="ContractForm">
+    <h5>Contract Information</h5>
+    <div class="FirstCall-group">
+        <!-- Contract Balance -->
+        <div class="FirstCall-group1">
+            <label for="ContractBalance">Contract Balance:</label>
+            <InputText id="ContractBalance" class="fcall" @bind-Value="currentDeceased.ContractBalance" />
+        </div>
+    </div>
+
+</EditForm>
+<h3>SAVED RESULTS</h3>
 <ul>
-    @foreach (var Deceased in Deceased)
+    @foreach (var deceased in Deceased)
     {
-        <li>@Deceased.FirstName @Deceased.LastName</li>
+        <li>
+            <strong>@deceased.FirstName @deceased.LastName</strong><br />
+            Middle Name: @deceased.MiddleName<br />
+            Title: @deceased.Title<br />
+            Suffix: @deceased.Suffix<br />
+            Status: @deceased.Status<br />
+            Contract Balance: @deceased.ContractBalance<br />
+            Date of Death: @deceased.DoD?.ToString("yyyy-MM-dd")<br />
+            Time of Death: @deceased.TimeOfDeath?.ToString("yyyy-MM-dd")<br />
+            SSN: @deceased.SSN<br />
+            Gender: @deceased.Gender<br />
+            Maiden Name: @deceased.MaidenName<br />
+            Alias: @deceased.Alias<br />
+            Phone Number: @deceased.PhoneNum<br />
+            Veteran Status: @deceased.Vet<br />
+            War: @deceased.War<br />
+            Informant: @deceased.Informant<br />
+            Informant Email: @deceased.InformEmail<br />
+            Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
+            Notes: @deceased.Notes<br />
+        </li>
     }
 </ul>
 
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
-	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
+    private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
 
     protected override async Task OnInitializedAsync()
     {
@@ -58,16 +272,50 @@
 
     private async Task SaveRecord()
     {
-	    Console.WriteLine($"Saving Record: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}'");
-
-		if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
+        // Ensure valid data before saving
+        if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
         {
-        	Console.WriteLine($"Invalid data: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}' are required.");
+            Console.WriteLine($"Invalid data: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}' are required.");
+            return;
         }
-
-		Context.Deceased.Add(currentDeceased);
+        // Manually ensure that Vet is saved as an integer
+        currentDeceased.Vet = currentDeceased.Vet == 1 ? 1 : 0;
+        // Add the record to the database
+        Context.Deceased.Add(currentDeceased);
         await Context.SaveChangesAsync();
+        
+        // Refresh the list of deceased records
         Deceased = await Context.Deceased.ToListAsync();
+
+        // Reset the form for the next entry
         currentDeceased = new RESTDB.Models.Deceased();
+    }
+}
+@code {
+    private string ssnValue = "";
+    private string zipCode = "";
+    private void Zip(ChangeEventArgs e)
+    {
+        var input = e.Value?.ToString() ?? "";
+        var digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+
+        if (digits.Length > 5)
+            digits = digits[..5];
+        
+        zipCode = digits;
+    }
+    private void FormatSSN(ChangeEventArgs e)
+    {
+        string digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+
+        if (digits.Length > 9)
+            digits = digits.Substring(0, 9);
+
+        if (digits.Length >= 5)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3, 2)}-{digits.Substring(5)}";
+        else if (digits.Length >= 3)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
+        else
+            ssnValue = digits;
     }
 }
