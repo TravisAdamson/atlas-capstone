@@ -1,76 +1,391 @@
-﻿@page "/browse-deceased"
-@inject RESTDB.Data.ApplicationDbContext Context
+﻿@page "/Modify Records"
 
-<PageTitle>Browse Deceased Records</PageTitle>
+<PageTitle>Modify Records</PageTitle>
 
-<h1>Browse All Deceased Records</h1>
+<h1>Modify Record</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ClientID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Contract Balance</th>
-            <th>Date of Death</th>
-            <th>Time of Death</th>
-            <th>SSN</th>
-            <th>Gender</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var deceased in Deceased)
-        {
-            <tr>
-                <td>@deceased.ClientID</td>
-                <td>@deceased.FirstName</td>
-                <td>@deceased.LastName</td>
-                <td>@deceased.Title</td>
-                <td>@deceased.Status</td>
-                <td>@deceased.ContractBalance</td>
-                <td>@deceased.DoD?.ToString("yyyy-MM-dd")</td>
-                <td>@deceased.TimeOfDeath?.ToString("yyyy-MM-dd")</td>
-                <td>@deceased.SSN</td>
-                <td>@deceased.Gender</td>
-                <td>
-                    <button @onclick="() => EditDeceased(deceased.ClientID ?? 0)">Edit</button>
-                    <button @onclick="() => DeleteDeceased(deceased.ClientID ?? 0)">Delete</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="forms">
+    <div class="form1">
+        <!-- First Call -->
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label for="client-id">Client ID</label>
+                <input
+                    id="client-id"
+                    class="fcall"
+                    type="text"
+                    name="client-id" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="director">Director</label>
+                <input
+                    id="director"
+                    class="fcall"
+                    type="text"
+                    name="director" />
+            </div>
+        </div>
+
+        <!-- Name Info -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">Last Name</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name"
+                />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="first-name">First Name</label>
+                <input
+                    id="first-name"
+                    class="fcall"
+                    type="text"
+                    name="first-name" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="middle-name">Middle Name</label>
+                <input
+                    id="middle-name"
+                    class="fcall"
+                    type="text"
+                    name="middle-name" />
+            </div>
+            <div class="FirstCall-group1">
+                <label for="suffix">Suffix</label>
+                <div class="genderlabel">
+                    <input type="radio" name="suffix" value="MR." /> MR.
+                    <input type="radio" name="suffix" value="MRS." /> MRS.
+                    <input type="radio" name="suffix" value="DR." /> DR.
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Name -->
+        <div class="display-name">
+            <div class="FirstCall-group1">
+                <label for="display">Display Name</label>
+                <input
+                    id="display"
+                    class="fcall"
+                    type="text"
+                    name="display"
+                />
+            </div>
+			<!-- Display Image -->
+			<div class="display-img">
+				<div>
+					<img class="img-class">
+				</div>
+			</div>
+        </div>
+    </div>
+
+    <!-- Deceased -->
+    <div class="form2">
+        <h5>Deceased</h5>
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label for="deathdate">Death Date</label>
+                <input id="deatedate" class="fcall" type="date" name="deathdate" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="time">Time</label>
+                <input
+                    class="fcall"
+                    type="time"
+                    id="time"
+                    placeholder="_:__"
+                    />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="snn">Social Security Number</label>
+                <input
+                    class="fcall"
+                    type="text"
+                    id="ssn"
+                    name="ssn"
+                    placeholder="123-45-6789"
+                    pattern="\d{3}-\d{2}-\d{4}"
+                    title="Format: 123-45-6789"
+                    maxlength="11"
+                    @bind="ssnValue"
+                    @oninput="FormatSSN"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                />
+            </div>
+
+            <!-- Sex -->
+            <div class="FirstCall-group1">
+                <label>Sex</label>
+                <div class="genderlabel">
+                    <input type="radio" name="gender" value="Male" /> Male
+                    <input type="radio" name="gender" value="Female" /> Female
+                    <input type="radio" name="gender" value="Other" /> Other
+                </div>
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="maiden-name">Maiden Name</label>
+                <input
+                    id="maiden-name"
+                    class="fcall"
+                    type="text"
+                    name="maiden-name"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="alias">Alias</label>
+                <input
+                    id="alias"
+                    class="fcall"
+                    type="text"
+                    name="alias"
+                />
+            </div>
+        </div>
+
+        <!-- Street row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="last-name">Last Name</label>
+                <input
+                    id="last-name"
+                    class="fcall"
+                    type="text"
+                    name="last-name" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="first-name">First Name</label>
+                <input
+                    id="first-name"
+                    class="fcall"
+                    type="text"
+                    name="first-name" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="zipcode">Zip</label>
+                <input
+                    id="zipcode"
+                    class="fcall"
+                    type="text"
+                    name="zipcode"
+                    maxlength="5"
+                    @bind="zipCode"
+                    @oninput="Zip"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="city">City</label>
+                <input
+                    id="city"
+                    class="fcall"
+                    type="text"
+                    name="city"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="display name">County</label>
+                <input
+                    id="county"
+                    class="fcall"
+                    type="text"
+                    name="county"
+                />
+            </div>
+        </div>
+
+        <!-- State row -->
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="state">State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state" />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="country">Country</label>
+                <input
+                    id="country"
+                    class="fcall"
+                    type="text"
+                    name="country"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="locality">Locality Type</label>
+                <input
+                    id="locality"
+                    class="fcall"
+                    type="text"
+                    name="locality"
+                />
+            </div>
+        </div>
+
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="city">Home City</label>
+                <input
+                    id="city"
+                    class="fcall"
+                    type="text"
+                    name="city"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Home State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Previous State</label>
+                <input
+                    id="state"
+                    class="fcall"
+                    type="text"
+                    name="state"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="phone">Phone Number</label>
+                <input
+                    id="phone"
+                    class="fcall"
+                    type="text"
+                    name="phone"
+                    maxlength="13"
+                    placeholder="(123)456-7890"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="vet">Veteran</label>
+                <input
+                    id="vet"
+                    name="vet"
+                    type="checkbox"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">War Served</label>
+                <input
+                    id="war"
+                    class="fcall"
+                    type="text"
+                    name="war"
+                />
+            </div>
+        </div>
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="informant">Informant</label>
+                <input
+                    id="informant"
+                    class="fcall"
+                    type="text"
+                    name="informant"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="state">Origin Type</label>
+                <input
+                    id="origin"
+                    class="fcall"
+                    type="text"
+                    name="origin"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="date-info">Date Information</label>
+                <input
+                    id="date-info"
+                    class="fcall"
+                    type="date"
+                    name="date-info"
+                />
+            </div>
+
+            <div class="FirstCall-group1">
+                <label for="date-amend">Date Amended</label>
+                <input
+                    id="date-amend"
+                    class="fcall"
+                    type="date"
+                    name="date-amend"
+                />
+            </div>
+        </div>
+
+        <div class="name-group">
+            <div class="FirstCall-group1">
+                <label for="Email-address">Email Address</label>
+                <input
+                    id="Email-address"
+                    class="fcall"
+                    type="email"
+                    name="Email-address"
+                />
+            </div>
+        </div>
+        <div>
+            <div>
+                <button>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
-    private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
-
-    protected override async Task OnInitializedAsync()
+    private string ssnValue = "";
+    private string zipCode = "";
+    private void Zip(ChangeEventArgs e)
     {
-        // Fetch all deceased records from the database
-        Deceased = await Context.Deceased.ToListAsync();
-    }
+        var input = e.Value?.ToString() ?? "";
+        var digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
 
-    private async Task EditDeceased(int clientId)
-    {
-        // Navigate to edit page or implement edit functionality
-        Console.WriteLine($"Edit record for Client ID: {clientId}");
-    }
-
-    private async Task DeleteDeceased(int clientId)
-    {
-        // Find the record by clientId
-        var deceasedToDelete = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
+        if (digits.Length > 5)
+            digits = digits[..5];
         
-        if (deceasedToDelete != null)
-        {
-            // Delete the record from the database
-            Context.Deceased.Remove(deceasedToDelete);
-            await Context.SaveChangesAsync();
-            // Refresh the list of deceased records
-            Deceased = await Context.Deceased.ToListAsync();
-        }
+        zipCode = digits;
+    }
+    private void FormatSSN(ChangeEventArgs e)
+    {
+        string digits = new string(e.Value?.ToString()?.Where(char.IsDigit).ToArray() ?? []);
+
+        if (digits.Length > 9)
+            digits = digits.Substring(0, 9);
+
+        if (digits.Length >= 5)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3, 2)}-{digits.Substring(5)}";
+        else if (digits.Length >= 3)
+            ssnValue = $"{digits.Substring(0, 3)}-{digits.Substring(3)}";
+        else
+            ssnValue = digits;
     }
 }
