@@ -58,6 +58,33 @@
     input[type="number"] {
         -moz-appearance: textfield;
     }
+    /* Style for Gender selection */
+    .gender-container {
+        margin-bottom: 15px;
+    }
+
+    .gender-group {
+        display: flex;
+        flex-direction: column; /* Stacks the radio buttons vertically */
+    }
+
+    .gender-group .fcall {
+        margin-bottom: 5px; /* Space between radio buttons */
+    }
+
+    /* Style for Suffix selection */
+    .suffix-container {
+        margin-bottom: 15px;
+    }
+
+    .suffix-group {
+        display: flex;
+        flex-direction: column; /* Stacks the radio buttons vertically */
+    }
+
+    .suffix-group .fcall {
+        margin-bottom: 5px; /* Space between radio buttons */
+    }
 </style>
 
 <EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
@@ -124,32 +151,14 @@
             <label for="MiddleName">Middle Name:</label>
             <InputText id="MiddleName" class="fcall" @bind-Value="currentDeceased.MiddleName" />
         </div>
-    </div>
 
-    <div class="FirstCall-group">
+    
         <!-- Title -->
         <div class="FirstCall-group1">
             <label for="Title">Title:</label>
             <InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
         </div>
-
-        <!-- Suffix -->
-        <div class="FirstCall-group1">
-            <label for="suffix">Suffix</label>
-                <select id="suffix" name="suffix">
-                    <option value="mr">Mr.</option>
-                    <option value="ms">Ms.</option>
-                    <option value="dr">Dr.</option>
-                </select>
-        </div>
-        <!-- Display Image -->
-        <div class="display-img">
-            <div>
-                <img class="img-class">
-            </div>
-        </div>
-    </div>
-    <div class="FirstCall-group">
+            <div class="FirstCall-group">
         <!-- Date of Death -->
         <div class="FirstCall-group1">
             <label for="DoD">Date of Death:</label>
@@ -161,27 +170,21 @@
             <label for="TimeOfDeath">Time of Death:</label>
             <InputDate id="TimeOfDeath" class="fcall" @bind-Value="currentDeceased.TimeOfDeath" />
         </div>
+                    <!-- Alias -->
+        <div class="FirstCall-group1">
+            <label for="Alias">Alias:</label>
+            <InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
+        </div>
     </div>
 
+    </div>
     <div class="FirstCall-group">
-        <!-- SSN -->
+                <!-- SSN -->
         <div class="FirstCall-group1">
             <label for="SSN">SSN:</label>
             <InputNumber id="SSN" class="fcall" @bind-Value="currentDeceased.SSN" placeholder="123-45-6789" pattern="\d{3}-\d{2}-\d{4}" title="Format: 123-45-6789" maxlength="11" @oninput="FormatSSN" />
         </div>
 
-        <!-- Gender -->
-        <div class="FirstCall-group1">
-            <div class="genderlabel">
-            <label>Gender:</label>
-            <InputRadioGroup @bind-Value="currentDeceased.Gender" class="genderlabel">
-                <InputRadio id="Male" TValue="string" value="Male" class="fcall" /> Male
-                <InputRadio id="Female" TValue="string" value="Female" class="fcall" /> Female
-                <InputRadio id="Other" TValue="string" value="Other" class="fcall" /> Other
-            </InputRadioGroup>
-            </div>
-        </div>
-    </div>
 
     <div class="FirstCall-group">
         <!-- Maiden Name -->
@@ -190,26 +193,49 @@
             <InputText id="MaidenName" class="fcall" @bind-Value="currentDeceased.MaidenName" />
         </div>
 
-        <!-- Alias -->
-        <div class="FirstCall-group1">
-            <label for="Alias">Alias:</label>
-            <InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
-        </div>
-
-
-        <!-- Vet -->
+                <!-- Vet -->
         <div class="FirstCall-group1">
             <label for="Vet">Veteran Status (0 = No, 1 = Yes):</label>
             <InputNumber id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
         </div>
-    </div>
-
-    <div class="FirstCall-group">
+           <div class="FirstCall-group">
         <!-- War -->
         <div class="FirstCall-group1">
             <label for="War">War Served:</label>
             <InputText id="War" class="fcall" @bind-Value="currentDeceased.War" />
         </div>
+        </div>
+        <!-- Suffix -->
+        <div class="suffix-container">
+            <label for="suffix">Select Suffix:</label>
+            <InputRadioGroup @bind-Value="currentDeceased.Suffix" class="suffix-group">
+                <InputRadio id="MR" TValue="string" value="MR" class="fcall" /> MR.
+                <InputRadio id="MRS" TValue="string" value="MRS" class="fcall" /> MRS.
+                <InputRadio id="DR" TValue="string" value="DR" class="fcall" /> DR.
+            </InputRadioGroup>
+        </div>
+
+                </div>
+        <!-- Display Image -->
+        <div class="display-img">
+            <div>
+                <img class="img-class">
+            </div>
+        </div>
+                            <!-- Gender -->
+        <div class="gender-container">
+            <label>Gender:</label>
+            <InputRadioGroup @bind-Value="currentDeceased.Gender" class="gender-group">
+                <InputRadio id="Male" TValue="string" value="Male" class="fcall" /> Male
+                <InputRadio id="Female" TValue="string" value="Female" class="fcall" /> Female
+                <InputRadio id="Other" TValue="string" value="Other" class="fcall" /> Other
+            </InputRadioGroup>
+        </div>
+    </div>
+    
+    <div class="FirstCall-group">
+
+
     </div>
 
     <!-- Notes -->
