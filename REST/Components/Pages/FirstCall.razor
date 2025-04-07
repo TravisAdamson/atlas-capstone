@@ -35,8 +35,10 @@
     .fcall {
         border: 2px solidrgb(253, 251, 251);
         border-radius: 0.2rem;
-        padding: 0.5rem;
-    }
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+	}
 
     .genderlabel {
         display: flex;
@@ -85,6 +87,11 @@
     .suffix-group .fcall {
         margin-bottom: 5px; /* Space between radio buttons */
     }
+
+	.notes-field {
+	min-height: 6rem;
+}
+
 </style>
 
 <EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
@@ -132,89 +139,84 @@
 </EditForm>
 <EditForm id="DeceasedForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="DeceasedForm" class="DeceasedForm">
     <h5>Deceased Information</h5>
-		<div class="FirstCall-group">
-			<!-- First Name -->
+	<div class="FirstCall-group">
+		<!-- First Name -->
+		<div class="FirstCall-group1">
+			<label for="FirstName">First Name:</label>
+			<InputText id="FirstName" class="fcall" @bind-Value="currentDeceased.FirstName" />
+       	</div>
+       	<!-- Last Name -->
+       	<div class="FirstCall-group1">
+           	<label for="LastName">Last Name:</label>
+           	<InputText id="LastName" class="fcall" @bind-Value="currentDeceased.LastName" />
+       	</div>
+       	<!-- Middle Name -->
+       	<div class="FirstCall-group1">
+           	<label for="MiddleName">Middle Name:</label>
+           	<InputText id="MiddleName" class="fcall" @bind-Value="currentDeceased.MiddleName" />
+       	</div>
+       	<!-- Title -->
+       	<div class="FirstCall-group1">
+       		<label for="Title">Title:</label>
+           	<InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
+		</div>
+        <div class="FirstCall-group">
+		<!-- Date of Death -->
 			<div class="FirstCall-group1">
-				<label for="FirstName">First Name:</label>
-				<InputText id="FirstName" class="fcall" @bind-Value="currentDeceased.FirstName" />
-        	</div>
-        	<!-- Last Name -->
-        	<div class="FirstCall-group1">
-            	<label for="LastName">Last Name:</label>
-            	<InputText id="LastName" class="fcall" @bind-Value="currentDeceased.LastName" />
-        	</div>
-        	<!-- Middle Name -->
-        	<div class="FirstCall-group1">
-            	<label for="MiddleName">Middle Name:</label>
-            	<InputText id="MiddleName" class="fcall" @bind-Value="currentDeceased.MiddleName" />
-        	</div>
-        	<!-- Title -->
-        	<div class="FirstCall-group1">
-        		<label for="Title">Title:</label>
-            	<InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
+				<label for="DoD">Date of Death:</label>
+				<InputDate id="DoD" class="fcall" @bind-Value="currentDeceased.DoD" />
 			</div>
-            <div class="FirstCall-group">
-        	<!-- Date of Death -->
-        	<div class="FirstCall-group1">
-            	<label for="DoD">Date of Death:</label>
-            	<InputDate id="DoD" class="fcall" @bind-Value="currentDeceased.DoD" />
-        	</div>
 			<!-- Time of Death -->
 			<div class="FirstCall-group1">
-        	    <label for="TimeOfDeath">Time of Death:</label>
-    	        <InputDate id="TimeOfDeath" class="fcall" @bind-Value="currentDeceased.TimeOfDeath" />
-	        </div>
+				<label for="TimeOfDeath">Time of Death:</label>
+				<input type="time" class="fcall" @bind="currentDeceased.TimeOfDeath" />
+			</div>
             <!-- Alias -->
-	        <div class="FirstCall-group1">
-    	        <label for="Alias">Alias:</label>
-            	<InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
-        	</div>
-    	</div>
+			<div class="FirstCall-group1">
+				<label for="Alias">Alias:</label>
+				<InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
+			</div>
+		</div>
     </div>
     <div class="FirstCall-group">
-                <!-- SSN -->
+        <!-- SSN -->
         <div class="FirstCall-group1">
             <label for="SSN">SSN:</label>
             <InputNumber id="SSN" class="fcall" @bind-Value="currentDeceased.SSN" placeholder="123-45-6789" pattern="\d{3}-\d{2}-\d{4}" title="Format: 123-45-6789" maxlength="11" @oninput="FormatSSN" />
         </div>
-
-    <div class="FirstCall-group">
-        <!-- Maiden Name -->
-        <div class="FirstCall-group1">
-            <label for="MaidenName">Maiden Name:</label>
-            <InputText id="MaidenName" class="fcall" @bind-Value="currentDeceased.MaidenName" />
-        </div>
-
-        <!-- Vet -->
-        <div class="FirstCall-group1">
-            <label for="Vet">Veteran Status (YES OR NO):</label>
-            <InputText id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
-        </div>
-			<div class="FirstCall-group">
-        <!-- War -->
-        <div class="FirstCall-group1">
-            <label for="War">War Served:</label>
-            <InputText id="War" class="fcall" @bind-Value="currentDeceased.War" />
-        </div>
-        </div>
-        <!-- Suffix -->
-        <div class="suffix-container">
-            <label for="suffix">Select Suffix:</label>
-            <InputRadioGroup @bind-Value="currentDeceased.Suffix" class="suffix-group">
-                <InputRadio id="MR" TValue="string" value="MR" class="fcall" /> MR.
-                <InputRadio id="MRS" TValue="string" value="MRS" class="fcall" /> MRS.
-                <InputRadio id="DR" TValue="string" value="DR" class="fcall" /> DR.
-            </InputRadioGroup>
-        </div>
-
-                </div>
+	    <div class="FirstCall-group">
+    	    <!-- Maiden Name -->
+        	<div class="FirstCall-group1">
+            	<label for="MaidenName">Maiden Name:</label>
+            	<InputText id="MaidenName" class="fcall" @bind-Value="currentDeceased.MaidenName" />
+        	</div>
+        	<!-- Vet -->
+			<div class="FirstCall-group1">
+            	<label for="Vet">Veteran Status (YES OR NO):</label>
+            	<InputText id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
+        	</div>
+			<!-- War -->
+			<div class="FirstCall-group1">
+				<label for="War">War Served:</label>
+				<InputText id="War" class="fcall" @bind-Value="currentDeceased.War" />
+			</div>
+			<!-- Suffix -->
+			<div class="suffix-container">
+				<label for="suffix">Select Suffix:</label>
+				<InputRadioGroup @bind-Value="currentDeceased.Suffix" class="suffix-group">
+					<InputRadio id="MR" TValue="string" value="MR" class="fcall" /> MR.
+					<InputRadio id="MRS" TValue="string" value="MRS" class="fcall" /> MRS.
+					<InputRadio id="DR" TValue="string" value="DR" class="fcall" /> DR.
+				</InputRadioGroup>
+			</div>
+		</div>
         <!-- Display Image -->
         <div class="display-img">
             <div>
                 <img class="img-class">
             </div>
         </div>
-                            <!-- Gender -->
+        <!-- Gender -->
         <div class="gender-container">
             <label>Gender:</label>
             <InputRadioGroup @bind-Value="currentDeceased.Gender" class="gender-group">
@@ -224,21 +226,16 @@
             </InputRadioGroup>
         </div>
     </div>
-    
-    <div class="FirstCall-group">
-
-
-    </div>
-
     <!-- Notes -->
     <div class="FirstCall-group1">
         <div class="FirstCall-group1">
             <label for="Notes">Notes:</label>
-            <InputTextArea id="Notes" class="fcall" @bind-Value="currentDeceased.Notes" />
+            <InputTextArea id="Notes" class="fcall notes-field" @bind-Value="currentDeceased.Notes" />
         </div>
     </div>
 
     <button type="submit" class="btn btn-primary btn-submit">Save</button>
+
 </EditForm>
 <EditForm id="ContractForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContractForm" class="ContractForm">
     <h5>Contract Information</h5>
@@ -265,7 +262,7 @@
                 Status: @deceased.Status<br />
                 Contract Balance: @deceased.ContractBalance<br />
                 Date of Death: @deceased.DoD?.ToString("yyyy-MM-dd")<br />
-                Time of Death: @deceased.TimeOfDeath?.ToString("yyyy-MM-dd")<br />
+                Time of Death: @deceased.TimeOfDeath?.ToString("")<br />
                 SSN: @deceased.SSN<br />
                 Gender: @deceased.Gender<br />
                 Maiden Name: @deceased.MaidenName<br />
