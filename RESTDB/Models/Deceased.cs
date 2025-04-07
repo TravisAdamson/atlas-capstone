@@ -5,10 +5,16 @@ namespace RESTDB.Models;
 public class Deceased
 {
 	[Key]
+<<<<<<< HEAD
 	public int? ClientID { get; set; }
 	public string? Director { get; set; }
 	public string? FirstName { get; set; }
 	public string? LastName { get; set; }
+=======
+	public required int ClientID { get; set; }
+	public required string FirstName { get; set; }
+	public required string LastName { get; set; }
+>>>>>>> d5c3f396c97bf84006899991c3f67b1555ca28ee
 	public string? MiddleName { get; set; }
 	public string? Title { get; set; }
 	public string? Suffix { get; set; }
@@ -35,5 +41,4 @@ public class Deceased
 	public string? InformantEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
 	public string? Notes { get; set; }
-
 }
