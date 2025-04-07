@@ -35,5 +35,4 @@ public class Deceased
 	public string? InformantEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
 	public string? Notes { get; set; }
-
 }
