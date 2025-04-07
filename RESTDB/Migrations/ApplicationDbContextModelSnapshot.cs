@@ -22,33 +22,6 @@ namespace RESTDB.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("RESTDB.Models.Address", b =>
-                {
-                    b.Property<string>("Street")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("AptNo")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("County")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ZipCode")
-                        .HasColumnType("int");
-
-                    b.HasKey("Street");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("RESTDB.Models.Deceased", b =>
                 {
                     b.Property<int?>("ClientID")
@@ -57,10 +30,10 @@ namespace RESTDB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("ClientID"));
 
-                    b.Property<string>("AddressStreet")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Alias")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("City")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ContractBalance")
@@ -75,14 +48,29 @@ namespace RESTDB.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ICity")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("IPhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IState")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("IStreetAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("IZipcode")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime?>("InfoNotified")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("InformEmail")
+                    b.Property<string>("InformantEmail")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("InformantInfoId")
-                        .HasColumnType("int");
+                    b.Property<string>("InformantName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
@@ -102,7 +90,13 @@ namespace RESTDB.Migrations
                     b.Property<int?>("SSN")
                         .HasColumnType("int");
 
+                    b.Property<string>("State")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StreetAddress")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Suffix")
@@ -114,75 +108,18 @@ namespace RESTDB.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("Vet")
-                        .HasColumnType("int");
+                    b.Property<string>("Vet")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("War")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("longtext");
+
                     b.HasKey("ClientID");
 
-                    b.HasIndex("AddressStreet");
-
-                    b.HasIndex("InformantInfoId");
-
                     b.ToTable("Deceased");
-                });
-
-            modelBuilder.Entity("RESTDB.Models.Informant", b =>
-                {
-                    b.Property<int>("InfoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("InfoId"));
-
-                    b.Property<string>("AddressStreet")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("InfoId");
-
-                    b.HasIndex("AddressStreet");
-
-                    b.ToTable("Informant");
-                });
-
-            modelBuilder.Entity("RESTDB.Models.Deceased", b =>
-                {
-                    b.HasOne("RESTDB.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressStreet");
-
-                    b.HasOne("RESTDB.Models.Informant", "Informant")
-                        .WithMany()
-                        .HasForeignKey("InformantInfoId");
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Informant");
-                });
-
-            modelBuilder.Entity("RESTDB.Models.Informant", b =>
-                {
-                    b.HasOne("RESTDB.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressStreet");
-
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }
