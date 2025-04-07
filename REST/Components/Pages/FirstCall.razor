@@ -7,10 +7,10 @@
 <h1>Create Record</h1>
 
 <style>
-    /* General Styles */
     .forms {
         padding: 1rem;
     }
+
     .ContactForm, .DeceasedForm, .ContractForm {
         border: 1px solid #000000;
         border-radius: 8px;
@@ -50,7 +50,7 @@
         margin-top: 1rem;
     }
 
-    /* Hide number input incrementing arrows */
+    /* Hide number input incrementing arrows */    /* this is probably not needed if we get the input type right for the box. this just hides the arrows, it doesnt remove the ability to use arrow keys to increment/decrement the integer in the field. also currently allows for negative integers. */
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -60,8 +60,8 @@
     input[type="number"] {
         -moz-appearance: textfield;
     }
-    /* Style for Gender selection */
-    .gender-container {
+
+    .gender-container { /* Style for Gender selection */
         margin-bottom: 15px;
     }
 
@@ -71,17 +71,16 @@
     }
 
     .gender-group .fcall {
-        margin-bottom: 5px; /* Space between radio buttons */
+        margin-bottom: 6px; /* Space between radio buttons not really */
     }
 
-    /* Style for Suffix selection */
-    .suffix-container {
+    .suffix-container { /* Style for Suffix selection */
         margin-bottom: 15px;
     }
 
     .suffix-group {
         display: flex;
-        flex-direction: column; /* Stacks the radio buttons vertically */
+        flex-direction: column; /* Stacks the radio buttons vertically kind of */
     }
 
     .suffix-group .fcall {
@@ -91,7 +90,6 @@
 	.notes-field {
 	min-height: 6rem;
 }
-
 </style>
 
 <EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
@@ -127,7 +125,6 @@
 				<InputText id="InformantEmail" class="fcall" @bind-Value="currentDeceased.InformantEmail" />
 			</div>
 		</div>
-
 		<div class="FirstCall-group">
 			<!-- Info Notified -->
 			<div class="FirstCall-group1">
@@ -278,7 +275,6 @@
         }
     </ul>
 }
-
 
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
