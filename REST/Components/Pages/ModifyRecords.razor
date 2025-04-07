@@ -75,7 +75,6 @@
             <InputText id="MiddleName" class="fcall" @bind-Value="currentDeceased.MiddleName" />
         </div>
 
-    
         <!-- Title -->
         <div class="FirstCall-group1">
             <label for="Title">Title:</label>
@@ -87,7 +86,6 @@
             <label for="DoD">Date of Death:</label>
             <InputDate id="DoD" class="fcall" @bind-Value="currentDeceased.DoD" />
         </div>
-
         <!-- Time of Death -->
         <div class="FirstCall-group1">
             <label for="TimeOfDeath">Time of Death:</label>
@@ -108,7 +106,6 @@
             <InputNumber id="SSN" class="fcall" @bind-Value="currentDeceased.SSN" placeholder="123-45-6789" pattern="\d{3}-\d{2}-\d{4}" title="Format: 123-45-6789" maxlength="11" @oninput="FormatSSN" />
         </div>
 
-
     <div class="FirstCall-group">
         <!-- Maiden Name -->
         <div class="FirstCall-group1">
@@ -116,12 +113,12 @@
             <InputText id="MaidenName" class="fcall" @bind-Value="currentDeceased.MaidenName" />
         </div>
 
-                <!-- Vet -->
+        <!-- Vet -->
         <div class="FirstCall-group1">
             <label for="Vet">Veteran Status (0 = No, 1 = Yes):</label>
             <InputText id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
         </div>
-           <div class="FirstCall-group">
+			<div class="FirstCall-group">
         <!-- War -->
         <div class="FirstCall-group1">
             <label for="War">War Served:</label>
