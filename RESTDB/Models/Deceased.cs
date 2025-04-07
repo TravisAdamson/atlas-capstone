@@ -12,7 +12,10 @@ public class Deceased
 	public string? Title { get; set; }
 	public string? Suffix { get; set; }
 	public string? Status { get; set; }
-	public Address? Address { get; set; }
+	public string? StreetAddress { get; set; }
+	public string? City { get; set; }
+	public string? State { get; set; }
+	public string? ZipCode { get; set; }
 	public string? ContractBalance { get; set; }
 	public DateTime? DoD { get; set; }
 	public DateTime? TimeOfDeath { get; set; }
@@ -21,12 +24,16 @@ public class Deceased
 	public string? MaidenName { get; set; }
 	public string? Alias { get; set; }
 	public int? PhoneNum { get; set; }
-	public int? Vet { get; set; }
+	public string? Vet { get; set; }
 	public string? War { get; set; }
-	public Informant? Informant { get; set; }
-	public string? InformEmail { get; set; }
+	public string? InformantName { get; set; }
+	public string? IStreetAddress { get; set; }
+	public string? ICity { get; set; }
+	public string? IState { get; set; }
+	public string? IZipcode { get; set; }
+	public int? IPhoneNumber { get; set; }
+	public string? InformantEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
 	public string? Notes { get; set; }
-	
 
 }
