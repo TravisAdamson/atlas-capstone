@@ -34,13 +34,13 @@
     <div class="FirstCall-group">
         <!-- Phone Number -->
         <div class="FirstCall-group1">
-            <label for="PhoneNum">Informant Phone Number:</label>
-            <InputNumber id="PhoneNum" class="fcall" @bind-Value="currentDeceased.PhoneNum" />
+            <label for="IPhoneNumber">Informant Phone Number:</label>
+            <InputNumber id="IPhoneNumber" class="fcall" @bind-Value="currentDeceased.IPhoneNumber" />
         </div>
     <!-- Informant Email -->
         <div class="FirstCall-group1">
-            <label for="InformEmail">Informant Email:</label>
-            <InputText id="InformEmail" class="fcall" @bind-Value="currentDeceased.InformEmail" />
+            <label for="InformantEmail">Informant Email:</label>
+            <InputText id="InformantEmail" class="fcall" @bind-Value="currentDeceased.InformantEmail" />
         </div>
     </div>
 
@@ -197,11 +197,11 @@
                 Gender: @deceased.Gender<br />
                 Maiden Name: @deceased.MaidenName<br />
                 Alias: @deceased.Alias<br />
-                Phone Number: @deceased.PhoneNum<br />
+                Phone Number: @deceased.IPhoneNumber<br />
                 Veteran Status: @deceased.Vet<br />
                 War: @deceased.War<br />
-                Informant: @deceased.Informant<br />
-                Informant Email: @deceased.InformEmail<br />
+                Informant: @deceased.InformantName<br />
+                Informant Email: @deceased.InformantEmail<br />
                 Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
                 Notes: @deceased.Notes<br />
             </li>
@@ -237,9 +237,6 @@
             Console.WriteLine($"Invalid data: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}' are required.");
             return;
         }
-
-        currentDeceased.Vet = currentDeceased.Vet == 1 ? 1 : 0;
-
         if (currentDeceased.ClientID == 0)
         {
             currentDeceased.ClientID = GetNextClientID();
