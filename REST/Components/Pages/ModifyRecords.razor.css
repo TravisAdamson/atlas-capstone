@@ -73,3 +73,11 @@
     border: 2px;
     border-radius: .2rem;
 }
+
+.searchbar {
+    flex: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+}
