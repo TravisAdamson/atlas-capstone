@@ -39,6 +39,9 @@ namespace RESTDB.Migrations
                     b.Property<string>("ContractBalance")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Director")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime?>("DoD")
                         .HasColumnType("datetime(6)");
 
@@ -83,9 +86,6 @@ namespace RESTDB.Migrations
 
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("PhoneNum")
-                        .HasColumnType("int");
 
                     b.Property<int?>("SSN")
                         .HasColumnType("int");

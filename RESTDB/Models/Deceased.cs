@@ -6,6 +6,7 @@ public class Deceased
 {
 	[Key]
 	public int? ClientID { get; set; }
+	public string? Director { get; set; }
 	public string? FirstName { get; set; }
 	public string? LastName { get; set; }
 	public string? MiddleName { get; set; }
@@ -23,7 +24,6 @@ public class Deceased
 	public string? Gender { get; set; }
 	public string? MaidenName { get; set; }
 	public string? Alias { get; set; }
-	public int? PhoneNum { get; set; }
 	public string? Vet { get; set; }
 	public string? War { get; set; }
 	public string? InformantName { get; set; }
