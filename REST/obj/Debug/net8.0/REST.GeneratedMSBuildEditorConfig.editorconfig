@@ -22,16 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/devunix2/atlas-capstone/REST/Components/Pages/BrowseDeceasedRecords.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ccm93c2VEZWNlYXNlZFJlY29yZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/devunix2/atlas-capstone/REST/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/devunix2/atlas-capstone/REST/Components/Pages/Service.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZXJ2aWNlLnJhem9y
+[/home/devunix2/atlas-capstone/REST/Components/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Mb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/devunix2/atlas-capstone/REST/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+[/home/devunix2/atlas-capstone/REST/Components/Pages/ViewAllRecords.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9WaWV3QWxsUmVjb3Jkcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/devunix2/atlas-capstone/REST/Components/Routes.razor]
@@ -50,6 +54,14 @@ build_metadata.AdditionalFiles.CssScope = b-wt0qkdbvk9
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-icd43a5vlv
 
+[/home/devunix2/atlas-capstone/REST/Components/Pages/FirstCall.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9GaXJzdENhbGwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-5mx7jhsibm
+
 [/home/devunix2/atlas-capstone/REST/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-c3b17fdnzf
+
+[/home/devunix2/atlas-capstone/REST/Components/Pages/ModifyRecords.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Nb2RpZnlSZWNvcmRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-b9h8xmcpgp
