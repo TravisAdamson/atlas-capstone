@@ -51,11 +51,11 @@ namespace RESTDB.Migrations
 
             modelBuilder.Entity("RESTDB.Models.Deceased", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int?>("ClientID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("ClientID"));
 
                     b.Property<string>("AddressStreet")
                         .HasColumnType("varchar(255)");
@@ -70,7 +70,6 @@ namespace RESTDB.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Gender")
@@ -86,7 +85,6 @@ namespace RESTDB.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("MaidenName")

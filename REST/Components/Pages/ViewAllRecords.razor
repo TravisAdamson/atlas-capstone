@@ -1,0 +1,139 @@
+﻿@page "/ViewAllRecords"
+@inject RESTDB.Data.ApplicationDbContext Context
+@inject NavigationManager NavigationManager
+
+<PageTitle>View All Records</PageTitle>
+
+<h1>View All Records</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ClientID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Contract Balance</th>
+            <th>Date of Death</th>
+            <th>Time of Death</th>
+            <th>SSN</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var deceased in Deceased)
+        {
+            <tr>
+                <td>@deceased.ClientID</td>
+                <td>@deceased.FirstName</td>
+                <td>@deceased.LastName</td>
+                <td>@deceased.Title</td>
+                <td>@deceased.Status</td>
+                <td>@deceased.ContractBalance</td>
+                <td>@deceased.DoD?.ToString("yyyy-MM-dd")</td>
+                <td>@deceased.TimeOfDeath?.ToString("yyyy-MM-dd")</td>
+                <td>@deceased.SSN</td>
+                <td>@deceased.Gender</td>
+                <td>
+                    <button @onclick="() => StartEdit(deceased.ClientID ?? 0)">Edit</button>
+                    <button @onclick="() => DeleteDeceased(deceased.ClientID ?? 0)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (IsEditing)
+{
+    <div class="edit-form">
+        <h3>Edit Deceased Record</h3>
+        <div>
+            <label for="first-name">First Name</label>
+            <input id="first-name" @bind="CurrentDeceased.FirstName" />
+        </div>
+        <div>
+            <label for="last-name">Last Name</label>
+            <input id="last-name" @bind="CurrentDeceased.LastName" />
+        </div>
+        <div>
+            <label for="title">Title</label>
+            <input id="title" @bind="CurrentDeceased.Title" />
+        </div>
+        <div>
+            <label for="status">Status</label>
+            <input id="status" @bind="CurrentDeceased.Status" />
+        </div>
+        <div>
+            <label for="contract-balance">Contract Balance</label>
+            <input id="contract-balance" @bind="CurrentDeceased.ContractBalance" />
+        </div>
+        <div>
+            <label for="death-date">Date of Death</label>
+            <input type="date" id="death-date" @bind="CurrentDeceased.DoD" />
+        </div>
+        <div>
+            <label for="time-of-death">Time of Death</label>
+            <input type="time" id="time-of-death" @bind="CurrentDeceased.TimeOfDeath" />
+        </div>
+        <div>
+            <label for="ssn">SSN</label>
+            <input id="ssn" @bind="CurrentDeceased.SSN" />
+        </div>
+        <div>
+            <label for="gender">Gender</label>
+            <input id="gender" @bind="CurrentDeceased.Gender" />
+        </div>
+
+        <button @onclick="SaveDeceased">Save</button>
+        <button @onclick="CancelEdit">Cancel</button>
+    </div>
+}
+
+@code {
+    private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
+    private bool IsEditing = false;
+    private RESTDB.Models.Deceased? CurrentDeceased;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Deceased = await Context.Deceased.ToListAsync();
+    }
+
+    private void StartEdit(int clientId)
+    {
+        CurrentDeceased = Deceased.FirstOrDefault(d => d.ClientID == clientId);
+        if (CurrentDeceased != null)
+        {
+            IsEditing = true;
+        }
+    }
+
+    private async Task SaveDeceased()
+    {
+        if (CurrentDeceased != null)
+        {
+            Context.Deceased.Update(CurrentDeceased);
+            await Context.SaveChangesAsync();
+            Deceased = await Context.Deceased.ToListAsync();
+            IsEditing = false;
+        }
+    }
+
+    private void CancelEdit()
+    {
+        IsEditing = false;
+    }
+
+    private async Task DeleteDeceased(int clientId)
+    {
+        var deceasedToDelete = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
+        if (deceasedToDelete != null)
+        {
+            Context.Deceased.Remove(deceasedToDelete);
+            await Context.SaveChangesAsync();
+            Deceased = await Context.Deceased.ToListAsync();
+        }
+    }
+}
