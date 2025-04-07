@@ -259,64 +259,80 @@
     </div>
 
 </EditForm>
-<h3>SAVED RESULTS</h3>
-<ul>
-    @foreach (var deceased in Deceased)
-    {
-        <li>
-            <strong>@deceased.FirstName @deceased.LastName</strong><br />
-            Middle Name: @deceased.MiddleName<br />
-            Title: @deceased.Title<br />
-            Suffix: @deceased.Suffix<br />
-            Status: @deceased.Status<br />
-            Contract Balance: @deceased.ContractBalance<br />
-            Date of Death: @deceased.DoD?.ToString("yyyy-MM-dd")<br />
-            Time of Death: @deceased.TimeOfDeath?.ToString("yyyy-MM-dd")<br />
-            SSN: @deceased.SSN<br />
-            Gender: @deceased.Gender<br />
-            Maiden Name: @deceased.MaidenName<br />
-            Alias: @deceased.Alias<br />
-            Phone Number: @deceased.PhoneNum<br />
-            Veteran Status: @deceased.Vet<br />
-            War: @deceased.War<br />
-            Informant: @deceased.Informant<br />
-            Informant Email: @deceased.InformEmail<br />
-            Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
-            Notes: @deceased.Notes<br />
-        </li>
-    }
-</ul>
+@if (showResults)
+{
+    <h3>SAVED RESULTS</h3>
+    <ul>
+        @foreach (var deceased in Deceased)
+        {
+            <li>
+                <strong>@deceased.FirstName @deceased.LastName</strong><br />
+                Middle Name: @deceased.MiddleName<br />
+                Title: @deceased.Title<br />
+                Suffix: @deceased.Suffix<br />
+                Status: @deceased.Status<br />
+                Contract Balance: @deceased.ContractBalance<br />
+                Date of Death: @deceased.DoD?.ToString("yyyy-MM-dd")<br />
+                Time of Death: @deceased.TimeOfDeath?.ToString("yyyy-MM-dd")<br />
+                SSN: @deceased.SSN<br />
+                Gender: @deceased.Gender<br />
+                Maiden Name: @deceased.MaidenName<br />
+                Alias: @deceased.Alias<br />
+                Phone Number: @deceased.PhoneNum<br />
+                Veteran Status: @deceased.Vet<br />
+                War: @deceased.War<br />
+                Informant: @deceased.Informant<br />
+                Informant Email: @deceased.InformEmail<br />
+                Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
+                Notes: @deceased.Notes<br />
+            </li>
+        }
+    </ul>
+}
+
 
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
+    private bool showResults = false; // Flag to control visibility of saved results
 
     protected override async Task OnInitializedAsync()
     {
         Deceased = await Context.Deceased.ToListAsync();
     }
 
+    private int GetNextClientID()
+    {
+        var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
+        return lastDeceased?.ClientID + 1 ?? 1;
+    }
+
     private async Task SaveRecord()
     {
-        // Ensure valid data before saving
         if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
         {
             Console.WriteLine($"Invalid data: First Name = '{currentDeceased.FirstName}', Last Name = '{currentDeceased.LastName}' are required.");
             return;
         }
-        // Manually ensure that Vet is saved as an integer
+
         currentDeceased.Vet = currentDeceased.Vet == 1 ? 1 : 0;
-        // Add the record to the database
+
+        if (currentDeceased.ClientID == 0)
+        {
+            currentDeceased.ClientID = GetNextClientID();
+        }
+
         Context.Deceased.Add(currentDeceased);
         await Context.SaveChangesAsync();
-        
-        // Refresh the list of deceased records
+
         Deceased = await Context.Deceased.ToListAsync();
 
-        // Reset the form for the next entry
         currentDeceased = new RESTDB.Models.Deceased();
+
+        showResults = true; // After saving, show results
     }
 }
+
 @code {
     private string ssnValue = "";
     private string zipCode = "";
