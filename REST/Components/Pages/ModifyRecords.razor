@@ -2,49 +2,6 @@
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
 
-@if (deceasedList == null)
-{
-    <p>Loading...</p>
-}
-else if (!deceasedList.Any())
-{
-    <p>No records found.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Client ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Date of Death</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var d in deceasedList)
-            {
-                <tr>
-                    <td>@d.ClientID</td>
-                    <td>@d.FirstName</td>
-                    <td>@d.LastName</td>
-                    <td>@(d.DoD?.ToShortDateString() ?? "N/A")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-@code {
-    private List<Deceased>? deceasedList;
-
-    protected override async Task OnInitializedAsync()
-    {
-        deceasedList = await Db.Deceased.ToListAsync();
-    }
-}
-
-
 <PageTitle>Modify Records</PageTitle>
 
 <h1>Modify Records</h1>
@@ -98,12 +55,12 @@ else
     </div>
 </EditForm>
 <EditForm id="DeceasedForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="DeceasedForm" class="DeceasedForm">
-	<h5>Deceased Information</h5>
-	<div class="FirstCall-group">
-		<!-- First Name -->
-		<div class="FirstCall-group1">
-			<label for="FirstName">First Name:</label>
-			<InputText id="FirstName" class="fcall" @bind-Value="currentDeceased.FirstName" />
+    <h5>Deceased Information</h5>
+    <div class="FirstCall-group">
+        <!-- First Name -->
+        <div class="FirstCall-group1">
+            <label for="FirstName">First Name:</label>
+            <InputText id="FirstName" class="fcall" @bind-Value="currentDeceased.FirstName" />
         </div>
 
         <!-- Last Name -->
@@ -164,7 +121,7 @@ else
             <label for="Vet">Veteran Status (0 = No, 1 = Yes):</label>
             <InputText id="Vet" class="fcall" @bind-Value="currentDeceased.Vet" />
         </div>
-            <div class="FirstCall-group">
+           <div class="FirstCall-group">
         <!-- War -->
         <div class="FirstCall-group1">
             <label for="War">War Served:</label>
@@ -188,7 +145,7 @@ else
                 <img class="img-class">
             </div>
         </div>
-        <!-- Gender -->
+                            <!-- Gender -->
         <div class="gender-container">
             <label>Gender:</label>
             <InputRadioGroup @bind-Value="currentDeceased.Gender" class="gender-group">
@@ -310,7 +267,6 @@ else
         }
     }
 }
-
 @code {
     private string ssnValue = "";
     private string zipCode = "";
