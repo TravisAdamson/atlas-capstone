@@ -1,6 +1,7 @@
 ﻿@page "/Modify Records"
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
+@inject NavigationManager NavigationManager
 
 <PageTitle>Modify Records</PageTitle>
 
@@ -344,10 +345,51 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Deceased = await Context.Deceased.ToListAsync();
+
+		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var queryParameters = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+
+		Deceased = await Context.Deceased.ToListAsync();
         if (Deceased.Any())
         {
-            currentDeceased = Deceased.Last();
+        	if (queryParameters.TryGetValue("currentRecordString", out var currentRecordString))
+        	{
+				if (int.TryParse(currentRecordString, out var currentRecord))
+				{
+					currentRecordIndex = currentRecord;
+            		// Use the clientID value
+            		Console.WriteLine($"ClientID: {currentRecordIndex}");
+				}
+			}
+			else if (currentRecordIndex != 0)
+            	currentDeceased = Deceased[currentRecordIndex - 1];
+			else
+				currentDeceased = Deceased.Last();
+			if (!string.IsNullOrEmpty(currentDeceased.SSN))
+            {
+                var ssnParts = currentDeceased.SSN.Split('-');
+                if (ssnParts.Length == 3)
+                {
+                    SSNPart1 = ssnParts[0];
+                    SSNPart2 = ssnParts[1];
+                    SSNPart3 = ssnParts[2];
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentDeceased.IPhoneNumber))
+            {
+                var phoneNumber = currentDeceased.IPhoneNumber
+                    .Replace("(", "")
+                    .Replace(")", "")
+                    .Replace("-", "");
+
+                if (phoneNumber.Length == 10)
+                {
+                    PhonePart1 = phoneNumber.Substring(0, 3);
+                    PhonePart2 = phoneNumber.Substring(3, 3);
+                    PhonePart3 = phoneNumber.Substring(6, 4);
+                }
+            }
         }
     }
 
