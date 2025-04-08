@@ -9,6 +9,7 @@
     border-radius: 8px;
 	margin: 1rem auto;
 	padding-left: 4rem;
+	padding-top: 1rem;
 }
 
 .btn {
@@ -24,4 +25,17 @@
 
 h1 {
 	text-align: center;
+	padding-top: 1rem;
+}
+
+.logo-image-container {
+    text-align: center; 
+    margin-top: 2rem;
+	padding-top: 6rem;
+}
+
+.the-actual-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
