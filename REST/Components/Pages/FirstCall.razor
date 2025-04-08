@@ -102,14 +102,45 @@
                 </select>    
         </div>
         <div class="FirstCall-group">
-        <!-- Status -->
+        <!-- Case Status -->
         <div class="FirstCall-group1">
-            <label for="Status">Status:</label>
+            <label for="Status">Case Status:</label>
             <InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
         </div>
     </div>
     <div class="FirstCall-group">
-        <!-- Phone Number -->
+                <!-- Informant Number -->
+        <div class="FirstCall-group1">
+            <label for="InformantName">Informant Name:</label>
+            <InputText id="InformantName" class="fcall" @bind-Value="currentDeceased.InformantName" />
+        </div>
+                <!-- Informant Address -->
+        <div class="FirstCall-group1">
+            <label for="IStreetAddress">Informant Address:</label>
+            <InputText id="IStreetAddress" class="fcall" @bind-Value="currentDeceased.IStreetAddress" />
+        </div>
+                <!-- Informant City -->
+        <div class="FirstCall-group1">
+            <label for="ICity">Informant City:</label>
+            <InputText id="ICity" class="fcall" @bind-Value="currentDeceased.ICity" />
+        </div>
+        <!-- Informant State -->
+        <div class="suffix-container">
+            <label for="IState">Select State:</label>
+            <InputSelect @bind-Value="currentDeceased.IState" class="suffix-group" TValue="string">
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Texas">Texas</option>
+                <option value="Kansas">Kansas</option>
+            </InputSelect>
+        </div>
+
+                <!-- Informant Zipcode -->
+        <div class="FirstCall-group1">
+            <label for="IZipcode">Informant Zipcode:</label>
+            <InputNumber id="IZipcode" class="fcall" @bind-Value="currentDeceased.IZipcode" />
+        </div>
+
+        <!-- Informant Phone Number -->
         <div class="FirstCall-group1">
             <label for="IPhoneNumber">Informant Phone Number:</label>
             <InputNumber id="IPhoneNumber" class="fcall" @bind-Value="currentDeceased.IPhoneNumber" />
@@ -281,7 +312,12 @@
                 Phone Number: @deceased.IPhoneNumber<br />
                 Veteran Status: @deceased.Vet<br />
                 War: @deceased.War<br />
-                Informant: @deceased.InformantName<br />
+                InformantName: @deceased.InformantName<br />
+                IStreetAddress: @deceased.IStreetAddress<br />
+                ICity: @deceased.ICity<br />
+                IState: @deceased.IState<br />
+                IZipcode: @deceased.IZipcode<br />
+                IPhoneNumber: @deceased.IPhoneNumber<br />
                 Informant Email: @deceased.InformantEmail<br />
                 Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
                 Notes: @deceased.Notes<br />
