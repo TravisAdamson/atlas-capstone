@@ -10,16 +10,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ClientID</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Contract Balance</th>
             <th>Date of Death</th>
             <th>Time of Death</th>
-            <th>SSN</th>
-            <th>Gender</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -29,8 +23,8 @@
             <tr>
                 <td>@deceased.FirstName</td>
                 <td>@deceased.LastName</td>
-                <td>@deceased.ContractBalance</td>
                 <td>@deceased.DoD?.ToString("yyyy-MM-dd")</td>
+				<td>@deceased.TimeOfDeath?.ToString("hh:mm")</td>
                 <td>
                     <button @onclick="() => StartEdit(deceased.ClientID ?? -1)">Edit</button>
                     <button @onclick="() => DeleteDeceased(deceased.ClientID ?? -1)">Delete</button>
@@ -54,18 +48,6 @@
         	    <label for="last-name">Last Name</label>
         	    <input id="last-name" @bind="currentDeceased.LastName" />
         	</div>
-        	<div>
-        	    <label for="title">Title</label>
-        	    <input id="title" @bind="currentDeceased.Title" />
-			</div>
-			<div>
-				<label for="status">Status</label>
-				<input id="status" @bind="currentDeceased.Status" />
-			</div>
-			<div>
-				<label for="contract-balance">Contract Balance</label>
-				<input id="contract-balance" @bind="currentDeceased.ContractBalance" />
-			</div>
 			<div>
 				<label for="death-date">Date of Death</label>
 				<input type="date" id="death-date" @bind="currentDeceased.DoD" />
@@ -73,14 +55,6 @@
 			<div>
 				<label for="time-of-death">Time of Death</label>
 				<input type="time" id="time-of-death" @bind="currentDeceased.TimeOfDeath" />
-			</div>
-			<div>
-				<label for="ssn">SSN</label>
-				<input id="ssn" @bind="currentDeceased.SSN" />
-			</div>
-			<div>
-				<label for="gender">Gender</label>
-				<input id="gender" @bind="currentDeceased.Gender" />
 			</div>
 
 			<button @onclick="SaveDeceased">Save</button>
