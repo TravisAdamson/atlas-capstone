@@ -9,7 +9,7 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, #552f7a 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, #552f7a 0%, #3a0647 99%);
     width: 50px;
     overflow-x: hidden;
     position: fixed;
@@ -101,13 +101,14 @@ main {
 /* Header (top nav bar) */
 .top-header {
     background-color: #552f7a;
+	background-image: linear-gradient(90deg, #552f7a 30%, #3a0647 95%);
     height: 3.5rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-	padding-left: 2rem;
+	padding-left: 3rem;
 	top: 0;
     left: 0;
     color: #ffffff;
