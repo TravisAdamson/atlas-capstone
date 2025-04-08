@@ -47,7 +47,8 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DoD = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     TimeOfDeath = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    SSN = table.Column<int>(type: "int", nullable: true),
+                    SSN = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Gender = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MaidenName = table.Column<string>(type: "longtext", nullable: true)
@@ -67,7 +68,8 @@ namespace RESTDB.Migrations
                     IState = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IZipcode = table.Column<int>(type: "int", nullable: true),
-                    IPhoneNumber = table.Column<int>(type: "int", nullable: true),
+                    IPhoneNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     InformantEmail = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     InfoNotified = table.Column<DateTime>(type: "datetime(6)", nullable: true),
