@@ -89,13 +89,13 @@
         <!-- Director -->
         <div class="FirstCall-group1">
             <label for="Director">Director</label>
-            <select id="Director" name="Director">
-                <option value="Travis">Travis</option>
-                <option value="Nolan">Nolan</option>
-                <option value="Kevin">Kevin</option>
-                <option value="Matt">Matt</option>
-                <option value="Other">Other</option>
-            </select>
+            <InputSelect @bind-Value="currentDeceased.Director" class="State-group" TValue="string">
+                    <option value="Travis">Travis</option>
+                    <option value="Nolan">Nolan</option>
+                    <option value="Kevin">Kevin</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Other">Other</option>
+            </InputSelect>
         </div>
         <!-- Case Status -->
         <div class="FirstCall-group1">
@@ -203,10 +203,10 @@
         <!-- Gender -->
         <div class="gender-container">
             <label>Gender:</label>
-            <InputRadioGroup @bind-Value="currentDeceased.Gender" class="gender-group">
-                <InputRadio id="Male" TValue="string" value="Male" class="fcall" /> Male
-                <InputRadio id="Female" TValue="string" value="Female" class="fcall" /> Female
-            </InputRadioGroup>
+            <InputSelect @bind-Value="currentDeceased.Gender" class="gender-group" TValue="string">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+            </InputSelect>
         </div>
         <!-- Notes -->
         <div class="FirstCall-group1">
