@@ -128,7 +128,7 @@
             <label for="Title">Title:</label>
             <InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
         </div>
-        
+
         <!-- Date of Death -->
         <div class="FirstCall-group1">
             <label for="DoD">Date of Death:</label>
@@ -322,7 +322,7 @@
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
-    
+
     // Phone and SSN part bindings
     private string? PhonePart1 { get; set; }
     private string? PhonePart2 { get; set; }
@@ -375,7 +375,7 @@
         currentDeceased.ClientID = GetNextClientID();
         Context.Deceased.Add(currentDeceased);
         await Context.SaveChangesAsync();
-        
+
         currentDeceased = new RESTDB.Models.Deceased();
         PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
         SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;

@@ -12,7 +12,7 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250408153717_InitialCreate")]
+    [Migration("20250408184554_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -57,8 +57,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("ICity")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("IPhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("IPhoneNumber")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("IState")
                         .HasColumnType("longtext");
@@ -90,8 +90,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("SSN")
-                        .HasColumnType("int");
+                    b.Property<string>("SSN")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("State")
                         .HasColumnType("longtext");
