@@ -365,6 +365,31 @@
             	currentDeceased = Deceased[currentRecordIndex - 1];
 			else
 				currentDeceased = Deceased.Last();
+			if (!string.IsNullOrEmpty(currentDeceased.SSN))
+            {
+                var ssnParts = currentDeceased.SSN.Split('-');
+                if (ssnParts.Length == 3)
+                {
+                    SSNPart1 = ssnParts[0];
+                    SSNPart2 = ssnParts[1];
+                    SSNPart3 = ssnParts[2];
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentDeceased.IPhoneNumber))
+            {
+                var phoneNumber = currentDeceased.IPhoneNumber
+                    .Replace("(", "")
+                    .Replace(")", "")
+                    .Replace("-", "");
+
+                if (phoneNumber.Length == 10)
+                {
+                    PhonePart1 = phoneNumber.Substring(0, 3);
+                    PhonePart2 = phoneNumber.Substring(3, 3);
+                    PhonePart3 = phoneNumber.Substring(6, 4);
+                }
+            }
         }
     }
 
