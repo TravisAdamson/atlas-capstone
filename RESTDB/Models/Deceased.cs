@@ -20,7 +20,7 @@ public class Deceased
 	public string? ContractBalance { get; set; }
 	public DateTime? DoD { get; set; }
 	public DateTime? TimeOfDeath { get; set; }
-	public int? SSN { get; set; }
+	public string? SSN { get; set; }
 	public string? Gender { get; set; }
 	public string? MaidenName { get; set; }
 	public string? Alias { get; set; }
@@ -31,8 +31,9 @@ public class Deceased
 	public string? ICity { get; set; }
 	public string? IState { get; set; }
 	public int? IZipcode { get; set; }
-	public int? IPhoneNumber { get; set; }
+	public string? IPhoneNumber { get; set; }
 	public string? InformantEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
 	public string? Notes { get; set; }
+	
 }
