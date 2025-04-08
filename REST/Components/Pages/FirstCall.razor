@@ -103,7 +103,6 @@
             <InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-submit">Save</button>
 </EditForm>
 
 <EditForm id="DeceasedForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="DeceasedForm" class="DeceasedForm">
@@ -144,6 +143,30 @@
         <div class="FirstCall-group1">
             <label for="Alias">Alias:</label>
             <InputText id="Alias" class="fcall" @bind-Value="currentDeceased.Alias" />
+        </div>
+        <!-- Deceased Address -->
+        <div class="FirstCall-group1">
+            <label for="StreetAddress">Informant Street Address:</label>
+            <InputText id="StreetAddress" class="fcall" @bind-Value="currentDeceased.StreetAddress" />
+        </div>
+        <!-- Deceased City -->
+        <div class="FirstCall-group1">
+            <label for="City">Informant City:</label>
+            <InputText id="City" class="fcall" @bind-Value="currentDeceased.City" />
+        </div>
+        <!-- Deceased State -->
+        <div class="IState-container">
+            <label for="State">Select State:</label>
+            <InputSelect @bind-Value="currentDeceased.State" class="State-group" TValue="string">
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Texas">Texas</option>
+                <option value="Kansas">Kansas</option>
+            </InputSelect>
+        </div>
+        <!-- Deceased ZipCode -->
+        <div class="FirstCall-group1">
+            <label for="ZipCode">Informant Zip Code:</label>
+            <InputText id="ZipCode" class="fcall" @bind-Value="currentDeceased.ZipCode" />
         </div>
 
         <!-- SSN -->
@@ -191,7 +214,6 @@
             <InputTextArea id="Notes" class="fcall notes-field" @bind-Value="currentDeceased.Notes" />
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-submit">Save</button>
 </EditForm>
 
 <EditForm id="InformantForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="InformantForm" class="InformantForm">
@@ -249,6 +271,13 @@
             <InputText id="InformantEmail" class="fcall" @bind-Value="currentDeceased.InformantEmail" />
         </div>
     </div>
+    <div class="FirstCall-group">
+        <!-- Info Notified -->
+        <div class="FirstCall-group1">
+            <label for="InfoNotified">Informant Notified:</label>
+            <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary btn-submit">Save</button>
 </EditForm>
 @if (showResults)
@@ -260,6 +289,10 @@
             <li>
                 <strong>@deceased.FirstName @deceased.LastName</strong><br />
                 Middle Name: @deceased.MiddleName<br />
+                StreetAddress: @deceased.StreetAddress<br />
+                City: @deceased.City<br />
+                State: @deceased.State<br />
+                Zipcode: @deceased.ZipCode<br />
                 Title: @deceased.Title<br />
                 Suffix: @deceased.Suffix<br />
                 Status: @deceased.Status<br />
