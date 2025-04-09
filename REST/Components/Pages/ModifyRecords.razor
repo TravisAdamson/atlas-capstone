@@ -348,8 +348,14 @@
 
 <!-- Navigation Controls for Record Selection -->
 <div class="navigation-controls">
+@if (preVis)
+{
     <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button>
+}
+@if (nexVis)
+{
     <button @onclick="NextRecord" class="btn btn-secondary">Next</button>
+}
 </div>
 
 @if (showResults)
@@ -407,6 +413,7 @@
     private int currentRecordIndex = 0;
 	private string? currentRecordString;
 	private string? firstString;
+	private bool preVis = true, nexVis = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -423,6 +430,10 @@
 				currentRecordString = value;
 				if (int.TryParse(currentRecordString, out var currentRecord))
 				{
+					if (currentRecord == Deceased.Count)
+						nexVis = false;
+					else if (currentRecord == 1)
+						preVis = false;
 					currentRecordIndex = currentRecord;
 				}
 			}
@@ -452,19 +463,17 @@
         if (string.IsNullOrEmpty(SSNPart1) || string.IsNullOrEmpty(SSNPart2) || string.IsNullOrEmpty(SSNPart3))
         {
             Console.WriteLine("SSN is required.");
-            return;
         }
-
-        currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+		else
+			currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
 
         // Format Phone Number
         if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
         {
             Console.WriteLine("Phone number is required.");
-            return;
         }
-
-        currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+		else
+        	currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
 
         // Save
         currentDeceased.ClientID = GetNextClientID();
@@ -478,22 +487,41 @@
     }
     private void PreviousRecord()
     {
-        if (currentRecordIndex > 0)
+        if (currentRecordIndex > 1)
         {
+			Console.WriteLine($"Current Index = {currentRecordIndex}");
             currentRecordIndex--;
-            currentDeceased = Deceased[currentRecordIndex];
+			Console.WriteLine($"Current Index = {currentRecordIndex}");
+            currentDeceased = Deceased[currentRecordIndex - 1];
 			LoadDigits();
+			if (currentRecordIndex == 1)
+				preVis = false;
+			nexVis = true;
         }
+		else
+		{
+			Console.WriteLine($"No More Records");
+			preVis = false;
+		}
     }
 
     private void NextRecord()
     {
-        if (currentRecordIndex < Deceased.Count - 1)
+        if (currentRecordIndex < Deceased.Count)
         {
             currentRecordIndex++;
-            currentDeceased = Deceased[currentRecordIndex];
+            currentDeceased = Deceased[currentRecordIndex - 1];
 			LoadDigits();
+
+			if (currentRecordIndex == Deceased.Count)
+				nexVis = false;
+			preVis = true;
         }
+		else
+		{
+			Console.WriteLine($"No More REcords forward");
+			nexVis = false;
+		}
     }
 
 	private void LoadDigits()
