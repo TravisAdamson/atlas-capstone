@@ -615,25 +615,24 @@
 		}
 	}
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)
-    	{
-        	var file = e.File;
-			if (file != null)
+	{
+		var file = e.File;
+		if (file != null)
+		{
+			try
 			{
-				try
+				using (var memoryStream = new MemoryStream())
 				{
-					using (var memoryStream = new MemoryStream())
-					{
-						await file.OpenReadStream().CopyToAsync(memoryStream);
-						currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
-					}
-					// Automatically save the record after image upload
-					Context.SaveChanges();
+					await file.OpenReadStream().CopyToAsync(memoryStream);
+					currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
 				}
-				catch (Exception ex)
-				{
-					Console.WriteLine($"Error uploading image: {ex.Message}");
-				}
+				// Automatically save the record after image upload
+				Context.SaveChanges();
 			}
-    	}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error uploading image: {ex.Message}");
+			}
+		}
 	}
 }
