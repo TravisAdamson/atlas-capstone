@@ -44,6 +44,42 @@
         max-height: 36px;
     }
 
+    .numcall1 {
+        border: 2px solid rgb(253, 251, 251);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        max-height: 36px;
+        width: 50px;
+    }
+
+    .numcall2 {
+        border: 2px solid rgb(253, 251, 251);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        max-height: 36px;
+        width: 45px;
+    }
+
+    .numcall3 {
+        border: 2px solid rgb(253, 251, 251);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        max-height: 36px;
+        width: 55px;
+    }
+
+    .zipcall {
+        border: 2px solid rgb(253, 251, 251);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        max-height: 36px;
+        width: 100px;
+    }
+
     .genderlabel {
         display: flex;
         flex-direction: row;
@@ -221,18 +257,18 @@
         <!-- Deceased ZipCode -->
         <div class="FirstCall-group1">
             <label for="ZipCode">Zip Code:</label>
-            <InputText id="ZipCode" class="fcall" @bind-Value="currentDeceased.ZipCode" />
+            <InputText id="ZipCode" class="zipcall" @bind-Value="currentDeceased.ZipCode" />
         </div>
 
         <!-- SSN -->
         <div class="FirstCall-group1">
             <label for="SSN">SSN:</label>
             <div class="SSN-input">
-                <InputText id="SSNPart1" class="fcall" maxlength="3" @bind-Value="SSNPart1" placeholder="###" />
+                <InputText id="SSNPart1" class="numcall1" maxlength="3" @bind-Value="SSNPart1" placeholder="###" />
                 <span>-</span>
-                <InputText id="SSNPart2" class="fcall" maxlength="2" @bind-Value="SSNPart2" placeholder="##" />
+                <InputText id="SSNPart2" class="numcall2" maxlength="2" @bind-Value="SSNPart2" placeholder="##" />
                 <span>-</span>
-                <InputText id="SSNPart3" class="fcall" maxlength="4" @bind-Value="SSNPart3" placeholder="####" />
+                <InputText id="SSNPart3" class="numcall3" maxlength="4" @bind-Value="SSNPart3" placeholder="####" />
             </div>
         </div>
         <!-- Maiden Name -->
@@ -359,17 +395,17 @@
         <!-- Informant Zipcode -->
         <div class="FirstCall-group1">
             <label for="IZipcode">Informant Zip Code:</label>
-            <InputNumber id="IZipcode" class="fcall" @bind-Value="currentDeceased.IZipcode" />
+            <InputNumber id="IZipcode" class="zipcall" @bind-Value="currentDeceased.IZipcode" />
         </div>
         <!-- Informant Phone -->
         <div class="FirstCall-group1">
             <label for="IPhoneNumber">Phone Number:</label>
             <div class="Phone-input">
-                <InputText id="PhonePart1" class="fcall" maxlength="3" @bind-Value="PhonePart1" placeholder="###" />
+                <InputText id="PhonePart1" class="numcall1" maxlength="3" @bind-Value="PhonePart1" placeholder="###" />
                 <span>-</span>
-                <InputText id="PhonePart2" class="fcall" maxlength="3" @bind-Value="PhonePart2" placeholder="###" />
+                <InputText id="PhonePart2" class="numcall2" maxlength="3" @bind-Value="PhonePart2" placeholder="###" />
                 <span>-</span>
-                <InputText id="PhonePart3" class="fcall" maxlength="4" @bind-Value="PhonePart3" placeholder="####" />
+                <InputText id="PhonePart3" class="numcall3" maxlength="4" @bind-Value="PhonePart3" placeholder="####" />
             </div>
         </div>
         <!-- Informant Relation -->
