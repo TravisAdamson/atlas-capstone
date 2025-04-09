@@ -76,7 +76,7 @@
     private void StartEdit(int clientID)
     {
         // Navigate to the Modify Records page with the ClientID as a query parameter
-        NavigationManager.NavigateTo($"/Modify%20Records?=currentRecordString={clientID}");
+        NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
     }
 
     private async Task SaveDeceased()

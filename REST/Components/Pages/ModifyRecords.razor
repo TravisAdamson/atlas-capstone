@@ -2,6 +2,8 @@
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
+@using Microsoft.Extensions.Primitives
+@using Microsoft.AspNetCore.WebUtilities
 
 <PageTitle>Modify Records</PageTitle>
 
@@ -345,26 +347,28 @@
     private string? SSNPart3 { get; set; }
     private bool showResults = false; // Flag to control visibility of saved results
     private int currentRecordIndex = 0;
+	private string? currentRecordString;
+	private string? firstString;
 
     protected override async Task OnInitializedAsync()
     {
 
-		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        var queryParameters = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+		var uri = NavigationManager.Uri;
+		var query = new Uri(uri).Query;
+        var queryParameters = QueryHelpers.ParseQuery(query);
 
 		Deceased = await Context.Deceased.ToListAsync();
         if (Deceased.Any())
         {
-        	if (queryParameters.TryGetValue("currentRecordString", out var currentRecordString))
+        	if (queryParameters.TryGetValue("currentRecordString", out var value))
         	{
+				currentRecordString = value;
 				if (int.TryParse(currentRecordString, out var currentRecord))
 				{
 					currentRecordIndex = currentRecord;
-            		// Use the clientID value
-            		Console.WriteLine($"ClientID: {currentRecordIndex}");
 				}
 			}
-			else if (currentRecordIndex != 0)
+			if (currentRecordIndex != 0)
             	currentDeceased = Deceased[currentRecordIndex - 1];
 			else
 				currentDeceased = Deceased.Last();
