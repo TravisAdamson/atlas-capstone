@@ -1,7 +1,7 @@
 # R.E.S.T. (Remembrance End-of-Life Services & Tracking)
 
 ## Overview
-Welcome to  the **R.E.S.T.** (Remembrance End-of-Life Services & Tracking) project! This application is designed to help users efficiently manage end-of-life service records, including product and service selection, contract creation, and obituary management. The goal of this project is to streamline the process for funeral homes or other service providers by allowing them to manage their clients' services in one integrated system.
+Welcome to the **R.E.S.T.** (Remembrance End-of-Life Services & Tracking) project! This application is designed to help users efficiently manage end-of-life service records, including product and service selection, contract creation, and obituary management. The goal of this project is to streamline the process for funeral homes or other service providers by allowing them to manage their clients' services in one integrated system.
 
 ## Table of Contents
 - [Project Description](#project-description)
