@@ -12,8 +12,8 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250408184554_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250409172451_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,9 @@ namespace RESTDB.Migrations
                     b.Property<int?>("IZipcode")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
+
                     b.Property<DateTime?>("InfoNotified")
                         .HasColumnType("datetime(6)");
 
@@ -77,6 +80,9 @@ namespace RESTDB.Migrations
 
                     b.Property<string>("InformantName")
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("InformantRelation")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
