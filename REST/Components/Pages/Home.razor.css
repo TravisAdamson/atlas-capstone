@@ -3,13 +3,14 @@
 }
 
 .homebuttons {
-    display: grid;
-    grid-template-columns: repeat(4, 2fr);
-    gap: 8rem;
-    border-radius: 8px;
-	margin: 1rem auto;
-	padding-left: 4rem;
-	padding-top: 1rem;
+    display: flex;
+	justify-content: space-around;
+	white-space: nowrap;
+	margin: 1rem;
+	padding: 1rem;
+	border-radius: 8px;
+	gap: 1rem;
+	padding-top: 3rem;
 }
 
 .btn {
