@@ -34,61 +34,20 @@
     </tbody>
 </table>
 
-@if (IsEditing)
-{
-	if (currentDeceased != null)
-	{
-		<div class="edit-form">
-			<h3>Edit Deceased Record</h3>
-			<div>
-				<label for="first-name">First Name</label>
-				<input id="first-name" @bind="currentDeceased.FirstName" />
-			</div>
-			<div>
-				<label for="last-name">Last Name</label>
-				<input id="last-name" @bind="currentDeceased.LastName" />
-			</div>
-			<div>
-				<label for="death-date">Date of Death</label>
-				<input type="date" id="death-date" @bind="currentDeceased.DoD" />
-			</div>
-			<div>
-				<label for="time-of-death">Time of Death</label>
-				<input type="time" id="time-of-death" @bind="currentDeceased.TimeOfDeath" />
-			</div>
-			<button @onclick="SaveDeceased">Save</button>
-			<button @onclick="CancelEdit">Cancel</button>
-		</div>
-	}
-}
-
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
-    private bool IsEditing = false;
-    private RESTDB.Models.Deceased? currentDeceased;
 
     protected override async Task OnInitializedAsync()
     {
         Deceased = await Context.Deceased.ToListAsync();
     }
+
     private void StartEdit(int clientID)
-    { // Navigate to the Modify Records page with the ClientID as a query parameter
+    {
+        // Navigate to the Modify Records page with the ClientID as a query parameter
         NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
     }
-    private async Task SaveDeceased()
-    {
-        if (currentDeceased != null)
-        {
-            Context.Deceased.Update(currentDeceased);
-            await Context.SaveChangesAsync();
-            Deceased = await Context.Deceased.ToListAsync();
-            IsEditing = false;
-        }
-    }
-    private void CancelEdit()
-    {
-        IsEditing = false;
-    }
+
     private async Task DeleteDeceased(int clientId)
     {
         var deceasedToDelete = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
