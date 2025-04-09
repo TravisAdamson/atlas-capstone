@@ -493,10 +493,17 @@
 
         if (file != null)
         {
-            using (var memoryStream = new MemoryStream())
+            try
             {
-                await file.OpenReadStream().CopyToAsync(memoryStream);
-                currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.OpenReadStream().CopyToAsync(memoryStream);
+                    currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error uploading image: {ex.Message}");
             }
         }
     }
