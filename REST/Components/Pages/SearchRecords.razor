@@ -23,8 +23,8 @@
             <tr>
                 <td>@deceased.FirstName</td>
                 <td>@deceased.LastName</td>
-                <td>@deceased.DoD?.ToString("yyyy-MM-dd")</td>
-				<td>@deceased.TimeOfDeath?.ToString("hh:mm")</td>
+                <td>@deceased.DoD?.ToString("MM-dd-yyyy")</td>
+				<td>@deceased.TimeOfDeath?.ToString("hh:mm tt")</td>
                 <td>
                     <button @onclick="() => StartEdit(deceased.ClientID ?? -1)">Edit</button>
                     <button @onclick="() => DeleteDeceased(deceased.ClientID ?? -1)">Delete</button>
@@ -73,17 +73,10 @@
         Deceased = await Context.Deceased.ToListAsync();
     }
 
-    private void StartEdit(int clientId)
+    private void StartEdit(int clientID)
     {
-		if (clientId != -1)
-        {
-			currentDeceased = Deceased[clientId - 1];
-        	if (currentDeceased != null)
-        	{
-				if (currentDeceased.FirstName != null)
-            		IsEditing = true;
-        	}
-		}
+        // Navigate to the Modify Records page with the ClientID as a query parameter
+        NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
     }
 
     private async Task SaveDeceased()

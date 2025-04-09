@@ -1,6 +1,9 @@
 ﻿@page "/Modify Records"
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using Microsoft.Extensions.Primitives
+@using Microsoft.AspNetCore.WebUtilities
 
 <PageTitle>Modify Records</PageTitle>
 
@@ -72,6 +75,9 @@
 
     .suffix-container, .IState-container {
         margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        margin-right: 1rem;
     }
 
     .suffix-group {
@@ -147,12 +153,12 @@
         </div>
         <!-- Deceased Address -->
         <div class="FirstCall-group1">
-            <label for="StreetAddress">Informant Street Address:</label>
+            <label for="StreetAddress">Street Address:</label>
             <InputText id="StreetAddress" class="fcall" @bind-Value="currentDeceased.StreetAddress" />
         </div>
         <!-- Deceased City -->
         <div class="FirstCall-group1">
-            <label for="City">Informant City:</label>
+            <label for="City">City:</label>
             <InputText id="City" class="fcall" @bind-Value="currentDeceased.City" />
         </div>
         <!-- Deceased State -->
@@ -166,7 +172,7 @@
         </div>
         <!-- Deceased ZipCode -->
         <div class="FirstCall-group1">
-            <label for="ZipCode">Informant Zip Code:</label>
+            <label for="ZipCode">Zip Code:</label>
             <InputText id="ZipCode" class="fcall" @bind-Value="currentDeceased.ZipCode" />
         </div>
 
@@ -275,7 +281,7 @@
     <div class="FirstCall-group">
         <!-- Info Notified -->
         <div class="FirstCall-group1">
-            <label for="InfoNotified">Informant Notified:</label>
+            <label for="InfoNotified">Date Notified:</label>
             <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
         </div>
     </div>
@@ -341,13 +347,32 @@
     private string? SSNPart3 { get; set; }
     private bool showResults = false; // Flag to control visibility of saved results
     private int currentRecordIndex = 0;
+	private string? currentRecordString;
+	private string? firstString;
 
     protected override async Task OnInitializedAsync()
     {
-        Deceased = await Context.Deceased.ToListAsync();
+
+		var uri = NavigationManager.Uri;
+		var query = new Uri(uri).Query;
+        var queryParameters = QueryHelpers.ParseQuery(query);
+
+		Deceased = await Context.Deceased.ToListAsync();
         if (Deceased.Any())
         {
-            currentDeceased = Deceased.Last();
+        	if (queryParameters.TryGetValue("currentRecordString", out var value))
+        	{
+				currentRecordString = value;
+				if (int.TryParse(currentRecordString, out var currentRecord))
+				{
+					currentRecordIndex = currentRecord;
+				}
+			}
+			if (currentRecordIndex != 0)
+            	currentDeceased = Deceased[currentRecordIndex - 1];
+			else
+				currentDeceased = Deceased.Last();
+			LoadDigits();
         }
     }
 
@@ -399,6 +424,7 @@
         {
             currentRecordIndex--;
             currentDeceased = Deceased[currentRecordIndex];
+			LoadDigits();
         }
     }
 
@@ -408,6 +434,36 @@
         {
             currentRecordIndex++;
             currentDeceased = Deceased[currentRecordIndex];
+			LoadDigits();
         }
     }
+
+	private void LoadDigits()
+	{
+		if (!string.IsNullOrEmpty(currentDeceased.SSN))
+		{
+			var ssnParts = currentDeceased.SSN.Split('-');
+			if (ssnParts.Length == 3)
+			{
+				SSNPart1 = ssnParts[0];
+				SSNPart2 = ssnParts[1];
+				SSNPart3 = ssnParts[2];
+			}
+		}
+
+		if (!string.IsNullOrEmpty(currentDeceased.IPhoneNumber))
+		{
+			var phoneNumber = currentDeceased.IPhoneNumber
+				.Replace("(", "")
+				.Replace(")", "")
+				.Replace("-", "");
+
+			if (phoneNumber.Length == 10)
+			{
+				PhonePart1 = phoneNumber.Substring(0, 3);
+				PhonePart2 = phoneNumber.Substring(3, 3);
+				PhonePart3 = phoneNumber.Substring(6, 4);
+			}
+		}
+	}
 }

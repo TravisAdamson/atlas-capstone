@@ -71,6 +71,9 @@
 
     .suffix-container, .IState-container {
         margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        margin-right: 1rem;
     }
 
     .suffix-group {
@@ -146,12 +149,12 @@
         </div>
         <!-- Deceased Address -->
         <div class="FirstCall-group1">
-            <label for="StreetAddress">Informant Street Address:</label>
+            <label for="StreetAddress">Street Address:</label>
             <InputText id="StreetAddress" class="fcall" @bind-Value="currentDeceased.StreetAddress" />
         </div>
         <!-- Deceased City -->
         <div class="FirstCall-group1">
-            <label for="City">Informant City:</label>
+            <label for="City">City:</label>
             <InputText id="City" class="fcall" @bind-Value="currentDeceased.City" />
         </div>
         <!-- Deceased State -->
@@ -165,7 +168,7 @@
         </div>
         <!-- Deceased ZipCode -->
         <div class="FirstCall-group1">
-            <label for="ZipCode">Informant Zip Code:</label>
+            <label for="ZipCode">Zip Code:</label>
             <InputText id="ZipCode" class="fcall" @bind-Value="currentDeceased.ZipCode" />
         </div>
 
@@ -274,7 +277,7 @@
     <div class="FirstCall-group">
         <!-- Info Notified -->
         <div class="FirstCall-group1">
-            <label for="InfoNotified">Informant Notified:</label>
+            <label for="InfoNotified">Date Notified:</label>
             <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
         </div>
     </div>
