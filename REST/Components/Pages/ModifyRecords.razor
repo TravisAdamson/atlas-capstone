@@ -184,18 +184,16 @@
 	}
 </style>
 
-<EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
+<EditForm id="ContactForm" Model="@currentDeceased"FormName="ContactForm" class="ContactForm">
     <h5>First Call Information</h5>
     <div class="FirstCall-group">
         <!-- Director -->
         <div class="FirstCall-group1">
             <label for="Director">Director</label>
             <InputSelect @bind-Value="currentDeceased.Director" class="State-group" TValue="string">
-                    <option value="Travis">Travis</option>
-                    <option value="Nolan">Nolan</option>
-                    <option value="Kevin">Kevin</option>
-                    <option value="Matt">Matt</option>
-                    <option value="Other">Other</option>
+                    <option value="Travis">Denise Adamson</option>
+                    <option value="Nolan">Jon Hoopert</option>
+                    <option value="Kevin">James Groesbeck</option>
             </InputSelect>
         </div>
         <!-- Case Status -->
@@ -206,7 +204,7 @@
     </div>
 </EditForm>
 
-<EditForm id="DeceasedForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="DeceasedForm" class="DeceasedForm">
+<EditForm id="DeceasedForm" Model="@currentDeceased" FormName="DeceasedForm" class="DeceasedForm">
     <h5>Deceased Information</h5>
     <div class="FirstCall-group">
         <!-- First Name -->
@@ -375,7 +373,7 @@
     </div>
 </EditForm>
 
-<EditForm id="InformantForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="InformantForm" class="InformantForm">
+<EditForm id="InformantForm" Model="@currentDeceased" FormName="InformantForm" class="InformantForm">
     <h5>Informant Information</h5>
     <div class="FirstCall-group">
         <!-- Informant Name -->
@@ -485,7 +483,6 @@
             <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-submit">Save</button>
 </EditForm>
 
 <!-- Navigation Controls for Record Selection -->
@@ -500,47 +497,6 @@
 }
 </div>
 
-@if (showResults)
-{
-    <h3>EDIT RESULTS</h3>
-    <ul>
-        @foreach (var deceased in Deceased)
-        {
-            <li>
-                First Name: @deceased.FirstName
-				Last Name: @deceased.LastName
-                Middle Name: @deceased.MiddleName<br />
-                StreetAddress: @deceased.StreetAddress<br />
-                City: @deceased.City<br />
-                State: @deceased.State<br />
-                Zipcode: @deceased.ZipCode<br />
-                Title: @deceased.Title<br />
-                Suffix: @deceased.Suffix<br />
-                Status: @deceased.Status<br />
-                Contract Balance: @deceased.ContractBalance<br />
-                Date of Death: @deceased.DoD?.ToString("yyyy-MM-dd")<br />
-                Time of Death: @deceased.TimeOfDeath?.ToString("")<br />
-                SSN: @deceased.SSN<br />
-                Gender: @deceased.Gender<br />
-                Maiden Name: @deceased.MaidenName<br />
-                Alias: @deceased.Alias<br />
-                Phone Number: @deceased.IPhoneNumber<br />
-                Veteran Status: @deceased.Vet<br />
-                War: @deceased.War<br />
-                InformantName: @deceased.InformantName<br />
-                IStreetAddress: @deceased.IStreetAddress<br />
-                ICity: @deceased.ICity<br />
-                IState: @deceased.IState<br />
-                IZipcode: @deceased.IZipcode<br />
-                IPhoneNumber: @deceased.IPhoneNumber<br />
-                Informant Email: @deceased.InformantEmail<br />
-                Info Notified: @deceased.InfoNotified?.ToString("yyyy-MM-dd")<br />
-                Notes: @deceased.Notes<br />
-            </li>
-        }
-    </ul>
-}
-
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
@@ -551,7 +507,6 @@
     private string? SSNPart1 { get; set; }
     private string? SSNPart2 { get; set; }
     private string? SSNPart3 { get; set; }
-    private bool showResults = false; // Flag to control visibility of saved results
     private int currentRecordIndex = 0;
 	private string? currentRecordString;
 	private bool preVis = true, nexVis = true;
@@ -592,40 +547,6 @@
         return lastDeceased?.ClientID + 1 ?? 1;
     }
 
-	private async Task SaveRecord()
-    {
-        if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
-        {
-            Console.WriteLine("First Name and Last Name are required.");
-            return;
-        }
-
-        // Format SSN
-        if (string.IsNullOrEmpty(SSNPart1) || string.IsNullOrEmpty(SSNPart2) || string.IsNullOrEmpty(SSNPart3))
-        {
-            Console.WriteLine("SSN is required.");
-        }
-		else
-			currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
-
-        // Format Phone Number
-        if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
-        {
-            Console.WriteLine("Phone number is required.");
-        }
-		else
-        	currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
-
-        // Save
-        currentDeceased.ClientID = GetNextClientID();
-        Context.Deceased.Add(currentDeceased);
-        await Context.SaveChangesAsync();
-
-        currentDeceased = new RESTDB.Models.Deceased();
-        PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
-        SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
-        showResults = true;
-    }
     private void PreviousRecord()
     {
         if (currentRecordIndex > 1)
@@ -693,24 +614,26 @@
 			}
 		}
 	}
-    private async Task HandleImageUpload(InputFileChangeEventArgs e)
-    {
-        var file = e.File;
-
-        if (file != null)
-        {
-            try
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await file.OpenReadStream().CopyToAsync(memoryStream);
-                    currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error uploading image: {ex.Message}");
-            }
-        }
-    }
+	private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    	{
+        	var file = e.File;
+			if (file != null)
+			{
+				try
+				{
+					using (var memoryStream = new MemoryStream())
+					{
+						await file.OpenReadStream().CopyToAsync(memoryStream);
+						currentDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
+					}
+					// Automatically save the record after image upload
+					Context.SaveChanges();
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine($"Error uploading image: {ex.Message}");
+				}
+			}
+    	}
+	}
 }
