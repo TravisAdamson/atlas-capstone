@@ -39,13 +39,13 @@ main {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) {
+@media (max-width: 640.98px) { /* defines behavior of the webpage when it's width *is reduced below* 641px */
 	.sidebar {
 		width: 83px;
 	}
 }
 
-@media (min-width: 641px) {
+@media (min-width: 641px) { /* defines behavior of the webpage when it's width *exceeds* 641px */
     .page {
         flex-direction: row;
     }
