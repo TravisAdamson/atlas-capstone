@@ -151,12 +151,12 @@
         </div>
         <!-- Deceased Address -->
         <div class="FirstCall-group1">
-            <label for="StreetAddress">Informant Street Address:</label>
+            <label for="StreetAddress">Street Address:</label>
             <InputText id="StreetAddress" class="fcall" @bind-Value="currentDeceased.StreetAddress" />
         </div>
         <!-- Deceased City -->
         <div class="FirstCall-group1">
-            <label for="City">Informant City:</label>
+            <label for="City">City:</label>
             <InputText id="City" class="fcall" @bind-Value="currentDeceased.City" />
         </div>
         <!-- Deceased State -->
@@ -170,7 +170,7 @@
         </div>
         <!-- Deceased ZipCode -->
         <div class="FirstCall-group1">
-            <label for="ZipCode">Informant Zip Code:</label>
+            <label for="ZipCode">Zip Code:</label>
             <InputText id="ZipCode" class="fcall" @bind-Value="currentDeceased.ZipCode" />
         </div>
 
@@ -279,7 +279,7 @@
     <div class="FirstCall-group">
         <!-- Info Notified -->
         <div class="FirstCall-group1">
-            <label for="InfoNotified">Informant Notified:</label>
+            <label for="InfoNotified">Date Notified:</label>
             <InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
         </div>
     </div>
@@ -368,31 +368,7 @@
             	currentDeceased = Deceased[currentRecordIndex - 1];
 			else
 				currentDeceased = Deceased.Last();
-			if (!string.IsNullOrEmpty(currentDeceased.SSN))
-            {
-                var ssnParts = currentDeceased.SSN.Split('-');
-                if (ssnParts.Length == 3)
-                {
-                    SSNPart1 = ssnParts[0];
-                    SSNPart2 = ssnParts[1];
-                    SSNPart3 = ssnParts[2];
-                }
-            }
-
-            if (!string.IsNullOrEmpty(currentDeceased.IPhoneNumber))
-            {
-                var phoneNumber = currentDeceased.IPhoneNumber
-                    .Replace("(", "")
-                    .Replace(")", "")
-                    .Replace("-", "");
-
-                if (phoneNumber.Length == 10)
-                {
-                    PhonePart1 = phoneNumber.Substring(0, 3);
-                    PhonePart2 = phoneNumber.Substring(3, 3);
-                    PhonePart3 = phoneNumber.Substring(6, 4);
-                }
-            }
+			LoadDigits();
         }
     }
 
@@ -444,6 +420,7 @@
         {
             currentRecordIndex--;
             currentDeceased = Deceased[currentRecordIndex];
+			LoadDigits();
         }
     }
 
@@ -453,6 +430,36 @@
         {
             currentRecordIndex++;
             currentDeceased = Deceased[currentRecordIndex];
+			LoadDigits();
         }
     }
+
+	private void LoadDigits()
+	{
+		if (!string.IsNullOrEmpty(currentDeceased.SSN))
+		{
+			var ssnParts = currentDeceased.SSN.Split('-');
+			if (ssnParts.Length == 3)
+			{
+				SSNPart1 = ssnParts[0];
+				SSNPart2 = ssnParts[1];
+				SSNPart3 = ssnParts[2];
+			}
+		}
+
+		if (!string.IsNullOrEmpty(currentDeceased.IPhoneNumber))
+		{
+			var phoneNumber = currentDeceased.IPhoneNumber
+				.Replace("(", "")
+				.Replace(")", "")
+				.Replace("-", "");
+
+			if (phoneNumber.Length == 10)
+			{
+				PhonePart1 = phoneNumber.Substring(0, 3);
+				PhonePart2 = phoneNumber.Substring(3, 3);
+				PhonePart3 = phoneNumber.Substring(6, 4);
+			}
+		}
+	}
 }

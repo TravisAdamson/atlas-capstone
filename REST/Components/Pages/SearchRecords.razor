@@ -23,7 +23,7 @@
             <tr>
                 <td>@deceased.FirstName</td>
                 <td>@deceased.LastName</td>
-                <td>@deceased.DoD?.ToString("yyyy-MM-dd")</td>
+                <td>@deceased.DoD?.ToString("MM-dd-yyyy")</td>
 				<td>@deceased.TimeOfDeath?.ToString("hh:mm tt")</td>
                 <td>
                     <button @onclick="() => StartEdit(deceased.ClientID ?? -1)">Edit</button>
