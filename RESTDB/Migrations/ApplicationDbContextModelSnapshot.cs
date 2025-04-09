@@ -66,6 +66,9 @@ namespace RESTDB.Migrations
                     b.Property<int?>("IZipcode")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
+
                     b.Property<DateTime?>("InfoNotified")
                         .HasColumnType("datetime(6)");
 
@@ -74,6 +77,9 @@ namespace RESTDB.Migrations
 
                     b.Property<string>("InformantName")
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("InformantRelation")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
