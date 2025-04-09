@@ -16,27 +16,27 @@
     }
 
 	.form1 {
-    	border: 1px solid #000000;
-    	border-radius: 10px;
+		border: 1px solid #000000;
+		border-radius: 10px;
 		padding: 1rem;
 		margin: 1rem auto;
 		background-color: rgb(187, 188, 188);
 	}
 
 	.form2 {
-    	border: 1px solid #000000;
-    	border-radius: 10px;
-    	padding: 1rem;
-    	margin: 1rem auto;
-    	background-color: rgb(187, 188, 188);
+		border: 1px solid #000000;
+		border-radius: 10px;
+		padding: 1rem;
+		margin: 1rem auto;
+		background-color: rgb(187, 188, 188);
 	}
 
 	.form3 {
-    	border: 2px solid #000000;
-    	border-radius: 10px;
-    	padding: 1rem;
-    	margin: 1rem auto;
-    	background-color: rgb(187, 188, 188);
+		border: 2px solid #000000;
+		border-radius: 10px;
+		padding: 1rem;
+		margin: 1rem auto;
+		background-color: rgb(187, 188, 188);
 	}
 
     .ContactForm, .DeceasedForm, .ContractForm, .InformantForm {
@@ -61,28 +61,28 @@
     }
 
 	.name-group {
-    	display: flex;
-    	flex-wrap: wrap;
-    	gap: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.display-name {
-    	display: flex;
-    	flex-wrap: wrap;
-    	gap: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.img-class {
-    	width: 100px;
-    	height: 100px;
-    	background-color: #dbdada;
+		width: 100px;
+		height: 100px;
+		background-color: #dbdada;
 	}
 
 	.d1 {
-    	display: flex;
-    	flex-direction: column;
-    	margin-right: 1rem;
-    	margin-bottom: 1rem;
+		display: flex;
+		flex-direction: column;
+		margin-right: 1rem;
+		margin-bottom: 1rem;
 	}
 
     .fcall {
@@ -140,11 +140,11 @@
     }
 
 	.searchbar {
-    	flex: auto;
-    	margin-top: 20px;
-    	margin-bottom: 20px;
-    	border-radius: 4px;
-    	border: 1px solid #000000;
+		flex: auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		border-radius: 4px;
+		border: 1px solid #000000;
 	}
 </style>
 
@@ -418,8 +418,8 @@
 		Deceased = await Context.Deceased.ToListAsync();
         if (Deceased.Any())
         {
-        	if (queryParameters.TryGetValue("currentRecordString", out var value))
-        	{
+			if (queryParameters.TryGetValue("currentRecordString", out var value))
+			{
 				currentRecordString = value;
 				if (int.TryParse(currentRecordString, out var currentRecord))
 				{
@@ -427,7 +427,7 @@
 				}
 			}
 			if (currentRecordIndex != 0)
-            	currentDeceased = Deceased[currentRecordIndex - 1];
+				currentDeceased = Deceased[currentRecordIndex - 1];
 			else
 				currentDeceased = Deceased.Last();
 			LoadDigits();
