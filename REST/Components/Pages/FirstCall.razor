@@ -131,7 +131,6 @@
             <label for="Title">Title:</label>
             <InputText id="Title" class="fcall" @bind-Value="currentDeceased.Title" />
         </div>
-
         <!-- Date of Death -->
         <div class="FirstCall-group1">
             <label for="DoD">Date of Death:</label>
@@ -468,7 +467,7 @@
             Console.WriteLine("SSN is required.");
         }
 		else
-        	currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+			currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
 
         // Format Phone Number
         if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
@@ -501,5 +500,4 @@
             }
         }
     }
-
 }
