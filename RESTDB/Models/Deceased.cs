@@ -30,7 +30,7 @@ public class Deceased
 	public string? IStreetAddress { get; set; }
 	public string? ICity { get; set; }
 	public string? IState { get; set; }
-	public string? IZipcode { get; set; }
+	public string? IZipCode { get; set; }
 	public string? IPhoneNumber { get; set; }
 	public string? InformantEmail { get; set; }
 	public DateTime? InfoNotified { get; set; }
