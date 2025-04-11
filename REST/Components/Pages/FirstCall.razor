@@ -10,7 +10,7 @@
 <div class="ContactForm">
 	<EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
 		<h5>First Call Information</h5>
-		<div class="FirstCall-group">
+		<div class="FirstCallTop-group">
 			<!-- Director -->
 			<div class="FirstCall-group1">
 				<label for="Director">Director</label>
@@ -24,6 +24,12 @@
 			<div class="FirstCall-group1">
 				<label for="Status">Case Status:</label>
 				<InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
+			</div>
+			<div class="ShowImage">
+				@if (currentDeceased.Image != null)
+				{
+					<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="max-width: 260px; max-height: 260px; width: auto; height: auto; display: block;" alt="Uploaded Image" />
+				}
 			</div>
 		</div>
 	</EditForm>
@@ -193,13 +199,8 @@
 			<!-- Image Upload -->
 			<div class="FirstCall-group1">
 				<label for="ImageUpload">Upload Image:</label>
-				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="fcall" />
+				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
 			</div>
-			@if (currentDeceased.Image != null)
-			{
-				<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="width: 20%; hieght: 20%;" alt="Uploaded Image" />
-			}
-
 		</div>
 	</EditForm>
 </div>
@@ -408,10 +409,6 @@
 }
 
 <style>
-	.forms {
-		padding: 1rem;
-	}
-
 	.ContactForm, .DeceasedForm, .ContractForm, .InformantForm {
 		border-radius: 6px;
 		padding: .25rem;
@@ -428,14 +425,19 @@
 	.FirstCallSave-group {
 		display: flex;
 		justify-content: space-between;
-		padding-right: 2rem;
+		padding-right: 1rem;
+		padding-bottom: 0rem;
+	}
+
+	.FirstCallTop-group {
+		display: flex;
+		padding-right: 1rem;
 	}
 
 	.FirstCall-group1 {
 		display: flex;
 		flex-direction: column;
 		margin-right: 1rem;
-		margin-bottom: 1rem;
 	}
 
 	.fcall {
@@ -491,16 +493,6 @@
 	.btn-submit {
 		margin-top: 1rem;
 	}
-	/* Hide number input incrementing arrows */    /* this is probably not needed if we get the input type right for the box. this just hides the arrows, it doesnt remove the ability to use arrow keys to increment/decrement the integer in the field. also currently allows for negative integers. */
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-
-	input[type="number"] {
-		-moz-appearance: textfield;
-	}
 
 	.gender-container {
 		margin-bottom: 15px;
@@ -525,9 +517,15 @@
 
 	.notes-field {
 		min-height: 6rem;
+		padding-right: 17rem;
 	}
 
-	.SaveButtonFirst {
-		justify-content: right;
+	.ImageUpload {
+		max-width: 14rem;
 	}
+
+	.ShowImage {
+		margin-left: auto;
+	}
+
 </style>

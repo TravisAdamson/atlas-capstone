@@ -13,7 +13,7 @@
 <div class="ContactForm">
 	<EditForm id="ContactForm" Model="@currentDeceased" FormName="ContactForm" class="ContactForm">
 		<h5>First Call Information</h5>
-		<div class="FirstCall-group">
+		<div class="FirstCallTop-group">
 			<!-- Director -->
 			<div class="FirstCall-group1">
 				<label for="Director">Director</label>
@@ -27,6 +27,12 @@
 			<div class="FirstCall-group1">
 				<label for="Status">Case Status:</label>
 				<InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
+			</div>
+			<div class="ShowImage">
+				@if (currentDeceased.Image != null)
+				{
+					<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="max-width: 260px; max-height: 260px; width: auto; height: auto; display: block;" alt="Uploaded Image" />
+				}
 			</div>
 		</div>
 	</EditForm>
@@ -198,13 +204,8 @@
 			<!-- Image Upload -->
 			<div class="FirstCall-group1">
 				<label for="ImageUpload">Upload Image:</label>
-				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="fcall" />
+				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
 			</div>
-			@if (currentDeceased.Image != null)
-			{
-				<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="width: 20%; hieght: 20%;" alt="Uploaded Image" />
-			}
-
 		</div>
 	</EditForm>
 </div>
@@ -481,10 +482,6 @@
 }
 
 <style>
-	.forms {
-		padding: 1rem;
-	}
-
 	.form1 {
 		border: 1px solid #000000;
 		border-radius: 10px;
@@ -526,7 +523,6 @@
 		display: flex;
 		flex-direction: column;
 		margin-right: 1rem;
-		margin-bottom: 1rem;
 	}
 
 	.name-group {
@@ -640,5 +636,18 @@
 		margin-bottom: 20px;
 		border-radius: 4px;
 		border: 1px solid #000000;
+	}
+
+	.ShowImage {
+		margin-left: auto;
+	}
+
+	.FirstCallTop-group {
+		display: flex;
+		padding-right: 1rem;
+	}
+
+	.ImageUpload {
+		max-width: 14rem;
 	}
 </style>
