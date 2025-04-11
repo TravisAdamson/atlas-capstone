@@ -63,7 +63,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("IStreetAddress")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("IZipcode")
+                    b.Property<string>("IZipCode")
                         .HasColumnType("longtext");
 
                     b.Property<byte[]>("Image")
