@@ -141,7 +141,13 @@
 			<!-- Deceased ZipCode -->
 			<div class="FirstCall-group1">
 				<label for="ZipCode">Zip Code:</label>
-				<InputText id="ZipCode" class="zipcall" @bind-Value="currentDeceased.ZipCode" />
+				<InputText id="ZipCode"
+					class="zipcall"
+					@bind-Value="currentDeceased.ZipCode"
+					inputmode="numeric"
+					pattern="[0-9]*"
+					maxlength="5"
+					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
 
 			<!-- SSN -->
@@ -281,7 +287,13 @@
 			<!-- Informant Zipcode -->
 			<div class="FirstCall-group1">
 				<label for="IZipcode">Informant Zip Code:</label>
-				<InputNumber id="IZipcode" class="zipcall" @bind-Value="currentDeceased.IZipcode" />
+				<InputText id="ZipCode"
+					class="zipcall"
+					@bind-Value="currentDeceased.ZipCode"
+					inputmode="numeric"
+					pattern="[0-9]*"
+					maxlength="5"
+					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
 			<!-- Informant Phone -->
 			<div class="FirstCall-group1">
