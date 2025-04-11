@@ -10,10 +10,9 @@ main {
 
 .sidebar {
     background-image: linear-gradient(180deg, #552f7a 0%, #3a0647 99%);
-    width: 50px;
-    overflow-x: hidden;
+    min-width: 50px;
+	height: 94vh;
     position: fixed;
-    transition: width 0.3s ease;
 }
 
 .top-row {
@@ -40,17 +39,13 @@ main {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) {
-    .top-row {
-        justify-content: space-between;
-    }
-
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
-    }
+@media (max-width: 640.98px) { /* defines behavior of the webpage when it's width *is reduced below* 641px */
+	.sidebar {
+		width: 83px;
+	}
 }
 
-@media (min-width: 641px) {
+@media (min-width: 641px) { /* defines behavior of the webpage when it's width *exceeds* 641px */
     .page {
         flex-direction: row;
     }
@@ -59,6 +54,7 @@ main {
         width: 200px;
         position: sticky;
         top: 0;
+		min-width: 83px;
     }
 
     .top-row {
@@ -91,14 +87,14 @@ main {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
+#blazor-error-ui .dismiss {
         cursor: pointer;
         position: absolute;
         right: 0.75rem;
         top: 0.5rem;
     }
 
-/* Header (top nav bar) */
+/* Header (top bar) */
 .top-header {
     background-color: #552f7a;
 	background-image: linear-gradient(90deg, #552f7a 30%, #3a0647 95%);
@@ -124,9 +120,3 @@ main {
     font-size: 40px;
 	font-weight: 750;
 }
-
-.logout {
-    color:#f7f7f7;
-    background-color: #552f7a;
-}
-
