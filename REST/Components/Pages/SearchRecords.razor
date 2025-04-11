@@ -24,19 +24,26 @@
                 <td>@deceased.FirstName</td>
                 <td>@deceased.LastName</td>
                 <td>@deceased.DoD?.ToString("MM-dd-yyyy")</td>
-				<td>@deceased.TimeOfDeath?.ToString("hh:mm tt")</td>
+                <td>@deceased.TimeOfDeath?.ToString("hh:mm tt")</td>
                 <td>
                     <button @onclick="() => StartEdit(deceased.ClientID ?? -1)">Edit</button>
-                    
+
                     @if (ConfirmingDeleteId == deceased.ClientID)
                     {
-                        <div>
-                            <button class="btn btn-danger mt-1" @onclick="() => ConfirmDelete(deceased.ClientID ?? -1)">Confirm Delete</button>
+                        <div class="mt-1">
+                            <button class="btn btn-danger me-2" @onclick="() => ConfirmDelete(deceased.ClientID ?? -1)">
+                                Confirm Delete
+                            </button>
+                            <button class="btn btn-success" @onclick="CancelDelete">
+                                Cancel
+                            </button>
                         </div>
                     }
                     else
                     {
-                        <button @onclick="() => ShowConfirmDelete(deceased.ClientID ?? -1)">Delete</button>
+                        <button class="btn btn-warning" @onclick="() => ShowConfirmDelete(deceased.ClientID ?? -1)">
+                            Delete
+                        </button>
                     }
                 </td>
             </tr>
@@ -44,9 +51,10 @@
     </tbody>
 </table>
 
-
 @code {
-    private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
+    private List<RESTDB.Models.Deceased> Deceased = new();
+
+    private int? ConfirmingDeleteId = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,26 +63,17 @@
 
     private void StartEdit(int clientID)
     {
-        // Navigate to the Modify Records page with the ClientID as a query parameter
         NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
     }
 
-    private async Task DeleteDeceased(int clientId)
-    {
-        var deceasedToDelete = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
-        if (deceasedToDelete != null)
-        {
-            Context.Deceased.Remove(deceasedToDelete);
-            await Context.SaveChangesAsync();
-            Deceased = await Context.Deceased.ToListAsync();
-        }
-    }
-    private int? ConfirmingDeleteId = null;
-
-    <!--  --------------------------------------------------- -->
     private void ShowConfirmDelete(int clientId)
     {
         ConfirmingDeleteId = clientId;
+    }
+
+    private void CancelDelete()
+    {
+        ConfirmingDeleteId = null;
     }
 
     private async Task ConfirmDelete(int clientId)
@@ -89,5 +88,5 @@
 
         ConfirmingDeleteId = null; // Reset after deletion
     }
-
 }
+
