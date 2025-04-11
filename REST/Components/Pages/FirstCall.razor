@@ -137,7 +137,13 @@
 			<!-- Deceased ZipCode -->
 			<div class="FirstCall-group1">
 				<label for="ZipCode">Zip Code:</label>
-				<InputText id="ZipCode" class="zipcall" @bind-Value="currentDeceased.ZipCode" />
+				<InputText id="ZipCode"
+				class="zipcall"
+				@bind-Value="currentDeceased.ZipCode"
+				inputmode="numeric"
+				pattern="[0-9]*"
+				maxlength="5"
+				oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
 
 			<!-- SSN -->
@@ -277,7 +283,13 @@
 			<!-- Informant Zipcode -->
 			<div class="FirstCall-group1">
 				<label for="IZipcode">Informant Zip Code:</label>
-				<InputNumber id="IZipcode" class="zipcall" @bind-Value="currentDeceased.IZipcode" />
+				<InputText id="ZipCode"
+					class="zipcall"
+					@bind-Value="currentDeceased.ZipCode"
+					inputmode="numeric"
+					pattern="[0-9]*"
+					maxlength="5"
+					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
 			<!-- Informant Phone -->
 			<div class="FirstCall-group1">
@@ -392,3 +404,117 @@
         }
     }
 }
+
+<style>
+	.forms {
+		padding: 1rem;
+	}
+
+	.ContactForm, .DeceasedForm, .ContractForm, .InformantForm {
+		padding: .5rem;
+		margin: .5rem auto;
+		background-color: rgb(187, 188, 188);
+	}
+
+	.FirstCall-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.FirstCall-group1 {
+		display: flex;
+		flex-direction: column;
+		margin-right: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.fcall {
+		border: 2px solid rgb(253, 251, 251);
+		border-radius: 0.2rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+	}
+
+	.numcall1 {
+		border: 2px solid rgb(253, 251, 251);
+		border-radius: 0.2rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+		width: 50px;
+	}
+
+	.numcall2 {
+		border: 2px solid rgb(253, 251, 251);
+		border-radius: 0.2rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+		width: 45px;
+	}
+
+	.numcall3 {
+		border: 2px solid rgb(253, 251, 251);
+		border-radius: 0.2rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+		width: 55px;
+	}
+
+	.zipcall {
+		border: 2px solid rgb(253, 251, 251);
+		border-radius: 0.2rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		max-height: 36px;
+		width: 100px;
+	}
+
+	.genderlabel {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+	}
+
+	.btn-submit {
+		margin-top: 1rem;
+	}
+	/* Hide number input incrementing arrows */    /* this is probably not needed if we get the input type right for the box. this just hides the arrows, it doesnt remove the ability to use arrow keys to increment/decrement the integer in the field. also currently allows for negative integers. */
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type="number"] {
+		-moz-appearance: textfield;
+	}
+
+	.gender-container {
+		margin-bottom: 15px;
+	}
+
+	.gender-group {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.suffix-container, .IState-container {
+		margin-bottom: 15px;
+		display: flex;
+		flex-direction: column;
+		margin-right: 1rem;
+	}
+
+	.suffix-group {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.notes-field {
+		min-height: 6rem;
+	}
+</style>

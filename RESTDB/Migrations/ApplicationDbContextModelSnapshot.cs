@@ -63,8 +63,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("IStreetAddress")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("IZipcode")
-                        .HasColumnType("int");
+                    b.Property<string>("IZipcode")
+                        .HasColumnType("longtext");
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("longblob");

@@ -67,7 +67,8 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IState = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IZipcode = table.Column<int>(type: "int", nullable: true),
+                    IZipcode = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IPhoneNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     InformantEmail = table.Column<string>(type: "longtext", nullable: true)

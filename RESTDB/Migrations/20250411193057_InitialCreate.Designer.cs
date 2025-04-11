@@ -12,7 +12,7 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250409180031_InitialCreate")]
+    [Migration("20250411193057_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -66,8 +66,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("IStreetAddress")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("IZipcode")
-                        .HasColumnType("int");
+                    b.Property<string>("IZipcode")
+                        .HasColumnType("longtext");
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("longblob");
