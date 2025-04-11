@@ -41,7 +41,7 @@
                     }
                     else
                     {
-                        <button class="btn btn-warning" @onclick="() => ShowConfirmDelete(deceased.ClientID ?? -1)">
+                        <button @onclick="() => ShowConfirmDelete(deceased.ClientID ?? -1)">
                             Delete
                         </button>
                     }
