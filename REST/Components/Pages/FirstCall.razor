@@ -15,9 +15,9 @@
 			<div class="FirstCall-group1">
 				<label for="Director">Director</label>
 				<InputSelect @bind-Value="currentDeceased.Director" class="State-group" TValue="string">
-						<option value="Travis">Denise Adamson</option>
-						<option value="Nolan">Jon Hoopert</option>
-						<option value="Kevin">James Groesbeck</option>
+						<option value="Denise Adamson">Denise Adamson</option>
+						<option value="Jon Hoopert">Jon Hoopert</option>
+						<option value="James Groesbeck">James Groesbeck</option>
 				</InputSelect>
 			</div>
 			<!-- Case Status -->
@@ -303,11 +303,6 @@
 					<InputText id="PhonePart3" class="numcall3" maxlength="4" @bind-Value="PhonePart3" placeholder="####" />
 				</div>
 			</div>
-			<!-- Informant Relation -->
-			<!-- <div class="FirstCall-group1"> -->
-				<!-- <label for="InformantRelation">Relation to Deceased:</label> -->
-				<!-- <InputText id="InformantRelation" class="fcall" @bind-Value="currentDeceased.InformantRelation" /> -->
-			<!-- </div> -->
 			<!-- Informant Phone -->
 			<!-- Informant Email -->
 			<div class="FirstCall-group1">
@@ -315,7 +310,12 @@
 				<InputText id="InformantEmail" class="fcall" @bind-Value="currentDeceased.InformantEmail" />
 			</div>
 		</div>
-		<div class="FirstCallSave-group">
+		<div class="FirstCall-group">
+			<!-- Informant Relation -->
+			<div class="FirstCall-group1">
+				<label for="InformantRelation">Relation to Deceased:</label>
+				<InputText id="InformantRelation" class="fcall" @bind-Value="currentDeceased.InformantRelation" />
+			</div>
 			<!-- Info Notified -->
 			<div class="FirstCall-group1">
 				<label for="InfoNotified">Date Notified:</label>
@@ -419,7 +419,7 @@
 	.FirstCall-group {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: .5rem;
 	}
 
 	.FirstCallSave-group {
@@ -438,6 +438,7 @@
 		display: flex;
 		flex-direction: column;
 		margin-right: 1rem;
+		margin-bottom: .5rem;
 	}
 
 	.fcall {
@@ -528,4 +529,7 @@
 		margin-left: auto;
 	}
 
+	.SaveButtonFirst {
+		margin-left: auto;
+	}
 </style>
