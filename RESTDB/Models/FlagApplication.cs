@@ -1,35 +1,27 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace YourNamespace.Models
+namespace RESTDB.Models;
+
+public class FlagApplication
 {
-    public class FlagApplication
-    {
-        [Key]
-        public int Id { get; set; }
-        
-        [Required]
-        [StringLength(100)]
-        public string ApplicantName { get; set; }
-        
-        [Required]
-        [StringLength(100)]
-        public string RelationshipToDeceased { get; set; }
-        
-        [Required]
-        [StringLength(100)]
-        public string FlagType { get; set; }
+	[Key]
+	public int? Id { get; set; }
 
-        public DateTime ApplicationDate { get; set; } = DateTime.Now;
+	public string? ApplicantName { get; set; }
 
-        // Constructor
-        public FlagApplication() { }
+	public string? RelationshipToDeceased { get; set; }
 
-        public FlagApplication(string applicantName, string relationshipToDeceased, string flagType)
-        {
-            ApplicantName = applicantName;
-            RelationshipToDeceased = relationshipToDeceased;
-            FlagType = flagType;
-        }
-    }
+	public string? FlagType { get; set; }
+
+	public DateTime? ApplicationDate { get; set; } = DateTime.Now;
+
+	// Constructor
+	public FlagApplication() { }
+
+	public FlagApplication(string applicantName, string relationshipToDeceased, string flagType)
+	{
+		ApplicantName = applicantName;
+		RelationshipToDeceased = relationshipToDeceased;
+		FlagType = flagType;
+	}
 }
