@@ -86,7 +86,6 @@
     min-width: 50px;
 }
 
-/* Add these new rules */
 .nav-icon {
     flex-shrink: 0;
     z-index: 2; /* Ensure icons stay on top */
@@ -102,12 +101,9 @@
     max-width: calc(100% - 2rem); /* Account for icon width + margin */
 }
 
-/* Modify existing .nav-item rule */
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
     overflow: hidden;
     min-width: 60px; /* Minimum width to preserve icon space */
 }
-
-/* Keep all other existing rules the same */

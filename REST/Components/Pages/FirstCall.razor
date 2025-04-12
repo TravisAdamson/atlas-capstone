@@ -5,7 +5,17 @@
 
 <PageTitle>First Call</PageTitle>
 
-<h1>Create Record</h1>
+<div class="title-bar">
+    <h1>Create Record</h1>
+	<EditForm id="placeholderformid" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
+		<div>
+			<InputText id="testsave" class="fcall" @bind-Value="placeholder" style="display: none" />
+		</div>
+		<div class="SaveButtonFirst">
+			<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+		</div>
+	</EditForm>
+</div>
 
 <div class="ContactForm">
 	<EditForm id="ContactForm" Model="@currentDeceased" OnValidSubmit="SaveRecord" FormName="ContactForm" class="ContactForm">
@@ -28,7 +38,7 @@
 			<div class="ShowImage">
 				@if (currentDeceased.Image != null)
 				{
-					<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="max-width: 260px; max-height: 260px; width: auto; height: auto; display: block;" alt="Uploaded Image" />
+					<img src="@($"data:image/png;base64,{Convert.ToBase64String(currentDeceased.Image)}")" style="max-width: 258px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
 				}
 			</div>
 		</div>
@@ -321,9 +331,7 @@
 				<label for="InfoNotified">Date Notified:</label>
 				<InputDate id="InfoNotified" class="fcall" @bind-Value="currentDeceased.InfoNotified" />
 			</div>
-			<div class="SaveButtonFirst">
-				<button type="submit" class="btn btn-primary btn-submit">Save</button>
-			</div>
+
 		</div>
 	</EditForm>
 </div>
@@ -340,6 +348,8 @@
     private string? SSNPart1 { get; set; }
     private string? SSNPart2 { get; set; }
     private string? SSNPart3 { get; set; }
+
+	private string? placeholder { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -409,29 +419,30 @@
 }
 
 <style>
-	.ContactForm, .DeceasedForm, .ContractForm, .InformantForm {
+	.title-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.DeceasedForm, .ContractForm, .InformantForm {
 		border-radius: 6px;
-		padding: .25rem;
+		padding-left: .25rem;
+		padding-top: .05rem;
 		margin: .5rem auto;
+		background-color: rgb(187, 188, 188);
+	}
+
+	.ContactForm {
+		border-radius: 6px;
+		padding-left: .25rem;
+		padding-top: .25rem;
 		background-color: rgb(187, 188, 188);
 	}
 
 	.FirstCall-group {
 		display: flex;
 		flex-wrap: wrap;
-		gap: .5rem;
-	}
-
-	.FirstCallSave-group {
-		display: flex;
-		justify-content: space-between;
-		padding-right: 1rem;
-		padding-bottom: 0rem;
-	}
-
-	.FirstCallTop-group {
-		display: flex;
-		padding-right: 1rem;
 	}
 
 	.FirstCall-group1 {
@@ -439,6 +450,17 @@
 		flex-direction: column;
 		margin-right: 1rem;
 		margin-bottom: .5rem;
+	}
+
+	.FirstCallSave-group {
+		display: flex;
+		justify-content: space-between;
+		padding-right: 1rem;
+	}
+
+	.FirstCallTop-group {
+		display: flex;
+		padding-right: 1rem;
 	}
 
 	.fcall {
@@ -492,16 +514,17 @@
 	}
 
 	.btn-submit {
-		margin-top: 1rem;
+		margin-top: 0rem;
 	}
 
 	.gender-container {
 		margin-bottom: 15px;
+		padding-right: 1rem;
 	}
 
 	.gender-group {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column;;
 	}
 
 	.suffix-container, .IState-container {
@@ -518,7 +541,7 @@
 
 	.notes-field {
 		min-height: 6rem;
-		padding-right: 17rem;
+		padding-right: 17rem;;
 	}
 
 	.ImageUpload {
@@ -530,6 +553,6 @@
 	}
 
 	.SaveButtonFirst {
-		margin-left: auto;
+		
 	}
 </style>
