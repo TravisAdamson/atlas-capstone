@@ -22,6 +22,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<Airline> Airline { get; set; }
 	public DbSet<FlagApplication> FlagApplication { get; set; }
 	public DbSet<Monument> Monument { get; set; }
+	public DbSet<Products> Products { get; set; }
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
