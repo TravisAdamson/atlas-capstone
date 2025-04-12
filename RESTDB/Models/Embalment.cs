@@ -1,0 +1,22 @@
+public class Embalment
+{
+    public int Id { get; set; }
+    
+    // Whether permission has been given for embalming
+    public bool HasPermissionToEmbalm { get; set; }
+    
+    // Whether the embalming has been performed
+    public bool Embalmed { get; set; }
+    
+    // The date when embalming was performed
+    public DateTime EmbalmedDate { get; set; }
+    
+    // The time when embalming was performed
+    public TimeSpan EmbalmedTime { get; set; }
+    
+    // The name of the embalmer
+    public string Embalmer { get; set; }
+    
+    // The person who authorized the embalming
+    public string EmbalmingAuthorizor { get; set; }
+}
