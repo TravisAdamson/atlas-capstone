@@ -12,7 +12,7 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250412222416_InitialCreate")]
+    [Migration("20250412224902_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -559,6 +559,33 @@ namespace RESTDB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PlaceOfDeath");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Products", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Category")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Item")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Tax")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("RESTDB.Models.ServiceContract", b =>
