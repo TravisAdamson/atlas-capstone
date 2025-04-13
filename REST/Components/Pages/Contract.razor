@@ -162,7 +162,6 @@
 				maxlength="5"
 				oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
-
 			<!-- SSN -->
 			<div class="FirstCall-group1">
 				<label for="SSN">SSN:</label>
@@ -348,7 +347,6 @@
 @code {
     [Parameter] public int? ClientID { get; set; }
 
-    // Keep your existing Deceased list if you really need it for something else:
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
 
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
@@ -364,10 +362,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Load everything if you want, or skip if you only need a single record
+        // Load everything if desired, or skip if only a single record is needed
         Deceased = await Context.Deceased.ToListAsync();
 
-        // If we have a ClientID in the URL, try loading that record
+        // If we have a ClientID in the URL, try loading that record // Haven't got to this quite yet ------------------------------------------------------------------------------------------------------------------------------
         if (ClientID.HasValue && ClientID.Value > 0)
         {
             var loaded = await Context.Deceased
@@ -376,8 +374,6 @@
             if (loaded != null)
             {
                 currentDeceased = loaded;
-                // OPTIONAL: parse out phone or SSN fields if you want them in separate textboxes
-                // e.g. LoadDigits(); or a method that sets PhonePart1 = ...
             }
             else
             {
@@ -386,7 +382,7 @@
         }
         else
         {
-            Console.WriteLine("No ClientID provided. We'll treat this as a brand-new record.");
+            Console.WriteLine("No ClientID provided. Being treated as a brand-new record.");
         }
     }
 

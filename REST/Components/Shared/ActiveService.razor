@@ -22,6 +22,16 @@
     <div class="active-service-field">
         <strong>Contract Balance:</strong> @(ContractBalance?.ToString("C") ?? "$0.00")
     </div>
+	<div class="active-service-field">
+		<strong>Title:</strong> @Title
+	</div>
+	<div class="active-service-field">
+		<strong>Photo:</strong>
+		@if (Photo != null)
+		{
+			<img src="data:image/jpeg;base64,@Convert.ToBase64String(Photo)" alt="Buyer Photo" style="max-height: 100px; max-width: 100px;"/>
+		}
+	</div>
 </div>
 
 <style>
