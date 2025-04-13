@@ -1,4 +1,5 @@
 @page "/ModifyBuyer"
+
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
@@ -6,6 +7,26 @@
 @using RESTDB.Models
 
 <PageTitle>Modify Buyer</PageTitle>
+
+<!-- these are used for shared folder -->
+@using RESTDB.Migrations
+@using RESTDB.Data
+@using REST.Components.Shared
+@inherits LayoutComponentBase
+
+@code {
+    private Deceased currentDeceased = new Deceased();
+}
+
+<ActiveService 
+    Director="@currentDeceased.Director" 
+    FirstName="@currentDeceased.FirstName" 
+    MiddleName="@currentDeceased.MiddleName"
+    LastName="@currentDeceased.LastName"
+	Title="@currentDeceased.Title"
+	Status="@currentDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
+	Photo="@currentDeceased.Image" />
 
 <div class="title-bar">
     <h1>Modify Buyer</h1>

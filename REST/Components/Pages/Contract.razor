@@ -1,8 +1,26 @@
 @page "/Contract"
+
 @inject RESTDB.Data.ApplicationDbContext Context
 @inject NavigationManager NavigationManager
 
+@using RESTDB.Models <!-- these are used for shared folder -->
+@using RESTDB.Migrations
+@using RESTDB.Data
+@using REST.Components.Shared
+@inherits LayoutComponentBase
+
+
 <PageTitle>Contract</PageTitle>
+
+<ActiveService 
+    Director="@currentDeceased.Director" 
+    FirstName="@currentDeceased.FirstName" 
+    MiddleName="@currentDeceased.MiddleName"
+    LastName="@currentDeceased.LastName"
+	Title="@currentDeceased.Title"
+	Status="@currentDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
+	Photo="@currentDeceased.Image" />
 
 <h1>Create, View, Update, or Delete Contract</h1>
 
@@ -144,7 +162,6 @@
 				maxlength="5"
 				oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
-
 			<!-- SSN -->
 			<div class="FirstCall-group1">
 				<label for="SSN">SSN:</label>
@@ -328,7 +345,10 @@
 </div>
 
 @code {
+    [Parameter] public int? ClientID { get; set; }
+
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
+
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
 
     // Phone and SSN part bindings
@@ -342,7 +362,28 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Load everything if desired, or skip if only a single record is needed
         Deceased = await Context.Deceased.ToListAsync();
+
+        // If we have a ClientID in the URL, try loading that record // Haven't got to this quite yet ------------------------------------------------------------------------------------------------------------------------------
+        if (ClientID.HasValue && ClientID.Value > 0)
+        {
+            var loaded = await Context.Deceased
+                .FirstOrDefaultAsync(d => d.ClientID == ClientID.Value);
+
+            if (loaded != null)
+            {
+                currentDeceased = loaded;
+            }
+            else
+            {
+                Console.WriteLine($"No record found for ClientID={ClientID.Value}. Creating a new one instead.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No ClientID provided. Being treated as a brand-new record.");
+        }
     }
 
     private int GetNextClientID()
@@ -353,6 +394,7 @@
 
     private async Task SaveRecord()
     {
+        // Basic validation
         if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
         {
             Console.WriteLine("First Name and Last Name are required.");
@@ -364,30 +406,44 @@
         {
             Console.WriteLine("SSN is required.");
         }
-		else
-			currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+        else
+        {
+            currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+        }
 
         // Format Phone Number
         if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
         {
             Console.WriteLine("Phone number is required.");
         }
-		else
-			currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+        else
+        {
+            currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+        }
 
-        // Save
-        currentDeceased.ClientID = GetNextClientID();
-        Context.Deceased.Add(currentDeceased);
+        // If this is a *new* record, set a new ClientID
+        if (currentDeceased.ClientID == 0)
+        {
+            currentDeceased.ClientID = GetNextClientID();
+            Context.Deceased.Add(currentDeceased);
+        }
+        else
+        {
+            // If it already had a ClientID, likely an existing record – update
+            Context.Deceased.Update(currentDeceased);
+        }
+
         await Context.SaveChangesAsync();
 
+        // Reset for new or do whatever next
         currentDeceased = new RESTDB.Models.Deceased();
         PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
         SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
     }
+
     private async Task HandleImageUpload(InputFileChangeEventArgs e)
     {
         var file = e.File;
-
         if (file != null)
         {
             try
