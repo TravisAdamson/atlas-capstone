@@ -1,0 +1,194 @@
+@page "/ModifyCashAdvance"
+@inject RESTDB.Data.ApplicationDbContext Context
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.WebUtilities
+@using RESTDB.Models
+
+<PageTitle>Modify Cash Advance</PageTitle>
+
+<style>
+    .title-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .ContactForm, .FirstCall-group {
+        padding: 1rem;
+    }
+
+    .FirstCall-group1 {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    .fcall {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+    }
+
+    .btn-submit {
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="title-bar">
+    <h1>Modify Cash Advance</h1>
+    <div class="navigation-controls">
+        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary" style="background-color: #936091;">Previous</button> }
+        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary" style="background-color: #936091;">Next</button> }
+    </div>
+    <div class="SubmitRecordButton">
+        <EditForm Model="@editingCashAdvance" OnValidSubmit="SaveRecord">
+            <div class="SaveButtonFirst">
+                <button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+<div class="ContactForm">
+    <EditForm Model="@editingCashAdvance">
+        <h5>Cash Advance Information</h5>
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label>Description</label>
+                <InputText class="fcall" @bind-Value="editingCashAdvance.Description" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Tax</label>
+                <InputNumber class="fcall" @bind-Value="editingCashAdvance.Tax" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Quantity</label>
+                <InputText class="fcall" @bind-Value="editingCashAdvance.Quantity" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Price</label>
+                <InputNumber class="fcall" @bind-Value="editingCashAdvance.Price" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Extended Price</label>
+                <InputNumber class="fcall" @bind-Value="editingCashAdvance.PriceExtended" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Last Preneed ID</label>
+                <InputText class="fcall" @bind-Value="editingCashAdvance.LastPreneedId" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Last Atneed ID</label>
+                <InputText class="fcall" @bind-Value="editingCashAdvance.LastAtneedId" />
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private List<CashAdvance> cashAdvanceList = new();
+    private CashAdvance editingCashAdvance = new();
+    private int currentRecordIndex = 0;
+    private string? currentRecordString;
+    private bool preVis = true, nexVis = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.Uri;
+        var query = new Uri(uri).Query;
+        var queryParameters = QueryHelpers.ParseQuery(query);
+
+        cashAdvanceList = await Context.CashAdvance.ToListAsync();
+
+        if (cashAdvanceList.Any())
+        {
+            if (queryParameters.TryGetValue("currentRecordString", out var value))
+            {
+                currentRecordString = value;
+                if (int.TryParse(currentRecordString, out var currentRecord))
+                {
+                    currentRecordIndex = currentRecord;
+                    preVis = currentRecord > 1;
+                    nexVis = currentRecord < cashAdvanceList.Count;
+                }
+            }
+
+            editingCashAdvance = CloneCashAdvance(currentRecordIndex > 0 ? cashAdvanceList[currentRecordIndex - 1] : cashAdvanceList.Last());
+        }
+    }
+
+    private CashAdvance CloneCashAdvance(CashAdvance original)
+    {
+        return new CashAdvance
+        {
+            Id = original.Id,
+            Description = original.Description,
+            Tax = original.Tax,
+            Quantity = original.Quantity,
+            Price = original.Price,
+            PriceExtended = original.PriceExtended,
+            LastPreneedId = original.LastPreneedId,
+            LastAtneedId = original.LastAtneedId
+        };
+    }
+
+    private void PreviousRecord()
+    {
+        if (currentRecordIndex > 1)
+        {
+            currentRecordIndex--;
+            editingCashAdvance = cashAdvanceList[currentRecordIndex - 1];
+            preVis = currentRecordIndex > 1;
+            nexVis = true;
+        }
+        else
+        {
+            preVis = false;
+        }
+    }
+
+    private void NextRecord()
+    {
+        if (currentRecordIndex < cashAdvanceList.Count)
+        {
+            currentRecordIndex++;
+            editingCashAdvance = cashAdvanceList[currentRecordIndex - 1];
+            nexVis = currentRecordIndex < cashAdvanceList.Count;
+            preVis = true;
+        }
+        else
+        {
+            nexVis = false;
+        }
+    }
+
+    private async Task SaveRecord()
+    {
+        if (string.IsNullOrWhiteSpace(editingCashAdvance.Description))
+        {
+            Console.WriteLine("Description is required.");
+            return;
+        }
+
+        var entity = await Context.CashAdvance.FirstOrDefaultAsync(a => a.Id == editingCashAdvance.Id);
+        if (entity is not null)
+        {
+            entity.Description = editingCashAdvance.Description;
+            entity.Tax = editingCashAdvance.Tax;
+            entity.Quantity = editingCashAdvance.Quantity;
+            entity.Price = editingCashAdvance.Price;
+            entity.PriceExtended = editingCashAdvance.PriceExtended;
+            entity.LastPreneedId = editingCashAdvance.LastPreneedId;
+            entity.LastAtneedId = editingCashAdvance.LastAtneedId;
+
+            await Context.SaveChangesAsync();
+        }
+    }
+}

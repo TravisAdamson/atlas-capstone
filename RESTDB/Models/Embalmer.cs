@@ -8,10 +8,10 @@ public class Embalmer
     public int? Id { get; set; }
 
     // Whether permission has been given for embalming
-    public bool? PermissionToEmbalm { get; set; }
+    public bool PermissionToEmbalm { get; set; }
 
     // Whether the embalming has been performed
-    public bool? Embalmed { get; set; }
+    public bool Embalmed { get; set; }
 
     // The date when embalming was performed
     public DateTime? EmbalmedDate { get; set; }

@@ -20,8 +20,8 @@ public class Buyer
     public string? Relationship { get; set; }
 
     // Whether the buyer is the primary buyer
-    public bool? IsPrimaryBuyer { get; set; }
+    public bool IsPrimaryBuyer { get; set; }
 
     // Whether a bill needs to be sent to the buyer
-    public bool? SendBill { get; set; }
+    public bool SendBill { get; set; }
 }

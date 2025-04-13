@@ -36,5 +36,5 @@ public class Survivors
     public string? Relationship { get; set; }
 
     // Whether the survivor is still living
-    public bool? IsLiving { get; set; }
+    public bool IsLiving { get; set; }
 }

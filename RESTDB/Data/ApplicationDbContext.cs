@@ -23,6 +23,8 @@ public class ApplicationDbContext : DbContext
 	public DbSet<FlagApplication> FlagApplication { get; set; }
 	public DbSet<Monument> Monument { get; set; }
 	public DbSet<Products> Products { get; set; }
+	public DbSet<MilitaryStint> MilitaryStint { get; set; }
+	public DbSet<WarsServed> WarsServed { get; set; }
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{

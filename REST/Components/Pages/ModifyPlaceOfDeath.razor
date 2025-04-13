@@ -1,0 +1,244 @@
+@page "/ModifyPlaceOfDeath"
+@inject RESTDB.Data.ApplicationDbContext Context
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.WebUtilities
+@using RESTDB.Models
+
+<PageTitle>Modify Place of Death</PageTitle>
+
+<div class="title-bar">
+    <h1>Modify Place of Death</h1>
+    <div class="navigation-controls">
+        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button> }
+        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary">Next</button> }
+    </div>
+    <div class="SubmitRecordButton">
+        <EditForm Model="@editingPlace" OnValidSubmit="SaveRecord">
+            <div class="SaveButtonFirst">
+                <button type="submit" class="btn btn-primary btn-submit">Save</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+<div class="MilitaryForm">
+    <EditForm Model="@editingPlace">
+
+        <h5>Place of Death Details</h5>
+
+        <div class="Form-group"><label>Name</label><InputText class="form-control" @bind-Value="editingPlace.Name" /></div>
+        <div class="Form-group"><label>Medical Record Number</label><InputText class="form-control" @bind-Value="editingPlace.MedicalRecordNumber" /></div>
+        <div class="Form-group"><label>Street Address</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
+        <div class="Form-group"><label>Apt Number</label><InputText class="form-control" @bind-Value="editingPlace.AptNumber" /></div>
+        <div class="Form-group"><label>Type of Facility</label><InputText class="form-control" @bind-Value="editingPlace.TypeOfFacility" /></div>
+        <div class="Form-group"><label>Call Taken By</label><InputText class="form-control" @bind-Value="editingPlace.CallTakenBy" /></div>
+        <div class="Form-group"><label>Zip Code</label><InputText class="form-control" @bind-Value="editingPlace.ZipCode" /></div>
+        <div class="Form-group"><label>Locality Type</label><InputText class="form-control" @bind-Value="editingPlace.LocalityType" /></div>
+        <div class="Form-group"><label>Township</label><InputText class="form-control" @bind-Value="editingPlace.Township" /></div>
+        <div class="Form-group"><label>Locality</label><InputText class="form-control" @bind-Value="editingPlace.Locality" /></div>
+        <div class="Form-group"><label>State</label><InputText class="form-control" @bind-Value="editingPlace.State" /></div>
+        <div class="Form-group"><label>County</label><InputText class="form-control" @bind-Value="editingPlace.County" /></div>
+        <div class="Form-group"><label>Country</label><InputText class="form-control" @bind-Value="editingPlace.Country" /></div>
+        <div class="Form-group"><label>In City Limits</label><InputCheckbox class="form-check-input" @bind-Value="editingPlace.InCityLimits" /></div>
+
+        <div class="Form-group"><label>Director Notify Date</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifyDate" /></div>
+        <div class="Form-group"><label>Director Notified Time</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifedTime" /></div>
+        <div class="Form-group"><label>Admission Date</label><InputDate class="form-control" @bind-Value="editingPlace.AdmissionDate" /></div>
+        <div class="Form-group"><label>Body Release Time</label><InputDate class="form-control" @bind-Value="editingPlace.BodyReleaseTime" /></div>
+    </EditForm>
+</div>
+
+@code {
+    private List<PlaceOfDeath> placeList = new();
+    private PlaceOfDeath editingPlace = new();
+    private int currentRecordIndex = 0;
+    private string? currentRecordString;
+    private bool preVis = true, nexVis = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.Uri;
+        var query = new Uri(uri).Query;
+        var queryParameters = QueryHelpers.ParseQuery(query);
+
+        placeList = await Context.PlaceOfDeath.ToListAsync();
+
+        if (placeList.Any())
+        {
+            if (queryParameters.TryGetValue("currentRecordString", out var value))
+            {
+                currentRecordString = value;
+                if (int.TryParse(currentRecordString, out var currentRecord))
+                {
+                    currentRecordIndex = currentRecord;
+                    preVis = currentRecord > 1;
+                    nexVis = currentRecord < placeList.Count;
+                }
+            }
+
+            editingPlace = ClonePlace(currentRecordIndex > 0 ? placeList[currentRecordIndex - 1] : placeList.Last());
+        }
+    }
+
+    private PlaceOfDeath ClonePlace(PlaceOfDeath original)
+    {
+        return new PlaceOfDeath
+        {
+            Id = original.Id,
+            Name = original.Name,
+            MedicalRecordNumber = original.MedicalRecordNumber,
+            StreetAddress = original.StreetAddress,
+            AptNumber = original.AptNumber,
+            TypeOfFacility = original.TypeOfFacility,
+            CallTakenBy = original.CallTakenBy,
+            ZipCode = original.ZipCode,
+            LocalityType = original.LocalityType,
+            Township = original.Township,
+            Locality = original.Locality,
+            State = original.State,
+            County = original.County,
+            Country = original.Country,
+            InCityLimits = original.InCityLimits,
+            DirectorNotifyDate = original.DirectorNotifyDate,
+            DirectorNotifedTime = original.DirectorNotifedTime,
+            AdmissionDate = original.AdmissionDate,
+            BodyReleaseTime = original.BodyReleaseTime
+        };
+    }
+
+    private void PreviousRecord()
+    {
+        if (currentRecordIndex > 1)
+        {
+            currentRecordIndex--;
+            editingPlace = placeList[currentRecordIndex - 1];
+            preVis = currentRecordIndex > 1;
+            nexVis = true;
+        }
+        else
+        {
+            preVis = false;
+        }
+    }
+
+    private void NextRecord()
+    {
+        if (currentRecordIndex < placeList.Count)
+        {
+            currentRecordIndex++;
+            editingPlace = placeList[currentRecordIndex - 1];
+            nexVis = currentRecordIndex < placeList.Count;
+            preVis = true;
+        }
+        else
+        {
+            nexVis = false;
+        }
+    }
+
+    private async Task SaveRecord()
+    {
+        var entity = await Context.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
+        if (entity is not null)
+        {
+            entity.Name = editingPlace.Name;
+            entity.MedicalRecordNumber = editingPlace.MedicalRecordNumber;
+            entity.StreetAddress = editingPlace.StreetAddress;
+            entity.AptNumber = editingPlace.AptNumber;
+            entity.TypeOfFacility = editingPlace.TypeOfFacility;
+            entity.CallTakenBy = editingPlace.CallTakenBy;
+            entity.ZipCode = editingPlace.ZipCode;
+            entity.LocalityType = editingPlace.LocalityType;
+            entity.Township = editingPlace.Township;
+            entity.Locality = editingPlace.Locality;
+            entity.State = editingPlace.State;
+            entity.County = editingPlace.County;
+            entity.Country = editingPlace.Country;
+            entity.InCityLimits = editingPlace.InCityLimits;
+            entity.DirectorNotifyDate = editingPlace.DirectorNotifyDate;
+            entity.DirectorNotifedTime = editingPlace.DirectorNotifedTime;
+            entity.AdmissionDate = editingPlace.AdmissionDate;
+            entity.BodyReleaseTime = editingPlace.BodyReleaseTime;
+
+            await Context.SaveChangesAsync();
+        }
+    }
+}
+<style>
+.MilitaryForm {
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f7fc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h5 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.Form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.form-check-input {
+    margin-top: 10px;
+    transform: scale(1.2);
+}
+
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.navigation-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.SubmitRecordButton {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.SaveButtonFirst {
+    margin-top: 20px;
+}
+
+.btn-submit, .btn-secondary {
+    padding: 10px 20px;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-submit {
+    background-color: #936091;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.SaveButtonFirst button:hover {
+    cursor: pointer;
+}
+</style>
