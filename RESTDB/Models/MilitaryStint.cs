@@ -1,14 +1,16 @@
-// Models/MilitaryStint.cs
-namespace YourProjectNamespace.Models
-{
-    public class MilitaryStint
-    {
-        public int Id { get; set; }
-        public string Description { get; set; } // Example: "Deployed in Afghanistan"
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+using System.ComponentModel.DataAnnotations;
 
-        public int MilitaryId { get; set; }
-        public Military Military { get; set; } // Navigation property to the Military class
-    }
+namespace RESTDB.Models;
+
+public class MilitaryStint
+{
+	[Key]
+	public int? Id { get; set; }
+	public string? Description { get; set; } // Example: "Deployed in Afghanistan"
+	public DateTime? StartDate { get; set; }
+	public DateTime? EndDate { get; set; }
+
+	// Needs to be limited to a number possibly
+	public string? StintMilitaryId { get; set; }
+	public Military? Military { get; set; } // Navigation property to the Military class
 }
