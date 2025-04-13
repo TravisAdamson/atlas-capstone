@@ -1,0 +1,49 @@
+@code {
+    [Parameter] public string? Director { get; set; }
+    [Parameter] public string? FirstName { get; set; }
+    [Parameter] public string? MiddleName { get; set; }
+    [Parameter] public string? LastName { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Status { get; set; }
+    [Parameter] public decimal? ContractBalance { get; set; }
+    [Parameter] public byte[]? Photo { get; set; }
+}
+
+<div class="active-service-row">
+    <div class="active-service-field">
+        <strong>Director:</strong> @Director
+    </div>
+    <div class="active-service-field">
+        <strong>Name:</strong> @FirstName @(" ") @MiddleName @(" ") @LastName
+    </div>
+    <div class="active-service-field">
+        <strong>Status:</strong> @Status
+    </div>
+    <div class="active-service-field">
+        <strong>Contract Balance:</strong> @(ContractBalance?.ToString("C") ?? "$0.00")
+    </div>
+</div>
+
+<style>
+    .active-service-row {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        border: 3px solid #333;
+		border-style: outset;
+        border-radius: 5px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        background-color: #858585;
+    }
+
+    .active-service-field {
+        /* This pushes each field to share space, but you can tweak how wide each is */
+        flex: 1; 
+        margin-right: 1rem; /* spacing between fields */
+    }
+
+    .active-service-field:last-child {
+        margin-right: 0; /* no extra space on the last item */
+    }
+</style>
