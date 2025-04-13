@@ -1,0 +1,306 @@
+@page "/ModifyAirline"
+@inject RESTDB.Data.ApplicationDbContext Context
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.WebUtilities
+@using RESTDB.Models
+
+<PageTitle>Modify Airline</PageTitle>
+
+<div class="title-bar">
+    <h1>Modify Airline</h1>
+    <div class="navigation-controls">
+        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary" style="background-color: #936091;">Previous</button> }
+        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary" style="background-color: #936091;">Next</button> }
+    </div>
+    <div class="SubmitRecordButton">
+        <EditForm Model="@editingAirline" OnValidSubmit="SaveRecord">
+            <div class="SaveButtonFirst">
+                <button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+<div class="ContactForm">
+    <EditForm Model="@editingAirline">
+        <h5>Airline Information</h5>
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label>Airline Name</label>
+                <InputText class="fcall" @bind-Value="editingAirline.AirlineName" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Country</label>
+                <InputText class="fcall" @bind-Value="editingAirline.Country" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Founded</label>
+                <InputDate class="fcall" @bind-Value="editingAirline.Founded" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>IATA</label>
+                <InputText class="fcall" @bind-Value="editingAirline.IATA" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>ICAO</label>
+                <InputText class="fcall" @bind-Value="editingAirline.ICAO" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Fleet Size</label>
+                <InputText class="fcall" @bind-Value="editingAirline.FleetSize" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Logo URL</label>
+                <InputText class="fcall" @bind-Value="editingAirline.LogoUrl" />
+            </div>
+            <div class="ShowImage">
+                @if (!string.IsNullOrWhiteSpace(editingAirline.LogoUrl))
+                {
+                    <img src="@editingAirline.LogoUrl" alt="Airline Logo" style="max-width: 260px; max-height: 258px;" />
+                }
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private List<Airline> airlineList = new();
+    private Airline editingAirline = new();
+    private int currentRecordIndex = 0;
+    private string? currentRecordString;
+    private bool preVis = true, nexVis = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.Uri;
+        var query = new Uri(uri).Query;
+        var queryParameters = QueryHelpers.ParseQuery(query);
+
+        airlineList = await Context.Airline.ToListAsync();
+
+        if (airlineList.Any())
+        {
+            if (queryParameters.TryGetValue("currentRecordString", out var value))
+            {
+                currentRecordString = value;
+                if (int.TryParse(currentRecordString, out var currentRecord))
+                {
+                    currentRecordIndex = currentRecord;
+                    preVis = currentRecord > 1;
+                    nexVis = currentRecord < airlineList.Count;
+                }
+            }
+
+            editingAirline = CloneAirline(currentRecordIndex > 0 ? airlineList[currentRecordIndex - 1] : airlineList.Last());
+        }
+    }
+
+    private Airline CloneAirline(Airline original)
+    {
+        return new Airline
+        {
+            Id = original.Id,
+            AirlineName = original.AirlineName,
+            Country = original.Country,
+            Founded = original.Founded,
+            IATA = original.IATA,
+            ICAO = original.ICAO,
+            FleetSize = original.FleetSize,
+            LogoUrl = original.LogoUrl
+        };
+    }
+
+    private void PreviousRecord()
+    {
+        if (currentRecordIndex > 1)
+        {
+            currentRecordIndex--;
+            editingAirline = airlineList[currentRecordIndex - 1];
+            preVis = currentRecordIndex > 1;
+            nexVis = true;
+        }
+        else
+        {
+            preVis = false;
+        }
+    }
+
+    private void NextRecord()
+    {
+        if (currentRecordIndex < airlineList.Count)
+        {
+            currentRecordIndex++;
+            editingAirline = airlineList[currentRecordIndex - 1];
+            nexVis = currentRecordIndex < airlineList.Count;
+            preVis = true;
+        }
+        else
+        {
+            nexVis = false;
+        }
+    }
+
+    private async Task SaveRecord()
+    {
+        if (string.IsNullOrWhiteSpace(editingAirline.AirlineName))
+        {
+            Console.WriteLine("Airline Name is required.");
+            return;
+        }
+
+        var entity = await Context.Airline.FirstOrDefaultAsync(a => a.Id == editingAirline.Id);
+        if (entity is not null)
+        {
+            entity.AirlineName = editingAirline.AirlineName;
+            entity.Country = editingAirline.Country;
+            entity.Founded = editingAirline.Founded;
+            entity.IATA = editingAirline.IATA;
+            entity.ICAO = editingAirline.ICAO;
+            entity.FleetSize = editingAirline.FleetSize;
+            entity.LogoUrl = editingAirline.LogoUrl;
+
+            await Context.SaveChangesAsync();
+        }
+    }
+}
+
+<style>
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation-controls {
+    display: flex;
+    gap: .5rem;
+}
+
+.DeceasedForm, .ContractForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .05rem;
+    margin: .5rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.ContactForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .25rem;
+    background-color: rgb(187, 188, 188);
+}
+
+.InformantForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .05rem;
+    margin: .5rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.FirstCall-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.FirstCall-group1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: .5rem;
+}
+
+.fcall {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+}
+
+.numcall1 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 50px;
+}
+
+.numcall2 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 45px;
+}
+
+.numcall3 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 55px;
+}
+
+.zipcall {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 100px;
+}
+
+.genderlabel {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gender-container {
+    margin-bottom: 15px;
+    padding-right: 1rem;
+}
+
+.gender-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.suffix-container, .IState-container {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.suffix-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-field {
+    min-height: 6rem;
+    padding-right: 17rem;
+}
+
+.ShowImage {
+    margin-left: auto;
+}
+
+.FirstCallTop-group {
+    display: flex;
+    padding-right: 1rem;
+}
+
+.ImageUpload {
+    max-width: 14rem;
+}
+
+</style>

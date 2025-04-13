@@ -51,7 +51,7 @@ public class PlaceOfDeath
     public string? Country { get; set; }
 
     // Whether the place of death is within city limits
-    public bool? InCityLimits { get; set; }
+    public bool InCityLimits { get; set; }
 
     // The date the director was notified about the death
     public DateTime? DirectorNotifyDate { get; set; }

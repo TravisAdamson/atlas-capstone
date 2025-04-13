@@ -17,16 +17,16 @@ public class ObituaryData
     public DateTime? DateSent { get; set; }
 
     // Whether the obituary is a primary obituary (e.g., featured)
-    public bool? Primary { get; set; }
+    public bool Primary { get; set; }
 
     // Whether the primary photo is included with the obituary (e.g., in email or NOA)
-    public bool? IncludePrimaryPhoto { get; set; }
+    public bool IncludePrimaryPhoto { get; set; }
 
     // Whether survivor addresses are displayed in the obituary
-    public bool? ShowSurvivorAddresses { get; set; }
+    public bool ShowSurvivorAddresses { get; set; }
 
     // Whether relationships of the survivors are shown
-    public bool? ShowSurvivorRelationships { get; set; }
+    public bool ShowSurvivorRelationships { get; set; }
 
     // The total number of relationships to be displayed in the obituary (limited to numbers)
     public string? RelationshipCount { get; set; }
