@@ -147,3 +147,14 @@
 .nav.flex-column.ms-4 {
     margin-left: 0 !important;
 }
+
+.nav-item > button.nav-link {
+    padding: 0;
+    display: flex;
+    width: 100%;
+    color: white !important;
+    height: 3rem;
+    line-height: 3rem;
+    overflow: hidden;
+    border-radius: 4px;
+}
