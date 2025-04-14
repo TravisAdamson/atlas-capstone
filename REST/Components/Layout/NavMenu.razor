@@ -9,38 +9,40 @@
     </div>
     <div class="nav-item px-3">
         <NavLink class="nav-link" href="First Call">
-            <span class="me-2 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
+            <span class="nav-icon bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
             <span class="nav-text">First Call</span>
         </NavLink>
     </div>
-	<div class="nav-item px-3 @(isModifiedOpen ? "open" : "")">
-		<button class="nav-link btn d-flex align-items-center w-100 text-start" style="font-size: 14.4px;"
+	<div class="nav-item px-3 @(isModifiedOpen ? "open" : "")" href="Search Records">
+		<button class="nav-link btn" style="font-size: 14.4px;"
 				@onclick="ToggleModified">
-			<span class="nav-icon bi bi-wrench-fill-nav-menu" aria-hidden="true"></span>
-			<span class="nav-text">Modifiy Records</span>
-			<span class="ms-auto @(isModifiedOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></span>
+			<NavLink class="nav-link" href="Search Records" aria-current="page">
+				<span class="nav-icon bi bi-wrench-fill-nav-menu" aria-hidden="true"></span>
+				<span class="nav-text">Modify Records</span>
+				<span class="ms-auto @(isModifiedOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></span>
+			</NavLink>
 		</button>
 
 		@if (isModifiedOpen)
 		{
 			<ul class="nav flex-column ms-4">
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Place of Death">Place of Death</NavLink>
+					<NavLink class="nav-link" href="Place of Death">• Place of Death</NavLink>
 				</li>
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Military">Military</NavLink>
+					<NavLink class="nav-link" href="Military">• Military</NavLink>
 				</li>
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Contract">Contract</NavLink>
+					<NavLink class="nav-link" href="Contract">• Contract</NavLink>
 				</li>
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Survivor">Survivor</NavLink>
+					<NavLink class="nav-link" href="Survivor">• Survivor</NavLink>
 				</li>
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Embalmer">Embalmer</NavLink>
+					<NavLink class="nav-link" href="Embalmer">• Embalmer</NavLink>
 				</li>
 				<li class="nav-item">
-					<NavLink class="nav-link" href="Obituary">Obituary</NavLink>
+					<NavLink class="nav-link" href="Obituary">• Obituary</NavLink>
 				</li>
 			</ul>
 		}
@@ -49,13 +51,6 @@
         <NavLink class="nav-link" href="Search Records">
             <span class="nav-icon bi bi-search-fill-nav-menu" aria-hidden="true"></span>
             <span class="nav-text">Search Records</span>
-        </NavLink>
-    </div>
-
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="Contract">
-            <span class="nav-icon bi bi-card-text-fill-nav-menu" aria-hidden="true"></span>
-            <span class="nav-text">Contract</span>
         </NavLink>
     </div>
 </div>

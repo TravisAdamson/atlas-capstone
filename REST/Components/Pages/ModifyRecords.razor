@@ -11,11 +11,7 @@
 <PageTitle>Modify Records</PageTitle>
 
 <div class="title-bar">
-    <h1>Modify Records</h1>
-    <div class="navigation-controls">
-        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary" style="background-color: #936091;">Previous</button> }
-        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary" style="background-color: #936091;">Next</button> }
-    </div>
+    <h1>Modifying Record</h1>
 	<button class="btn btn-secondary" @onclick="() => GoToBuyers(currentDeceased.ClientID ?? -1)">
 		Modify Buyers
 	</button>
@@ -447,45 +443,6 @@
     {
         var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
         return lastDeceased?.ClientID + 1 ?? 1;
-    }
-
-    private void PreviousRecord()
-    {
-        if (currentRecordIndex > 1)
-        {
-			Console.WriteLine($"Current Index = {currentRecordIndex}");
-            currentRecordIndex--;
-			Console.WriteLine($"Current Index = {currentRecordIndex}");
-            edittingDeceased = Deceased[currentRecordIndex - 1];
-			LoadDigits();
-			if (currentRecordIndex == 1)
-				preVis = false;
-			nexVis = true;
-        }
-		else
-		{
-			Console.WriteLine($"No More Records");
-			preVis = false;
-		}
-    }
-
-    private void NextRecord()
-    {
-        if (currentRecordIndex < Deceased.Count)
-        {
-            currentRecordIndex++;
-            edittingDeceased = Deceased[currentRecordIndex - 1];
-			LoadDigits();
-
-			if (currentRecordIndex == Deceased.Count)
-				nexVis = false;
-			preVis = true;
-        }
-		else
-		{
-			Console.WriteLine($"No More REcords forward");
-			nexVis = false;
-		}
     }
 
 	private void LoadDigits()

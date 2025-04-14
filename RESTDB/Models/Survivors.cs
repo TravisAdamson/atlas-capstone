@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace RESTDB.Models;
+
 public class Survivors
 {
     [Key]
