@@ -340,6 +340,41 @@
 @code {
     private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
     private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
+    private List<RESTDB.Models.Airline> Airline = new List<RESTDB.Models.Airline>();
+    private RESTDB.Models.Airline currentAirline = new RESTDB.Models.Airline();
+    private List<RESTDB.Models.Buyer> Buyer = new List<RESTDB.Models.Buyer>();
+    private RESTDB.Models.Buyer currentBuyer = new RESTDB.Models.Buyer();
+    private List<RESTDB.Models.CashAdvance> CashAdvance = new List<RESTDB.Models.CashAdvance>();
+    private RESTDB.Models.CashAdvance currentCashAdvance = new RESTDB.Models.CashAdvance();
+    private List<RESTDB.Models.ContainerShipping> ContainerShipping = new List<RESTDB.Models.ContainerShipping>();
+    private RESTDB.Models.ContainerShipping currentContainerShipping = new RESTDB.Models.ContainerShipping();
+    private List<RESTDB.Models.Embalmer> Embalmer = new List<RESTDB.Models.Embalmer>();
+    private RESTDB.Models.Embalmer currentEmbalmer = new RESTDB.Models.Embalmer();
+    private List<RESTDB.Models.FlagApplication> FlagApplication = new List<RESTDB.Models.FlagApplication>();
+    private RESTDB.Models.FlagApplication currentFlagApplication = new RESTDB.Models.FlagApplication();
+    private List<RESTDB.Models.Military> Military = new List<RESTDB.Models.Military>();
+    private RESTDB.Models.Military currentMilitary = new RESTDB.Models.Military();
+    private List<RESTDB.Models.MilitaryStint> MilitaryStint = new List<RESTDB.Models.MilitaryStint>();
+    private RESTDB.Models.MilitaryStint currentMilitaryStint = new RESTDB.Models.MilitaryStint();
+    private List<RESTDB.Models.Monument> Monument = new List<RESTDB.Models.Monument>();
+    private RESTDB.Models.Monument currentMonument = new RESTDB.Models.Monument();
+    private List<RESTDB.Models.ObituaryData> ObituaryData = new List<RESTDB.Models.ObituaryData>();
+    private RESTDB.Models.ObituaryData currentObituaryData = new RESTDB.Models.ObituaryData();
+    private List<RESTDB.Models.PlaceOfDeath> PlaceOfDeath = new List<RESTDB.Models.PlaceOfDeath>();
+    private RESTDB.Models.PlaceOfDeath currentPlaceOfDeath = new RESTDB.Models.PlaceOfDeath();
+    private List<RESTDB.Models.Products> Products = new List<RESTDB.Models.Products>();
+    private RESTDB.Models.Products currentProducts = new RESTDB.Models.Products();
+	private List<RESTDB.Models.ServiceContract> ServiceContract = new List<RESTDB.Models.ServiceContract>();
+    private RESTDB.Models.ServiceContract currentServiceContract = new RESTDB.Models.ServiceContract();
+	private List<RESTDB.Models.Services> Services = new List<RESTDB.Models.Services>();
+    private RESTDB.Models.Services currentServices = new RESTDB.Models.Services();
+	private List<RESTDB.Models.Survivors> Survivors = new List<RESTDB.Models.Survivors>();
+    private RESTDB.Models.Survivors currentSurvivors = new RESTDB.Models.Survivors();
+	private List<RESTDB.Models.WarsServed> WarsServed = new List<RESTDB.Models.WarsServed>();
+    private RESTDB.Models.WarsServed currentWarsServed = new RESTDB.Models.WarsServed();
+
+
+
 
     // Phone and SSN part bindings
     private string? PhonePart1 { get; set; }
@@ -391,6 +426,23 @@
         // Save
         currentDeceased.ClientID = GetNextClientID();
         Context.Deceased.Add(currentDeceased);
+        Context.Airline.Add(currentAirline);
+        Context.Buyer.Add(currentBuyer);
+        Context.CashAdvance.Add(currentCashAdvance);
+        Context.Embalmer.Add(currentEmbalmer);
+        Context.ContainerShipping.Add(currentContainerShipping);
+        Context.FlagApplication.Add(currentFlagApplication);
+        Context.Military.Add(currentMilitary);
+        Context.MilitaryStint.Add(currentMilitaryStint);
+        Context.Monument.Add(currentMonument);
+        Context.ObituaryData.Add(currentObituaryData);
+        Context.PlaceOfDeath.Add(currentPlaceOfDeath);
+        Context.Products.Add(currentProducts);
+        Context.ServiceContract.Add(currentServiceContract);
+        Context.Services.Add(currentServices);
+        Context.Survivors.Add(currentSurvivors);
+        Context.WarsServed.Add(currentWarsServed);
+
         await Context.SaveChangesAsync();
 
         currentDeceased = new RESTDB.Models.Deceased();
@@ -554,6 +606,6 @@
 	}
 
 	.SaveButtonFirst {
-		
+
 	}
 </style>
