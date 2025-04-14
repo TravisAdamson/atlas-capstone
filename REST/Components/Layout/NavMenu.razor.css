@@ -92,16 +92,6 @@
     min-width: 60px; /* preserves icon space */
 }
 
-/* Style the button for the modify dropdown */ /* seems like i can remove this */
-.btn {
-    border: none;
-    font-size: 1rem;
-    text-align: left;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
 /* Style the caret icon */
 .nav-item button span.ms-auto {
     font-size: 1.2rem; /* Adjust icon size */
