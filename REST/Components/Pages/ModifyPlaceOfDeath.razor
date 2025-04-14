@@ -1,11 +1,31 @@
-@page "/ModifyPlaceOfDeath"
+@page "/Place of Death"
 @inject RESTDB.Data.ApplicationDbContext Context
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using RESTDB.Models
 
-<PageTitle>Modify Place of Death</PageTitle>
+<PageTitle>Place of Death</PageTitle>
+
+<!-- these are used for shared folder -->
+@using RESTDB.Migrations
+@using RESTDB.Data
+@using REST.Components.Shared
+@inherits LayoutComponentBase
+
+@code {
+    private Deceased currentDeceased = new Deceased();
+}
+
+<ActiveService 
+    Director="@currentDeceased.Director" 
+    FirstName="@currentDeceased.FirstName" 
+    MiddleName="@currentDeceased.MiddleName"
+    LastName="@currentDeceased.LastName"
+	Title="@currentDeceased.Title"
+	Status="@currentDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
+	Photo="@currentDeceased.Image" />
 
 <div class="title-bar">
     <h1>Modify Place of Death</h1>
@@ -41,7 +61,6 @@
         <div class="Form-group"><label>County</label><InputText class="form-control" @bind-Value="editingPlace.County" /></div>
         <div class="Form-group"><label>Country</label><InputText class="form-control" @bind-Value="editingPlace.Country" /></div>
         <div class="Form-group"><label>In City Limits</label><InputCheckbox class="form-check-input" @bind-Value="editingPlace.InCityLimits" /></div>
-
         <div class="Form-group"><label>Director Notify Date</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifyDate" /></div>
         <div class="Form-group"><label>Director Notified Time</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifedTime" /></div>
         <div class="Form-group"><label>Admission Date</label><InputDate class="form-control" @bind-Value="editingPlace.AdmissionDate" /></div>
