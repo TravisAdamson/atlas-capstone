@@ -445,45 +445,6 @@
         return lastDeceased?.ClientID + 1 ?? 1;
     }
 
-    private void PreviousRecord()
-    {
-        if (currentRecordIndex > 1)
-        {
-			Console.WriteLine($"Current Index = {currentRecordIndex}");
-            currentRecordIndex--;
-			Console.WriteLine($"Current Index = {currentRecordIndex}");
-            edittingDeceased = Deceased[currentRecordIndex - 1];
-			LoadDigits();
-			if (currentRecordIndex == 1)
-				preVis = false;
-			nexVis = true;
-        }
-		else
-		{
-			Console.WriteLine($"No More Records");
-			preVis = false;
-		}
-    }
-
-    private void NextRecord()
-    {
-        if (currentRecordIndex < Deceased.Count)
-        {
-            currentRecordIndex++;
-            edittingDeceased = Deceased[currentRecordIndex - 1];
-			LoadDigits();
-
-			if (currentRecordIndex == Deceased.Count)
-				nexVis = false;
-			preVis = true;
-        }
-		else
-		{
-			Console.WriteLine($"No More REcords forward");
-			nexVis = false;
-		}
-    }
-
 	private void LoadDigits()
 	{
 		if (!string.IsNullOrEmpty(edittingDeceased.SSN))
