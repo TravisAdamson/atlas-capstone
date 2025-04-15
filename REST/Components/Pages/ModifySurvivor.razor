@@ -9,10 +9,6 @@
 
 <div class="title-bar">
     <h1>Modify Survivor</h1>
-    <div class="navigation-controls">
-        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button> }
-        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary">Next</button> }
-    </div>
     <div class="SubmitRecordButton">
         <EditForm Model="@editingSurvivor" OnValidSubmit="SaveRecord">
             <div class="SaveButtonFirst">
@@ -134,35 +130,7 @@
         };
     }
 
-    private void PreviousRecord()
-    {
-        if (currentRecordIndex > 1)
-        {
-            currentRecordIndex--;
-            editingSurvivor = survivorList[currentRecordIndex - 1];
-            preVis = currentRecordIndex > 1;
-            nexVis = true;
-        }
-        else
-        {
-            preVis = false;
-        }
-    }
 
-    private void NextRecord()
-    {
-        if (currentRecordIndex < survivorList.Count)
-        {
-            currentRecordIndex++;
-            editingSurvivor = survivorList[currentRecordIndex - 1];
-            nexVis = currentRecordIndex < survivorList.Count;
-            preVis = true;
-        }
-        else
-        {
-            nexVis = false;
-        }
-    }
 
     private async Task SaveRecord()
     {
