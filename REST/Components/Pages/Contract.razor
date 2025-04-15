@@ -1,12 +1,33 @@
 @page "/Contract"
-@rendermode InteractiveServer
 @inject RESTDB.Data.ApplicationDbContext Db
-@using RESTDB.Models
+
 @inject NavigationManager NavigationManager
+
+@using RESTDB.Models
+@using RESTDB.Migrations
+@using RESTDB.Data
+@using REST.Components.Shared
+@inherits LayoutComponentBase
+@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 
+
 <PageTitle>Contract</PageTitle>
+
+@code {
+    private Deceased currentDeceased = new Deceased();
+}
+
+<ActiveService 
+    Director="@currentDeceased.Director" 
+    FirstName="@currentDeceased.FirstName" 
+    MiddleName="@currentDeceased.MiddleName"
+    LastName="@currentDeceased.LastName"
+	Title="@currentDeceased.Title"
+	Status="@currentDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
+	Photo="@currentDeceased.Image" />
 
 <div class="title-bar">
     <h1>Place of Death</h1>
