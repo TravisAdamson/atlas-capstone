@@ -2,7 +2,7 @@
 @inject RESTDB.Data.ApplicationDbContext Db
 
 @inject NavigationManager NavigationManager
-
+@inject REST.Services.GlobalState GlobalState
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
@@ -18,19 +18,15 @@
 
 <PageTitle>Contract Record</PageTitle>
 
-@code {
-    private Deceased currentDeceased = new Deceased();
-}
-
-<ActiveService 
-    Director="@currentDeceased.Director" 
-    FirstName="@currentDeceased.FirstName" 
-    MiddleName="@currentDeceased.MiddleName"
-    LastName="@currentDeceased.LastName"
-	Title="@currentDeceased.Title"
-	Status="@currentDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
-	Photo="@currentDeceased.Image" />
+<ActiveService
+    Director="@edittingDeceased.Director"
+    FirstName="@edittingDeceased.FirstName"
+    MiddleName="@edittingDeceased.MiddleName"
+    LastName="@edittingDeceased.LastName"
+	Title="@edittingDeceased.Title"
+	Status="@edittingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
+	Photo="@edittingDeceased.Image" />
 
 <div class="title-bar">
     <h1>Contract Record</h1>
@@ -101,14 +97,16 @@
         </div>
     }
     </div>
-</div> 
+</div>
 </div>
 
 @code {
     private ServiceContract editingContract = new();
     private Buyer editingBuyer = new();
     private Products editingProduct = new();
-
+    private List<Deceased> deceasedList = new List<Deceased>();
+    private Deceased currentDeceased = new Deceased();
+	private Deceased edittingDeceased = new Deceased();
     private string selectedTab = "Buyers";
 
     protected override async Task OnInitializedAsync()
@@ -118,11 +116,52 @@
         var queryParameters = QueryHelpers.ParseQuery(query);
 
         var contractList = await Db.ServiceContract.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
+		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
         if (contractList.Any())
         {
             editingContract = contractList.First(); // Replace with ID-based logic if needed
         }
     }
+
+	private Deceased CloneDeceased(Deceased original)
+    {
+        return new Deceased
+        {
+            ClientID = original.ClientID,
+            Director = original.Director,
+			FirstName = original.FirstName,
+			LastName = original.LastName,
+			MiddleName = original.MiddleName,
+			Title = original.Title,
+			Suffix = original.Suffix,
+            Status = original.Status,
+			StreetAddress = original.StreetAddress,
+			City = original.City,
+			State = original.State,
+			ZipCode = original.ZipCode,
+			ContractBalance = original.ContractBalance,
+			DoD = original.DoD,
+			TimeOfDeath = original.TimeOfDeath,
+			SSN = original.SSN,
+			Gender = original.Gender,
+			MaidenName = original.MaidenName,
+			Alias = original.Alias,
+			Vet = original.Vet,
+			War = original.War,
+			InformantName = original.InformantName,
+			IStreetAddress = original.IStreetAddress,
+			ICity = original.ICity,
+			IState = original.IState,
+			IZipCode = original.IZipCode,
+			IPhoneNumber = original.IPhoneNumber,
+			InformantEmail = original.InformantEmail,
+			InfoNotified = original.InfoNotified,
+			Notes = original.Notes,
+            Image = original.Image,
+			InformantRelation = original.InformantRelation
+        };
+	}
 
     private async Task SaveContractRecord()
     {
