@@ -68,32 +68,56 @@
     {
         <h5>Buyers</h5>
         <div class="FirstCall-group">
-            <label>Name</label>
-            <InputText class="fcall" @bind-Value="editingBuyer.Name" />
-            <label>Address</label>
-            <InputText class="fcall" @bind-Value="editingBuyer.Address" />
-            <label>Phone Number</label>
-            <InputText class="fcall" @bind-Value="editingBuyer.PhoneNumber" />
-            <label>Relationship</label>
-            <InputText class="fcall" @bind-Value="editingBuyer.Relationship" />
-            <label>Is Primary Buyer</label>
-            <InputCheckbox class="fcall" @bind-Value="editingBuyer.IsPrimaryBuyer" />
-            <label>Send Bill</label>
-            <InputCheckbox class="fcall" @bind-Value="editingBuyer.SendBill" />
+            <div class="FirstCall-group1">
+                <label>Name</label>
+                <InputText class="fcall" @bind-Value="editingBuyer.Name" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Address</label>
+                <InputText class="fcall" @bind-Value="editingBuyer.Address" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Phone Number</label>
+                <InputText class="fcall" @bind-Value="editingBuyer.PhoneNumber" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Relationship</label>
+                <InputText class="fcall" @bind-Value="editingBuyer.Relationship" />
+            </div>
+            <div class="primary-buyer">
+                <div class="subclass-primary">
+                    <div>
+                        <label>Is Primary Buyer</label>
+                        <InputCheckbox class="fcall" @bind-Value="editingBuyer.IsPrimaryBuyer" />
+                    </div>
+                    <div>
+                        <label>Send Bill</label>
+                        <InputCheckbox class="fcall" @bind-Value="editingBuyer.SendBill" />
+                    </div>
+                </div>
+            </div>
         </div>
     }
     else if (selectedTab == "Products")
     {
         <h5>Products</h5>
         <div class="FirstCall-group">
-            <label>Category</label>
-            <InputText class="fcall" @bind-Value="editingProduct.Category" />
-            <label>Item</label>
-            <InputText class="fcall" @bind-Value="editingProduct.Item" />
-            <label>Tax</label>
-            <InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
-            <label>Price</label>
-            <InputNumber class="fcall" @bind-Value="editingProduct.Price" />
+            <div class="FirstCall-group1">
+                <label>Category</label>
+                <InputText class="fcall" @bind-Value="editingProduct.Category" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Item</label>
+                <InputText class="fcall" @bind-Value="editingProduct.Item" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Tax</label>
+                <InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Price</label>
+                <InputNumber class="fcall" @bind-Value="editingProduct.Price" />
+            </div>
         </div>
     }
     </div>
@@ -232,6 +256,17 @@
     margin-bottom: 15px;
 }
 
+.prymary-buyer {
+    display: flex;
+    flex-direction: row;
+}
+
+.subclass-primary {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+}
+
 label {
     font-weight: bold;
 }
@@ -258,6 +293,7 @@ label {
 .FirstCall-group {
     display: flex;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .FirstCall-group1 {
