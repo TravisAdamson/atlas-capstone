@@ -169,6 +169,19 @@
         placeList = await Db.PlaceOfDeath.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		
+		int index = GlobalState.clientID - 1;
+
+		if (index >= 0 && index < deceasedList.Count) // ensure index is valid before access
+		{
+			edittingDeceased = CloneDeceased(deceasedList[index]);
+		}
+		else
+		{
+    		// handle by pick first record, show an error, etc.
+			edittingDeceased = deceasedList.Any() ? CloneDeceased(deceasedList.First()) : new Deceased(); // or some fallback
+		}
+
         if (airlineList.Any())
         {
             if (queryParameters.TryGetValue("currentRecordString", out var value))
