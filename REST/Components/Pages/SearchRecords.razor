@@ -2,6 +2,7 @@
 @inject RESTDB.Data.ApplicationDbContext Db
 @using RESTDB.Models
 @inject NavigationManager NavigationManager
+@inject REST.Services.GlobalState GlobalState
 @rendermode InteractiveServer
 
 <h3>Search Deceased Records</h3>
@@ -141,7 +142,10 @@ else if (searched)
 
 	private void StartEdit(int clientID)
     {
-        NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
+        GlobalState.clientID = clientID;
+        Console.WriteLine($"ClientID: {GlobalState.clientID}");
+		NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
+
     }
 
     private void ShowConfirmDelete(int clientId)
