@@ -8,51 +8,51 @@
 <h3>Search Deceased Records</h3>
 
 <form @onsubmit="HandleSubmit">
-    <div class="mb-3">
-        <label>Select Field:</label>
-        <select @bind="selectedField" class="form-select">
-            @foreach (var field in searchFields)
-            {
-                <option value="@field.Value">@field.Key</option>
-            }
-        </select>
-    </div>
+	<div class="mb-3">
+		<label>Select Field:</label>
+		<select @bind="selectedField" class="form-select">
+			@foreach (var field in searchFields)
+			{
+				<option value="@field.Value">@field.Key</option>
+			}
+		</select>
+	</div>
 
-    <div class="mb-3">
-        <input type="text" @bind="searchTerm" placeholder="Enter search term..." class="form-control" />
-    </div>
+	<div class="mb-3">
+		<input type="text" @bind="searchTerm" placeholder="Enter search term..." class="form-control" />
+	</div>
 
-    <button type="submit" class="btn btn-primary">Search</button>
+	<button type="submit" class="btn btn-primary">Search</button>
 </form>
 
 @if (isLoading)
 {
-    <p><em>Loading...</em></p>
+	<p><em>Loading...</em></p>
 }
 else if (results != null && results.Any())
 {
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
-                <th>Client ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Director</th>
-                <th>City</th>
-                <th>DoD</th>
+	<table class="table table-striped mt-3">
+		<thead>
+			<tr>
+				<th>Client ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Director</th>
+				<th>City</th>
+				<th>DoD</th>
 				<th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in results)
-            {
-                <tr>
-                    <td>@item.ClientID</td>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Director</td>
-                    <td>@item.City</td>
-                    <td>@item.DoD?.ToString("MM-dd-yyyy")</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in results)
+			{
+				<tr>
+					<td>@item.ClientID</td>
+					<td>@item.FirstName</td>
+					<td>@item.LastName</td>
+					<td>@item.Director</td>
+					<td>@item.City</td>
+					<td>@item.DoD?.ToString("MM-dd-yyyy")</td>
 					<td>
 						<button type="button" @onclick="() => StartEdit(item.ClientID ?? -1)">Edit</button>
 						<span class="Spacing"></span>
@@ -79,88 +79,88 @@ else if (searched)
 }
 
 @code {
-    private string searchTerm = string.Empty;
-    private string selectedField = "FirstName";
-    private List<Deceased> results = new();
-    private bool isLoading = false;
-    private bool searched = false;
+	private string searchTerm = string.Empty;
+	private string selectedField = "FirstName";
+	private List<Deceased> results = new();
+	private bool isLoading = false;
+	private bool searched = false;
 	private int? ConfirmingDeleteId = null;
-    private Dictionary<string, string> searchFields = new()
-    {
-        { "First Name", "FirstName" },
-        { "Last Name", "LastName" },
-        { "City", "City" },
-        { "Director", "Director" },
-        { "Status", "Status" },
-        { "SSN", "SSN" },
-        { "Gender", "Gender" },
-        { "Maiden Name", "MaidenName" }
-    };
+	private Dictionary<string, string> searchFields = new()
+	{
+		{ "First Name", "FirstName" },
+		{ "Last Name", "LastName" },
+		{ "City", "City" },
+		{ "Director", "Director" },
+		{ "Status", "Status" },
+		{ "SSN", "SSN" },
+		{ "Gender", "Gender" },
+		{ "Maiden Name", "MaidenName" }
+	};
 	private async Task HandleSubmit()
 	{
 		await Search();
 	}
 
-    private async Task Search()
-    {
-        isLoading = true;
-        searched = false;
+	private async Task Search()
+	{
+		isLoading = true;
+		searched = false;
 
-        IQueryable<Deceased> query = Db.Deceased;
+		IQueryable<Deceased> query = Db.Deceased;
 
-        if (!string.IsNullOrWhiteSpace(searchTerm))
-        {
-            query = selectedField switch
-            {
-                "FirstName" => query.Where(d => d.FirstName != null && d.FirstName.Contains(searchTerm)),
-                "LastName" => query.Where(d => d.LastName != null && d.LastName.Contains(searchTerm)),
-                "City" => query.Where(d => d.City != null && d.City.Contains(searchTerm)),
-                "Director" => query.Where(d => d.Director != null && d.Director.Contains(searchTerm)),
-                "Status" => query.Where(d => d.Status != null && d.Status.Contains(searchTerm)),
-                "SSN" => query.Where(d => d.SSN != null && d.SSN.Contains(searchTerm)),
-                "Gender" => query.Where(d => d.Gender != null && d.Gender.Contains(searchTerm)),
-                "MaidenName" => query.Where(d => d.MaidenName != null && d.MaidenName.Contains(searchTerm)),
-                _ => query
-            };
-        }
+		if (!string.IsNullOrWhiteSpace(searchTerm))
+		{
+			query = selectedField switch
+			{
+				"FirstName" => query.Where(d => d.FirstName != null && d.FirstName.Contains(searchTerm)),
+				"LastName" => query.Where(d => d.LastName != null && d.LastName.Contains(searchTerm)),
+				"City" => query.Where(d => d.City != null && d.City.Contains(searchTerm)),
+				"Director" => query.Where(d => d.Director != null && d.Director.Contains(searchTerm)),
+				"Status" => query.Where(d => d.Status != null && d.Status.Contains(searchTerm)),
+				"SSN" => query.Where(d => d.SSN != null && d.SSN.Contains(searchTerm)),
+				"Gender" => query.Where(d => d.Gender != null && d.Gender.Contains(searchTerm)),
+				"MaidenName" => query.Where(d => d.MaidenName != null && d.MaidenName.Contains(searchTerm)),
+				_ => query
+			};
+		}
 
 		query = query.OrderByDescending(d => d.DoD);
-        results = await query.ToListAsync();
+		results = await query.ToListAsync();
 
-        isLoading = false;
-        searched = true;
-    }
+		isLoading = false;
+		searched = true;
+	}
 
 	private void StartEdit(int clientID)
-    {
-        GlobalState.clientID = clientID;
-        Console.WriteLine($"ClientID: {GlobalState.clientID}");
+	{
+		GlobalState.clientID = clientID;
+		Console.WriteLine($"ClientID: {GlobalState.clientID}");
 		NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
 
-    }
+	}
 
-    private void ShowConfirmDelete(int clientId)
-    {
-        ConfirmingDeleteId = clientId;
-    }
+	private void ShowConfirmDelete(int clientId)
+	{
+		ConfirmingDeleteId = clientId;
+	}
 
-    private void CancelDelete()
-    {
-        ConfirmingDeleteId = null;
-    }
+	private void CancelDelete()
+	{
+		ConfirmingDeleteId = null;
+	}
 
-    private async Task ConfirmDelete(int clientId)
-    {
-        var deceasedToDelete = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
-        if (deceasedToDelete != null)
-        {
-            Db.Deceased.Remove(deceasedToDelete);
-            await Db.SaveChangesAsync();
-            results = await Db.Deceased.ToListAsync();
-        }
+	private async Task ConfirmDelete(int clientId)
+	{
+		var deceasedToDelete = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
+		if (deceasedToDelete != null)
+		{
+			Db.Deceased.Remove(deceasedToDelete);
+			await Db.SaveChangesAsync();
+			results = await Db.Deceased.ToListAsync();
+		}
 
-        ConfirmingDeleteId = null; // Reset after deletion
-    }
+		ConfirmingDeleteId = null; // Reset after deletion
+	}
 }
 <style>
 

@@ -13,10 +13,10 @@
 @using Microsoft.AspNetCore.Components.Web
 
 <ActiveService
-    Director="@edittingDeceased.Director"
-    FirstName="@edittingDeceased.FirstName"
-    MiddleName="@edittingDeceased.MiddleName"
-    LastName="@edittingDeceased.LastName"
+	Director="@edittingDeceased.Director"
+	FirstName="@edittingDeceased.FirstName"
+	MiddleName="@edittingDeceased.MiddleName"
+	LastName="@edittingDeceased.LastName"
 	Title="@edittingDeceased.Title"
 	Status="@edittingDeceased.Status"
 	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
@@ -26,136 +26,136 @@
 <PageTitle>Military Record</PageTitle>
 
 <div class="title-bar">
-    <h1>Military Record</h1>
-    <div class="SubmitRecordButton">
-        <EditForm Model="@editingMilitary" OnValidSubmit="SaveMilitaryRecord">
-            <div class="SaveButtonFirst">
-                <button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
-            </div>
-        </EditForm>
-    </div>
+	<h1>Military Record</h1>
+	<div class="SubmitRecordButton">
+		<EditForm Model="@editingMilitary" OnValidSubmit="SaveMilitaryRecord">
+			<div class="SaveButtonFirst">
+				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+			</div>
+		</EditForm>
+	</div>
 </div>
 
 <!-- Main Military Record Fields -->
 <EditForm Model="@editingMilitary">
-    <div class="ContractForm">
-        <div class="pod-field-container">
-            <div class="FirstCall-group1"><label>Branch</label><InputText class="form-control" @bind-Value="editingMilitary.Branch" /></div>
-            <div class="FirstCall-group1"><label>Service Number</label><InputText class="form-control" @bind-Value="editingMilitary.ServiceNumber" /></div>
-            <div class="FirstCall-group1"><label>Start Date</label><InputDate class="form-control" @bind-Value="editingMilitary.StartDate" /></div>
-            <div class="FirstCall-group1"><label>End Date</label><InputDate class="form-control" @bind-Value="editingMilitary.EndDate" /></div>
-        </div>
-    </div>
+	<div class="ContractForm">
+		<div class="pod-field-container">
+			<div class="FirstCall-group1"><label>Branch</label><InputText class="form-control" @bind-Value="editingMilitary.Branch" /></div>
+			<div class="FirstCall-group1"><label>Service Number</label><InputText class="form-control" @bind-Value="editingMilitary.ServiceNumber" /></div>
+			<div class="FirstCall-group1"><label>Start Date</label><InputDate class="form-control" @bind-Value="editingMilitary.StartDate" /></div>
+			<div class="FirstCall-group1"><label>End Date</label><InputDate class="form-control" @bind-Value="editingMilitary.EndDate" /></div>
+		</div>
+	</div>
 </EditForm>
 
 <!-- Tabs Navigation -->
 <div class="TabForm">
-    <div class="tab-buttons">
-        <button @onclick="@(() => SelectTab("Stints"))" class="tab-button @(selectedTab == "Stints" ? "active" : "")">Military Stints</button>
-        <button @onclick="@(() => SelectTab("Wars"))" class="tab-button @(selectedTab == "Wars" ? "active" : "")">Wars Served</button>
-        <button @onclick="@(() => SelectTab("Flags"))" class="tab-button @(selectedTab == "Flags" ? "active" : "")">Flag Application</button>
-    </div>
+	<div class="tab-buttons">
+		<button @onclick="@(() => SelectTab("Stints"))" class="tab-button @(selectedTab == "Stints" ? "active" : "")">Military Stints</button>
+		<button @onclick="@(() => SelectTab("Wars"))" class="tab-button @(selectedTab == "Wars" ? "active" : "")">Wars Served</button>
+		<button @onclick="@(() => SelectTab("Flags"))" class="tab-button @(selectedTab == "Flags" ? "active" : "")">Flag Application</button>
+	</div>
 </div>
 
 <!-- Tab Content -->
 <div class="Tabinfoform">
 <div class="FirstCall-group">
-    <div class="FirstCall-group1">
-        @if (selectedTab == "Stints")
-        {
-        <h5>Military Stints</h5>
-            <div class="tab-content">
-                <div class="FirstCall-group1">
-                    <label>Description</label>
-                    <InputText class="fcall" @bind-Value="editingStint.Description" />
-                </div>
-                <div class="FirstCall-group1">
-                    <label>Start Date</label>
-                    <InputDate class="fcall" @bind-Value="editingStint.StartDate" />
-                </div>
-                <div class="FirstCall-group1">
-                    <label>End Date</label>
-                    <InputDate class="fcall" @bind-Value="editingStint.EndDate" />
-                </div>
-            </div>
-        }
-        else if (selectedTab == "Wars")
-        {
-            <h5>Wars Served</h5>
-            <div class="tab-content">
-                <div class="FirstCall-group1">
-                    <label>War Name</label>
-                    <InputText class="fcall" @bind-Value="editingWar.WarName" />
-                </div>
-                <div class="FirstCall-group1">
-                    <label>Description</label>
-                    <InputText class="fcall" @bind-Value="editingWar.Description" />
-                </div>
-            </div>
-        }
-        else if (selectedTab == "Flags")
-        {
-        <h5>Flag Application</h5>
-        <div class="tab-content">
-            <div class="FirstCall-group1">
-                <label>Applicant Name</label>
-                <InputText class="fcall" @bind-Value="editingFlag.ApplicantName" />
-            </div>
-            <div class="FirstCall-group1">
-                <label>Relationship</label>
-                <InputText class="fcall" @bind-Value="editingFlag.RelationshipToDeceased" />
-            </div>
-            <div class="FirstCall-group1">
-                <label>Flag Type</label>
-                <InputText class="fcall" @bind-Value="editingFlag.FlagType" />
-            </div>
-            <div class="FirstCall-group1">
-                <label>Application Date</label>
-                <InputDate class="fcall" @bind-Value="editingFlag.ApplicationDate" />
-            </div>
-        </div>
-        }
-    </div>
+	<div class="FirstCall-group1">
+		@if (selectedTab == "Stints")
+		{
+		<h5>Military Stints</h5>
+			<div class="tab-content">
+				<div class="FirstCall-group1">
+					<label>Description</label>
+					<InputText class="fcall" @bind-Value="editingStint.Description" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Start Date</label>
+					<InputDate class="fcall" @bind-Value="editingStint.StartDate" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>End Date</label>
+					<InputDate class="fcall" @bind-Value="editingStint.EndDate" />
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Wars")
+		{
+			<h5>Wars Served</h5>
+			<div class="tab-content">
+				<div class="FirstCall-group1">
+					<label>War Name</label>
+					<InputText class="fcall" @bind-Value="editingWar.WarName" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Description</label>
+					<InputText class="fcall" @bind-Value="editingWar.Description" />
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Flags")
+		{
+		<h5>Flag Application</h5>
+		<div class="tab-content">
+			<div class="FirstCall-group1">
+				<label>Applicant Name</label>
+				<InputText class="fcall" @bind-Value="editingFlag.ApplicantName" />
+			</div>
+			<div class="FirstCall-group1">
+				<label>Relationship</label>
+				<InputText class="fcall" @bind-Value="editingFlag.RelationshipToDeceased" />
+			</div>
+			<div class="FirstCall-group1">
+				<label>Flag Type</label>
+				<InputText class="fcall" @bind-Value="editingFlag.FlagType" />
+			</div>
+			<div class="FirstCall-group1">
+				<label>Application Date</label>
+				<InputDate class="fcall" @bind-Value="editingFlag.ApplicationDate" />
+			</div>
+		</div>
+		}
+	</div>
 </div>
 </div>
 
 @code {
-    private Military editingMilitary = new();
-    private MilitaryStint editingStint = new();
-    private WarsServed editingWar = new();
-    private FlagApplication editingFlag = new();
-    private List<Deceased> deceasedList = new List<Deceased>();
-    private Deceased currentDeceased = new Deceased();
+	private Military editingMilitary = new();
+	private MilitaryStint editingStint = new();
+	private WarsServed editingWar = new();
+	private FlagApplication editingFlag = new();
+	private List<Deceased> deceasedList = new List<Deceased>();
+	private Deceased currentDeceased = new Deceased();
 	private Deceased edittingDeceased = new Deceased();
-    private string selectedTab = "Stints";
+	private string selectedTab = "Stints";
 
 
-    protected override async Task OnInitializedAsync()
-    {
-        var uri = NavigationManager.Uri;
-        var query = new Uri(uri).Query;
-        var queryParameters = QueryHelpers.ParseQuery(query);
+	protected override async Task OnInitializedAsync()
+	{
+		var uri = NavigationManager.Uri;
+		var query = new Uri(uri).Query;
+		var queryParameters = QueryHelpers.ParseQuery(query);
 
-        var militaryList = await Db.Military.ToListAsync();
+		var militaryList = await Db.Military.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-        if (militaryList.Any())
-        {
-            editingMilitary = militaryList.First(); // Or adjust this to load by ID if needed
-        }
-    }
+		if (militaryList.Any())
+		{
+			editingMilitary = militaryList.First(); // Or adjust this to load by ID if needed
+		}
+	}
 	private Deceased CloneDeceased(Deceased original)
-    {
-        return new Deceased
-        {
-            ClientID = original.ClientID,
-            Director = original.Director,
+	{
+		return new Deceased
+		{
+			ClientID = original.ClientID,
+			Director = original.Director,
 			FirstName = original.FirstName,
 			LastName = original.LastName,
 			MiddleName = original.MiddleName,
 			Title = original.Title,
 			Suffix = original.Suffix,
-            Status = original.Status,
+			Status = original.Status,
 			StreetAddress = original.StreetAddress,
 			City = original.City,
 			State = original.State,
@@ -178,125 +178,125 @@
 			InformantEmail = original.InformantEmail,
 			InfoNotified = original.InfoNotified,
 			Notes = original.Notes,
-            Image = original.Image,
+			Image = original.Image,
 			InformantRelation = original.InformantRelation
-        };
+		};
 	}
 
-    private async Task SaveMilitaryRecord()
-    {
-        var entity = await Db.Military.FirstOrDefaultAsync(m => m.Id == editingMilitary.Id);
-        if (entity is not null)
-        {
-            entity.Branch = editingMilitary.Branch;
-            entity.ServiceNumber = editingMilitary.ServiceNumber;
-            entity.StartDate = editingMilitary.StartDate;
-            entity.EndDate = editingMilitary.EndDate;
+	private async Task SaveMilitaryRecord()
+	{
+		var entity = await Db.Military.FirstOrDefaultAsync(m => m.Id == editingMilitary.Id);
+		if (entity is not null)
+		{
+			entity.Branch = editingMilitary.Branch;
+			entity.ServiceNumber = editingMilitary.ServiceNumber;
+			entity.StartDate = editingMilitary.StartDate;
+			entity.EndDate = editingMilitary.EndDate;
 
-            await Db.SaveChangesAsync();
-        }
-    }
+			await Db.SaveChangesAsync();
+		}
+	}
 
-    private void SelectTab(string tabName)
-    {
-        selectedTab = tabName;
-    }
+	private void SelectTab(string tabName)
+	{
+		selectedTab = tabName;
+	}
 }
 
 <style>
 .tab-buttons {
-    display: flex;
-    gap: 10px;
-    margin: 5px .25rem 5px .25rem;
+	display: flex;
+	gap: 10px;
+	margin: 5px .25rem 5px .25rem;
 }
 
 .tab-button {
-    background-color: #e0e0e0;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px 5px 0 0;
-    font-weight: bold;
-    cursor: pointer;
+	background-color: #e0e0e0;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px 5px 0 0;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .tab-button.active {
-    background-color: #936091;
-    color: white;
+	background-color: #936091;
+	color: white;
 }
 
 .TabForm {
-    display: inline-block;
-    max-width: 100%;
-    background-color: rgb(187, 188, 188);
-    border-radius: 5px;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: 1; /* optional, just in case */
+	display: inline-block;
+	max-width: 100%;
+	background-color: rgb(187, 188, 188);
+	border-radius: 5px;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 1; /* optional, just in case */
 	margin-top: .5rem;
 }
 
 .Tabinfoform {
-    position: relative;
-    top: 2.5rem; /* pulls form down over tab bar */
-    border-radius: 6px;
-    padding-left: 0.5rem;
+	position: relative;
+	top: 2.5rem; /* pulls form down over tab bar */
+	border-radius: 6px;
+	padding-left: 0.5rem;
 	margin-top: 1rem;
-    padding-top: 1rem; /* adds space above the heading */
-    background-color: rgb(187, 188, 188);
+	padding-top: 1rem; /* adds space above the heading */
+	background-color: rgb(187, 188, 188);
 }
 
 .tab-content {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .FirstCall-group1 {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 label {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .form-control { /* fields under place of death but above the tabs */
-    width: 100%;
-    font-size: 1em;
-    border-radius: 4px;
+	width: 100%;
+	font-size: 1em;
+	border-radius: 4px;
 }
 
 .title-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .ContractForm {
-    border-radius: 6px;
-    padding-left: .25rem;
-    padding-top: .05rem;
-    background-color: rgb(187, 188, 188);
+	border-radius: 6px;
+	padding-left: .25rem;
+	padding-top: .05rem;
+	background-color: rgb(187, 188, 188);
 }
 
 .FirstCall-group {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .FirstCall-group1 {
-    display: flex;
-    flex-direction: column;
-    margin-right: .5rem;
-    margin-bottom: .5rem;
+	display: flex;
+	flex-direction: column;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
 	margin-top: .25rem;
 	box-sizing: border-box;
 }
 
 .fcall {
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 0.2rem;
-    padding: .5rem;
-    box-sizing: border-box;
-    max-height: 36px;
+	border: 2px solid rgb(255, 255, 255);
+	border-radius: 0.2rem;
+	padding: .5rem;
+	box-sizing: border-box;
+	max-height: 36px;
 }
 
 .pod-field-container {
@@ -306,84 +306,84 @@ label {
 }
 
 .numcall1 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 50px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 50px;
 }
 
 .numcall2 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 45px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 45px;
 }
 
 .numcall3 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 55px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 55px;
 }
 
 .zipcall {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 100px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 100px;
 }
 
 .genderlabel {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
 }
 
 .gender-container {
-    margin-bottom: 15px;
-    padding-right: 1rem;
+	margin-bottom: 15px;
+	padding-right: 1rem;
 }
 
 .gender-group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .suffix-container, .IState-container {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 1rem;
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
 }
 
 .suffix-group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .notes-field {
-    min-height: 6rem;
-    padding-right: 17rem;
+	min-height: 6rem;
+	padding-right: 17rem;
 }
 
 .ShowImage {
-    margin-left: auto;
+	margin-left: auto;
 }
 
 .FirstCallTop-group {
-    display: flex;
-    padding-right: 1rem;
+	display: flex;
+	padding-right: 1rem;
 }
 
 .ImageUpload {
-    max-width: 14rem;
+	max-width: 14rem;
 }
 </style>
