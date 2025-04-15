@@ -12,9 +12,17 @@
 
 <div class="title-bar">
     <h1>Modifying Record</h1>
-	<button class="btn btn-secondary" @onclick="() => GoToBuyers(currentDeceased.ClientID ?? -1)">
-		Modify Buyers
-	</button>
+	<!-- Link tab -->
+    <!-- <div class="homebuttons">
+		<button class="btn" @onclick="() => NavigateToContract()">Contract</button>
+		<button class="btn" @onclick="() => NavigateToMilitary()">Military</button>
+		<button class="btn" @onclick="() => NavigateToPlaceOfDeath()">Place of Death</button>
+    </div>
+    <div class="homebuttons">
+		<button class="btn" onclick="window.location.href='ModifySurvivor'">Survivor</button>
+        <button class="btn" onclick="window.location.href='ModifyObituary'">Obituary</button>
+    </div> -->
+
 	<div class="SubmitRecordButton">
 		<EditForm id="placeholderformid" Model="@edittingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
 		<div>
@@ -346,7 +354,6 @@
 		</div>
 	</EditForm>
 </div>
-
 @code {
     private List<Deceased> Deceased = new List<Deceased>();
     private Deceased currentDeceased = new Deceased();
@@ -363,6 +370,9 @@
 	private string? currentRecordString;
 	private bool preVis = true, nexVis = true;
 	private string? placeholder { get; set; }
+
+	
+
 
 	protected override async Task OnInitializedAsync()
     {
@@ -557,6 +567,40 @@
         }
         await Context.SaveChangesAsync();
 	}
+
+	<!-- Page Navigation -->
+	private void NavigateToContract()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Contract?currentRecordString={edittingDeceased.ClientID}");
+	}
+
+	private void NavigateToMilitary()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Military?currentRecordString={edittingDeceased.ClientID}");
+	}
+
+	private void NavigateToPlaceOfDeath()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/PlaceOfDeath?currentRecordString={edittingDeceased.ClientID}");
+	}
+	private void NavigateToObituary()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Obituary?currentRecordString={edittingDeceased.ClientID}");
+	}
+	private void NavigateToEmbalmer()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Embalmer?currentRecordString={edittingDeceased.ClientID}");
+	}
+	private void NavigateToSuvivor()
+	{
+		if (edittingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Suvivor?currentRecordString={edittingDeceased.ClientID}");
+	}
 }
 
 <style>
@@ -695,4 +739,27 @@
 	.ImageUpload {
 		max-width: 14rem;
 	}
+	.homebuttons {
+        display: flex;
+        justify-content: space-around;
+        white-space: nowrap;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        gap: 1rem;
+        padding-top: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        border-color: #000000;
+        background-color: #c7a5e9;
+        height: 60px;
+        width: 150px;
+        z-index: 1000;
+    }
 </style>
