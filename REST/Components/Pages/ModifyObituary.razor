@@ -22,69 +22,71 @@
     <EditForm Model="@editingObituary">
         <h5>Obituary Details</h5>
 
-        <div class="Form-group">
-            <label>Distribution Format</label>
-            <InputText class="form-control" @bind-Value="editingObituary.DistributionFormat" />
-        </div>
+        <div class="Military-flex">
+            <div class="Form-group">
+                <label>Distribution Format</label>
+                <InputText class="form-control" @bind-Value="editingObituary.DistributionFormat" />
+            </div>
 
-        <div class="Form-group">
-            <label>Media</label>
-            <InputText class="form-control" @bind-Value="editingObituary.Media" />
-        </div>
+            <div class="Form-group">
+                <label>Media</label>
+                <InputText class="form-control" @bind-Value="editingObituary.Media" />
+            </div>
 
-        <div class="Form-group">
-            <label>Date Sent</label>
-            <InputDate class="form-control" @bind-Value="editingObituary.DateSent" />
-        </div>
+            <div class="Form-group">
+                <label>Date Sent</label>
+                <InputDate class="form-control" @bind-Value="editingObituary.DateSent" />
+            </div>
 
-        <div class="Form-group">
-            <label>Primary</label>
-            <InputCheckbox class="form-check-input" @bind-Value="editingObituary.Primary" />
-        </div>
+            <div class="Form-group">
+                <label>Primary</label>
+                <InputCheckbox class="form-check-input" @bind-Value="editingObituary.Primary" />
+            </div>
 
-        <div class="Form-group">
-            <label>Include Primary Photo</label>
-            <InputCheckbox class="form-check-input" @bind-Value="editingObituary.IncludePrimaryPhoto" />
-        </div>
+            <div class="Form-group">
+                <label>Include Primary Photo</label>
+                <InputCheckbox class="form-check-input" @bind-Value="editingObituary.IncludePrimaryPhoto" />
+            </div>
 
-        <div class="Form-group">
-            <label>Show Survivor Addresses</label>
-            <InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorAddresses" />
-        </div>
+            <div class="Form-group">
+                <label>Show Survivor Addresses</label>
+                <InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorAddresses" />
+            </div>
 
-        <div class="Form-group">
-            <label>Show Survivor Relationships</label>
-            <InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorRelationships" />
-        </div>
+            <div class="Form-group">
+                <label>Show Survivor Relationships</label>
+                <InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorRelationships" />
+            </div>
 
-        <div class="Form-group">
-            <label>Relationship Count</label>
-            <InputText class="form-control" @bind-Value="editingObituary.RelationshipCount" />
-        </div>
+            <div class="Form-group">
+                <label>Relationship Count</label>
+                <InputText class="form-control" @bind-Value="editingObituary.RelationshipCount" />
+            </div>
 
-        <div class="Form-group">
-            <label>Word Count</label>
-            <InputText class="form-control" @bind-Value="editingObituary.WordCount" />
-        </div>
+            <div class="Form-group">
+                <label>Word Count</label>
+                <InputText class="form-control" @bind-Value="editingObituary.WordCount" />
+            </div>
 
-        <div class="Form-group">
-            <label>Obituary Notes</label>
-            <InputTextArea class="form-control" @bind-Value="editingObituary.ObitNotes" />
-        </div>
+            <div class="Form-group">
+                <label>Obituary Notes</label>
+                <InputTextArea class="form-control" @bind-Value="editingObituary.ObitNotes" />
+            </div>
 
-        <div class="Form-group">
-            <label>Last Preneed ID</label>
-            <InputText class="form-control" @bind-Value="editingObituary.LastPreneedId" />
-        </div>
+            <div class="Form-group">
+                <label>Last Preneed ID</label>
+                <InputText class="form-control" @bind-Value="editingObituary.LastPreneedId" />
+            </div>
 
-        <div class="Form-group">
-            <label>Last Atneed ID</label>
-            <InputText class="form-control" @bind-Value="editingObituary.LastAtneedId" />
-        </div>
+            <div class="Form-group">
+                <label>Last Atneed ID</label>
+                <InputText class="form-control" @bind-Value="editingObituary.LastAtneedId" />
+            </div>
 
-        <div class="Form-group">
-            <label>Obituary</label>
-            <InputTextArea class="form-control" @bind-Value="editingObituary.Obituary" />
+            <div class="Form-group">
+                <label>Obituary</label>
+                <InputTextArea class="form-control" @bind-Value="editingObituary.Obituary" />
+            </div>
         </div>
     </EditForm>
 </div>
@@ -167,12 +169,18 @@
 }
 <style>
 .MilitaryForm {
-    max-width: 100%;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f7fc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+	padding-left: .25rem;
+    padding-right: .25rem;
+	padding-top: .05rem;
+	margin: .5rem auto;
+	background-color: rgb(187, 188, 188);
+}
+
+.Military-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 h5 {

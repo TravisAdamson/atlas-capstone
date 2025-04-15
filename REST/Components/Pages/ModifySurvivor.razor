@@ -20,61 +20,65 @@
 
 <div class="SurvivorForm">
     <EditForm Model="@editingSurvivor">
-        <h5>Survivor Information</h5>
+            <h5>Survivor Information</h5>
 
-        <div class="Form-group">
-            <label>Survivor Relation</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.SurvivorRelation" />
+        <div class="FirstCall-group">
+            <div class="Form-group">
+                <label>Survivor Relation</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.SurvivorRelation" />
+            </div>
+
+            <div class="Form-group">
+                <label>Name</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.Name" />
+            </div>
+
+            <div class="Form-group">
+                <label>Address</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.Address" />
+            </div>
+
+            <div class="Form-group">
+                <label>Children Count</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.GreatGrandChildrenCount" />
+            </div>
+
+            <div class="Form-group">
+                <label>Grandchildren Count</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.GrandChildrenCount" />
+            </div>
+
+            <div class="Form-group">
+                <label>Great Grandchildren Count</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGrandChildrenCount" />
+            </div>
+
+            <div class="Form-group">
+                <label>Great Great Grandchildren Count</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGreatGrandChildrenCount" />
+            </div>
+
+            <div class="Form-group">
+                <label>Great Great Great Grandchildren Count</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.ChildrenCount" />
+            </div>
         </div>
 
-        <div class="Form-group">
-            <label>Name</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.Name" />
-        </div>
+        <div class="-group">
+            <div class="Form-group">
+                <label>Phone Number</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.PhoneNumber" />
+            </div>
 
-        <div class="Form-group">
-            <label>Address</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.Address" />
-        </div>
+            <div class="Form-group">
+                <label>Relationship</label>
+                <InputText class="form-control" @bind-Value="editingSurvivor.Relationship" />
+            </div>
 
-        <div class="Form-group">
-            <label>Great Grandchildren Count</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.GreatGrandChildrenCount" />
-        </div>
-
-        <div class="Form-group">
-            <label>Great Great Grandchildren Count</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGrandChildrenCount" />
-        </div>
-
-        <div class="Form-group">
-            <label>Great Great Great Grandchildren Count</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGreatGrandChildrenCount" />
-        </div>
-
-        <div class="Form-group">
-            <label>Children Count</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.ChildrenCount" />
-        </div>
-
-        <div class="Form-group">
-            <label>Grandchildren Count</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.GrandChildrenCount" />
-        </div>
-
-        <div class="Form-group">
-            <label>Phone Number</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.PhoneNumber" />
-        </div>
-
-        <div class="Form-group">
-            <label>Relationship</label>
-            <InputText class="form-control" @bind-Value="editingSurvivor.Relationship" />
-        </div>
-
-        <div class="Form-group">
-            <label>Is Living</label>
-            <InputCheckbox class="form-control" @bind-Value="editingSurvivor.IsLiving" />
+            <div class="Form-group">
+                <label>Is Living</label>
+                <InputCheckbox class="form-control" @bind-Value="editingSurvivor.IsLiving" />
+            </div>
         </div>
     </EditForm>
 </div>
@@ -157,12 +161,24 @@
 <style>
 /* Shared Survivor Form Styles */
 .SurvivorForm {
-    max-width: 100%;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f7fc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+	padding-left: .25rem;
+    padding-right: .25rem;
+	padding-top: .05rem;
+	margin: .5rem auto;
+	background-color: rgb(187, 188, 188);
+}
+
+.Survivor-group {
+		display: flex;
+		flex-wrap: wrap;
+        gap: 1rem;
+	}
+
+.Form-group {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: .5rem;
 }
 
 h5 {
@@ -171,7 +187,7 @@ h5 {
 }
 
 .Form-group {
-    margin-bottom: 15px;
+    
 }
 
 label {
