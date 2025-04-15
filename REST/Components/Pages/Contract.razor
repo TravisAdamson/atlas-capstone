@@ -66,22 +66,24 @@
 
 <!-- Tab Content -->
 <div class="Tabinfoform">
+<div class="FirstCall-group">
+    <div class="FirstCall-group1">
     @if (selectedTab == "Buyers")
     {
         <h5>Buyers</h5>
         <div class="FirstCall-group">
             <label>Name</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingBuyer.Name" />
+            <InputText class="fcall" @bind-Value="editingBuyer.Name" />
             <label>Address</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingBuyer.Address" />
+            <InputText class="fcall" @bind-Value="editingBuyer.Address" />
             <label>Phone Number</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingBuyer.PhoneNumber" />
+            <InputText class="fcall" @bind-Value="editingBuyer.PhoneNumber" />
             <label>Relationship</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingBuyer.Relationship" />
+            <InputText class="fcall" @bind-Value="editingBuyer.Relationship" />
             <label>Is Primary Buyer</label>
-            <InputCheckbox class="FirstCall-group1" @bind-Value="editingBuyer.IsPrimaryBuyer" />
+            <InputCheckbox class="fcall" @bind-Value="editingBuyer.IsPrimaryBuyer" />
             <label>Send Bill</label>
-            <InputCheckbox class="FirstCall-group1" @bind-Value="editingBuyer.SendBill" />
+            <InputCheckbox class="fcall" @bind-Value="editingBuyer.SendBill" />
         </div>
     }
     else if (selectedTab == "Products")
@@ -89,15 +91,17 @@
         <h5>Products</h5>
         <div class="FirstCall-group">
             <label>Category</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingProduct.Category" />
+            <InputText class="fcall" @bind-Value="editingProduct.Category" />
             <label>Item</label>
-            <InputText class="FirstCall-group1" @bind-Value="editingProduct.Item" />
+            <InputText class="fcall" @bind-Value="editingProduct.Item" />
             <label>Tax</label>
-            <InputNumber class="FirstCall-group1" @bind-Value="editingProduct.Tax" />
+            <InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
             <label>Price</label>
-            <InputNumber class="FirstCall-group1" @bind-Value="editingProduct.Price" />
+            <InputNumber class="fcall" @bind-Value="editingProduct.Price" />
         </div>
     }
+    </div>
+</div> 
 </div>
 
 @code {
