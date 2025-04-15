@@ -6,14 +6,14 @@
 		<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
 			<span class="nav-icon bi bi-house-door-fill-nav-menu" aria-hidden="true"></span>
 			<span class="nav-text">Home</span>
-        </NavLink>
-    </div>
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="First Call">
-            <span class="nav-icon bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
-            <span class="nav-text">First Call</span>
-        </NavLink>
-    </div>
+		</NavLink>
+	</div>
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="First Call">
+			<span class="nav-icon bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
+			<span class="nav-text">First Call</span>
+		</NavLink>
+	</div>
 	<div class="nav-item px-3 @(isModifiedOpen ? "open" : "")" href="Search Records">
 		<button class="nav-link btn" style="font-size: 14.4px;"
 				@onclick="ToggleModified">
@@ -48,19 +48,19 @@
 			</ul>
 		}
 	</div>
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="Search Records">
-            <span class="nav-icon bi bi-search-fill-nav-menu" aria-hidden="true"></span>
-            <span class="nav-text">Search Records</span>
-        </NavLink>
-    </div>
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="Search Records">
+			<span class="nav-icon bi bi-search-fill-nav-menu" aria-hidden="true"></span>
+			<span class="nav-text">Search Records</span>
+		</NavLink>
+	</div>
 </div>
 
 @code {
-    private bool isModifiedOpen;
-    private void ToggleModified()
+	private bool isModifiedOpen;
+	private void ToggleModified()
 
-    {
-        isModifiedOpen = !isModifiedOpen;
-    }
+	{
+		isModifiedOpen = !isModifiedOpen;
+	}
 }

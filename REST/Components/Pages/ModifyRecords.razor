@@ -12,17 +12,17 @@
 <PageTitle>Modify Records</PageTitle>
 
 <div class="title-bar">
-    <h1>Modifying Record</h1>
+	<h1>Modifying Record</h1>
 	<!-- Link tab -->
-    <!-- <div class="homebuttons">
+	<!-- <div class="homebuttons">
 		<button class="btn" @onclick="() => NavigateToContract()">Contract</button>
 		<button class="btn" @onclick="() => NavigateToMilitary()">Military</button>
 		<button class="btn" @onclick="() => NavigateToPlaceOfDeath()">Place of Death</button>
-    </div>
-    <div class="homebuttons">
+	</div>
+	<div class="homebuttons">
 		<button class="btn" onclick="window.location.href='ModifySurvivor'">Survivor</button>
-        <button class="btn" onclick="window.location.href='ModifyObituary'">Obituary</button>
-    </div> -->
+		<button class="btn" onclick="window.location.href='ModifyObituary'">Obituary</button>
+	</div> -->
 
 	<div class="SubmitRecordButton">
 		<EditForm id="placeholderformid" Model="@edittingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
@@ -356,18 +356,18 @@
 	</EditForm>
 </div>
 @code {
-    private List<Deceased> Deceased = new List<Deceased>();
-    private Deceased currentDeceased = new Deceased();
+	private List<Deceased> Deceased = new List<Deceased>();
+	private Deceased currentDeceased = new Deceased();
 	private Deceased edittingDeceased = new Deceased();
 
 	private string? PhonePart1 { get; set; }
-    private string? PhonePart2 { get; set; }
-    private string? PhonePart3 { get; set; }
+	private string? PhonePart2 { get; set; }
+	private string? PhonePart3 { get; set; }
 
-    private string? SSNPart1 { get; set; }
-    private string? SSNPart2 { get; set; }
-    private string? SSNPart3 { get; set; }
-    private int currentRecordIndex = 0;
+	private string? SSNPart1 { get; set; }
+	private string? SSNPart2 { get; set; }
+	private string? SSNPart3 { get; set; }
+	private int currentRecordIndex = 0;
 	private string? currentRecordString;
 	private string? placeholder { get; set; }
 
@@ -375,15 +375,15 @@
 
 
 	protected override async Task OnInitializedAsync()
-    {
+	{
 
 		var uri = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
-        var queryParameters = QueryHelpers.ParseQuery(query);
+		var queryParameters = QueryHelpers.ParseQuery(query);
 
 		Deceased = await Context.Deceased.ToListAsync();
-        if (Deceased.Any())
-        {
+		if (Deceased.Any())
+		{
 			if (queryParameters.TryGetValue("currentRecordString", out var value))
 			{
 				currentRecordString = value;
@@ -398,8 +398,8 @@
 			else
 				edittingDeceased = CloneDeceased(Deceased.Last());
 			LoadDigits();
-        }
-    }
+		}
+	}
 
 	private void GoToBuyers(int clientID)
 	{
@@ -408,17 +408,17 @@
 
 
 	private Deceased CloneDeceased(Deceased original)
-    {
-        return new Deceased
-        {
-            ClientID = original.ClientID,
-            Director = original.Director,
+	{
+		return new Deceased
+		{
+			ClientID = original.ClientID,
+			Director = original.Director,
 			FirstName = original.FirstName,
 			LastName = original.LastName,
 			MiddleName = original.MiddleName,
 			Title = original.Title,
 			Suffix = original.Suffix,
-            Status = original.Status,
+			Status = original.Status,
 			StreetAddress = original.StreetAddress,
 			City = original.City,
 			State = original.State,
@@ -441,16 +441,16 @@
 			InformantEmail = original.InformantEmail,
 			InfoNotified = original.InfoNotified,
 			Notes = original.Notes,
-            Image = original.Image,
+			Image = original.Image,
 			InformantRelation = original.InformantRelation
-        };
-    }
+		};
+	}
 
-    private int GetNextClientID()
-    {
-        var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
-        return lastDeceased?.ClientID + 1 ?? 1;
-    }
+	private int GetNextClientID()
+	{
+		var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
+		return lastDeceased?.ClientID + 1 ?? 1;
+	}
 
 	private void LoadDigits()
 	{
@@ -501,42 +501,42 @@
 	}
 
 	private async Task SaveRecord()
-    {
+	{
 		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == edittingDeceased.ClientID);
 
 		if (string.IsNullOrEmpty(edittingDeceased.FirstName) || string.IsNullOrEmpty(edittingDeceased.LastName))
-        {
-            Console.WriteLine("First Name and Last Name are required.");
-            return;
-        }
+		{
+			Console.WriteLine("First Name and Last Name are required.");
+			return;
+		}
 
-        // Format SSN
-        if (string.IsNullOrEmpty(SSNPart1) || string.IsNullOrEmpty(SSNPart2) || string.IsNullOrEmpty(SSNPart3))
-        {
-            Console.WriteLine("SSN is required.");
-        }
+		// Format SSN
+		if (string.IsNullOrEmpty(SSNPart1) || string.IsNullOrEmpty(SSNPart2) || string.IsNullOrEmpty(SSNPart3))
+		{
+			Console.WriteLine("SSN is required.");
+		}
 		else
 			edittingDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
 
-        // Format Phone Number
-        if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
-        {
-            Console.WriteLine("Phone number is required.");
-        }
+		// Format Phone Number
+		if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
+		{
+			Console.WriteLine("Phone number is required.");
+		}
 		else
 			edittingDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
 
-        // Save
+		// Save
 		if (entity is not null)
 		{
-            entity.ClientID = edittingDeceased.ClientID;
-            entity.Director = edittingDeceased.Director;
+			entity.ClientID = edittingDeceased.ClientID;
+			entity.Director = edittingDeceased.Director;
 			entity.FirstName = edittingDeceased.FirstName;
 			entity.LastName = edittingDeceased.LastName;
 			entity.MiddleName = edittingDeceased.MiddleName;
 			entity.Title = edittingDeceased.Title;
 			entity.Suffix = edittingDeceased.Suffix;
-            entity.Status = edittingDeceased.Status;
+			entity.Status = edittingDeceased.Status;
 			entity.StreetAddress = edittingDeceased.StreetAddress;
 			entity.City = edittingDeceased.City;
 			entity.State = edittingDeceased.State;
@@ -559,10 +559,10 @@
 			entity.InformantEmail = edittingDeceased.InformantEmail;
 			entity.InfoNotified = edittingDeceased.InfoNotified;
 			entity.Notes = edittingDeceased.Notes;
-            entity.Image = edittingDeceased.Image;
+			entity.Image = edittingDeceased.Image;
 			entity.InformantRelation = edittingDeceased.InformantRelation;
-        }
-        await Context.SaveChangesAsync();
+		}
+		await Context.SaveChangesAsync();
 	}
 
 	<!-- Page Navigation -->
@@ -737,21 +737,21 @@
 		max-width: 14rem;
 	}
 	.homebuttons {
-        display: flex;
-        justify-content: space-around;
-        white-space: nowrap;
-        margin: 1rem;
-        padding: 1rem;
-        border-radius: 8px;
-        gap: 1rem;
-        padding-top: 3rem;
-        flex-wrap: wrap;
-    }
+		display: flex;
+		justify-content: space-around;
+		white-space: nowrap;
+		margin: 1rem;
+		padding: 1rem;
+		border-radius: 8px;
+		gap: 1rem;
+		padding-top: 3rem;
+		flex-wrap: wrap;
+	}
 
-    .btn {
-        border: 1px solid transparent;
+	.btn {
+		border: 1px solid transparent;
 		padding: .375rem .75rem;
 		font-size: 1rem;
 		border-radius: .25rem;
-    }
+	}
 </style>

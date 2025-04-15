@@ -3,7 +3,6 @@ namespace RESTDB.Data;
 using Microsoft.EntityFrameworkCore;
 using RESTDB.Models;
 
-
 public class ApplicationDbContext : DbContext
 {
 	static readonly string connectionString = "Server=localhost; User ID=travis; Password=travis; Database=restdb";
