@@ -55,7 +55,7 @@ else if (results != null && results.Any())
                     <td>@item.DoD?.ToString("MM-dd-yyyy")</td>
 					               <td>
                     <button type="button" @onclick="() => StartEdit(item.ClientID ?? -1)">Edit</button>
-
+					<span class="Spacing"></span>
                     @if (ConfirmingDeleteId == @item.ClientID)
                     {
                         <div class="mt-1">
@@ -171,3 +171,10 @@ else if (searched)
         ConfirmingDeleteId = null; // Reset after deletion
     }
 }
+
+<style>
+
+.Spacing {
+	padding: .25rem;
+}
+</style>
