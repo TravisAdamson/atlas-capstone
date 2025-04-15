@@ -53,35 +53,29 @@ else if (results != null && results.Any())
                     <td>@item.Director</td>
                     <td>@item.City</td>
                     <td>@item.DoD?.ToString("MM-dd-yyyy")</td>
-					               <td>
-                    <button type="button" @onclick="() => StartEdit(item.ClientID ?? -1)">Edit</button>
-					<span class="Spacing"></span>
-                    @if (ConfirmingDeleteId == @item.ClientID)
-                    {
-                        <div class="mt-1">
-                            <button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ClientID ?? -1)">
-                                Confirm Delete
-                            </button>
-                            <button type="button" class="btn btn-success" @onclick="CancelDelete">
-                                Cancel
-                            </button>
-                        </div>
-                    }
-                    else
-                    {
-                        <button type="button" @onclick="() => ShowConfirmDelete(item.ClientID ?? -1)">
-                            Delete
-                        </button>
-                    }
-                </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+					<td>
+						<button type="button" @onclick="() => StartEdit(item.ClientID ?? -1)">Edit</button>
+						<span class="Spacing"></span>
+						@if (ConfirmingDeleteId == @item.ClientID)
+						{
+							<div class="mt-1">
+								<button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ClientID ?? -1)">Confirm Delete</button>
+								<button type="button" class="btn btn-success" @onclick="CancelDelete">Cancel</button>
+							</div>
+						}
+						else
+						{
+							<button type="button" @onclick="() => ShowConfirmDelete(item.ClientID ?? -1)">Delete</button>
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 }
 else if (searched)
 {
-    <p class="mt-3"><em>No results found.</em></p>
+	<p class="mt-3"><em>No results found.</em></p>
 }
 
 @code {
@@ -91,8 +85,6 @@ else if (searched)
     private bool isLoading = false;
     private bool searched = false;
 	private int? ConfirmingDeleteId = null;
-
-
     private Dictionary<string, string> searchFields = new()
     {
         { "First Name", "FirstName" },
@@ -104,10 +96,9 @@ else if (searched)
         { "Gender", "Gender" },
         { "Maiden Name", "MaidenName" }
     };
-
 	private async Task HandleSubmit()
 	{
-    	await Search();
+		await Search();
 	}
 
     private async Task Search()
@@ -133,7 +124,7 @@ else if (searched)
             };
         }
 
-    	query = query.OrderByDescending(d => d.DoD);
+		query = query.OrderByDescending(d => d.DoD);
         results = await query.ToListAsync();
 
         isLoading = false;
@@ -171,7 +162,6 @@ else if (searched)
         ConfirmingDeleteId = null; // Reset after deletion
     }
 }
-
 <style>
 
 .Spacing {
