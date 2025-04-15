@@ -1,38 +1,38 @@
 .top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+	height: 3.5rem;
+	background-color: rgba(0,0,0,0.4);
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+	font-size: 1.1rem;
 }
 
 .bi {
-    display: inline-block;
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    background-size: cover;
+	display: inline-block;
+	position: relative;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-size: cover;
 }
 
 .bi-house-door-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-house-door-fill' viewBox='0 0 16 16'%3E%3Cpath d='M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-house-door-fill' viewBox='0 0 16 16'%3E%3Cpath d='M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z'/%3E%3C/svg%3E");
 }
 
 .bi-plus-square-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z'/%3E%3C/svg%3E");
 }
 
 .bi-wrench-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-wrench-fill' viewBox='0 0 16 16'%3E%3Cpath d='M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-wrench-fill' viewBox='0 0 16 16'%3E%3Cpath d='M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z'/%3E%3C/svg%3E");
 }
 
 .bi-search-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-search-fill' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-search-fill' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E");
 }
 
 .bi-card-text-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-card-text-fill' viewBox='0 0 16 16'%3E%3Cpath d='M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-card-text-fill' viewBox='0 0 16 16'%3E%3Cpath d='M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5'/%3E%3C/svg%3E");
 }
 
 .nav-item:first-of-type {
@@ -57,104 +57,104 @@
 }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.37);
-    color: white !important;
+	background-color: rgba(255,255,255,0.37);
+	color: white !important;
 }
 
 .nav-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex-shrink: 0;
 }
 
 .nav-icon {
-    flex-shrink: 0;
-    z-index: 2; /* Ensure icons stay on top */
-    margin-right: 0.5rem;
+	flex-shrink: 0;
+	z-index: 2; /* Ensure icons stay on top */
+	margin-right: 0.5rem;
 	margin-left: -.5rem;
 }
 
 .nav-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
 	text-align: right;
-    z-index: 1; /* Keep text behind icon */
-    max-width: calc(100% - 1rem); /* Account for icon width + margin */
+	z-index: 1; /* Keep text behind icon */
+	max-width: calc(100% - 1rem); /* Account for icon width + margin */
 }
 
 .nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0rem;
-    overflow: visible;
-    min-width: 60px; /* preserves icon space */
+	font-size: 0.9rem;
+	padding-bottom: 0rem;
+	overflow: visible;
+	min-width: 60px; /* preserves icon space */
 }
 
 /* Style the caret icon */
 .nav-item button span.ms-auto {
-    font-size: 1.2rem; /* Adjust icon size */
-    transition: transform 0.3s ease;
+	font-size: 1.2rem; /* Adjust icon size */
+	transition: transform 0.3s ease;
 }
 
 /* Rotate the caret when the menu is open */
 .nav-item.open button span.ms-auto {
-    transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 /* Hide the submenu initially */
 .nav-item ul {
-    display: none;
-    list-style-type: none;
+	display: none;
+	list-style-type: none;
 	justify-content: right;
 }
 
 /* Show the submenu when it's open */
 .nav-item.open > ul {
-    display: block;
+	display: block;
 	text-align: right;
 }
 
 /* style submenu items */
 .nav-item .nav-link {
-    font-size: 1rem;
-    background-color: transparent;
-    border: none;
-    text-align: left;
+	font-size: 1rem;
+	background-color: transparent;
+	border: none;
+	text-align: left;
 }
 
 /* Show the submenu when it's open */
 .nav-item.open > ul {
-    display: flex; 
-    flex-direction: column;
-    align-items: flex-end; /* push items to the right side */
-    text-align: right;     /* ensures text is flush right if the link is wide */
+	display: flex; 
+	flex-direction: column;
+	align-items: flex-end; /* push items to the right side */
+	text-align: right;	 /* ensures text is flush right if the link is wide */
 }
 
 /* each submenu link aligned on the right side */
 .nav-item.open > ul .nav-link {
-    display: inline-flex;  
-    justify-content: flex-end;  /* text is at the right side of the link's row */
-    width: 100%;
+	display: inline-flex;  
+	justify-content: flex-end;  /* text is at the right side of the link's row */
+	width: 100%;
 }
 
 .nav-item.open {
-    border: 1px solid white;
-    border-radius: 4px;
+	border: 1px solid white;
+	border-radius: 4px;
 }
 
 .nav.flex-column.ms-4 {
-    margin-left: 0 !important;
+	margin-left: 0 !important;
 }
 
 .nav-item > button.nav-link {
-    padding: 0;
-    display: flex;
-    width: 100%;
-    color: white !important;
-    height: 3rem;
-    line-height: 3rem;
-    overflow: hidden;
-    border-radius: 4px;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	color: white !important;
+	height: 3rem;
+	line-height: 3rem;
+	overflow: hidden;
+	border-radius: 4px;
 }
