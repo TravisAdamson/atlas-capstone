@@ -1,84 +1,149 @@
-@page "/Military"
+@page "/ModifyMilitary"
 @inject RESTDB.Data.ApplicationDbContext Context
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using RESTDB.Models
 
-<PageTitle>Military</PageTitle>
-
-<!-- these are used for shared folder -->
-@using RESTDB.Migrations
-@using RESTDB.Data
-@using REST.Components.Shared
-@inherits LayoutComponentBase
-
-@code {
-    private Deceased currentDeceased = new Deceased();
-}
-
-<ActiveService 
-    Director="@currentDeceased.Director" 
-    FirstName="@currentDeceased.FirstName" 
-    MiddleName="@currentDeceased.MiddleName"
-    LastName="@currentDeceased.LastName"
-	Title="@currentDeceased.Title"
-	Status="@currentDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(currentDeceased.ContractBalance)"
-	Photo="@currentDeceased.Image" />
+<PageTitle>Modify Military Record</PageTitle>
 
 <div class="title-bar">
-    <h1>Modify Military Service Record</h1>
+    <h1>Place of Death</h1>
     <div class="navigation-controls">
-        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button> }
-        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary">Next</button> }
+        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary" style="background-color: #936091;">Previous</button> }
+        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary" style="background-color: #936091;">Next</button> }
     </div>
     <div class="SubmitRecordButton">
-        <EditForm Model="@editingMilitary" OnValidSubmit="SaveRecord">
+        <EditForm Model="@editingPlace" OnValidSubmit="SavePlaceRecord">
             <div class="SaveButtonFirst">
-                <button type="submit" class="btn btn-primary btn-submit">Save</button>
+                <button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
             </div>
         </EditForm>
     </div>
 </div>
 
 <div class="MilitaryForm">
-    <EditForm Model="@editingMilitary">
-        <h5>Military Service Information</h5>
-
-        <div class="Form-group">
-            <label>Branch</label>
-            <InputText class="form-control" @bind-Value="editingMilitary.Branch" />
+    <EditForm Model="@editingPlace">
+    <div class="ContractForm">
+        <div class="FirstCall-group">
+            <div class="FirstCall-group1"><label>Name</label><InputText class="form-control" @bind-Value="editingPlace.Name" /></div>
+            <div class="FirstCall-group1"><label>Medical Record Number</label><InputText class="form-control" @bind-Value="editingPlace.MedicalRecordNumber" /></div>
+            <div class="FirstCall-group1"><label>Street Address</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
+            <div class="FirstCall-group1"><label>Apt Number</label><InputText class="form-control" @bind-Value="editingPlace.AptNumber" /></div>
+            <div class="FirstCall-group1"><label>Type of Facility</label><InputText class="form-control" @bind-Value="editingPlace.TypeOfFacility" /></div>
+            <div class="FirstCall-group1"><label>Call Taken By</label><InputText class="form-control" @bind-Value="editingPlace.CallTakenBy" /></div>
+            <div class="FirstCall-group1"><label>Zip Code</label><InputText class="form-control" @bind-Value="editingPlace.ZipCode" /></div>
+            <div class="FirstCall-group1"><label>Locality Type</label><InputText class="form-control" @bind-Value="editingPlace.LocalityType" /></div>
+            <div class="FirstCall-group1"><label>Township</label><InputText class="form-control" @bind-Value="editingPlace.Township" /></div>
+            <div class="FirstCall-group1"><label>Locality</label><InputText class="form-control" @bind-Value="editingPlace.Locality" /></div>
+            <div class="FirstCall-group1"><label>State</label><InputText class="form-control" @bind-Value="editingPlace.State" /></div>
+            <div class="FirstCall-group1"><label>County</label><InputText class="form-control" @bind-Value="editingPlace.County" /></div>
+            <div class="FirstCall-group1"><label>Country</label><InputText class="form-control" @bind-Value="editingPlace.Country" /></div>
+            <div class="FirstCall-group1"><label>In City Limits</label><InputCheckbox class="form-check-input" @bind-Value="editingPlace.InCityLimits" /></div>
+            <div class="FirstCall-group1"><label>Director Notify Date</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifyDate" /></div>
+            <div class="FirstCall-group1"><label>Director Notified Time</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifedTime" /></div>
+            <div class="FirstCall-group1"><label>Admission Date</label><InputDate class="form-control" @bind-Value="editingPlace.AdmissionDate" /></div>
+            <div class="FirstCall-group1"><label>Body Release Time</label><InputDate class="form-control" @bind-Value="editingPlace.BodyReleaseTime" /></div>
         </div>
-
-        <div class="Form-group">
-            <label>Rank</label>
-            <InputText class="form-control" @bind-Value="editingMilitary.Rank" />
-        </div>
-
-        <div class="Form-group">
-            <label>Service Number</label>
-            <InputText class="form-control" @bind-Value="editingMilitary.ServiceNumber" />
-        </div>
-
-        <div class="Form-group">
-            <label>Start Date</label>
-            <InputDate class="form-control" @bind-Value="editingMilitary.StartDate" />
-        </div>
-
-        <div class="Form-group">
-            <label>End Date</label>
-            <InputDate class="form-control" @bind-Value="editingMilitary.EndDate" />
-        </div>
+    </div>
     </EditForm>
 </div>
 
+<!-- Tabs Navigation -->
+    <div class="TabForm">
+        <div class="tab-buttons">
+            <button @onclick="@(() => SelectTab("Airline"))" class="tab-button @(selectedTab == "Airline" ? "active" : "")">Airline</button>
+            <button @onclick="@(() => SelectTab("Shipping Contaner"))" class="tab-button @(selectedTab == "Shipping Contaner" ? "active" : "")">Shipping Container</button>
+            <button @onclick="@(() => SelectTab("Tab3"))" class="tab-button @(selectedTab == "Tab3" ? "active" : "")">Personal Effects</button>
+        </div>
+    </div>
+    <div class="Tabinfoform">
+        @if (selectedTab == "Airline")
+        {
+            <h5>Airline Information</h5>
+            <div class="FirstCall-group">
+                <div class="FirstCall-group1">
+                    <label>Airline Name</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.AirlineName" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Country</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.Country" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Founded</label>
+                    <InputDate class="fcall" @bind-Value="editingAirline.Founded" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>IATA</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.IATA" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>ICAO</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.ICAO" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Fleet Size</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.FleetSize" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Logo URL</label>
+                    <InputText class="fcall" @bind-Value="editingAirline.LogoUrl" />
+                </div>
+            </div>
+        }
+        else if (selectedTab == "Shipping Contaner")
+        {
+            <h5>Shipping Container</h5>
+            <div class="FirstCall-group">
+                <div class="FirstCall-group1">
+                    <label>Ship From</label>
+                    <InputText class="form-control" @bind-Value="shippingInfo.ShipFrom" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Ship To</label>
+                    <InputText class="form-control" @bind-Value="shippingInfo.ShipTo" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Ship From Name</label>
+                    <InputText class="form-control" @bind-Value="shippingInfo.ShipFromName" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Ship To Name</label>
+                    <InputText class="form-control" @bind-Value="shippingInfo.ShipToName" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Notes</label>
+                    <InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+                </div>
+            </div>
+        }
+        else if (selectedTab == "Tab3")
+        {
+            <h5>Personal Effects</h5>
+            <div class="FirstCall-group">
+            <div class="FirstCall-group1">
+                <label>Item</label>
+                <InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Qty</label>
+                <InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+            </div>
+            </div>
+        }
+    </div>
 @code {
-    private List<Military> militaryList = new();
-    private Military editingMilitary = new();
+    private List<Airline> airlineList = new();
+    private Airline editingAirline = new();
     private int currentRecordIndex = 0;
     private string? currentRecordString;
     private bool preVis = true, nexVis = true;
+    private string selectedTab = "Airline";
+    private ContainerShipping shippingInfo = new();
+    private List<PlaceOfDeath> placeList = new();
+    private PlaceOfDeath editingPlace = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -86,9 +151,10 @@
         var query = new Uri(uri).Query;
         var queryParameters = QueryHelpers.ParseQuery(query);
 
-        militaryList = await Context.Military.ToListAsync();
+        airlineList = await Db.Airline.ToListAsync();
+        placeList = await Db.PlaceOfDeath.ToListAsync();
 
-        if (militaryList.Any())
+        if (airlineList.Any())
         {
             if (queryParameters.TryGetValue("currentRecordString", out var value))
             {
@@ -97,24 +163,57 @@
                 {
                     currentRecordIndex = currentRecord;
                     preVis = currentRecord > 1;
-                    nexVis = currentRecord < militaryList.Count;
+                    nexVis = currentRecord < airlineList.Count;
                 }
             }
 
-            editingMilitary = CloneMilitary(currentRecordIndex > 0 ? militaryList[currentRecordIndex - 1] : militaryList.Last());
+            editingAirline = CloneAirline(currentRecordIndex > 0 ? airlineList[currentRecordIndex - 1] : airlineList.Last());
+        }
+
+        if (placeList.Any())
+        {
+            editingPlace = ClonePlace(currentRecordIndex > 0 ? placeList[currentRecordIndex - 1] : placeList.Last());
         }
     }
 
-    private Military CloneMilitary(Military original)
+    private Airline CloneAirline(Airline original)
     {
-        return new Military
+        return new Airline
         {
             Id = original.Id,
-            Branch = original.Branch,
-            Rank = original.Rank,
-            ServiceNumber = original.ServiceNumber,
-            StartDate = original.StartDate,
-            EndDate = original.EndDate
+            AirlineName = original.AirlineName,
+            Country = original.Country,
+            Founded = original.Founded,
+            IATA = original.IATA,
+            ICAO = original.ICAO,
+            FleetSize = original.FleetSize,
+            LogoUrl = original.LogoUrl
+        };
+    }
+
+    private PlaceOfDeath ClonePlace(PlaceOfDeath original)
+    {
+        return new PlaceOfDeath
+        {
+            Id = original.Id,
+            Name = original.Name,
+            MedicalRecordNumber = original.MedicalRecordNumber,
+            StreetAddress = original.StreetAddress,
+            AptNumber = original.AptNumber,
+            TypeOfFacility = original.TypeOfFacility,
+            CallTakenBy = original.CallTakenBy,
+            ZipCode = original.ZipCode,
+            LocalityType = original.LocalityType,
+            Township = original.Township,
+            Locality = original.Locality,
+            State = original.State,
+            County = original.County,
+            Country = original.Country,
+            InCityLimits = original.InCityLimits,
+            DirectorNotifyDate = original.DirectorNotifyDate,
+            DirectorNotifedTime = original.DirectorNotifedTime,
+            AdmissionDate = original.AdmissionDate,
+            BodyReleaseTime = original.BodyReleaseTime
         };
     }
 
@@ -123,7 +222,7 @@
         if (currentRecordIndex > 1)
         {
             currentRecordIndex--;
-            editingMilitary = militaryList[currentRecordIndex - 1];
+            editingAirline = airlineList[currentRecordIndex - 1];
             preVis = currentRecordIndex > 1;
             nexVis = true;
         }
@@ -135,11 +234,11 @@
 
     private void NextRecord()
     {
-        if (currentRecordIndex < militaryList.Count)
+        if (currentRecordIndex < airlineList.Count)
         {
             currentRecordIndex++;
-            editingMilitary = militaryList[currentRecordIndex - 1];
-            nexVis = currentRecordIndex < militaryList.Count;
+            editingAirline = airlineList[currentRecordIndex - 1];
+            nexVis = currentRecordIndex < airlineList.Count;
             preVis = true;
         }
         else
@@ -148,39 +247,87 @@
         }
     }
 
-    private async Task SaveRecord()
+    private async Task SavePlaceRecord()
     {
-        var entity = await Context.Military.FirstOrDefaultAsync(m => m.Id == editingMilitary.Id);
+        var entity = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
         if (entity is not null)
         {
-            entity.Branch = editingMilitary.Branch;
-            entity.Rank = editingMilitary.Rank;
-            entity.ServiceNumber = editingMilitary.ServiceNumber;
-            entity.StartDate = editingMilitary.StartDate;
-            entity.EndDate = editingMilitary.EndDate;
+            entity.Name = editingPlace.Name;
+            entity.MedicalRecordNumber = editingPlace.MedicalRecordNumber;
+            entity.StreetAddress = editingPlace.StreetAddress;
+            entity.AptNumber = editingPlace.AptNumber;
+            entity.TypeOfFacility = editingPlace.TypeOfFacility;
+            entity.CallTakenBy = editingPlace.CallTakenBy;
+            entity.ZipCode = editingPlace.ZipCode;
+            entity.LocalityType = editingPlace.LocalityType;
+            entity.Township = editingPlace.Township;
+            entity.Locality = editingPlace.Locality;
+            entity.State = editingPlace.State;
+            entity.County = editingPlace.County;
+            entity.Country = editingPlace.Country;
+            entity.InCityLimits = editingPlace.InCityLimits;
+            entity.DirectorNotifyDate = editingPlace.DirectorNotifyDate;
+            entity.DirectorNotifedTime = editingPlace.DirectorNotifedTime;
+            entity.AdmissionDate = editingPlace.AdmissionDate;
+            entity.BodyReleaseTime = editingPlace.BodyReleaseTime;
 
-            await Context.SaveChangesAsync();
+            await Db.SaveChangesAsync();
         }
+    }
+
+    private void SelectTab(string tabName)
+    {
+        selectedTab = tabName;
     }
 }
 
+
+
 <style>
-/* MilitaryForm */
-.MilitaryForm {
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 5px .25rem 5px .25rem;
+}
+
+.tab-button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background-color: #936091;
+    color: white;
+}
+
+.TabForm {
+    display: inline-block;
     max-width: 100%;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f7fc;
+    background-color: rgb(187, 188, 188);
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1; /* optional, just in case */
+
 }
 
-h5 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
+
+.Tabinfoform {
+    position: relative;
+    top:2.5rem; /* pulls form down over tab bar */
+    border-radius: 6px;
+    padding-left: 0.25rem;
+    padding-top: 1rem; /* 👈 adds space above the heading */
+    background-color: rgb(187, 188, 188);
 }
 
-.Form-group {
+
+
+.FirstCall-group1 {
     margin-bottom: 15px;
 }
 
@@ -198,46 +345,139 @@ label {
 
 .title-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 .navigation-controls {
     display: flex;
-    gap: 10px;
+    gap: .5rem;
 }
 
-.SubmitRecordButton {
+.DeceasedForm, .ContractForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .05rem;
+    margin: .5rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+
+
+.ContactForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .25rem;
+    background-color: rgb(187, 188, 188);
+}
+
+.InformantForm {
+    border-radius: 6px;
+    padding-left: .25rem;
+    padding-top: .05rem;
+    margin: .5rem auto;
+    background-color: rgb(187, 188, 188);
+}
+
+.FirstCall-group {
     display: flex;
-    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
-.SaveButtonFirst {
-    margin-top: 20px;
+.FirstCall-group1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    margin-bottom: .5rem;
 }
 
-.btn-submit, .btn-secondary {
-    padding: 10px 20px;
-    color: white;
-    font-size: 1em;
-    border-radius: 5px;
-    border: none;
+.fcall {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    max-height: 36px;
 }
 
-.btn-submit {
-    background-color: #936091;
+.numcall1 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 50px;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
+.numcall2 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 45px;
 }
 
-.SaveButtonFirst {
-    margin-top: 20px;
+.numcall3 {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 55px;
 }
 
-.SaveButtonFirst button:hover {
-    cursor: pointer;
+.zipcall {
+    border: 2px solid rgb(253, 251, 251);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    max-height: 36px;
+    width: 100px;
+}
+
+.genderlabel {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gender-container {
+    margin-bottom: 15px;
+    padding-right: 1rem;
+}
+
+.gender-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.suffix-container, .IState-container {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.suffix-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-field {
+    min-height: 6rem;
+    padding-right: 17rem;
+}
+
+.ShowImage {
+    margin-left: auto;
+}
+
+.FirstCallTop-group {
+    display: flex;
+    padding-right: 1rem;
+}
+
+.ImageUpload {
+    max-width: 14rem;
 }
 </style>
