@@ -1,18 +1,14 @@
-@page "/ModifyObituary"
+@page "/Obituary"
 @inject RESTDB.Data.ApplicationDbContext Context
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using RESTDB.Models
 
-<PageTitle>Modify Obituary Record</PageTitle>
+<PageTitle>Obituary</PageTitle>
 
 <div class="title-bar">
     <h1>Modify Obituary Record</h1>
-    <div class="navigation-controls">
-        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button> }
-        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary">Next</button> }
-    </div>
     <div class="SubmitRecordButton">
         <EditForm Model="@editingObituary" OnValidSubmit="SaveRecord">
             <div class="SaveButtonFirst">
@@ -144,36 +140,6 @@
             LastAtneedId = original.LastAtneedId,
             Obituary = original.Obituary
         };
-    }
-
-    private void PreviousRecord()
-    {
-        if (currentRecordIndex > 1)
-        {
-            currentRecordIndex--;
-            editingObituary = obituaryList[currentRecordIndex - 1];
-            preVis = currentRecordIndex > 1;
-            nexVis = true;
-        }
-        else
-        {
-            preVis = false;
-        }
-    }
-
-    private void NextRecord()
-    {
-        if (currentRecordIndex < obituaryList.Count)
-        {
-            currentRecordIndex++;
-            editingObituary = obituaryList[currentRecordIndex - 1];
-            nexVis = currentRecordIndex < obituaryList.Count;
-            preVis = true;
-        }
-        else
-        {
-            nexVis = false;
-        }
     }
 
     private async Task SaveRecord()

@@ -1,18 +1,14 @@
-@page "/ModifyEmbalmer"
+@page "/Embalmer"
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.WebUtilities
 @using RESTDB.Models
 
-<PageTitle>Modify Embalmer</PageTitle>
+<PageTitle>Embalmer</PageTitle>
 
 <div class="title-bar">
     <h1>Modify Embalmer Record</h1>
-    <div class="navigation-controls">
-        @if (preVis) { <button @onclick="PreviousRecord" class="btn btn-secondary">Previous</button> }
-        @if (nexVis) { <button @onclick="NextRecord" class="btn btn-secondary">Next</button> }
-    </div>
     <div class="SubmitRecordButton">
         <EditForm Model="@editingEmbalmer" OnValidSubmit="SaveRecord">
             <div class="SaveButtonFirst">
@@ -108,36 +104,6 @@
             EmbalmedBy = original.EmbalmedBy,
             EmbalmingAuthorizor = original.EmbalmingAuthorizor
         };
-    }
-
-    private void PreviousRecord()
-    {
-        if (currentRecordIndex > 1)
-        {
-            currentRecordIndex--;
-            editingEmbalmer = embalmerList[currentRecordIndex - 1];
-            preVis = currentRecordIndex > 1;
-            nexVis = true;
-        }
-        else
-        {
-            preVis = false;
-        }
-    }
-
-    private void NextRecord()
-    {
-        if (currentRecordIndex < embalmerList.Count)
-        {
-            currentRecordIndex++;
-            editingEmbalmer = embalmerList[currentRecordIndex - 1];
-            nexVis = currentRecordIndex < embalmerList.Count;
-            preVis = true;
-        }
-        else
-        {
-            nexVis = false;
-        }
     }
 
     private async Task SaveRecord()
