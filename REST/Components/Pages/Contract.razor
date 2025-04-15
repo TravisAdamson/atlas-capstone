@@ -18,43 +18,43 @@
 <PageTitle>Contract Record</PageTitle>
 
 <ActiveService
-    Director="@edittingDeceased.Director"
-    FirstName="@edittingDeceased.FirstName"
-    MiddleName="@edittingDeceased.MiddleName"
-    LastName="@edittingDeceased.LastName"
+	Director="@edittingDeceased.Director"
+	FirstName="@edittingDeceased.FirstName"
+	MiddleName="@edittingDeceased.MiddleName"
+	LastName="@edittingDeceased.LastName"
 	Title="@edittingDeceased.Title"
 	Status="@edittingDeceased.Status"
 	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
 	Photo="@edittingDeceased.Image" />
 
 <div class="title-bar">
-    <h1>Contract Record</h1>
-    <div class="SubmitRecordButton">
-        <EditForm Model="@editingContract" OnValidSubmit="SaveContractRecord">
-                <button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
-        </EditForm>
-    </div>
+	<h1>Contract Record</h1>
+	<div class="SubmitRecordButton">
+		<EditForm Model="@editingContract" OnValidSubmit="SaveContractRecord">
+				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+		</EditForm>
+	</div>
 </div>
 
-    <!-- Main Contract Fields -->
-    <EditForm Model="@editingContract">
-        <div class="ContractForm">
-            <div class="pod-field-container">
-                <div class="FirstCall-group1"><label>Contract Date</label><InputDate class="form-control" @bind-Value="editingContract.ContractDate" /></div>
-                <div class="FirstCall-group1"><label>Sales Package</label><InputText class="form-control" @bind-Value="editingContract.SalesPackage" /></div>
-                <div class="FirstCall-group1"><label>Estate Owner</label><InputText class="form-control" @bind-Value="editingContract.EstateOwner" /></div>
-                <div class="FirstCall-group1"><label>Balance</label><InputNumber class="form-control" @bind-Value="editingContract.Balance" /></div>
-                <div class="FirstCall-group1"><label>Distributed Charges</label><InputNumber class="form-control" @bind-Value="editingContract.DistributedCharges" /></div>
-            </div>
-        </div>
-    </EditForm>
+	<!-- Main Contract Fields -->
+	<EditForm Model="@editingContract">
+		<div class="ContractForm">
+			<div class="pod-field-container">
+				<div class="FirstCall-group1"><label>Contract Date</label><InputDate class="form-control" @bind-Value="editingContract.ContractDate" /></div>
+				<div class="FirstCall-group1"><label>Sales Package</label><InputText class="form-control" @bind-Value="editingContract.SalesPackage" /></div>
+				<div class="FirstCall-group1"><label>Estate Owner</label><InputText class="form-control" @bind-Value="editingContract.EstateOwner" /></div>
+				<div class="FirstCall-group1"><label>Balance</label><InputNumber class="form-control" @bind-Value="editingContract.Balance" /></div>
+				<div class="FirstCall-group1"><label>Distributed Charges</label><InputNumber class="form-control" @bind-Value="editingContract.DistributedCharges" /></div>
+			</div>
+		</div>
+	</EditForm>
 
 <!-- Tabs Navigation -->
 <div class="TabForm">
-    <div class="tab-buttons">
-        <button @onclick="@(() => SelectTab("Buyers"))" class="tab-button @(selectedTab == "Buyers" ? "active" : "")">Buyers</button>
-        <button @onclick="@(() => SelectTab("Products"))" class="tab-button @(selectedTab == "Products" ? "active" : "")">Products</button>
-    </div>
+	<div class="tab-buttons">
+		<button @onclick="@(() => SelectTab("Buyers"))" class="tab-button @(selectedTab == "Buyers" ? "active" : "")">Buyers</button>
+		<button @onclick="@(() => SelectTab("Products"))" class="tab-button @(selectedTab == "Products" ? "active" : "")">Products</button>
+	</div>
 </div>
 
 <!-- Tab Content -->
@@ -62,101 +62,101 @@
 	<div class="FirstCall-group">
 		<div class="FirstCall-group1">
 		@if (selectedTab == "Buyers")
-    	{
-        	<h5>Buyers</h5>
-        	<div class="FirstCall-group">
-            	<div class="FirstCall-group1">
-                	<label>Name</label>
-                	<InputText class="fcall" @bind-Value="editingBuyer.Name" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Address</label>
-                	<InputText class="fcall" @bind-Value="editingBuyer.Address" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Phone Number</label>
-                	<InputText class="fcall" @bind-Value="editingBuyer.PhoneNumber" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Relationship</label>
-                	<InputText class="fcall" @bind-Value="editingBuyer.Relationship" />
-            	</div>
-            	<div class="primary-buyer">
-                	<div class="subclass-primary">
-                    	<div>
-                        	<label>Is Primary Buyer</label>
-                        	<InputCheckbox class="fcall" @bind-Value="editingBuyer.IsPrimaryBuyer" />
-                    	</div>
-                    	<div>
-                        	<label>Send Bill</label>
-                        	<InputCheckbox class="fcall" @bind-Value="editingBuyer.SendBill" />
-                    	</div>
-                	</div>
-            	</div>
-        	</div>
-    	}
-    	else if (selectedTab == "Products")
-    	{
-        	<h5>Products</h5>
-        	<div class="FirstCall-group">
-            	<div class="FirstCall-group1">
-                	<label>Category</label>
-                	<InputText class="fcall" @bind-Value="editingProduct.Category" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Item</label>
-                	<InputText class="fcall" @bind-Value="editingProduct.Item" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Tax</label>
-                	<InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
-            	</div>
-            	<div class="FirstCall-group1">
-                	<label>Price</label>
-                	<InputNumber class="fcall" @bind-Value="editingProduct.Price" />
-            	</div>
-        	</div>
-    	}
-    	</div>
+		{
+			<h5>Buyers</h5>
+			<div class="FirstCall-group">
+				<div class="FirstCall-group1">
+					<label>Name</label>
+					<InputText class="fcall" @bind-Value="editingBuyer.Name" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Address</label>
+					<InputText class="fcall" @bind-Value="editingBuyer.Address" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Phone Number</label>
+					<InputText class="fcall" @bind-Value="editingBuyer.PhoneNumber" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Relationship</label>
+					<InputText class="fcall" @bind-Value="editingBuyer.Relationship" />
+				</div>
+				<div class="primary-buyer">
+					<div class="subclass-primary">
+						<div>
+							<label>Is Primary Buyer</label>
+							<InputCheckbox class="fcall" @bind-Value="editingBuyer.IsPrimaryBuyer" />
+						</div>
+						<div>
+							<label>Send Bill</label>
+							<InputCheckbox class="fcall" @bind-Value="editingBuyer.SendBill" />
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Products")
+		{
+			<h5>Products</h5>
+			<div class="FirstCall-group">
+				<div class="FirstCall-group1">
+					<label>Category</label>
+					<InputText class="fcall" @bind-Value="editingProduct.Category" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Item</label>
+					<InputText class="fcall" @bind-Value="editingProduct.Item" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Tax</label>
+					<InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Price</label>
+					<InputNumber class="fcall" @bind-Value="editingProduct.Price" />
+				</div>
+			</div>
+		}
+		</div>
 	</div>
 </div>
 
 @code {
-    private ServiceContract editingContract = new();
-    private Buyer editingBuyer = new();
-    private Products editingProduct = new();
-    private List<Deceased> deceasedList = new List<Deceased>();
-    private Deceased currentDeceased = new Deceased();
+	private ServiceContract editingContract = new();
+	private Buyer editingBuyer = new();
+	private Products editingProduct = new();
+	private List<Deceased> deceasedList = new List<Deceased>();
+	private Deceased currentDeceased = new Deceased();
 	private Deceased edittingDeceased = new Deceased();
-    private string selectedTab = "Buyers";
+	private string selectedTab = "Buyers";
 
-    protected override async Task OnInitializedAsync()
-    {
-        var uri = NavigationManager.Uri;
-        var query = new Uri(uri).Query;
-        var queryParameters = QueryHelpers.ParseQuery(query);
+	protected override async Task OnInitializedAsync()
+	{
+		var uri = NavigationManager.Uri;
+		var query = new Uri(uri).Query;
+		var queryParameters = QueryHelpers.ParseQuery(query);
 
-        var contractList = await Db.ServiceContract.ToListAsync();
+		var contractList = await Db.ServiceContract.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-        if (contractList.Any())
-        {
-            editingContract = contractList.First(); // Replace with ID-based logic if needed
-        }
-    }
+		if (contractList.Any())
+		{
+			editingContract = contractList.First(); // Replace with ID-based logic if needed
+		}
+	}
 
 	private Deceased CloneDeceased(Deceased original)
-    {
-        return new Deceased
-        {
-            ClientID = original.ClientID,
-            Director = original.Director,
+	{
+		return new Deceased
+		{
+			ClientID = original.ClientID,
+			Director = original.Director,
 			FirstName = original.FirstName,
 			LastName = original.LastName,
 			MiddleName = original.MiddleName,
 			Title = original.Title,
 			Suffix = original.Suffix,
-            Status = original.Status,
+			Status = original.Status,
 			StreetAddress = original.StreetAddress,
 			City = original.City,
 			State = original.State,
@@ -179,133 +179,133 @@
 			InformantEmail = original.InformantEmail,
 			InfoNotified = original.InfoNotified,
 			Notes = original.Notes,
-            Image = original.Image,
+			Image = original.Image,
 			InformantRelation = original.InformantRelation
-        };
+		};
 	}
 
-    private async Task SaveContractRecord()
-    {
-        var entity = await Db.ServiceContract.FirstOrDefaultAsync(c => c.Id == editingContract.Id);
-        if (entity is not null)
-        {
-            entity.ContractDate = editingContract.ContractDate;
-            entity.SalesPackage = editingContract.SalesPackage;
-            entity.EstateOwner = editingContract.EstateOwner;
-            entity.Balance = editingContract.Balance;
-            entity.DistributedCharges = editingContract.DistributedCharges;
+	private async Task SaveContractRecord()
+	{
+		var entity = await Db.ServiceContract.FirstOrDefaultAsync(c => c.Id == editingContract.Id);
+		if (entity is not null)
+		{
+			entity.ContractDate = editingContract.ContractDate;
+			entity.SalesPackage = editingContract.SalesPackage;
+			entity.EstateOwner = editingContract.EstateOwner;
+			entity.Balance = editingContract.Balance;
+			entity.DistributedCharges = editingContract.DistributedCharges;
 
-            await Db.SaveChangesAsync();
-        }
-    }
+			await Db.SaveChangesAsync();
+		}
+	}
 
-    private void SelectTab(string tabName)
-    {
-        selectedTab = tabName;
-    }
+	private void SelectTab(string tabName)
+	{
+		selectedTab = tabName;
+	}
 }
 
 <style>
 .tab-buttons {
-    display: flex;
-    gap: 10px;
-    margin: 5px .25rem 5px .25rem;
+	display: flex;
+	gap: 10px;
+	margin: 5px .25rem 5px .25rem;
 }
 
 .tab-button {
-    background-color: #e0e0e0;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px 5px 0 0;
-    font-weight: bold;
-    cursor: pointer;
+	background-color: #e0e0e0;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px 5px 0 0;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .tab-button.active {
-    background-color: #936091;
-    color: white;
+	background-color: #936091;
+	color: white;
 }
 
 .TabForm {
-    display: inline-block;
-    max-width: 100%;
-    background-color: rgb(187, 188, 188);
-    border-radius: 5px;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: 1; /* optional, just in case */
+	display: inline-block;
+	max-width: 100%;
+	background-color: rgb(187, 188, 188);
+	border-radius: 5px;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 1; /* optional, just in case */
 	margin-top: .5rem;
 }
 
 .Tabinfoform {
-    position: relative;
-    top: 2.5rem; /* pulls form down over tab bar */
-    border-radius: 6px;
-    padding-left: 0.5rem;
+	position: relative;
+	top: 2.5rem; /* pulls form down over tab bar */
+	border-radius: 6px;
+	padding-left: 0.5rem;
 	margin-top: 1rem;
-    padding-top: 1rem; /* adds space above the heading */
-    background-color: rgb(187, 188, 188);
+	padding-top: 1rem; /* adds space above the heading */
+	background-color: rgb(187, 188, 188);
 }
 
 .FirstCall-group1 {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .prymary-buyer {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .subclass-primary {
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
+	display: flex;
+	flex-direction: row;
+	gap: 4rem;
 }
 
 label {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .form-control { /* fields under place of death but above the tabs */
-    width: 100%;
-    font-size: 1em;
-    border-radius: 4px;
+	width: 100%;
+	font-size: 1em;
+	border-radius: 4px;
 }
 
 .title-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .ContractForm {
-    border-radius: 6px;
-    padding-left: .25rem;
-    padding-top: .05rem;
-    background-color: rgb(187, 188, 188);
+	border-radius: 6px;
+	padding-left: .25rem;
+	padding-top: .05rem;
+	background-color: rgb(187, 188, 188);
 }
 
 .FirstCall-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 
 .FirstCall-group1 {
-    display: flex;
-    flex-direction: column;
-    margin-right: .5rem;
-    margin-bottom: .5rem;
+	display: flex;
+	flex-direction: column;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
 	margin-top: .25rem;
 	box-sizing: border-box;
 }
 
 .fcall {
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 0.2rem;
-    padding: .5rem;
-    box-sizing: border-box;
-    max-height: 36px;
+	border: 2px solid rgb(255, 255, 255);
+	border-radius: 0.2rem;
+	padding: .5rem;
+	box-sizing: border-box;
+	max-height: 36px;
 }
 
 .pod-field-container {
@@ -315,84 +315,84 @@ label {
 }
 
 .numcall1 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 50px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 50px;
 }
 
 .numcall2 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 45px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 45px;
 }
 
 .numcall3 {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 55px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 55px;
 }
 
 .zipcall {
-    border: 2px solid rgb(253, 251, 251);
-    border-radius: 0.2rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-height: 36px;
-    width: 100px;
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 100px;
 }
 
 .genderlabel {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
 }
 
 .gender-container {
-    margin-bottom: 15px;
-    padding-right: 1rem;
+	margin-bottom: 15px;
+	padding-right: 1rem;
 }
 
 .gender-group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .suffix-container, .IState-container {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 1rem;
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
 }
 
 .suffix-group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .notes-field {
-    min-height: 6rem;
-    padding-right: 17rem;
+	min-height: 6rem;
+	padding-right: 17rem;
 }
 
 .ShowImage {
-    margin-left: auto;
+	margin-left: auto;
 }
 
 .FirstCallTop-group {
-    display: flex;
-    padding-right: 1rem;
+	display: flex;
+	padding-right: 1rem;
 }
 
 .ImageUpload {
-    max-width: 14rem;
+	max-width: 14rem;
 }
 </style>
