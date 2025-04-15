@@ -2,6 +2,7 @@
 @inject RESTDB.Data.ApplicationDbContext Context
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
+@inject REST.Services.GlobalState GlobalState
 @using Microsoft.Extensions.Primitives
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
@@ -368,10 +369,9 @@
     private string? SSNPart3 { get; set; }
     private int currentRecordIndex = 0;
 	private string? currentRecordString;
-	private bool preVis = true, nexVis = true;
 	private string? placeholder { get; set; }
 
-	
+
 
 
 	protected override async Task OnInitializedAsync()
@@ -390,10 +390,7 @@
 				if (int.TryParse(currentRecordString, out var currentRecord))
 				{
 					if (currentRecord == Deceased.Count)
-						nexVis = false;
-					else if (currentRecord == 1)
-						preVis = false;
-					currentRecordIndex = currentRecord;
+						currentRecordIndex = currentRecord;
 				}
 			}
 			if (currentRecordIndex != 0)

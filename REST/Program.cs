@@ -1,10 +1,11 @@
 using REST.Components;
 using RESTDB.Data;
 using Microsoft.EntityFrameworkCore;
+using REST.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddSingleton<GlobalState>();
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents(); // Razor components contain antiforgery
 
