@@ -65,36 +65,54 @@
         {
         <h5>Military Stints</h5>
             <div class="tab-content">
-                <label>Description</label>
-                <InputText class="fcall" @bind-Value="editingStint.Description" />
-                <label>Start Date</label>
-                <InputDate class="fcall" @bind-Value="editingStint.StartDate" />
-                <label>End Date</label>
-                <InputDate class="fcall" @bind-Value="editingStint.EndDate" />
+                <div class="FirstCall-group1">
+                    <label>Description</label>
+                    <InputText class="fcall" @bind-Value="editingStint.Description" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Start Date</label>
+                    <InputDate class="fcall" @bind-Value="editingStint.StartDate" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>End Date</label>
+                    <InputDate class="fcall" @bind-Value="editingStint.EndDate" />
+                </div>
             </div>
         }
         else if (selectedTab == "Wars")
         {
             <h5>Wars Served</h5>
             <div class="tab-content">
-                <label>War Name</label>
-                <InputText class="fcall" @bind-Value="editingWar.WarName" />
-                <label>Description</label>
-                <InputText class="fcall" @bind-Value="editingWar.Description" />
+                <div class="FirstCall-group1">
+                    <label>War Name</label>
+                    <InputText class="fcall" @bind-Value="editingWar.WarName" />
+                </div>
+                <div class="FirstCall-group1">
+                    <label>Description</label>
+                    <InputText class="fcall" @bind-Value="editingWar.Description" />
+                </div>
             </div>
         }
         else if (selectedTab == "Flags")
         {
         <h5>Flag Application</h5>
         <div class="tab-content">
-            <label>Applicant Name</label>
-            <InputText class="fcall" @bind-Value="editingFlag.ApplicantName" />
-            <label>Relationship</label>
-            <InputText class="fcall" @bind-Value="editingFlag.RelationshipToDeceased" />
-            <label>Flag Type</label>
-            <InputText class="fcall" @bind-Value="editingFlag.FlagType" />
-            <label>Application Date</label>
-            <InputDate class="fcall" @bind-Value="editingFlag.ApplicationDate" />
+            <div class="FirstCall-group1">
+                <label>Applicant Name</label>
+                <InputText class="fcall" @bind-Value="editingFlag.ApplicantName" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Relationship</label>
+                <InputText class="fcall" @bind-Value="editingFlag.RelationshipToDeceased" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Flag Type</label>
+                <InputText class="fcall" @bind-Value="editingFlag.FlagType" />
+            </div>
+            <div class="FirstCall-group1">
+                <label>Application Date</label>
+                <InputDate class="fcall" @bind-Value="editingFlag.ApplicationDate" />
+            </div>
         </div>
         }
     </div>
@@ -227,6 +245,10 @@
     background-color: rgb(187, 188, 188);
 }
 
+.tab-content {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .FirstCall-group1 {
     margin-bottom: 15px;
