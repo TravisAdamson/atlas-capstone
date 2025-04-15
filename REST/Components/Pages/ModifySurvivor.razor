@@ -26,7 +26,7 @@
 <PageTitle>Survivor</PageTitle>
 
 <div class="title-bar">
-	<h1>Modify Survivor</h1>
+	<h1>Modify Survivor Record</h1>
 	<div class="SubmitRecordButton">
 		<EditForm Model="@editingSurvivor" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
@@ -210,7 +210,8 @@
 <style> /* Shared Survivor Form Styles */
 .SurvivorForm {
 	border-radius: 6px;
-	padding-left: .25rem;
+	padding-top: .25rem;
+	padding-left: .5rem;
 	padding-right: .25rem;
 	background-color: rgb(187, 188, 188);
 }
@@ -232,7 +233,7 @@ h5 {
 	margin-bottom: 15px;
 }
 
-.form-control {
+.form-control { /* for the fields themselves */
 	border: 2px solid rgb(255, 255, 255);
 	border-radius: 0.2rem;
 	padding: .5rem;
@@ -244,11 +245,6 @@ h5 {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.navigation-controls {
-	display: flex;
-	gap: 10px;
 }
 
 .btn-submit {
