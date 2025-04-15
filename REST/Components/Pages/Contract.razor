@@ -1,18 +1,10 @@
 @page "/Contract"
-
-@inject RESTDB.Data.ApplicationDbContext Context
-@inject RESTDB.Data.ApplicationDbContext Db
-@inject NavigationManager NavigationManager
 @rendermode InteractiveServer
-@using RESTDB.Models <!-- these are used for shared folder -->
-@using RESTDB.Migrations
-@using RESTDB.Data
-@using REST.Components.Shared
-@inherits LayoutComponentBase
+@inject RESTDB.Data.ApplicationDbContext Db
+@using RESTDB.Models
+@inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.WebUtilities
-
-
-
+@using Microsoft.AspNetCore.Components
 
 <PageTitle>Contract</PageTitle>
 
