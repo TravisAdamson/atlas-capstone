@@ -13,14 +13,14 @@
 @using Microsoft.AspNetCore.Components.Web
 
 <ActiveService
-	Director="@edittingDeceased.Director"
-	FirstName="@edittingDeceased.FirstName"
-	MiddleName="@edittingDeceased.MiddleName"
-	LastName="@edittingDeceased.LastName"
-	Title="@edittingDeceased.Title"
-	Status="@edittingDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
-	Photo="@edittingDeceased.Image" />
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
 
 <PageTitle>Embalmer</PageTitle>
 
@@ -84,7 +84,7 @@
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -93,7 +93,7 @@
 		var queryParameters = QueryHelpers.ParseQuery(query);
 		embalmerList = await Context.Embalmer.ToListAsync();
 		deceasedList = await Context.Deceased.ToListAsync();
-		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (embalmerList.Any())
 		{
 			if (queryParameters.TryGetValue("currentRecordString", out var value))
@@ -206,11 +206,6 @@
 		gap: 1rem;
 		margin-top: 15px;
 		margin-bottom: 10px;
-	}
-
-	label {
-		font-weight: bold;
-		text-wrap: nowrap;
 	}
 
 	.form-control {

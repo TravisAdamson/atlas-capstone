@@ -14,14 +14,14 @@
 @namespace REST.Components
 
 <ActiveService
-	Director="@edittingDeceased.Director"
-	FirstName="@edittingDeceased.FirstName"
-	MiddleName="@edittingDeceased.MiddleName"
-	LastName="@edittingDeceased.LastName"
-	Title="@edittingDeceased.Title"
-	Status="@edittingDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
-	Photo="@edittingDeceased.Image" />
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
 
 <PageTitle>Survivor</PageTitle>
 
@@ -99,7 +99,7 @@
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -123,7 +123,7 @@
 				}
 			}
 			editingSurvivor = CloneSurvivor(currentRecordIndex > 0 ? survivorList[currentRecordIndex - 1] : survivorList.Last());
-			edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+			editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		}
 	}
 
@@ -230,10 +230,6 @@
 h5 {
 	font-size: 1.7em;
 	margin-bottom: 15px;
-}
-
-label {
-	font-weight: bold;
 }
 
 .form-control {

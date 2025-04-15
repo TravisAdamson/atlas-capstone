@@ -2,25 +2,27 @@
 @inject RESTDB.Data.ApplicationDbContext Context
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+@using REST.Components.Shared
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
-@using REST.Components.Shared
+@using REST.Components.Pages
 @inherits LayoutComponentBase
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
 
 <ActiveService
-	Director="@edittingDeceased.Director"
-	FirstName="@edittingDeceased.FirstName"
-	MiddleName="@edittingDeceased.MiddleName"
-	LastName="@edittingDeceased.LastName"
-	Title="@edittingDeceased.Title"
-	Status="@edittingDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
-	Photo="@edittingDeceased.Image" />
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
 
 
 <PageTitle>Obituary</PageTitle>
@@ -117,7 +119,7 @@
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -127,7 +129,7 @@
 
 		obituaryList = await Context.ObituaryData.ToListAsync();
 		deceasedList = await Context.Deceased.ToListAsync();
-		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (obituaryList.Any())
 		{
 			if (queryParameters.TryGetValue("currentRecordString", out var value))
@@ -227,6 +229,7 @@ private Deceased CloneDeceased(Deceased original)
 		}
 	}
 }
+
 <style>
 .MilitaryForm {
 	border-radius: 6px;
@@ -244,10 +247,6 @@ private Deceased CloneDeceased(Deceased original)
 .MilitaryForm h5 {
 	font-size: 1.7em;
 	margin-bottom: 15px;
-}
-
-label {
-	font-weight: bold;
 }
 
 .form-control {

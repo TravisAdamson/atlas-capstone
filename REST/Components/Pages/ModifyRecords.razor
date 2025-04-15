@@ -25,7 +25,7 @@
 	</div> -->
 
 	<div class="SubmitRecordButton">
-		<EditForm id="placeholderformid" Model="@edittingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
+		<EditForm id="placeholderformid" Model="@editingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
 		<div>
 			<InputText id="testsave" class="fcall" @bind-Value="placeholder" style="display: none" />
 		</div>
@@ -37,13 +37,13 @@
 </div>
 
 <div class="ContactForm">
-	<EditForm id="ContactForm" Model="@edittingDeceased" FormName="ContactForm" class="ContactForm">
+	<EditForm id="ContactForm" Model="@editingDeceased" FormName="ContactForm" class="ContactForm">
 		<h5>First Call Information</h5>
 		<div class="FirstCallTop-group">
 			<!-- Director -->
 			<div class="FirstCall-group1">
 				<label for="Director">Director</label>
-				<InputSelect @bind-Value="edittingDeceased.Director" class="State-group" TValue="string">
+				<InputSelect @bind-Value="editingDeceased.Director" class="State-group" TValue="string">
 						<option value="Denise Adamson">Denise Adamson</option>
 						<option value="Jon Hoopert">Jon Hoopert</option>
 						<option value="James Groesbeck">James Groesbeck</option>
@@ -53,12 +53,12 @@
 			<!-- Case Status -->
 			<div class="FirstCall-group1">
 				<label for="Status">Case Status:</label>
-				<InputText id="Status" class="fcall" @bind-Value="edittingDeceased.Status" />
+				<InputText id="Status" class="fcall" @bind-Value="editingDeceased.Status" />
 			</div>
 			<div class="ShowImage">
-				@if (edittingDeceased.Image != null)
+				@if (editingDeceased.Image != null)
 				{
-					<img src="@($"data:image/png;base64,{Convert.ToBase64String(edittingDeceased.Image)}")" style="max-width: 260px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
+					<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 260px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
 				}
 			</div>
 		</div>
@@ -66,59 +66,59 @@
 </div>
 
 <div class="DeceasedForm">
-	<EditForm id="DeceasedForm" Model="@edittingDeceased" FormName="DeceasedForm" class="DeceasedForm">
+	<EditForm id="DeceasedForm" Model="@editingDeceased" FormName="DeceasedForm" class="DeceasedForm">
 		<h5>Deceased Information</h5>
 		<div class="FirstCall-group">
 			<!-- First Name -->
 			<div class="FirstCall-group1">
 				<label for="FirstName">First Name:</label>
-				<InputText id="FirstName" class="fcall" @bind-Value="edittingDeceased.FirstName" />
+				<InputText id="FirstName" class="fcall" @bind-Value="editingDeceased.FirstName" />
 			</div>
 			<!-- Last Name -->
 			<div class="FirstCall-group1">
 				<label for="LastName">Last Name:</label>
-				<InputText id="LastName" class="fcall" @bind-Value="edittingDeceased.LastName" />
+				<InputText id="LastName" class="fcall" @bind-Value="editingDeceased.LastName" />
 			</div>
 			<!-- Middle Name -->
 			<div class="FirstCall-group1">
 				<label for="MiddleName">Middle Name:</label>
-				<InputText id="MiddleName" class="fcall" @bind-Value="edittingDeceased.MiddleName" />
+				<InputText id="MiddleName" class="fcall" @bind-Value="editingDeceased.MiddleName" />
 			</div>
 			<!-- Title -->
 			<div class="FirstCall-group1">
 				<label for="Title">Title:</label>
-				<InputText id="Title" class="fcall" @bind-Value="edittingDeceased.Title" />
+				<InputText id="Title" class="fcall" @bind-Value="editingDeceased.Title" />
 			</div>
 
 			<!-- Date of Death -->
 			<div class="FirstCall-group1">
 				<label for="DoD">Date of Death:</label>
-				<InputDate id="DoD" class="fcall" @bind-Value="edittingDeceased.DoD" />
+				<InputDate id="DoD" class="fcall" @bind-Value="editingDeceased.DoD" />
 			</div>
 			<!-- Time of Death -->
 			<div class="FirstCall-group1">
 				<label for="TimeOfDeath">Time of Death:</label>
-				<input type="time" class="fcall" @bind="edittingDeceased.TimeOfDeath" />
+				<input type="time" class="fcall" @bind="editingDeceased.TimeOfDeath" />
 			</div>
 			<!-- Alias -->
 			<div class="FirstCall-group1">
 				<label for="Alias">Alias:</label>
-				<InputText id="Alias" class="fcall" @bind-Value="edittingDeceased.Alias" />
+				<InputText id="Alias" class="fcall" @bind-Value="editingDeceased.Alias" />
 			</div>
 			<!-- Deceased Address -->
 			<div class="FirstCall-group1">
 				<label for="StreetAddress">Street Address:</label>
-				<InputText id="StreetAddress" class="fcall" @bind-Value="edittingDeceased.StreetAddress" />
+				<InputText id="StreetAddress" class="fcall" @bind-Value="editingDeceased.StreetAddress" />
 			</div>
 			<!-- Deceased City -->
 			<div class="FirstCall-group1">
 				<label for="City">City:</label>
-				<InputText id="City" class="fcall" @bind-Value="edittingDeceased.City" />
+				<InputText id="City" class="fcall" @bind-Value="editingDeceased.City" />
 			</div>
 			<!-- Deceased State -->
 			<div class="IState-container">
 				<label for="State">Select State:</label>
-				<InputSelect @bind-Value="edittingDeceased.State" class="State-group" TValue="string">
+				<InputSelect @bind-Value="editingDeceased.State" class="State-group" TValue="string">
 					<option value="Alabama">Alabama</option>
 					<option value="Alaska">Alaska</option>
 					<option value="Arizona">Arizona</option>
@@ -177,7 +177,7 @@
 				<label for="ZipCode">Zip Code:</label>
 				<InputText id="ZipCode"
 					class="zipcall"
-					@bind-Value="edittingDeceased.ZipCode"
+					@bind-Value="editingDeceased.ZipCode"
 					inputmode="numeric"
 					pattern="[0-9]*"
 					maxlength="5"
@@ -198,27 +198,27 @@
 			<!-- Maiden Name -->
 			<div class="FirstCall-group1">
 				<label for="MaidenName">Maiden Name:</label>
-				<InputText id="MaidenName" class="fcall" @bind-Value="edittingDeceased.MaidenName" />
+				<InputText id="MaidenName" class="fcall" @bind-Value="editingDeceased.MaidenName" />
 			</div>
 			<!-- Veteran Status -->
 			<div class="FirstCall-group1">
 				<label for="Vet">Veteran Status:</label>
-				<InputText id="Vet" class="fcall" @bind-Value="edittingDeceased.Vet" />
+				<InputText id="Vet" class="fcall" @bind-Value="editingDeceased.Vet" />
 			</div>
 			<!-- War -->
 			<div class="FirstCall-group1">
 				<label for="War">War Served:</label>
-				<InputText id="War" class="fcall" @bind-Value="edittingDeceased.War" />
+				<InputText id="War" class="fcall" @bind-Value="editingDeceased.War" />
 			</div>
 			<!-- Suffix -->
 			<div class="suffix-container">
 				<label for="suffix">Suffix:</label>
-				<InputText id="suffix" class="fcall" @bind-Value="edittingDeceased.Suffix" />
+				<InputText id="suffix" class="fcall" @bind-Value="editingDeceased.Suffix" />
 			</div>
 			<!-- Gender -->
 			<div class="gender-container">
 				<label>Gender:</label>
-				<InputSelect @bind-Value="edittingDeceased.Gender" class="gender-group" TValue="string">
+				<InputSelect @bind-Value="editingDeceased.Gender" class="gender-group" TValue="string">
 						<option value="Male">Male</option>
 						<option value="Female">Female</option>
 				</InputSelect>
@@ -226,7 +226,7 @@
 			<!-- Notes -->
 			<div class="FirstCall-group1">
 				<label for="Notes">Notes:</label>
-				<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="edittingDeceased.Notes" />
+				<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="editingDeceased.Notes" />
 			</div>
 			<!-- Image Upload -->
 			<div class="FirstCall-group1">
@@ -238,28 +238,28 @@
 </div>
 
 <div class="InformantForm">
-	<EditForm id="InformantForm" Model="@edittingDeceased" FormName="InformantForm" class="InformantForm">
+	<EditForm id="InformantForm" Model="@editingDeceased" FormName="InformantForm" class="InformantForm">
 		<h5>Informant Information</h5>
 		<div class="FirstCall-group">
 			<!-- Informant Name -->
 			<div class="FirstCall-group1">
 				<label for="InformantName">Informant Name:</label>
-				<InputText id="InformantName" class="fcall" @bind-Value="edittingDeceased.InformantName" />
+				<InputText id="InformantName" class="fcall" @bind-Value="editingDeceased.InformantName" />
 			</div>
 			<!-- Informant Address -->
 			<div class="FirstCall-group1">
 				<label for="IStreetAddress">Informant Street Address:</label>
-				<InputText id="IStreetAddress" class="fcall" @bind-Value="edittingDeceased.IStreetAddress" />
+				<InputText id="IStreetAddress" class="fcall" @bind-Value="editingDeceased.IStreetAddress" />
 			</div>
 			<!-- Informant City -->
 			<div class="FirstCall-group1">
 				<label for="ICity">Informant City:</label>
-				<InputText id="ICity" class="fcall" @bind-Value="edittingDeceased.ICity" />
+				<InputText id="ICity" class="fcall" @bind-Value="editingDeceased.ICity" />
 			</div>
 			<!-- Informant State -->
 			<div class="IState-container">
 				<label for="IState">Select State:</label>
-				<InputSelect @bind-Value="edittingDeceased.IState" class="IState-group" TValue="string">
+				<InputSelect @bind-Value="editingDeceased.IState" class="IState-group" TValue="string">
 					<option value="Alabama">Alabama</option>
 					<option value="Alaska">Alaska</option>
 					<option value="Arizona">Arizona</option>
@@ -318,7 +318,7 @@
 				<label for="IZipcode">Informant Zip Code:</label>
 				<InputText id="IZipCode"
 					class="zipcall"
-					@bind-Value="edittingDeceased.IZipCode"
+					@bind-Value="editingDeceased.IZipCode"
 					inputmode="numeric"
 					pattern="[0-9]*"
 					maxlength="5"
@@ -338,19 +338,19 @@
 			<!-- Informant Email -->
 			<div class="FirstCall-group1">
 				<label for="InformantEmail">Email Address:</label>
-				<InputText id="InformantEmail" class="fcall" @bind-Value="edittingDeceased.InformantEmail" />
+				<InputText id="InformantEmail" class="fcall" @bind-Value="editingDeceased.InformantEmail" />
 			</div>
 		</div>
 		<div class="FirstCall-group">
 			<!-- Informant Relation -->
 			<div class="FirstCall-group1">
 				<label for="InformantRelation">Relation to Deceased:</label>
-				<InputText id="InformantRelation" class="fcall" @bind-Value="edittingDeceased.InformantRelation" />
+				<InputText id="InformantRelation" class="fcall" @bind-Value="editingDeceased.InformantRelation" />
 			</div>
 			<!-- Info Notified -->
 			<div class="FirstCall-group1">
 				<label for="InfoNotified">Date Notified:</label>
-				<InputDate id="InfoNotified" class="fcall" @bind-Value="edittingDeceased.InfoNotified" />
+				<InputDate id="InfoNotified" class="fcall" @bind-Value="editingDeceased.InfoNotified" />
 			</div>
 		</div>
 	</EditForm>
@@ -358,7 +358,7 @@
 @code {
 	private List<Deceased> Deceased = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	private string? PhonePart1 { get; set; }
 	private string? PhonePart2 { get; set; }
@@ -394,9 +394,9 @@
 				}
 			}
 			if (currentRecordIndex != 0)
-				edittingDeceased = CloneDeceased(Deceased[currentRecordIndex - 1]);
+				editingDeceased = CloneDeceased(Deceased[currentRecordIndex - 1]);
 			else
-				edittingDeceased = CloneDeceased(Deceased.Last());
+				editingDeceased = CloneDeceased(Deceased.Last());
 			LoadDigits();
 		}
 	}
@@ -454,9 +454,9 @@
 
 	private void LoadDigits()
 	{
-		if (!string.IsNullOrEmpty(edittingDeceased.SSN))
+		if (!string.IsNullOrEmpty(editingDeceased.SSN))
 		{
-			var ssnParts = edittingDeceased.SSN.Split('-');
+			var ssnParts = editingDeceased.SSN.Split('-');
 			if (ssnParts.Length == 3)
 			{
 				SSNPart1 = ssnParts[0];
@@ -465,9 +465,9 @@
 			}
 		}
 
-		if (!string.IsNullOrEmpty(edittingDeceased.IPhoneNumber))
+		if (!string.IsNullOrEmpty(editingDeceased.IPhoneNumber))
 		{
-			var phoneNumber = edittingDeceased.IPhoneNumber
+			var phoneNumber = editingDeceased.IPhoneNumber
 				.Replace("(", "")
 				.Replace(")", "")
 				.Replace("-", "");
@@ -490,7 +490,7 @@
 				using (var memoryStream = new MemoryStream())
 				{
 					await file.OpenReadStream().CopyToAsync(memoryStream);
-					edittingDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
+					editingDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
 				}
 			}
 			catch (Exception ex)
@@ -502,9 +502,9 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == edittingDeceased.ClientID);
+		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == editingDeceased.ClientID);
 
-		if (string.IsNullOrEmpty(edittingDeceased.FirstName) || string.IsNullOrEmpty(edittingDeceased.LastName))
+		if (string.IsNullOrEmpty(editingDeceased.FirstName) || string.IsNullOrEmpty(editingDeceased.LastName))
 		{
 			Console.WriteLine("First Name and Last Name are required.");
 			return;
@@ -516,7 +516,7 @@
 			Console.WriteLine("SSN is required.");
 		}
 		else
-			edittingDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+			editingDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
 
 		// Format Phone Number
 		if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
@@ -524,43 +524,43 @@
 			Console.WriteLine("Phone number is required.");
 		}
 		else
-			edittingDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+			editingDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
 
 		// Save
 		if (entity is not null)
 		{
-			entity.ClientID = edittingDeceased.ClientID;
-			entity.Director = edittingDeceased.Director;
-			entity.FirstName = edittingDeceased.FirstName;
-			entity.LastName = edittingDeceased.LastName;
-			entity.MiddleName = edittingDeceased.MiddleName;
-			entity.Title = edittingDeceased.Title;
-			entity.Suffix = edittingDeceased.Suffix;
-			entity.Status = edittingDeceased.Status;
-			entity.StreetAddress = edittingDeceased.StreetAddress;
-			entity.City = edittingDeceased.City;
-			entity.State = edittingDeceased.State;
-			entity.ZipCode = edittingDeceased.ZipCode;
-			entity.ContractBalance = edittingDeceased.ContractBalance;
-			entity.DoD = edittingDeceased.DoD;
-			entity.TimeOfDeath = edittingDeceased.TimeOfDeath;
-			entity.SSN = edittingDeceased.SSN;
-			entity.Gender = edittingDeceased.Gender;
-			entity.MaidenName = edittingDeceased.MaidenName;
-			entity.Alias = edittingDeceased.Alias;
-			entity.Vet = edittingDeceased.Vet;
-			entity.War = edittingDeceased.War;
-			entity.InformantName = edittingDeceased.InformantName;
-			entity.IStreetAddress = edittingDeceased.IStreetAddress;
-			entity.ICity = edittingDeceased.ICity;
-			entity.IState = edittingDeceased.IState;
-			entity.IZipCode = edittingDeceased.IZipCode;
-			entity.IPhoneNumber = edittingDeceased.IPhoneNumber;
-			entity.InformantEmail = edittingDeceased.InformantEmail;
-			entity.InfoNotified = edittingDeceased.InfoNotified;
-			entity.Notes = edittingDeceased.Notes;
-			entity.Image = edittingDeceased.Image;
-			entity.InformantRelation = edittingDeceased.InformantRelation;
+			entity.ClientID = editingDeceased.ClientID;
+			entity.Director = editingDeceased.Director;
+			entity.FirstName = editingDeceased.FirstName;
+			entity.LastName = editingDeceased.LastName;
+			entity.MiddleName = editingDeceased.MiddleName;
+			entity.Title = editingDeceased.Title;
+			entity.Suffix = editingDeceased.Suffix;
+			entity.Status = editingDeceased.Status;
+			entity.StreetAddress = editingDeceased.StreetAddress;
+			entity.City = editingDeceased.City;
+			entity.State = editingDeceased.State;
+			entity.ZipCode = editingDeceased.ZipCode;
+			entity.ContractBalance = editingDeceased.ContractBalance;
+			entity.DoD = editingDeceased.DoD;
+			entity.TimeOfDeath = editingDeceased.TimeOfDeath;
+			entity.SSN = editingDeceased.SSN;
+			entity.Gender = editingDeceased.Gender;
+			entity.MaidenName = editingDeceased.MaidenName;
+			entity.Alias = editingDeceased.Alias;
+			entity.Vet = editingDeceased.Vet;
+			entity.War = editingDeceased.War;
+			entity.InformantName = editingDeceased.InformantName;
+			entity.IStreetAddress = editingDeceased.IStreetAddress;
+			entity.ICity = editingDeceased.ICity;
+			entity.IState = editingDeceased.IState;
+			entity.IZipCode = editingDeceased.IZipCode;
+			entity.IPhoneNumber = editingDeceased.IPhoneNumber;
+			entity.InformantEmail = editingDeceased.InformantEmail;
+			entity.InfoNotified = editingDeceased.InfoNotified;
+			entity.Notes = editingDeceased.Notes;
+			entity.Image = editingDeceased.Image;
+			entity.InformantRelation = editingDeceased.InformantRelation;
 		}
 		await Context.SaveChangesAsync();
 	}
@@ -568,35 +568,35 @@
 	<!-- Page Navigation -->
 	private void NavigateToContract()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Contract?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Contract?currentRecordString={editingDeceased.ClientID}");
 	}
 
 	private void NavigateToMilitary()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Military?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Military?currentRecordString={editingDeceased.ClientID}");
 	}
 
 	private void NavigateToPlaceOfDeath()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/PlaceOfDeath?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/PlaceOfDeath?currentRecordString={editingDeceased.ClientID}");
 	}
 	private void NavigateToObituary()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Obituary?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Obituary?currentRecordString={editingDeceased.ClientID}");
 	}
 	private void NavigateToEmbalmer()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Embalmer?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Embalmer?currentRecordString={editingDeceased.ClientID}");
 	}
 	private void NavigateToSuvivor()
 	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Suvivor?currentRecordString={edittingDeceased.ClientID}");
+		if (editingDeceased?.ClientID > 0)
+			NavigationManager.NavigateTo($"/Suvivor?currentRecordString={editingDeceased.ClientID}");
 	}
 }
 

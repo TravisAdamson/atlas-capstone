@@ -13,14 +13,14 @@
 @using Microsoft.AspNetCore.Components.Web
 
 <ActiveService
-	Director="@edittingDeceased.Director"
-	FirstName="@edittingDeceased.FirstName"
-	MiddleName="@edittingDeceased.MiddleName"
-	LastName="@edittingDeceased.LastName"
-	Title="@edittingDeceased.Title"
-	Status="@edittingDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
-	Photo="@edittingDeceased.Image" />
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
 
 
 <PageTitle>Military Record</PageTitle>
@@ -126,7 +126,7 @@
 	private FlagApplication editingFlag = new();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 	private string selectedTab = "Stints";
 
 
@@ -138,7 +138,7 @@
 
 		var militaryList = await Db.Military.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
-		edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (militaryList.Any())
 		{
 			editingMilitary = militaryList.First(); // Or adjust this to load by ID if needed
@@ -250,14 +250,6 @@
 	flex-wrap: wrap;
 }
 
-.FirstCall-group1 {
-	margin-bottom: 15px;
-}
-
-label {
-	font-weight: bold;
-}
-
 .form-control { /* fields under place of death but above the tabs */
 	width: 100%;
 	font-size: 1em;
@@ -286,7 +278,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	margin-right: .5rem;
-	margin-bottom: .5rem;
+	margin-bottom: .25rem;
 	margin-top: .25rem;
 	box-sizing: border-box;
 }
