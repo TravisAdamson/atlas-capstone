@@ -1,16 +1,20 @@
 @page "/Cause of Death"
-@inject RESTDB.Data.ApplicationDbContext Context
-@inject NavigationManager NavigationManager
-@inject REST.Services.GlobalState GlobalState
-@using RESTDB.Models
+
 @using RESTDB.Migrations
 @using RESTDB.Data
 @using REST.Components.Shared
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+@using RESTDB.Models
+
+@inherits LayoutComponentBase
+
+@inject RESTDB.Data.ApplicationDbContext Context
+@inject NavigationManager NavigationManager
+@inject REST.Services.GlobalState GlobalState
+
+@rendermode InteractiveServer
 
 <ActiveService
 	Director="@editingDeceased.Director"
@@ -44,28 +48,23 @@
 				<label>Manner</label>
 				<InputText class="form-control" @bind-Value="editingCause.Manner" />
 			</div>
-
 			<div class="Form-group">
 				<label>Other</label>
 				<InputText class="form-control" @bind-Value="editingCause.Other" />
 			</div>
-
 			<div class="Form-group">
 				<label>Type Of Factor</label>
 				<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
 			</div>
-
 			<div class="Form-group">
 				<label>Cause Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.CauseFactors" />
 			</div
-
 			<div class="Form-group">
 				<label>Other Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.OtherFactors" />
 			</div>
 		</div>
-
 		<div class="Cause-group">
 			<div class="Form-group">
 				<label>Diabetic</label>
@@ -127,7 +126,6 @@
 	</EditForm>
 </div>
 
-
 @code {
 	private List<CauseOfDeath> causeList = new();
 	private CauseOfDeath editingCause = new();
@@ -158,7 +156,6 @@
 					nexVis = currentRecord < causeList.Count;
 				}
 			}
-
 			editingCause = CloneCause(currentRecordIndex > 0 ? causeList[currentRecordIndex - 1] : causeList.Last());
 		}
 	}
@@ -277,6 +274,7 @@
 		}
 	}
 }
+
 <style>
 	.CauserForm h5 {
 		font-size: 1.7em;
