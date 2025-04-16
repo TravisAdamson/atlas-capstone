@@ -110,23 +110,23 @@
 			<div class="FirstCall-group">
 				<div class="FirstCall-group1">
 					<label>Ship From</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipFrom" />
+					<InputText class="form-control" @bind-Value="editingShipping.ShipFrom" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Ship To</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipTo" />
+					<InputText class="form-control" @bind-Value="editingShipping.ShipTo" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Ship From Name</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipFromName" />
+					<InputText class="form-control" @bind-Value="editingShipping.ShipFromName" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Ship To Name</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipToName" />
+					<InputText class="form-control" @bind-Value="editingShipping.ShipToName" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Notes</label>
-					<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+					<InputTextArea class="form-control" @bind-Value="editingShipping.Notes" />
 				</div>
 			</div>
 		}
@@ -136,26 +136,27 @@
 			<div class="FirstCall-group">
 			<div class="FirstCall-group1">
 				<label>Item</label>
-				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+				<InputTextArea class="form-control" @bind-Value="editingShipping.Notes" />
 			</div>
 			<div class="FirstCall-group1">
 				<label>Qty</label>
-				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+				<InputTextArea class="form-control" @bind-Value="editingShipping.Notes" />
 			</div>
 			</div>
 		}
 	</div>
 
 @code {
-	private List<Airline> airlineList = new();
-	private Airline editingAirline = new();
-	private int currentRecordIndex = 0;
-	private string? currentRecordString;
-	private bool preVis = true, nexVis = true;
 	private string selectedTab = "Airline";
-	private ContainerShipping shippingInfo = new();
-	private List<PlaceOfDeath> placeList = new();
-	private PlaceOfDeath editingPlace = new();
+	private List<Airline> airlineList = new List<Airline>();
+	private Airline editingAirline = new Airline();
+	private Airline currentAirline = new Airline();
+	private List<ContainerShipping> shippingList = new List<ContainerShipping>();
+	private ContainerShipping editingShipping = new ContainerShipping();
+	private ContainerShipping currentShipping = new ContainerShipping();
+	private List<PlaceOfDeath> placeList = new List<PlaceOfDeath>();
+	private PlaceOfDeath editingPlace = new PlaceOfDeath();
+	private PlaceOfDeath currentPlace = new PlaceOfDeath();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
 	private Deceased editingDeceased = new Deceased();
@@ -169,39 +170,36 @@
 		airlineList = await Db.Airline.ToListAsync();
 		placeList = await Db.PlaceOfDeath.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
+		shippingList = await Db.ContainerShipping.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		editingAirline = CloneAirline(airlineList[GlobalState.clientID - 1]);
+		editingPlace = ClonePlace(placeList[GlobalState.clientID - 1]);
+		editingShipping = CloneShipping(shippingList[GlobalState.clientID - 1]);
+	}
 
-		int index = GlobalState.clientID - 1;
-
-		if (index >= 0 && index < deceasedList.Count) // ensure index is valid before access
+	private ContainerShipping CloneShipping(ContainerShipping original)
+	{
+		return new ContainerShipping
 		{
-			editingDeceased = CloneDeceased(deceasedList[index]);
-		}
-		else
-		{
-			// handle by pick first record, show an error, etc.
-			editingDeceased = deceasedList.Any() ? CloneDeceased(deceasedList.First()) : new Deceased(); // or some fallback
-		}
-
-		if (airlineList.Any())
-		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
-			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < airlineList.Count;
-				}
-			}
-			editingAirline = CloneAirline(currentRecordIndex > 0 ? airlineList[currentRecordIndex - 1] : airlineList.Last());
-		}
-
-		if (placeList.Any())
-		{
-			editingPlace = ClonePlace(currentRecordIndex > 0 ? placeList[currentRecordIndex - 1] : placeList.Last());
-		}
+			Id = original.Id,
+			ShipFrom = original.ShipFrom,
+			ShipTo = original.ShipTo,
+			ShipToName = original.ShipToName,
+			ShipFromName = original.ShipFromName,
+			ShipFromStreet = original.ShipFromStreet,
+			ShipFromZip = original.ShipFromStreet,
+			ShipFromTownship = original.ShipFromTownship,
+			ShipFromLocality = original.ShipFromLocality,
+			ShipFromState = original.ShipFromState,
+			ShipToStreet = original.ShipToStreet,
+			ShipToZip = original.ShipToZip,
+			ShipToTownship = original.ShipToTownship,
+			ShipToLocality = original.ShipToLocality,
+			ShipToState = original.ShipToState,
+			ShipToCountry = original.ShipToCountry,
+			ShipToCounty = original.ShipToCounty,
+			Notes = original.Notes
+		};
 	}
 
 	private Airline CloneAirline(Airline original)
@@ -306,30 +304,65 @@
 
 	private async Task SavePlaceRecord()
 	{
-		var entity = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
-		if (entity is not null)
+		var entityP = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
+		if (entityP is not null)
 		{
-			entity.Name = editingPlace.Name;
-			entity.MedicalRecordNumber = editingPlace.MedicalRecordNumber;
-			entity.StreetAddress = editingPlace.StreetAddress;
-			entity.AptNumber = editingPlace.AptNumber;
-			entity.TypeOfFacility = editingPlace.TypeOfFacility;
-			entity.CallTakenBy = editingPlace.CallTakenBy;
-			entity.ZipCode = editingPlace.ZipCode;
-			entity.LocalityType = editingPlace.LocalityType;
-			entity.Township = editingPlace.Township;
-			entity.Locality = editingPlace.Locality;
-			entity.State = editingPlace.State;
-			entity.County = editingPlace.County;
-			entity.Country = editingPlace.Country;
-			entity.InCityLimits = editingPlace.InCityLimits;
-			entity.DirectorNotifyDate = editingPlace.DirectorNotifyDate;
-			entity.DirectorNotifedTime = editingPlace.DirectorNotifedTime;
-			entity.AdmissionDate = editingPlace.AdmissionDate;
-			entity.BodyReleaseTime = editingPlace.BodyReleaseTime;
-
-			await Db.SaveChangesAsync();
+			entityP.Name = editingPlace.Name;
+			entityP.MedicalRecordNumber = editingPlace.MedicalRecordNumber;
+			entityP.StreetAddress = editingPlace.StreetAddress;
+			entityP.AptNumber = editingPlace.AptNumber;
+			entityP.TypeOfFacility = editingPlace.TypeOfFacility;
+			entityP.CallTakenBy = editingPlace.CallTakenBy;
+			entityP.ZipCode = editingPlace.ZipCode;
+			entityP.LocalityType = editingPlace.LocalityType;
+			entityP.Township = editingPlace.Township;
+			entityP.Locality = editingPlace.Locality;
+			entityP.State = editingPlace.State;
+			entityP.County = editingPlace.County;
+			entityP.Country = editingPlace.Country;
+			entityP.InCityLimits = editingPlace.InCityLimits;
+			entityP.DirectorNotifyDate = editingPlace.DirectorNotifyDate;
+			entityP.DirectorNotifedTime = editingPlace.DirectorNotifedTime;
+			entityP.AdmissionDate = editingPlace.AdmissionDate;
+			entityP.BodyReleaseTime = editingPlace.BodyReleaseTime;
 		}
+
+		var entityS = await Db.ContainerShipping.FirstOrDefaultAsync(s => s.Id == editingShipping.Id);
+		if (entityS is not null)
+		{
+			entityS.Id = editingShipping.Id;
+			entityS.ShipFrom = editingShipping.ShipFrom;
+			entityS.ShipTo = editingShipping.ShipTo;
+			entityS.ShipToName = editingShipping.ShipToName;
+			entityS.ShipFromName = editingShipping.ShipFromName;
+			entityS.ShipFromStreet = editingShipping.ShipFromStreet;
+			entityS.ShipFromZip = editingShipping.ShipFromStreet;
+			entityS.ShipFromTownship = editingShipping.ShipFromTownship;
+			entityS.ShipFromLocality = editingShipping.ShipFromLocality;
+			entityS.ShipFromState = editingShipping.ShipFromState;
+			entityS.ShipToStreet = editingShipping.ShipToStreet;
+			entityS.ShipToZip = editingShipping.ShipToZip;
+			entityS.ShipToTownship = editingShipping.ShipToTownship;
+			entityS.ShipToLocality = editingShipping.ShipToLocality;
+			entityS.ShipToState = editingShipping.ShipToState;
+			entityS.ShipToCountry = editingShipping.ShipToCountry;
+			entityS.ShipToCounty = editingShipping.ShipToCounty;
+			entityS.Notes = editingShipping.Notes;
+		}
+		var entityA = await Db.Airline.FirstOrDefaultAsync(a => a.Id == editingAirline.Id);
+		if (entityA is not null)
+		{
+			entityA.Id = editingAirline.Id;
+			entityA.AirlineName = editingAirline.AirlineName;
+			entityA.Country = editingAirline.Country;
+			entityA.Founded = editingAirline.Founded;
+			entityA.IATA = editingAirline.IATA;
+			entityA.ICAO = editingAirline.ICAO;
+			entityA.FleetSize = editingAirline.FleetSize;
+			entityA.LogoUrl = editingAirline.LogoUrl;
+		}
+			await Db.SaveChangesAsync();
+
 	}
 
 	private void SelectTab(string tabName)
