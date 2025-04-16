@@ -55,20 +55,35 @@
 					<div class="FirstCall-group1">
 						<label for="Director">Director</label>
 						<InputSelect @bind-Value="editingDeceased.Director" class="State-group" TValue="string">
-							<option value="Denise Adamson">Denise Adamson</option>
-							<option value="Jon Hoopert">Jon Hoopert</option>
-							<option value="James Groesbeck">James Groesbeck</option>
-							<option value="John Heim">John Heim</option>
+								<option value="Denise Adamson">Denise Adamson</option>
+								<option value="Jon Hoopert">Jon Hoopert</option>
+								<option value="James Groesbeck">James Groesbeck</option>
+						</InputSelect>
+					</div>
+					<!-- Case Status -->
+					<div class="FirstCall-group1">
+						<label for="Need">Pre-Need or At-Need:</label>
+						<InputSelect id="Need" class="State-group" TValue="string" @bind-Value="editingDeceased.Need">
+								<option value="Pre-Need">Pre-Need</option>
+								<option value="At-Need">At-Need</option>
 						</InputSelect>
 					</div>
 					<div class="FirstCall-group1">
 						<label for="Status">Case Status:</label>
-						<InputText id="Status" class="fcall" @bind-Value="editingDeceased.Status" />
+						<InputSelect id="Status" class="State-group" TValue="string" @bind-Value="editingDeceased.Status">
+								<option value="Pending">Pending</option>
+								<option value="Closed">Closed</option>
+								<option value="Charged off">Charged off</option>
+						</InputSelect>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="ServiceID">Service ID:</label>
+						<InputText id="ServiceID" class="UniqueServiceID" @bind-Value="editingDeceased.ServiceID" />
 					</div>
 					<div class="ShowImage">
 						@if (editingDeceased.Image != null)
 						{
-							<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 260px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
+							<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 258px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
 						}
 					</div>
 				</div>
@@ -342,16 +357,11 @@
 	else if (selectedTab == "Secondary Info")
 	{
 		<h5>Secondary Info</h5>
-		/*
 		<EditForm Model="@editingDeceased" OnValidSubmit="SaveRecord">
 			<div class="FirstCall-group">
 				<div class="FirstCall-group1">
 					<label>Birth Date</label>
-					<InputDate class="fcall" @bind-Value="editingDeceased.BirthDate" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Birth Time</label>
-					<input type="time" class="fcall" @bind="editingDeceased.BirthTime" />
+					<InputDate class="fcall" @bind-Value="editingDeceased.DoB" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Age</label>
@@ -359,19 +369,19 @@
 				</div>
 				<div class="FirstCall-group1">
 					<label>Birth ZIP</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.BirthZip" />
+					<InputText class="fcall" @bind-Value="editingDeceased.BZip" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Birth City</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.BirthCity" />
+					<InputText class="fcall" @bind-Value="editingDeceased.BCity" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Birth County</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.BirthCounty" />
+					<InputText class="fcall" @bind-Value="editingDeceased.BCounty" />
 				</div>
 				<div class="IState-container">
 					<label>Birth State</label>
-					<InputSelect class="fcall" @bind-Value="editingDeceased.BirthState" TValue="string">
+					<InputSelect class="fcall" @bind-Value="editingDeceased.BState" TValue="string">
 						<option value="Alabama">Alabama</option>
 						<option value="Alaska">Alaska</option>
 						<option value="Arizona">Arizona</option>
@@ -427,27 +437,27 @@
 				</div>
 				<div class="FirstCall-group1">
 					<label>Birth Country</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.BirthCountry" />
+					<InputText class="fcall" @bind-Value="editingDeceased.BCountry" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Marital Status</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.MaritalStatus" />
+					<InputText class="fcall" @bind-Value="editingDeceased.MStatus" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Marriage Date</label>
-					<InputDate class="fcall" @bind-Value="editingDeceased.MarriageDate" />
+					<InputDate class="fcall" @bind-Value="editingDeceased.MDate" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Marriage Place</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.MarriagePlace" />
+					<InputText class="fcall" @bind-Value="editingDeceased.MPlace" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Church Attended</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.ChurchAttended" />
+					<InputText class="fcall" @bind-Value="editingDeceased.Church" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Religious Preference</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.ReligiousPreference" />
+					<InputText class="fcall" @bind-Value="editingDeceased.RPreference" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Clergy</label>
@@ -463,15 +473,14 @@
 				</div>
 				<div class="FirstCall-group1">
 					<label>Years of Education</label>
-					<InputNumber class="fcall" @bind-Value="editingDeceased.YearsOfEducation" />
+					<InputNumber class="fcall" @bind-Value="editingDeceased.HYoE" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Education Level</label>
-					<InputText class="fcall" @bind-Value="editingDeceased.EducationLevel" />
+					<InputText class="fcall" @bind-Value="editingDeceased.HEL" />
 				</div>
 			</div>
 		</EditForm>
-		*/
 	}
 </div>
 
@@ -487,7 +496,7 @@
 	private string? SSNPart1 { get; set; }
 	private string? SSNPart2 { get; set; }
 	private string? SSNPart3 { get; set; }
-
+	public string? errorMessage { get; set; }
 	private int currentRecordIndex = 0;
 	private string? currentRecordString;
 	private string? placeholder { get; set; }
@@ -532,12 +541,14 @@
 		return new Deceased
 		{
 			ClientID = original.ClientID,
+			ServiceID = original.ServiceID,
 			Director = original.Director,
 			FirstName = original.FirstName,
 			LastName = original.LastName,
 			MiddleName = original.MiddleName,
 			Title = original.Title,
 			Suffix = original.Suffix,
+			Need = original.Need,
 			Status = original.Status,
 			StreetAddress = original.StreetAddress,
 			City = original.City,
@@ -562,7 +573,26 @@
 			InfoNotified = original.InfoNotified,
 			Notes = original.Notes,
 			Image = original.Image,
-			InformantRelation = original.InformantRelation
+			InformantRelation = original.InformantRelation,
+			DoB = original.DoB,
+			Age = original.Age,
+			BCity = original.BCity,
+			BZip = original.BZip,
+			BCounty = original.BCounty,
+			BState = original.BState,
+			BCountry = original.BCountry,
+			MStatus = original.MStatus,
+			MDate = original.MDate,
+			MPlace = original.MPlace,
+			Church = original.Church,
+			RPreference = original.RPreference,
+			Clergy = original.Clergy,
+			HighSchool = original.HighSchool,
+			HYoE = original.HYoE,
+			HEL = original.HEL,
+			College = original.College,
+			CYoE = original.CYoE,
+			CEL = original.CEL
 		};
 	}
 
@@ -648,40 +678,57 @@
 		// Save to DB
 		if (entity is not null)
 		{
-			entity.ClientID = editingDeceased.ClientID;
-			entity.Director = editingDeceased.Director;
-			entity.FirstName = editingDeceased.FirstName;
-			entity.LastName = editingDeceased.LastName;
-			entity.MiddleName = editingDeceased.MiddleName;
-			entity.Title = editingDeceased.Title;
-			entity.Suffix = editingDeceased.Suffix;
-			entity.Status = editingDeceased.Status;
-			entity.StreetAddress = editingDeceased.StreetAddress;
-			entity.City = editingDeceased.City;
-			entity.State = editingDeceased.State;
-			entity.ZipCode = editingDeceased.ZipCode;
-			entity.ContractBalance = editingDeceased.ContractBalance;
-			entity.DoD = editingDeceased.DoD;
-			entity.TimeOfDeath = editingDeceased.TimeOfDeath;
-			entity.SSN = editingDeceased.SSN;
-			entity.Gender = editingDeceased.Gender;
-			entity.MaidenName = editingDeceased.MaidenName;
-			entity.Alias = editingDeceased.Alias;
-			entity.Vet = editingDeceased.Vet;
-			entity.War = editingDeceased.War;
-			entity.InformantName = editingDeceased.InformantName;
-			entity.IStreetAddress = editingDeceased.IStreetAddress;
-			entity.ICity = editingDeceased.ICity;
-			entity.IState = editingDeceased.IState;
-			entity.IZipCode = editingDeceased.IZipCode;
-			entity.IPhoneNumber = editingDeceased.IPhoneNumber;
-			entity.InformantEmail = editingDeceased.InformantEmail;
-			entity.InfoNotified = editingDeceased.InfoNotified;
-			entity.Notes = editingDeceased.Notes;
-			entity.Image = editingDeceased.Image;
-			entity.InformantRelation = editingDeceased.InformantRelation;
+			try
+			{
+				entity.ClientID = editingDeceased.ClientID;
+				entity.Director = editingDeceased.Director;
+				entity.FirstName = editingDeceased.FirstName;
+				entity.LastName = editingDeceased.LastName;
+				entity.MiddleName = editingDeceased.MiddleName;
+				entity.Title = editingDeceased.Title;
+				entity.Suffix = editingDeceased.Suffix;
+				entity.Status = editingDeceased.Status;
+				entity.StreetAddress = editingDeceased.StreetAddress;
+				entity.City = editingDeceased.City;
+				entity.State = editingDeceased.State;
+				entity.ZipCode = editingDeceased.ZipCode;
+				entity.ContractBalance = editingDeceased.ContractBalance;
+				entity.DoD = editingDeceased.DoD;
+				entity.TimeOfDeath = editingDeceased.TimeOfDeath;
+				entity.SSN = editingDeceased.SSN;
+				entity.Gender = editingDeceased.Gender;
+				entity.MaidenName = editingDeceased.MaidenName;
+				entity.Alias = editingDeceased.Alias;
+				entity.Vet = editingDeceased.Vet;
+				entity.War = editingDeceased.War;
+				entity.InformantName = editingDeceased.InformantName;
+				entity.IStreetAddress = editingDeceased.IStreetAddress;
+				entity.ICity = editingDeceased.ICity;
+				entity.IState = editingDeceased.IState;
+				entity.IZipCode = editingDeceased.IZipCode;
+				entity.IPhoneNumber = editingDeceased.IPhoneNumber;
+				entity.InformantEmail = editingDeceased.InformantEmail;
+				entity.InfoNotified = editingDeceased.InfoNotified;
+				entity.Notes = editingDeceased.Notes;
+				entity.Image = editingDeceased.Image;
+				entity.InformantRelation = editingDeceased.InformantRelation;
 
-			await Context.SaveChangesAsync();
+				await Context.SaveChangesAsync();
+			}
+			catch (DbUpdateException ex)
+			{
+				// You can inspect the inner exception to make sure it's a duplicate key error
+				if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
+				{
+					errorMessage = "A record with this Service ID already exists.";
+				}
+				else
+				{
+					errorMessage = "An unexpected error occurred while saving.";
+				}
+
+				Console.WriteLine($"Error saving record: {ex.Message}");
+			}
 		}
 	}
 }
