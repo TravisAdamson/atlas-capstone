@@ -22,10 +22,10 @@
 	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
 	Photo="@editingDeceased.Image" />
 
-<PageTitle>Place of Death</PageTitle>
+<PageTitle>Cause of Death</PageTitle>
 
 <div class="title-bar">
-	<h1>Place of Death</h1>
+	<h1>Cause of Death</h1>
 	<div class="SubmitRecordButton">
 		<EditForm Model="@editingPlace" OnValidSubmit="SavePlaceRecord">
 			<div class="SaveButtonFirst">
@@ -38,12 +38,11 @@
 	<EditForm Model="@editingPlace">
 	<div class="ContractForm">
 		<div class="pod-field-container">
-			<div class="FirstCall-group1"><label>Name</label><InputText class="form-control" @bind-Value="editingPlace.Name" /></div>
-			<div class="FirstCall-group1"><label>Medical Record Number</label><InputText class="form-control" @bind-Value="editingPlace.MedicalRecordNumber" /></div>
-			<div class="FirstCall-group1"><label>Street Address</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
-			<div class="FirstCall-group1"><label>Apt Number</label><InputText class="form-control" @bind-Value="editingPlace.AptNumber" /></div>
-			<div class="FirstCall-group1"><label>Type of Facility</label><InputText class="form-control" @bind-Value="editingPlace.TypeOfFacility" /></div>
-			<div class="FirstCall-group1"><label>Call Taken By</label><InputText class="form-control" @bind-Value="editingPlace.CallTakenBy" /></div>
+			<div class="FirstCall-group1"><label>Manner Of Death</label><InputText class="form-control" @bind-Value="editingPlace.Name" /></div>
+			<div class="FirstCall-group1"><label>Other</label><InputText class="form-control" @bind-Value="editingPlace.MedicalRecordNumber" /></div>
+			<div class="FirstCall-group1"><label>Other Significant factors contributing to cause of death</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
+		
+
 			<div class="FirstCall-group1"><label>Zip Code</label><InputText class="form-control" @bind-Value="editingPlace.ZipCode" /></div>
 			<div class="FirstCall-group1"><label>Locality Type</label><InputText class="form-control" @bind-Value="editingPlace.LocalityType" /></div>
 			<div class="FirstCall-group1"><label>Township</label><InputText class="form-control" @bind-Value="editingPlace.Township" /></div>
@@ -62,87 +61,18 @@
 
 <!-- Tabs Navigation -->
 	<div class="TabForm">
-		<div class="tab-buttons">
-			<button @onclick="@(() => SelectTab("Airline"))" class="tab-button @(selectedTab == "Airline" ? "active" : "")">Airline</button>
-			<button @onclick="@(() => SelectTab("Shipping Contaner"))" class="tab-button @(selectedTab == "Shipping Contaner" ? "active" : "")">Shipping Container</button>
-			<button @onclick="@(() => SelectTab("Tab3"))" class="tab-button @(selectedTab == "Tab3" ? "active" : "")">Personal Effects</button>
+		<div class="pod-field-container">
+			<div class="FirstCall-group1"><label>Street Address</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
+			<div class="FirstCall-group1"><label>Apt Number</label><InputText class="form-control" @bind-Value="editingPlace.AptNumber" /></div>
+			<div class="FirstCall-group1"><label>Zip Code</label><InputText class="form-control" @bind-Value="editingPlace.ZipCode" /></div>
+			<div class="FirstCall-group1"><label>Locality Type</label><InputText class="form-control" @bind-Value="editingPlace.LocalityType" /></div>
+			<div class="FirstCall-group1"><label>Locality</label><InputText class="form-control" @bind-Value="editingPlace.Locality" /></div>
+			<div class="FirstCall-group1"><label>Township</label><InputText class="form-control" @bind-Value="editingPlace.Township" /></div>
+			<div class="FirstCall-group1"><label>State</label><InputText class="form-control" @bind-Value="editingPlace.State" /></div>
+			<div class="FirstCall-group1"><label>County</label><InputText class="form-control" @bind-Value="editingPlace.County" /></div>
+			<div class="FirstCall-group1"><label>Country</label><InputText class="form-control" @bind-Value="editingPlace.Country" /></div>
+			<div class="FirstCall-group1"><label>In City Limits</label><InputCheckbox class="form-check-input" @bind-Value="editingPlace.InCityLimits" /></div>
 		</div>
-	</div>
-	<div class="Tabinfoform">
-		@if (selectedTab == "Airline")
-		{
-			<h5>Airline Information</h5>
-			<div class="FirstCall-group">
-				<div class="FirstCall-group1">
-					<label>Airline Name</label>
-					<InputText class="fcall" @bind-Value="editingAirline.AirlineName" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Country</label>
-					<InputText class="fcall" @bind-Value="editingAirline.Country" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Founded</label>
-					<InputDate class="fcall" @bind-Value="editingAirline.Founded" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>IATA</label>
-					<InputText class="fcall" @bind-Value="editingAirline.IATA" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>ICAO</label>
-					<InputText class="fcall" @bind-Value="editingAirline.ICAO" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Fleet Size</label>
-					<InputText class="fcall" @bind-Value="editingAirline.FleetSize" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Logo URL</label>
-					<InputText class="fcall" @bind-Value="editingAirline.LogoUrl" />
-				</div>
-			</div>
-		}
-		else if (selectedTab == "Shipping Contaner")
-		{
-			<h5>Shipping Container</h5>
-			<div class="FirstCall-group">
-				<div class="FirstCall-group1">
-					<label>Ship From</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipFrom" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Ship To</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipTo" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Ship From Name</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipFromName" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Ship To Name</label>
-					<InputText class="form-control" @bind-Value="shippingInfo.ShipToName" />
-				</div>
-				<div class="FirstCall-group1">
-					<label>Notes</label>
-					<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
-				</div>
-			</div>
-		}
-		else if (selectedTab == "Tab3")
-		{
-			<h5>Personal Effects</h5>
-			<div class="FirstCall-group">
-			<div class="FirstCall-group1">
-				<label>Item</label>
-				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
-			</div>
-			<div class="FirstCall-group1">
-				<label>Qty</label>
-				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
-			</div>
-			</div>
-		}
 	</div>
 
 @code {
