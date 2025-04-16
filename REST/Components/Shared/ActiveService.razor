@@ -6,10 +6,11 @@
 
 @code {
 	[Parameter] public string? Director { get; set; }
+	[Parameter] public string? ServiceID { get; set; }
 	[Parameter] public string? FirstName { get; set; }
 	[Parameter] public string? MiddleName { get; set; }
 	[Parameter] public string? LastName { get; set; }
-	[Parameter] public string? Title { get; set; }
+	[Parameter] public string? Need { get; set; }
 	[Parameter] public string? Status { get; set; }
 	[Parameter] public decimal? ContractBalance { get; set; }
 	[Parameter] public byte[]? Photo { get; set; }
@@ -20,16 +21,19 @@
 		<strong>Director:</strong> @Director
 	</div>
 	<div class="active-service-field">
+		<strong>ServiceID:</strong> @ServiceID
+	</div>
+	<div class="active-service-field">
 		<strong>Name:</strong> @FirstName @(" ") @MiddleName @(" ") @LastName
+	</div>
+	<div class="active-service-field">
+		<strong>Need:</strong> @Need
 	</div>
 	<div class="active-service-field">
 		<strong>Status:</strong> @Status
 	</div>
 	<div class="active-service-field">
 		<strong>Contract Balance:</strong> @(ContractBalance?.ToString("C") ?? "$0.00")
-	</div>
-	<div class="active-service-field">
-		<strong>Title:</strong> @Title
 	</div>
 	<div class="active-service-field">
 		<strong>Photo:</strong>

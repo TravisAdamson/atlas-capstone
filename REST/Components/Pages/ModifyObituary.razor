@@ -16,10 +16,11 @@
 
 <ActiveService
 	Director="@editingDeceased.Director"
+	ServiceID="@editingDeceased.ServiceID"
 	FirstName="@editingDeceased.FirstName"
 	MiddleName="@editingDeceased.MiddleName"
 	LastName="@editingDeceased.LastName"
-	Title="@editingDeceased.Title"
+	Need="@editingDeceased.Need"
 	Status="@editingDeceased.Status"
 	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
 	Photo="@editingDeceased.Image" />
@@ -172,12 +173,14 @@ private Deceased CloneDeceased(Deceased original)
 		return new Deceased
 		{
 			ClientID = original.ClientID,
+			ServiceID = original.ServiceID,
 			Director = original.Director,
 			FirstName = original.FirstName,
 			LastName = original.LastName,
 			MiddleName = original.MiddleName,
 			Title = original.Title,
 			Suffix = original.Suffix,
+			Need = original.Need,
 			Status = original.Status,
 			StreetAddress = original.StreetAddress,
 			City = original.City,
@@ -202,7 +205,26 @@ private Deceased CloneDeceased(Deceased original)
 			InfoNotified = original.InfoNotified,
 			Notes = original.Notes,
 			Image = original.Image,
-			InformantRelation = original.InformantRelation
+			InformantRelation = original.InformantRelation,
+			DoB = original.DoB,
+			Age = original.Age,
+			BCity = original.BCity,
+			BZip = original.BZip,
+			BCounty = original.BCounty,
+			BState = original.BState,
+			BCountry = original.BCountry,
+			MStatus = original.MStatus,
+			MDate = original.MDate,
+			MPlace = original.MPlace,
+			Church = original.Church,
+			RPreference = original.RPreference,
+			Clergy = original.Clergy,
+			HighSchool = original.HighSchool,
+			HYoE = original.HYoE,
+			HEL = original.HEL,
+			College = original.College,
+			CYoE = original.CYoE,
+			CEL = original.CEL
 		};
 	}
 
