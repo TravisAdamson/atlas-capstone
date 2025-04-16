@@ -12,7 +12,7 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416190614_InitialCreate")]
+    [Migration("20250416192119_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -371,8 +371,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("MDate")
-                        .HasColumnType("longtext");
+                    b.Property<DateTime?>("MDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("MPlace")
                         .HasColumnType("longtext");

@@ -368,8 +368,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("MDate")
-                        .HasColumnType("longtext");
+                    b.Property<DateTime?>("MDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("MPlace")
                         .HasColumnType("longtext");
