@@ -108,7 +108,7 @@
 				}
 			}
 
-			editingEmbalmer = CloneEmbalmer(currentRecordIndex > 0 ? embalmerList[currentRecordIndex - 1] : embalmerList.Last());
+			editingEmbalmer = CloneEmbalmer(embalmerList[GlobalState.clientID - 1]);
 		}
 	}
 

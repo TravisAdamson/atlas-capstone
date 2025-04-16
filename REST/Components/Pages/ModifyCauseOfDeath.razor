@@ -44,29 +44,34 @@
 				<label>Manner</label>
 				<InputText class="form-control" @bind-Value="editingCause.Manner" />
 			</div>
+
 			<div class="Form-group">
 				<label>Other</label>
 				<InputText class="form-control" @bind-Value="editingCause.Other" />
 			</div>
+
+			<div class="Form-group">
+				<label>Type Of Factor</label>
+				<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
+			</div>
+
 			<div class="Form-group">
 				<label>Cause Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.CauseFactors" />
 			</div
+
 			<div class="Form-group">
 				<label>Other Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.OtherFactors" />
 			</div>
 		</div>
+
 		<div class="Cause-group">
-			<div class="Form-group">
-				<label>Type Of Factor</label>
-				<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
-			</div>
 			<div class="Form-group">
 				<label>Diabetic</label>
 				<InputText class="form-control" @bind-Value="editingCause.Diabetic" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group-check">
 				<label>Diabetes Contributed</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DContributed" />
 			</div>
@@ -78,45 +83,50 @@
 				<label>Alcohol Use</label>
 				<InputText class="form-control" @bind-Value="editingCause.AlcoholUse" />
 			</div>
-			<div class="Form-group">
+		</div>
+		<div class="Cause-group">
+			<div class="Form-group-check">
 				<label>Hospitalized</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Hospitalized" />
 			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Deffered Diagnosis</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DefferedDiag" />
 			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Communicable Disease</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.CommDisease" />
 			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Organ or Tisue donation considered</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DonationConsidered" />
 			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Consent for Donation</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DonationConsented" />
 			</div>
-			<div class="Form-group">
-				<label>Anatomical Gift Considered</label>
-				<InputCheckbox class="form-check-input" @bind-Value="editingCause.AnatGiftConsidered" />
-			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Deceased Viewed</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Viewed" />
 			</div>
-			<div class="Form-group">
+			<div class="Form-group-check">
 				<label>Biopsy</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Biopsy" />
 			</div>
+		</div>
+		<div class="Form">
 			<div class="Form-group">
 				<label>Anatomical Gift</label>
 				<InputText class="form-control" @bind-Value="editingCause.AnatGift" />
 			</div>
+			<div class="Form-group-check">
+				<label>Anatomical Gift Considered</label>
+				<InputCheckbox class="form-check-input" @bind-Value="editingCause.AnatGiftConsidered" />
+			</div>
 		</div>
 	</EditForm>
 </div>
+
 
 @code {
 	private List<CauseOfDeath> causeList = new();
@@ -148,6 +158,7 @@
 					nexVis = currentRecord < causeList.Count;
 				}
 			}
+
 			editingCause = CloneCause(currentRecordIndex > 0 ? causeList[currentRecordIndex - 1] : causeList.Last());
 		}
 	}
@@ -286,12 +297,18 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
+		padding: .25rem;
 	}
 
 	.Form-group {
 		display: flex;
 		flex-direction: column;
 		margin-bottom: .5rem;
+	}
+
+	.Form {
+		display: flex;
+		gap: 1rem;
 	}
 
 	.Form-group2 {
