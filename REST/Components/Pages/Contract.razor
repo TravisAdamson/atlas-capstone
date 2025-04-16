@@ -101,19 +101,41 @@
 			<div class="FirstCall-group">
 				<div class="FirstCall-group1">
 					<label>Category</label>
-					<InputText class="fcall" @bind-Value="editingProduct.Category" />
+					<InputText class="fcall" @bind-Value="editingProducts.Category" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Item</label>
-					<InputText class="fcall" @bind-Value="editingProduct.Item" />
+					<InputText class="fcall" @bind-Value="editingProducts.Item" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Tax</label>
-					<InputNumber class="fcall" @bind-Value="editingProduct.Tax" />
+					<InputNumber class="fcall" @bind-Value="editingProducts.Tax" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Price</label>
-					<InputNumber class="fcall" @bind-Value="editingProduct.Price" />
+					<InputNumber class="fcall" @bind-Value="editingProducts.Price" />
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Services")
+		{
+			<h5>Services</h5>
+			<div class="FirstCall-group">
+				<div class="FirstCall-group1">
+					<label>Category</label>
+					<InputText class="fcall" @bind-Value="editingServices.Category" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Item</label>
+					<InputText class="fcall" @bind-Value="editingServices.Item" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Tax</label>
+					<InputNumber class="fcall" @bind-Value="editingServices.Tax" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Price</label>
+					<InputNumber class="fcall" @bind-Value="editingServices.Price" />
 				</div>
 			</div>
 		}
@@ -122,9 +144,18 @@
 </div>
 
 @code {
-	private ServiceContract editingContract = new();
-	private Buyer editingBuyer = new();
-	private Products editingProduct = new();
+	private List<ServiceContract> contractList = new List<ServiceContract>();
+	private ServiceContract currentContract = new ServiceContract();
+	private ServiceContract editingContract = new ServiceContract();
+	private List<Buyer> buyerList = new List<Buyer>();
+	private Buyer currentBuyer = new Buyer();
+	private Buyer editingBuyer = new Buyer();
+	private List<Products> productsList = new List<Products>();
+	private Products currentProducts = new Products();
+	private Products editingProducts = new Products();
+	private List<Services> servicesList = new List<Services>();
+	private Services currentServices = new Services();
+	private Services editingServices = new Services();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
 	private Deceased editingDeceased = new Deceased();
@@ -136,13 +167,16 @@
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
-		var contractList = await Db.ServiceContract.ToListAsync();
+		contractList = await Db.ServiceContract.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
+		productsList = await Db.Products.ToListAsync();
+		servicesList = await Db.Services.ToListAsync();
+		buyerList = await Db.Buyer.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		if (contractList.Any())
-		{
-			editingContract = contractList.First(); // Replace with ID-based logic if needed
-		}
+		editingContract = CloneContract(contractList[GlobalState.clientID - 1]);
+		editingBuyer = CloneBuyer(buyerList[GlobalState.clientID - 1]);
+		editingServices = CloneServices(servicesList[GlobalState.clientID - 1]);
+		editingProducts = CloneProducts(productsList[GlobalState.clientID - 1]);
 	}
 
 	private Deceased CloneDeceased(Deceased original)
@@ -205,19 +239,98 @@
 		};
 	}
 
+	private ServiceContract CloneContract(ServiceContract original)
+	{
+		return new ServiceContract
+		{
+			Id = original.Id,
+			ContractDate = original.ContractDate,
+			SalesPackage = original.SalesPackage,
+			EstateOwner = original.EstateOwner,
+			Balance = original.Balance,
+			DistributedCharges = original.DistributedCharges
+		};
+	}
+
+	private Buyer CloneBuyer(Buyer original)
+	{
+		return new Buyer
+		{
+			Id = original.Id,
+			Name = original.Name,
+			Address = original.Address,
+			PhoneNumber = original.PhoneNumber,
+			Relationship = original.Relationship,
+			IsPrimaryBuyer = original.IsPrimaryBuyer,
+			SendBill = original.SendBill
+		};
+	}
+
+	private Services CloneServices(Services original)
+	{
+		return new Services
+		{
+			Id = original.Id,
+			Category = original.Category,
+			Item = original.Item,
+			Tax = original.Tax,
+			Price = original.Price
+		};
+	}
+
+	private Products CloneProducts(Products original)
+	{
+		return new Products
+		{
+			Id = original.Id,
+			Category = original.Category,
+			Item = original.Item,
+			Tax = original.Tax,
+			Price = original.Price
+		};
+	}
+
 	private async Task SaveContractRecord()
 	{
-		var entity = await Db.ServiceContract.FirstOrDefaultAsync(c => c.Id == editingContract.Id);
-		if (entity is not null)
+		var entityC = await Db.ServiceContract.FirstOrDefaultAsync(c => c.Id == editingContract.Id);
+		if (entityC is not null)
 		{
-			entity.ContractDate = editingContract.ContractDate;
-			entity.SalesPackage = editingContract.SalesPackage;
-			entity.EstateOwner = editingContract.EstateOwner;
-			entity.Balance = editingContract.Balance;
-			entity.DistributedCharges = editingContract.DistributedCharges;
-
-			await Db.SaveChangesAsync();
+			entityC.ContractDate = editingContract.ContractDate;
+			entityC.SalesPackage = editingContract.SalesPackage;
+			entityC.EstateOwner = editingContract.EstateOwner;
+			entityC.Balance = editingContract.Balance;
+			entityC.DistributedCharges = editingContract.DistributedCharges;
 		}
+		var entityB = await Db.Buyer.FirstOrDefaultAsync(b => b.Id == editingBuyer.Id);
+		if (entityB is not null)
+		{
+			entityB.Id = editingBuyer.Id;
+			entityB.Name = editingBuyer.Name;
+			entityB.Address = editingBuyer.Address;
+			entityB.PhoneNumber = editingBuyer.PhoneNumber;
+			entityB.Relationship = editingBuyer.Relationship;
+			entityB.IsPrimaryBuyer = editingBuyer.IsPrimaryBuyer;
+			entityB.SendBill = editingBuyer.SendBill;
+		}
+		var entityS = await Db.Services.FirstOrDefaultAsync(s => s.Id == editingServices.Id);
+		if (entityS is not null)
+		{
+			entityS.Id = editingServices.Id;
+			entityS.Category = editingServices.Category;
+			entityS.Item = editingServices.Item;
+			entityS.Tax = editingServices.Tax;
+			entityS.Price = editingServices.Price;
+		}
+		var entityP = await Db.Products.FirstOrDefaultAsync(p => p.Id == editingProducts.Id);
+		if (entityP is not null)
+		{
+			entityP.Id = editingProducts.Id;
+			entityP.Category = editingProducts.Category;
+			entityP.Item = editingProducts.Item;
+			entityP.Tax = editingProducts.Tax;
+			entityP.Price = editingProducts.Price;
+		}
+		await Db.SaveChangesAsync();
 	}
 
 	private void SelectTab(string tabName)
