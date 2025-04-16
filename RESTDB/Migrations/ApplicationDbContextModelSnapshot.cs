@@ -177,10 +177,10 @@ namespace RESTDB.Migrations
                     b.Property<string>("OtherFactors")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("PrimaryFactor")
+                    b.Property<string>("TobaccoUse")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TobaccoUse")
+                    b.Property<string>("TypeofFactor")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("Viewed")
