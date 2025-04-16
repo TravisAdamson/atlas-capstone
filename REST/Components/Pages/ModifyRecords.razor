@@ -55,6 +55,7 @@
 					<div class="FirstCall-group1">
 						<label for="Director">Director</label>
 						<InputSelect @bind-Value="editingDeceased.Director" class="State-group" TValue="string">
+								<option value="Select">Select</option>
 								<option value="Denise Adamson">Denise Adamson</option>
 								<option value="Jon Hoopert">Jon Hoopert</option>
 								<option value="James Groesbeck">James Groesbeck</option>
@@ -64,6 +65,7 @@
 					<div class="FirstCall-group1">
 						<label for="Need">Pre-Need or At-Need:</label>
 						<InputSelect id="Need" class="State-group" TValue="string" @bind-Value="editingDeceased.Need">
+								<option value="Select">Select</option>
 								<option value="Pre-Need">Pre-Need</option>
 								<option value="At-Need">At-Need</option>
 						</InputSelect>
@@ -71,6 +73,7 @@
 					<div class="FirstCall-group1">
 						<label for="Status">Case Status:</label>
 						<InputSelect id="Status" class="State-group" TValue="string" @bind-Value="editingDeceased.Status">
+								<option value="Select">Select</option>
 								<option value="Pending">Pending</option>
 								<option value="Closed">Closed</option>
 								<option value="Charged off">Charged off</option>
@@ -134,6 +137,7 @@
 					<div class="IState-container">
 						<label for="State">Select State:</label>
 						<InputSelect @bind-Value="editingDeceased.State" class="State-group" TValue="string">
+							<option value="Select">Select</option>
 							<option value="Alabama">Alabama</option>
 							<option value="Alaska">Alaska</option>
 							<option value="Arizona">Arizona</option>
@@ -227,6 +231,7 @@
 					<div class="gender-container">
 						<label>Gender:</label>
 						<InputSelect @bind-Value="editingDeceased.Gender" class="gender-group" TValue="string">
+							<option value="Select">Select</option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</InputSelect>
@@ -263,6 +268,7 @@
 					<div class="IState-container">
 						<label for="IState">Select State:</label>
 						<InputSelect @bind-Value="editingDeceased.IState" class="IState-group" TValue="string">
+							<option value="Select">Select</option>
 							<option value="Alabama">Alabama</option>
 							<option value="Alaska">Alaska</option>
 							<option value="Arizona">Arizona</option>
@@ -382,6 +388,7 @@
 				<div class="IState-container">
 					<label>Birth State</label>
 					<InputSelect class="fcall" @bind-Value="editingDeceased.BState" TValue="string">
+						<option value="Select">Select</option>
 						<option value="Alabama">Alabama</option>
 						<option value="Alaska">Alaska</option>
 						<option value="Arizona">Arizona</option>
