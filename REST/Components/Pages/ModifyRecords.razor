@@ -16,7 +16,6 @@
 
 <div class="title-bar">
 	<h1>Modifying Record</h1>
-
 	<div class="SubmitRecordButton">
 		<EditForm id="placeholderformid" Model="@editingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
 			<div>
@@ -86,7 +85,7 @@
 					<div class="ShowImage">
 						@if (editingDeceased.Image != null)
 						{
-							<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 258px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
+							<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 258px; max-height: 244px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
 						}
 					</div>
 				</div>
@@ -538,7 +537,6 @@
 				editingDeceased = CloneDeceased(Deceased[currentRecordIndex - 1]);
 			else
 				editingDeceased = CloneDeceased(Deceased.Last());
-
 			LoadDigits();
 		}
 	}
@@ -741,6 +739,10 @@
 }
 
 <style>
+h1 {
+	margin-bottom: 0rem;
+}
+
 .title-bar {
 	display: flex;
 	align-items: center;
@@ -813,7 +815,6 @@
 	display: flex;
 	flex-direction: column;
 	margin-right: 1rem;
-	margin-bottom: .5rem;
 }
 
 .IState-container {
