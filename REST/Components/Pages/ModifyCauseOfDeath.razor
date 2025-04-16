@@ -39,88 +39,87 @@
 <div class="CauseForm">
 	<EditForm Model="@editingCause">
 		<h5>Cause of Death Information</h5>
-
-		<div class="Form-group">
-			<div>
+		<div class="Cause-group">
+			<div class="Form-group">
 				<label>Manner</label>
 				<InputText class="form-check-input" @bind-Value="editingCause.Manner" />
 			</div>
 
-			<div>
+			<div class="Form-group">
 				<label>Other</label>
 				<InputText class="form-check-input" @bind-Value="editingCause.Other" />
 			</div>
 
-			<div>
+			<div class="Form-group">
 				<label>Cause Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.CauseFactors" />
 			</div
 
-			<div>
+			<div class="Form-group">
 				<label>Other Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.OtherFactors" />
 			</div>
 		</div>
 
-	<div class="Form-group2">
-		<div>
-			<label>Type Of Factor</label>
-			<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
-		</div>
+		<div class="Cause-group">
+			<div class="Form-group">
+				<label>Type Of Factor</label>
+				<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
+			</div>
 
-		<div>
-			<label>Diabetic</label>
-			<InputText class="form-control" @bind-Value="editingCause.Diabetic" />
+			<div class="Form-group">
+				<label>Diabetic</label>
+				<InputText class="form-control" @bind-Value="editingCause.Diabetic" />
+			</div>
+			<div class="Form-group">
+				<label>Diabetes Contributed</label>
+				<InputText class="form-control" @bind-Value="editingCause.DContributed" />
+			</div>
+			<div class="Form-group">
+				<label>Tobacco Use</label>
+				<InputText class="form-control" @bind-Value="editingCause.TobaccoUse" />
+			</div>
+			<div class="Form-group">
+				<label>Alcohol Use</label>
+				<InputText class="form-control" @bind-Value="editingCause.AlcoholUse" />
+			</div>
+			<div class="Form-group">
+				<label>Hospitalized</label>
+				<InputText class="form-control" @bind-Value="editingCause.Hospitalized" />
+			</div>
+			<div class="Form-group">
+				<label>Deffered Diagnosis</label>
+				<InputText class="form-control" @bind-Value="editingCause.DefferedDiag" />
+			</div>
+			<div class="Form-group">
+				<label>Communicable Disease</label>
+				<InputText class="form-control" @bind-Value="editingCause.CommDisease" />
+			</div>
+			<div class="Form-group">
+				<label>Organ or Tisue donation considered</label>
+				<InputText class="form-control" @bind-Value="editingCause.DonationConsidered" />
+			</div>
+			<div class="Form-group">
+				<label>Consent for Donation</label>
+				<InputText class="form-control" @bind-Value="editingCause.DonationConsented" />
+			</div>
+			<div class="Form-group">
+				<label>Anatomical Gift Considered</label>
+				<InputText class="form-control" @bind-Value="editingCause.AnatGiftConsidered" />
+			</div>
+			<div class="Form-group">
+				<label>Deceased Viewed</label>
+				<InputText class="form-control" @bind-Value="editingCause.Viewed" />
+			</div>
+			<div class="Form-group">
+				<label>Biopsy</label>
+				<InputText class="form-control" @bind-Value="editingCause.Biopsy" />
+			</div>
+			<div class="Form-group">
+				<label>Anatomical Gift</label>
+				<InputText class="form-control" @bind-Value="editingCause.AnatGift" />
+			</div>
 		</div>
-		<div>
-			<label>Diabetes Contributed</label>
-			<InputText class="form-control" @bind-Value="editingCause.DContributed" />
-		</div>
-		<div>
-			<label>Tobacco Use</label>
-			<InputText class="form-control" @bind-Value="editingCause.TobaccoUse" />
-		</div>
-		<div>
-			<label>Alcohol Use</label>
-			<InputText class="form-control" @bind-Value="editingCause.AlcoholUse" />
-		</div>
-		<div>
-			<label>Hospitalized</label>
-			<InputText class="form-control" @bind-Value="editingCause.Hospitalized" />
-		</div>
-		<div>
-			<label>Deffered Diagnosis</label>
-			<InputText class="form-control" @bind-Value="editingCause.DefferedDiag" />
-		</div>
-		<div>
-			<label>Communicable Disease</label>
-			<InputText class="form-control" @bind-Value="editingCause.CommDisease" />
-		</div>
-		<div>
-			<label>Organ or Tisue donation considered</label>
-			<InputText class="form-control" @bind-Value="editingCause.DonationConsidered" />
-		</div>
-		<div>
-			<label>Consent for Donation</label>
-			<InputText class="form-control" @bind-Value="editingCause.DonationConsented" />
-		</div>
-		<div>
-			<label>Anatomical Gift Considered</label>
-			<InputText class="form-control" @bind-Value="editingCause.AnatGiftConsidered" />
-		</div>
-		<div>
-			<label>Deceased Viewed</label>
-			<InputText class="form-control" @bind-Value="editingCause.Viewed" />
-		</div>
-		<div>
-			<label>Biopsy</label>
-			<InputText class="form-control" @bind-Value="editingCause.Biopsy" />
-		</div>
-		<div>
-			<label>Anatomical Gift</label>
-			<InputText class="form-control" @bind-Value="editingCause.AnatGift" />
-		</div>
-	</div>
 	</EditForm>
 </div>
 
@@ -275,25 +274,31 @@
 	}
 }
 <style>
-	.EmbalmerForm h5 {
+	.CauserForm h5 {
 		font-size: 1.7em;
 		padding-left: .25rem;
 	}
 
-	.EmbalmerForm {
-		max-width: 100%;
-		margin: 0px;
-		padding: .25rem;
+	.CauseForm {
+		border-radius: 6px;
+		padding-top: .25rem;
+		padding-left: .5rem;
+		padding-right: .25rem;
 		background-color: rgb(187, 188, 188);
 		border-radius: 5px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	}
 
+	.Cause-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
 	.Form-group {
 		display: flex;
-		gap: 4rem;
-		margin-bottom: .25rem;
-		padding-left: .25rem;
+		flex-direction: column;
+		margin-bottom: .5rem;
 	}
 
 	.Form-group2 {
