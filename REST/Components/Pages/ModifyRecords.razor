@@ -492,6 +492,12 @@
 
 @code {
 	// Fields
+	protected override void OnInitialized() // This prevents direct URL access when no records exist.
+	{
+		if (GlobalState.clientID <= 0) {NavigationManager.NavigateTo("Search Records");}
+	}
+
+
 	private List<Deceased> Deceased = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
 
