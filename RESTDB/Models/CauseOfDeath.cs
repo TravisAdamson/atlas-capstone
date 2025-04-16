@@ -17,31 +17,31 @@ public class CauseOfDeath
 
 	public string? OtherFactors { get; set; }
 
-	public string? TypeofFactor { get; set; }
+	public string? PrimaryFactor { get; set; }
 
 	public string? Diabetic { get; set; }
 
-	public string? DContributed { get; set; }
+	public bool DContributed { get; set; }
 
 	public string? TobaccoUse { get; set; }
 
 	public string? AlcoholUse { get; set; }
 
-	public string? Hospitalized { get; set; }
+	public bool Hospitalized { get; set; }
 
-	public string? DefferedDiag { get; set; }
+	public bool DefferedDiag { get; set; }
 
-	public string? CommDisease { get; set; }
+	public bool CommDisease { get; set; }
 
-	public string? DonationConsidered { get; set; }
+	public bool DonationConsidered { get; set; }
 
-	public string? DonationConsented { get; set; }
+	public bool DonationConsented { get; set; }
 
-	public string? AnatGiftConsidered { get; set; }
+	public bool AnatGiftConsidered { get; set; }
 
-	public string? Viewed { get; set; }
+	public bool Viewed { get; set; }
 
-	public string? Biopsy { get; set; }
+	public bool Biopsy { get; set; }
 
 	public string? AnatGift { get; set; }
 }
