@@ -5,111 +5,111 @@
 
 <div class="nav-bar-object">
 
-    <!-- Home -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-            <span class="nav-icon bi bi-house-door-fill-nav-menu"></span>
-            <span class="nav-text">Home</span>
-        </NavLink>
-    </div>
+	<!-- Home -->
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+			<span class="nav-icon bi bi-house-door-fill-nav-menu"></span>
+			<span class="nav-text">Home</span>
+		</NavLink>
+	</div>
 
-    <!-- First Call -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="First Call">
-            <span class="nav-icon bi bi-plus-square-fill-nav-menu"></span>
-            <span class="nav-text">First Call</span>
-        </NavLink>
-    </div>
+	<!-- First Call -->
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="First Call">
+			<span class="nav-icon bi bi-plus-square-fill-nav-menu"></span>
+			<span class="nav-text">First Call</span>
+		</NavLink>
+	</div>
 
-    <!-- Modify Records (disabled until a record is selected) -->
-    <div class="nav-item px-3 @(isModifiedOpen ? "open" : "")">
-        <!-- Outer <button> handles the expand behavior. Disabled if !IsRecordSelected. -->
-        <button class="nav-link btn @(DisabledCss)"
-                @onclick="ToggleModified"
-                disabled="@(!IsRecordSelected)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="right"
-                title="@(IsRecordSelected ? "" : "Select a record in Search Records first")"
+	<!-- Modify Records (disabled until a record is selected) -->
+	<div class="nav-item px-3 @(isModifiedOpen ? "open" : "")">
+		<!-- Outer <button> handles the expand behavior. Disabled if !IsRecordSelected. -->
+		<button class="nav-link btn @(DisabledCss)"
+				@onclick="ToggleModified"
+				disabled="@(!IsRecordSelected)"
+				data-bs-toggle="tooltip"
+				data-bs-placement="right"
+				title="@(IsRecordSelected ? "" : "Select a record in Search Records first")"
 				style="font-size: 14.4px;">
 
-            <!-- inner NavLink only active when enabled -->
-            @if (IsRecordSelected)
-            {
-                <NavLink class="nav-link" href="Modify Records">
-                    <span class="nav-icon bi bi-wrench-fill-nav-menu"></span>
-                    <span class="nav-text">Modify Records</span>
-                    <span class="ms-auto @(isModifiedOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></span>
-                </NavLink>
-            }
-            else
-            {
-                <span class="d-flex align-items-center w-100" style="padding-left: 1rem;">
-                    <span class="nav-icon bi bi-wrench-fill-nav-menu"></span>
-                    <span class="nav-text">Modify Records</span>
-                    <span class="ms-auto bi-caret-down-fill"></span>
-                </span>
-            }
-        </button>
+			<!-- inner NavLink only active when enabled -->
+			@if (IsRecordSelected)
+			{
+				<NavLink class="nav-link">
+					<span class="nav-icon bi bi-wrench-fill-nav-menu"></span>
+					<span class="nav-text">Modify Records</span>
+					<span class="ms-auto @(isModifiedOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></span>
+				</NavLink>
+			}
+			else
+			{
+				<span class="d-flex align-items-center w-100" style="padding-left: 1rem;">
+					<span class="nav-icon bi bi-wrench-fill-nav-menu"></span>
+					<span class="nav-text">Modify Records</span>
+					<span class="ms-auto bi-caret-down-fill"></span>
+				</span>
+			}
+		</button>
 
-        @if (isModifiedOpen && IsRecordSelected)
-        {
-            <ul class="nav flex-column ms-4">
-			    <li class="nav-item"><NavLink class="nav-link" href="Cause of Death">• Deceased Information</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Cause of Death">• Cause of Death</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Place of Death">• Place of Death</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Military">• Military</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Contract">• Contract</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Survivor">• Survivor</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Embalmer">• Embalmer</NavLink></li>
-                <li class="nav-item"><NavLink class="nav-link" href="Obituary">• Obituary</NavLink></li>
-            </ul>
-        }
-    </div>
+		@if (isModifiedOpen && IsRecordSelected)
+		{
+			<ul class="nav flex-column ms-4">
+				<li class="nav-item"><NavLink class="nav-link" href="Modify Records">• Deceased Info</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Cause of Death">• Cause of Death</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Place of Death">• Place of Death</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Military">• Military</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Contract">• Contract</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Survivor">• Survivor</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Embalmer">• Embalmer</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Obituary">• Obituary</NavLink></li>
+			</ul>
+		}
+	</div>
 
-    <!-- Search Records -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="Search Records">
-            <span class="nav-icon bi bi-search-fill-nav-menu"></span>
-            <span class="nav-text">Search Records</span>
-        </NavLink>
-    </div>
+	<!-- Search Records -->
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="Search Records">
+			<span class="nav-icon bi bi-search-fill-nav-menu"></span>
+			<span class="nav-text">Search Records</span>
+		</NavLink>
+	</div>
 </div>
 
 @code
 {
-    // state helpers
-    private bool IsRecordSelected => GlobalState.clientID > 0;
-    private string DisabledCss => IsRecordSelected ? "" : "disabled-nav";
-    private bool isModifiedOpen;
+	// state helpers
+	private bool IsRecordSelected => GlobalState.clientID > 0;
+	private string DisabledCss => IsRecordSelected ? "" : "disabled-nav";
+	private bool isModifiedOpen;
 
-    // lifecycle
-    protected override void OnInitialized()
-    {
-        Nav.LocationChanged += HandleLocationChanged;
-        UpdateOpenState();
-    }
+	// lifecycle
+	protected override void OnInitialized()
+	{
+		Nav.LocationChanged += HandleLocationChanged;
+		UpdateOpenState();
+	}
 
-    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
-        => UpdateOpenState();
+	private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+		=> UpdateOpenState();
 
-    private void UpdateOpenState()
-    {
-        // auto‑expand submenu when user is on any Modify subpage
-        isModifiedOpen = Nav.Uri.Contains("Modify%20Records", StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Place%20of%20Death", StringComparison.OrdinalIgnoreCase)
+	private void UpdateOpenState()
+	{
+		// auto‑expand submenu when user is on any Modify subpage
+		isModifiedOpen = Nav.Uri.Contains("Modify%20Records", StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Place%20of%20Death", StringComparison.OrdinalIgnoreCase)
 					|| Nav.Uri.Contains("/Cause%20of%20Death", StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Military",           StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Contract",           StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Survivor",           StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Embalmer",           StringComparison.OrdinalIgnoreCase)
-                    || Nav.Uri.Contains("/Obituary",           StringComparison.OrdinalIgnoreCase);
-        StateHasChanged();
-    }
+					|| Nav.Uri.Contains("/Military",		   StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Contract",		   StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Survivor",		   StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Embalmer",		   StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Obituary",		   StringComparison.OrdinalIgnoreCase);
+		StateHasChanged();
+	}
 
-    // UI actions
-    private void ToggleModified()
-    {
-        if (!IsRecordSelected) return;     // ignore clicks when disabled
-        isModifiedOpen = !isModifiedOpen;
-    }
+	// UI actions
+	private void ToggleModified()
+	{
+		if (!IsRecordSelected) return;	 // ignore clicks when disabled
+		isModifiedOpen = !isModifiedOpen;
+	}
 }
