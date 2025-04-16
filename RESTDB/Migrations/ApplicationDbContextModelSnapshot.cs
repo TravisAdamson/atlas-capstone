@@ -67,7 +67,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("IsPrimaryBuyer")
+                    b.Property<bool>("IsPrimaryBuyer")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
@@ -79,7 +79,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("Relationship")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("SendBill")
+                    b.Property<bool>("SendBill")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
@@ -202,10 +202,43 @@ namespace RESTDB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("ClientID"));
 
+                    b.Property<string>("Age")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Alias")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("BCity")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BCountry")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BCounty")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BState")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BZip")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CEL")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CYoE")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Church")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("City")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Clergy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("College")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ContractBalance")
@@ -214,6 +247,9 @@ namespace RESTDB.Migrations
                     b.Property<string>("Director")
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("DoB")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime?>("DoD")
                         .HasColumnType("datetime(6)");
 
@@ -221,6 +257,15 @@ namespace RESTDB.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HEL")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HYoE")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HighSchool")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ICity")
@@ -256,17 +301,35 @@ namespace RESTDB.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("MDate")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MPlace")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MStatus")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("MaidenName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Need")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Notes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RPreference")
                         .HasColumnType("longtext");
 
                     b.Property<string>("SSN")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("State")
                         .HasColumnType("longtext");
@@ -297,6 +360,9 @@ namespace RESTDB.Migrations
 
                     b.HasKey("ClientID");
 
+                    b.HasIndex("ServiceID")
+                        .IsUnique();
+
                     b.ToTable("Deceased");
                 });
 
@@ -308,7 +374,7 @@ namespace RESTDB.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<bool?>("Embalmed")
+                    b.Property<bool>("Embalmed")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("EmbalmedBy")
@@ -323,7 +389,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("EmbalmingAuthorizor")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("PermissionToEmbalm")
+                    b.Property<bool>("PermissionToEmbalm")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
@@ -453,7 +519,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("DistributionFormat")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("IncludePrimaryPhoto")
+                    b.Property<bool>("IncludePrimaryPhoto")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LastAtneedId")
@@ -471,16 +537,16 @@ namespace RESTDB.Migrations
                     b.Property<string>("Obituary")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("Primary")
+                    b.Property<bool>("Primary")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("RelationshipCount")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("ShowSurvivorAddresses")
+                    b.Property<bool>("ShowSurvivorAddresses")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("ShowSurvivorRelationships")
+                    b.Property<bool>("ShowSurvivorRelationships")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("WordCount")
@@ -523,7 +589,7 @@ namespace RESTDB.Migrations
                     b.Property<DateTime?>("DirectorNotifyDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<bool?>("InCityLimits")
+                    b.Property<bool>("InCityLimits")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Locality")
@@ -642,34 +708,7 @@ namespace RESTDB.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("RESTDB.Models.WarsServed", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("MilitaryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WarMilitaryId")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("WarName")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MilitaryId");
-
-                    b.ToTable("WarsServed");
-                });
-
-            modelBuilder.Entity("Survivors", b =>
+            modelBuilder.Entity("RESTDB.Models.Survivors", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -695,7 +734,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("GreatGreatGreatGrandChildrenCount")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("IsLiving")
+                    b.Property<bool>("IsLiving")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
@@ -713,6 +752,33 @@ namespace RESTDB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Survivors");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.WarsServed", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("MilitaryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WarMilitaryId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WarName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MilitaryId");
+
+                    b.ToTable("WarsServed");
                 });
 
             modelBuilder.Entity("RESTDB.Models.MilitaryStint", b =>

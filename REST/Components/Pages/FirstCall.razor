@@ -33,8 +33,23 @@
 			</div>
 			<!-- Case Status -->
 			<div class="FirstCall-group1">
+				<label for="Need">Pre-Need or At-Need:</label>
+				<InputSelect id="Need" class="State-group" TValue="string" @bind-Value="currentDeceased.Need">
+						<option value="Pre-Need">Pre-Need</option>
+						<option value="At-Need">At-Need</option>
+				</InputSelect>
+			</div>
+			<div class="FirstCall-group1">
 				<label for="Status">Case Status:</label>
-				<InputText id="Status" class="fcall" @bind-Value="currentDeceased.Status" />
+				<InputSelect id="Status" class="State-group" TValue="string" @bind-Value="currentDeceased.Status">
+						<option value="Pending">Pending</option>
+						<option value="Closed">Closed</option>
+						<option value="Charged off">Charged off</option>
+				</InputSelect>
+			</div>
+			<div class="FirstCall-group1">
+				<label for="ServiceID">Service ID:</label>
+				<InputText id="ServiceID" class="UniqueServiceID" @bind-Value="currentDeceased.ServiceID" />
 			</div>
 			<div class="ShowImage">
 				@if (currentDeceased.Image != null)
@@ -382,7 +397,7 @@
 	private string? SSNPart3 { get; set; }
 
 	private string? placeholder { get; set; }
-
+	private string? errorMessage { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -397,9 +412,9 @@
 
 	private async Task SaveRecord()
 	{
-		if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName))
+		if (string.IsNullOrEmpty(currentDeceased.FirstName) || string.IsNullOrEmpty(currentDeceased.LastName) || string.IsNullOrEmpty(currentDeceased.ServiceID))
 		{
-			Console.WriteLine("First Name and Last Name are required.");
+			Console.WriteLine("First Name, Last Name, and Service ID are required.");
 			return;
 		}
 
@@ -420,6 +435,8 @@
 			currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
 
 		// Save
+	try
+	{
 		currentDeceased.ClientID = GetNextClientID();
 		Context.Deceased.Add(currentDeceased);
 		Context.Airline.Add(currentAirline);
@@ -444,6 +461,22 @@
 		currentDeceased = new RESTDB.Models.Deceased();
 		PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
 		SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
+    }
+    catch (DbUpdateException ex)
+    {
+        // You can inspect the inner exception to make sure it's a duplicate key error
+        if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
+        {
+            errorMessage = "A record with this Service ID already exists.";
+        }
+        else
+        {
+            errorMessage = "An unexpected error occurred while saving.";
+        }
+
+        Console.WriteLine($"Error saving record: {ex.Message}");
+    }
+
 	}
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)
 	{
