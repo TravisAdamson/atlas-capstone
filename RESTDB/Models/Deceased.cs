@@ -47,7 +47,7 @@ public class Deceased
 	public string? BState { get; set; }
 	public string? BCountry { get; set; }
 	public string? MStatus { get; set; }
-	public string? MDate { get; set; }
+	public DateTime? MDate { get; set; }
 	public string? MPlace { get; set; }
 	public string? Church { get; set; }
 	public string? RPreference { get; set; }
