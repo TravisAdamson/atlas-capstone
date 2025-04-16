@@ -14,19 +14,19 @@
 @namespace REST.Components
 
 <ActiveService
-	Director="@edittingDeceased.Director"
-	FirstName="@edittingDeceased.FirstName"
-	MiddleName="@edittingDeceased.MiddleName"
-	LastName="@edittingDeceased.LastName"
-	Title="@edittingDeceased.Title"
-	Status="@edittingDeceased.Status"
-	ContractBalance="@Convert.ToDecimal(edittingDeceased.ContractBalance)"
-	Photo="@edittingDeceased.Image" />
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
 
 <PageTitle>Survivor</PageTitle>
 
 <div class="title-bar">
-	<h1>Modify Survivor</h1>
+	<h1>Modify Survivor Record</h1>
 	<div class="SubmitRecordButton">
 		<EditForm Model="@editingSurvivor" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
@@ -99,7 +99,7 @@
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -123,7 +123,7 @@
 				}
 			}
 			editingSurvivor = CloneSurvivor(currentRecordIndex > 0 ? survivorList[currentRecordIndex - 1] : survivorList.Last());
-			edittingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+			editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		}
 	}
 
@@ -210,7 +210,8 @@
 <style> /* Shared Survivor Form Styles */
 .SurvivorForm {
 	border-radius: 6px;
-	padding-left: .25rem;
+	padding-top: .25rem;
+	padding-left: .5rem;
 	padding-right: .25rem;
 	background-color: rgb(187, 188, 188);
 }
@@ -232,11 +233,7 @@ h5 {
 	margin-bottom: 15px;
 }
 
-label {
-	font-weight: bold;
-}
-
-.form-control {
+.form-control { /* for the fields themselves */
 	border: 2px solid rgb(255, 255, 255);
 	border-radius: 0.2rem;
 	padding: .5rem;
@@ -248,11 +245,6 @@ label {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.navigation-controls {
-	display: flex;
-	gap: 10px;
 }
 
 .btn-submit {

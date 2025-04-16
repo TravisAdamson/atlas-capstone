@@ -1,8 +1,11 @@
 ﻿@page "/Modify Records"
+
 @inject RESTDB.Data.ApplicationDbContext Context
-@rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
+@rendermode InteractiveServer
+
 @using Microsoft.Extensions.Primitives
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
@@ -13,352 +16,340 @@
 
 <div class="title-bar">
 	<h1>Modifying Record</h1>
-	<!-- Link tab -->
-	<!-- <div class="homebuttons">
-		<button class="btn" @onclick="() => NavigateToContract()">Contract</button>
-		<button class="btn" @onclick="() => NavigateToMilitary()">Military</button>
-		<button class="btn" @onclick="() => NavigateToPlaceOfDeath()">Place of Death</button>
-	</div>
-	<div class="homebuttons">
-		<button class="btn" onclick="window.location.href='ModifySurvivor'">Survivor</button>
-		<button class="btn" onclick="window.location.href='ModifyObituary'">Obituary</button>
-	</div> -->
 
 	<div class="SubmitRecordButton">
-		<EditForm id="placeholderformid" Model="@edittingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
-		<div>
-			<InputText id="testsave" class="fcall" @bind-Value="placeholder" style="display: none" />
-		</div>
-		<div class="SaveButtonFirst">
-			<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
-		</div>
+		<EditForm id="placeholderformid" Model="@editingDeceased" OnValidSubmit="SaveRecord" FormName="placeholderformname" class="placeholderclass">
+			<div>
+				<InputText id="testsave" class="fcall" @bind-Value="placeholder" style="display: none" />
+			</div>
+			<div class="SaveButtonFirst">
+				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+			</div>
 		</EditForm>
 	</div>
 </div>
 
-<div class="ContactForm">
-	<EditForm id="ContactForm" Model="@edittingDeceased" FormName="ContactForm" class="ContactForm">
-		<h5>First Call Information</h5>
-		<div class="FirstCallTop-group">
-			<!-- Director -->
-			<div class="FirstCall-group1">
-				<label for="Director">Director</label>
-				<InputSelect @bind-Value="edittingDeceased.Director" class="State-group" TValue="string">
-						<option value="Denise Adamson">Denise Adamson</option>
-						<option value="Jon Hoopert">Jon Hoopert</option>
-						<option value="James Groesbeck">James Groesbeck</option>
-						<option value="John Heim">John Heim</option>
-				</InputSelect>
-			</div>
-			<!-- Case Status -->
-			<div class="FirstCall-group1">
-				<label for="Status">Case Status:</label>
-				<InputText id="Status" class="fcall" @bind-Value="edittingDeceased.Status" />
-			</div>
-			<div class="ShowImage">
-				@if (edittingDeceased.Image != null)
-				{
-					<img src="@($"data:image/png;base64,{Convert.ToBase64String(edittingDeceased.Image)}")" style="max-width: 260px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
-				}
-			</div>
-		</div>
-	</EditForm>
+<!-- Tabs Navigation -->
+<div class="TabForm">
+	<div class="tab-buttons">
+		<button @onclick="@(() => SelectTab("Primary Info"))"
+				class="tab-button @(selectedTab == "Primary Info" ? "active" : "")">
+			Primary Info
+		</button>
+		<button @onclick="@(() => SelectTab("Secondary Info"))"
+				class="tab-button @(selectedTab == "Secondary Info" ? "active" : "")">
+			Secondary Info
+		</button>
+	</div>
 </div>
 
-<div class="DeceasedForm">
-	<EditForm id="DeceasedForm" Model="@edittingDeceased" FormName="DeceasedForm" class="DeceasedForm">
-		<h5>Deceased Information</h5>
-		<div class="FirstCall-group">
-			<!-- First Name -->
-			<div class="FirstCall-group1">
-				<label for="FirstName">First Name:</label>
-				<InputText id="FirstName" class="fcall" @bind-Value="edittingDeceased.FirstName" />
-			</div>
-			<!-- Last Name -->
-			<div class="FirstCall-group1">
-				<label for="LastName">Last Name:</label>
-				<InputText id="LastName" class="fcall" @bind-Value="edittingDeceased.LastName" />
-			</div>
-			<!-- Middle Name -->
-			<div class="FirstCall-group1">
-				<label for="MiddleName">Middle Name:</label>
-				<InputText id="MiddleName" class="fcall" @bind-Value="edittingDeceased.MiddleName" />
-			</div>
-			<!-- Title -->
-			<div class="FirstCall-group1">
-				<label for="Title">Title:</label>
-				<InputText id="Title" class="fcall" @bind-Value="edittingDeceased.Title" />
-			</div>
-
-			<!-- Date of Death -->
-			<div class="FirstCall-group1">
-				<label for="DoD">Date of Death:</label>
-				<InputDate id="DoD" class="fcall" @bind-Value="edittingDeceased.DoD" />
-			</div>
-			<!-- Time of Death -->
-			<div class="FirstCall-group1">
-				<label for="TimeOfDeath">Time of Death:</label>
-				<input type="time" class="fcall" @bind="edittingDeceased.TimeOfDeath" />
-			</div>
-			<!-- Alias -->
-			<div class="FirstCall-group1">
-				<label for="Alias">Alias:</label>
-				<InputText id="Alias" class="fcall" @bind-Value="edittingDeceased.Alias" />
-			</div>
-			<!-- Deceased Address -->
-			<div class="FirstCall-group1">
-				<label for="StreetAddress">Street Address:</label>
-				<InputText id="StreetAddress" class="fcall" @bind-Value="edittingDeceased.StreetAddress" />
-			</div>
-			<!-- Deceased City -->
-			<div class="FirstCall-group1">
-				<label for="City">City:</label>
-				<InputText id="City" class="fcall" @bind-Value="edittingDeceased.City" />
-			</div>
-			<!-- Deceased State -->
-			<div class="IState-container">
-				<label for="State">Select State:</label>
-				<InputSelect @bind-Value="edittingDeceased.State" class="State-group" TValue="string">
-					<option value="Alabama">Alabama</option>
-					<option value="Alaska">Alaska</option>
-					<option value="Arizona">Arizona</option>
-					<option value="Arkansas">Arkansas</option>
-					<option value="California">California</option>
-					<option value="Colorado">Colorado</option>
-					<option value="Connecticut">Connecticut</option>
-					<option value="Delaware">Delaware</option>
-					<option value="Florida">Florida</option>
-					<option value="Georgia">Georgia</option>
-					<option value="Hawaii">Hawaii</option>
-					<option value="Idaho">Idaho</option>
-					<option value="Illinois">Illinois</option>
-					<option value="Indiana">Indiana</option>
-					<option value="Iowa">Iowa</option>
-					<option value="Kansas">Kansas</option>
-					<option value="Kentucky">Kentucky</option>
-					<option value="Louisiana">Louisiana</option>
-					<option value="Maine">Maine</option>
-					<option value="Maryland">Maryland</option>
-					<option value="Massachusetts">Massachusetts</option>
-					<option value="Michigan">Michigan</option>
-					<option value="Minnesota">Minnesota</option>
-					<option value="Mississippi">Mississippi</option>
-					<option value="Missouri">Missouri</option>
-					<option value="Montana">Montana</option>
-					<option value="Nebraska">Nebraska</option>
-					<option value="Nevada">Nevada</option>
-					<option value="New Hampshire">New Hampshire</option>
-					<option value="New Jersey">New Jersey</option>
-					<option value="New Mexico">New Mexico</option>
-					<option value="New York">New York</option>
-					<option value="North Carolina">North Carolina</option>
-					<option value="North Dakota">North Dakota</option>
-					<option value="Ohio">Ohio</option>
-					<option value="Oklahoma">Oklahoma</option>
-					<option value="Oregon">Oregon</option>
-					<option value="Pennsylvania">Pennsylvania</option>
-					<option value="Rhode Island">Rhode Island</option>
-					<option value="South Carolina">South Carolina</option>
-					<option value="South Dakota">South Dakota</option>
-					<option value="Tennessee">Tennessee</option>
-					<option value="Texas">Texas</option>
-					<option value="Utah">Utah</option>
-					<option value="Vermont">Vermont</option>
-					<option value="Virginia">Virginia</option>
-					<option value="Washington">Washington</option>
-					<option value="West Virginia">West Virginia</option>
-					<option value="Wisconsin">Wisconsin</option>
-					<option value="Wyoming">Wyoming</option>
-					<option value="District of Columbia">District of Columbia</option>
-				</InputSelect>
-			</div>
-			<!-- Deceased ZipCode -->
-			<div class="FirstCall-group1">
-				<label for="ZipCode">Zip Code:</label>
-				<InputText id="ZipCode"
-					class="zipcall"
-					@bind-Value="edittingDeceased.ZipCode"
-					inputmode="numeric"
-					pattern="[0-9]*"
-					maxlength="5"
-					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-			</div>
-
-			<!-- SSN -->
-			<div class="FirstCall-group1">
-				<label for="SSN">SSN:</label>
-				<div class="SSN-input">
-					<InputText id="SSNPart1" class="numcall1" maxlength="3" @bind-Value="SSNPart1" placeholder="###" />
-					<span>-</span>
-					<InputText id="SSNPart2" class="numcall2" maxlength="2" @bind-Value="SSNPart2" placeholder="##" />
-					<span>-</span>
-					<InputText id="SSNPart3" class="numcall3" maxlength="4" @bind-Value="SSNPart3" placeholder="####" />
+<!-- Tab Content -->
+<div class="Tabinfoform">
+	@if (selectedTab == "Primary Info")
+	{
+		<!-- Contact Form -->
+		<div class="ContactForm">
+			<EditForm id="ContactForm" Model="@editingDeceased" FormName="ContactForm" class="ContactForm">
+				<h5>First Call Information</h5>
+				<div class="FirstCallTop-group">
+					<div class="FirstCall-group1">
+						<label for="Director">Director</label>
+						<InputSelect @bind-Value="editingDeceased.Director" class="State-group" TValue="string">
+							<option value="Denise Adamson">Denise Adamson</option>
+							<option value="Jon Hoopert">Jon Hoopert</option>
+							<option value="James Groesbeck">James Groesbeck</option>
+							<option value="John Heim">John Heim</option>
+						</InputSelect>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="Status">Case Status:</label>
+						<InputText id="Status" class="fcall" @bind-Value="editingDeceased.Status" />
+					</div>
+					<div class="ShowImage">
+						@if (editingDeceased.Image != null)
+						{
+							<img src="@($"data:image/png;base64,{Convert.ToBase64String(editingDeceased.Image)}")" style="max-width: 260px; max-height: 258px; width: auto; height: auto; display: block; padding-bottom: 1rem;" alt="Uploaded Image" />
+						}
+					</div>
 				</div>
-			</div>
-			<!-- Maiden Name -->
-			<div class="FirstCall-group1">
-				<label for="MaidenName">Maiden Name:</label>
-				<InputText id="MaidenName" class="fcall" @bind-Value="edittingDeceased.MaidenName" />
-			</div>
-			<!-- Veteran Status -->
-			<div class="FirstCall-group1">
-				<label for="Vet">Veteran Status:</label>
-				<InputText id="Vet" class="fcall" @bind-Value="edittingDeceased.Vet" />
-			</div>
-			<!-- War -->
-			<div class="FirstCall-group1">
-				<label for="War">War Served:</label>
-				<InputText id="War" class="fcall" @bind-Value="edittingDeceased.War" />
-			</div>
-			<!-- Suffix -->
-			<div class="suffix-container">
-				<label for="suffix">Suffix:</label>
-				<InputText id="suffix" class="fcall" @bind-Value="edittingDeceased.Suffix" />
-			</div>
-			<!-- Gender -->
-			<div class="gender-container">
-				<label>Gender:</label>
-				<InputSelect @bind-Value="edittingDeceased.Gender" class="gender-group" TValue="string">
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
-				</InputSelect>
-			</div>
-			<!-- Notes -->
-			<div class="FirstCall-group1">
-				<label for="Notes">Notes:</label>
-				<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="edittingDeceased.Notes" />
-			</div>
-			<!-- Image Upload -->
-			<div class="FirstCall-group1">
-				<label for="ImageUpload">Upload Image:</label>
-				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
-			</div>
+			</EditForm>
 		</div>
-	</EditForm>
+
+		<!-- Deceased Form -->
+		<div class="DeceasedForm">
+			<EditForm id="DeceasedForm" Model="@editingDeceased" FormName="DeceasedForm" class="DeceasedForm">
+				<h5>Deceased Information</h5>
+				<div class="FirstCall-group">
+					<div class="FirstCall-group1">
+						<label for="FirstName">First Name:</label>
+						<InputText id="FirstName" class="fcall" @bind-Value="editingDeceased.FirstName" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="LastName">Last Name:</label>
+						<InputText id="LastName" class="fcall" @bind-Value="editingDeceased.LastName" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="MiddleName">Middle Name:</label>
+						<InputText id="MiddleName" class="fcall" @bind-Value="editingDeceased.MiddleName" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="Title">Title:</label>
+						<InputText id="Title" class="fcall" @bind-Value="editingDeceased.Title" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="DoD">Date of Death:</label>
+						<InputDate id="DoD" class="fcall" @bind-Value="editingDeceased.DoD" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="TimeOfDeath">Time of Death:</label>
+						<input type="time" class="fcall" @bind="editingDeceased.TimeOfDeath" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="Alias">Alias:</label>
+						<InputText id="Alias" class="fcall" @bind-Value="editingDeceased.Alias" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="StreetAddress">Street Address:</label>
+						<InputText id="StreetAddress" class="fcall" @bind-Value="editingDeceased.StreetAddress" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="City">City:</label>
+						<InputText id="City" class="fcall" @bind-Value="editingDeceased.City" />
+					</div>
+					<div class="IState-container">
+						<label for="State">Select State:</label>
+						<InputSelect @bind-Value="editingDeceased.State" class="State-group" TValue="string">
+							<option value="Alabama">Alabama</option>
+							<option value="Alaska">Alaska</option>
+							<option value="Arizona">Arizona</option>
+							<option value="Arkansas">Arkansas</option>
+							<option value="California">California</option>
+							<option value="Colorado">Colorado</option>
+							<option value="Connecticut">Connecticut</option>
+							<option value="Delaware">Delaware</option>
+							<option value="Florida">Florida</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Hawaii">Hawaii</option>
+							<option value="Idaho">Idaho</option>
+							<option value="Illinois">Illinois</option>
+							<option value="Indiana">Indiana</option>
+							<option value="Iowa">Iowa</option>
+							<option value="Kansas">Kansas</option>
+							<option value="Kentucky">Kentucky</option>
+							<option value="Louisiana">Louisiana</option>
+							<option value="Maine">Maine</option>
+							<option value="Maryland">Maryland</option>
+							<option value="Massachusetts">Massachusetts</option>
+							<option value="Michigan">Michigan</option>
+							<option value="Minnesota">Minnesota</option>
+							<option value="Mississippi">Mississippi</option>
+							<option value="Missouri">Missouri</option>
+							<option value="Montana">Montana</option>
+							<option value="Nebraska">Nebraska</option>
+							<option value="Nevada">Nevada</option>
+							<option value="New Hampshire">New Hampshire</option>
+							<option value="New Jersey">New Jersey</option>
+							<option value="New Mexico">New Mexico</option>
+							<option value="New York">New York</option>
+							<option value="North Carolina">North Carolina</option>
+							<option value="North Dakota">North Dakota</option>
+							<option value="Ohio">Ohio</option>
+							<option value="Oklahoma">Oklahoma</option>
+							<option value="Oregon">Oregon</option>
+							<option value="Pennsylvania">Pennsylvania</option>
+							<option value="Rhode Island">Rhode Island</option>
+							<option value="South Carolina">South Carolina</option>
+							<option value="South Dakota">South Dakota</option>
+							<option value="Tennessee">Tennessee</option>
+							<option value="Texas">Texas</option>
+							<option value="Utah">Utah</option>
+							<option value="Vermont">Vermont</option>
+							<option value="Virginia">Virginia</option>
+							<option value="Washington">Washington</option>
+							<option value="West Virginia">West Virginia</option>
+							<option value="Wisconsin">Wisconsin</option>
+							<option value="Wyoming">Wyoming</option>
+							<option value="District of Columbia">District of Columbia</option>
+						</InputSelect>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="ZipCode">Zip Code:</label>
+						<InputText id="ZipCode"
+								class="zipcall"
+								@bind-Value="editingDeceased.ZipCode"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								maxlength="5"
+								oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+					</div>
+					<!-- SSN -->
+					<div class="FirstCall-group1">
+						<label for="SSN">SSN:</label>
+						<div class="SSN-input">
+							<InputText id="SSNPart1" class="numcall1" maxlength="3" @bind-Value="SSNPart1" placeholder="###" />
+							<span>-</span>
+							<InputText id="SSNPart2" class="numcall2" maxlength="2" @bind-Value="SSNPart2" placeholder="##" />
+							<span>-</span>
+							<InputText id="SSNPart3" class="numcall3" maxlength="4" @bind-Value="SSNPart3" placeholder="####" />
+						</div>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="MaidenName">Maiden Name:</label>
+						<InputText id="MaidenName" class="fcall" @bind-Value="editingDeceased.MaidenName" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="Vet">Veteran Status:</label>
+						<InputText id="Vet" class="fcall" @bind-Value="editingDeceased.Vet" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="War">War Served:</label>
+						<InputText id="War" class="fcall" @bind-Value="editingDeceased.War" />
+					</div>
+					<div class="suffix-container">
+						<label for="suffix">Suffix:</label>
+						<InputText id="suffix" class="fcall" @bind-Value="editingDeceased.Suffix" />
+					</div>
+					<div class="gender-container">
+						<label>Gender:</label>
+						<InputSelect @bind-Value="editingDeceased.Gender" class="gender-group" TValue="string">
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</InputSelect>
+					</div>
+					<div class="FirstCall-group1 notes-container">
+						<label for="Notes">Notes:</label>
+						<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="editingDeceased.Notes" />
+					</div>
+					<div class="FirstCall-group1 upload-container">
+						<label for="ImageUpload">Upload Image:</label>
+						<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
+					</div>
+				</div>
+			</EditForm>
+		</div>
+
+		<!-- Informant Form -->
+		<div class="InformantForm">
+			<EditForm id="InformantForm" Model="@editingDeceased" FormName="InformantForm" class="InformantForm">
+				<h5>Informant Information</h5>
+				<div class="FirstCall-group">
+					<div class="FirstCall-group1">
+						<label for="InformantName">Informant Name:</label>
+						<InputText id="InformantName" class="fcall" @bind-Value="editingDeceased.InformantName" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="IStreetAddress">Informant Street Address:</label>
+						<InputText id="IStreetAddress" class="fcall" @bind-Value="editingDeceased.IStreetAddress" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="ICity">Informant City:</label>
+						<InputText id="ICity" class="fcall" @bind-Value="editingDeceased.ICity" />
+					</div>
+					<div class="IState-container">
+						<label for="IState">Select State:</label>
+						<InputSelect @bind-Value="editingDeceased.IState" class="IState-group" TValue="string">
+							<option value="Alabama">Alabama</option>
+							<option value="Alaska">Alaska</option>
+							<option value="Arizona">Arizona</option>
+							<option value="Arkansas">Arkansas</option>
+							<option value="California">California</option>
+							<option value="Colorado">Colorado</option>
+							<option value="Connecticut">Connecticut</option>
+							<option value="Delaware">Delaware</option>
+							<option value="Florida">Florida</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Hawaii">Hawaii</option>
+							<option value="Idaho">Idaho</option>
+							<option value="Illinois">Illinois</option>
+							<option value="Indiana">Indiana</option>
+							<option value="Iowa">Iowa</option>
+							<option value="Kansas">Kansas</option>
+							<option value="Kentucky">Kentucky</option>
+							<option value="Louisiana">Louisiana</option>
+							<option value="Maine">Maine</option>
+							<option value="Maryland">Maryland</option>
+							<option value="Massachusetts">Massachusetts</option>
+							<option value="Michigan">Michigan</option>
+							<option value="Minnesota">Minnesota</option>
+							<option value="Mississippi">Mississippi</option>
+							<option value="Missouri">Missouri</option>
+							<option value="Montana">Montana</option>
+							<option value="Nebraska">Nebraska</option>
+							<option value="Nevada">Nevada</option>
+							<option value="New Hampshire">New Hampshire</option>
+							<option value="New Jersey">New Jersey</option>
+							<option value="New Mexico">New Mexico</option>
+							<option value="New York">New York</option>
+							<option value="North Carolina">North Carolina</option>
+							<option value="North Dakota">North Dakota</option>
+							<option value="Ohio">Ohio</option>
+							<option value="Oklahoma">Oklahoma</option>
+							<option value="Oregon">Oregon</option>
+							<option value="Pennsylvania">Pennsylvania</option>
+							<option value="Rhode Island">Rhode Island</option>
+							<option value="South Carolina">South Carolina</option>
+							<option value="South Dakota">South Dakota</option>
+							<option value="Tennessee">Tennessee</option>
+							<option value="Texas">Texas</option>
+							<option value="Utah">Utah</option>
+							<option value="Vermont">Vermont</option>
+							<option value="Virginia">Virginia</option>
+							<option value="Washington">Washington</option>
+							<option value="West Virginia">West Virginia</option>
+							<option value="Wisconsin">Wisconsin</option>
+							<option value="Wyoming">Wyoming</option>
+							<option value="District of Columbia">District of Columbia</option>
+						</InputSelect>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="IZipcode">Informant Zip Code:</label>
+						<InputText id="IZipCode"
+								class="zipcall"
+								@bind-Value="editingDeceased.IZipCode"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								maxlength="5"
+								oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="IPhoneNumber">Phone Number:</label>
+						<div class="Phone-input">
+							<InputText id="PhonePart1" class="numcall1" maxlength="3" @bind-Value="PhonePart1" placeholder="###" />
+							<span>-</span>
+							<InputText id="PhonePart2" class="numcall2" maxlength="3" @bind-Value="PhonePart2" placeholder="###" />
+							<span>-</span>
+							<InputText id="PhonePart3" class="numcall3" maxlength="4" @bind-Value="PhonePart3" placeholder="####" />
+						</div>
+					</div>
+					<div class="FirstCall-group1">
+						<label for="InformantEmail">Email Address:</label>
+						<InputText id="InformantEmail" class="fcall" @bind-Value="editingDeceased.InformantEmail" />
+					</div>
+				</div>
+				<div class="FirstCall-group">
+					<div class="FirstCall-group1">
+						<label for="InformantRelation">Relation to Deceased:</label>
+						<InputText id="InformantRelation" class="fcall" @bind-Value="editingDeceased.InformantRelation" />
+					</div>
+					<div class="FirstCall-group1">
+						<label for="InfoNotified">Date Notified:</label>
+						<InputDate id="InfoNotified" class="fcall" @bind-Value="editingDeceased.InfoNotified" />
+					</div>
+				</div>
+			</EditForm>
+		</div>
+	}
+	else if (selectedTab == "Secondary Info")
+	{
+		<h5>Secondary Info</h5>
+		<p>placeholder</p>
+	}
 </div>
 
-<div class="InformantForm">
-	<EditForm id="InformantForm" Model="@edittingDeceased" FormName="InformantForm" class="InformantForm">
-		<h5>Informant Information</h5>
-		<div class="FirstCall-group">
-			<!-- Informant Name -->
-			<div class="FirstCall-group1">
-				<label for="InformantName">Informant Name:</label>
-				<InputText id="InformantName" class="fcall" @bind-Value="edittingDeceased.InformantName" />
-			</div>
-			<!-- Informant Address -->
-			<div class="FirstCall-group1">
-				<label for="IStreetAddress">Informant Street Address:</label>
-				<InputText id="IStreetAddress" class="fcall" @bind-Value="edittingDeceased.IStreetAddress" />
-			</div>
-			<!-- Informant City -->
-			<div class="FirstCall-group1">
-				<label for="ICity">Informant City:</label>
-				<InputText id="ICity" class="fcall" @bind-Value="edittingDeceased.ICity" />
-			</div>
-			<!-- Informant State -->
-			<div class="IState-container">
-				<label for="IState">Select State:</label>
-				<InputSelect @bind-Value="edittingDeceased.IState" class="IState-group" TValue="string">
-					<option value="Alabama">Alabama</option>
-					<option value="Alaska">Alaska</option>
-					<option value="Arizona">Arizona</option>
-					<option value="Arkansas">Arkansas</option>
-					<option value="California">California</option>
-					<option value="Colorado">Colorado</option>
-					<option value="Connecticut">Connecticut</option>
-					<option value="Delaware">Delaware</option>
-					<option value="Florida">Florida</option>
-					<option value="Georgia">Georgia</option>
-					<option value="Hawaii">Hawaii</option>
-					<option value="Idaho">Idaho</option>
-					<option value="Illinois">Illinois</option>
-					<option value="Indiana">Indiana</option>
-					<option value="Iowa">Iowa</option>
-					<option value="Kansas">Kansas</option>
-					<option value="Kentucky">Kentucky</option>
-					<option value="Louisiana">Louisiana</option>
-					<option value="Maine">Maine</option>
-					<option value="Maryland">Maryland</option>
-					<option value="Massachusetts">Massachusetts</option>
-					<option value="Michigan">Michigan</option>
-					<option value="Minnesota">Minnesota</option>
-					<option value="Mississippi">Mississippi</option>
-					<option value="Missouri">Missouri</option>
-					<option value="Montana">Montana</option>
-					<option value="Nebraska">Nebraska</option>
-					<option value="Nevada">Nevada</option>
-					<option value="New Hampshire">New Hampshire</option>
-					<option value="New Jersey">New Jersey</option>
-					<option value="New Mexico">New Mexico</option>
-					<option value="New York">New York</option>
-					<option value="North Carolina">North Carolina</option>
-					<option value="North Dakota">North Dakota</option>
-					<option value="Ohio">Ohio</option>
-					<option value="Oklahoma">Oklahoma</option>
-					<option value="Oregon">Oregon</option>
-					<option value="Pennsylvania">Pennsylvania</option>
-					<option value="Rhode Island">Rhode Island</option>
-					<option value="South Carolina">South Carolina</option>
-					<option value="South Dakota">South Dakota</option>
-					<option value="Tennessee">Tennessee</option>
-					<option value="Texas">Texas</option>
-					<option value="Utah">Utah</option>
-					<option value="Vermont">Vermont</option>
-					<option value="Virginia">Virginia</option>
-					<option value="Washington">Washington</option>
-					<option value="West Virginia">West Virginia</option>
-					<option value="Wisconsin">Wisconsin</option>
-					<option value="Wyoming">Wyoming</option>
-					<option value="District of Columbia">District of Columbia</option>
-				</InputSelect>
-			</div>
-			<!-- Informant Zipcode -->
-			<div class="FirstCall-group1">
-				<label for="IZipcode">Informant Zip Code:</label>
-				<InputText id="IZipCode"
-					class="zipcall"
-					@bind-Value="edittingDeceased.IZipCode"
-					inputmode="numeric"
-					pattern="[0-9]*"
-					maxlength="5"
-					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-			</div>
-			<!-- Informant Phone -->
-			<div class="FirstCall-group1">
-				<label for="IPhoneNumber">Phone Number:</label>
-				<div class="Phone-input">
-					<InputText id="PhonePart1" class="numcall1" maxlength="3" @bind-Value="PhonePart1" placeholder="###" />
-					<span>-</span>
-					<InputText id="PhonePart2" class="numcall2" maxlength="3" @bind-Value="PhonePart2" placeholder="###" />
-					<span>-</span>
-					<InputText id="PhonePart3" class="numcall3" maxlength="4" @bind-Value="PhonePart3" placeholder="####" />
-				</div>
-			</div>
-			<!-- Informant Email -->
-			<div class="FirstCall-group1">
-				<label for="InformantEmail">Email Address:</label>
-				<InputText id="InformantEmail" class="fcall" @bind-Value="edittingDeceased.InformantEmail" />
-			</div>
-		</div>
-		<div class="FirstCall-group">
-			<!-- Informant Relation -->
-			<div class="FirstCall-group1">
-				<label for="InformantRelation">Relation to Deceased:</label>
-				<InputText id="InformantRelation" class="fcall" @bind-Value="edittingDeceased.InformantRelation" />
-			</div>
-			<!-- Info Notified -->
-			<div class="FirstCall-group1">
-				<label for="InfoNotified">Date Notified:</label>
-				<InputDate id="InfoNotified" class="fcall" @bind-Value="edittingDeceased.InfoNotified" />
-			</div>
-		</div>
-	</EditForm>
-</div>
 @code {
+	// Fields
 	private List<Deceased> Deceased = new List<Deceased>();
-	private Deceased currentDeceased = new Deceased();
-	private Deceased edittingDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
 
 	private string? PhonePart1 { get; set; }
 	private string? PhonePart2 { get; set; }
@@ -367,16 +358,21 @@
 	private string? SSNPart1 { get; set; }
 	private string? SSNPart2 { get; set; }
 	private string? SSNPart3 { get; set; }
+
 	private int currentRecordIndex = 0;
 	private string? currentRecordString;
 	private string? placeholder { get; set; }
 
+	// Tab logic
+	private string selectedTab = "Primary Info";
 
-
+	private void SelectTab(string tabName)
+	{
+		selectedTab = tabName;
+	}
 
 	protected override async Task OnInitializedAsync()
 	{
-
 		var uri = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
@@ -394,18 +390,13 @@
 				}
 			}
 			if (currentRecordIndex != 0)
-				edittingDeceased = CloneDeceased(Deceased[currentRecordIndex - 1]);
+				editingDeceased = CloneDeceased(Deceased[currentRecordIndex - 1]);
 			else
-				edittingDeceased = CloneDeceased(Deceased.Last());
+				editingDeceased = CloneDeceased(Deceased.Last());
+
 			LoadDigits();
 		}
 	}
-
-	private void GoToBuyers(int clientID)
-	{
-		NavigationManager.NavigateTo($"/ModifyBuyer");
-	}
-
 
 	private Deceased CloneDeceased(Deceased original)
 	{
@@ -446,17 +437,12 @@
 		};
 	}
 
-	private int GetNextClientID()
-	{
-		var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
-		return lastDeceased?.ClientID + 1 ?? 1;
-	}
-
 	private void LoadDigits()
 	{
-		if (!string.IsNullOrEmpty(edittingDeceased.SSN))
+		// SSN
+		if (!string.IsNullOrEmpty(editingDeceased.SSN))
 		{
-			var ssnParts = edittingDeceased.SSN.Split('-');
+			var ssnParts = editingDeceased.SSN.Split('-');
 			if (ssnParts.Length == 3)
 			{
 				SSNPart1 = ssnParts[0];
@@ -464,10 +450,10 @@
 				SSNPart3 = ssnParts[2];
 			}
 		}
-
-		if (!string.IsNullOrEmpty(edittingDeceased.IPhoneNumber))
+		// Phone
+		if (!string.IsNullOrEmpty(editingDeceased.IPhoneNumber))
 		{
-			var phoneNumber = edittingDeceased.IPhoneNumber
+			var phoneNumber = editingDeceased.IPhoneNumber
 				.Replace("(", "")
 				.Replace(")", "")
 				.Replace("-", "");
@@ -480,6 +466,7 @@
 			}
 		}
 	}
+
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)
 	{
 		var file = e.File;
@@ -487,11 +474,9 @@
 		{
 			try
 			{
-				using (var memoryStream = new MemoryStream())
-				{
-					await file.OpenReadStream().CopyToAsync(memoryStream);
-					edittingDeceased.Image = memoryStream.ToArray(); // Store the image as a byte array
-				}
+				using var memoryStream = new MemoryStream();
+				await file.OpenReadStream().CopyToAsync(memoryStream);
+				editingDeceased.Image = memoryStream.ToArray();
 			}
 			catch (Exception ex)
 			{
@@ -502,9 +487,10 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == edittingDeceased.ClientID);
+		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == editingDeceased.ClientID);
 
-		if (string.IsNullOrEmpty(edittingDeceased.FirstName) || string.IsNullOrEmpty(edittingDeceased.LastName))
+		// Basic validation
+		if (string.IsNullOrEmpty(editingDeceased.FirstName) || string.IsNullOrEmpty(editingDeceased.LastName))
 		{
 			Console.WriteLine("First Name and Last Name are required.");
 			return;
@@ -516,242 +502,228 @@
 			Console.WriteLine("SSN is required.");
 		}
 		else
-			edittingDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+		{
+			editingDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
+		}
 
-		// Format Phone Number
+		// Format Phone
 		if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
 		{
 			Console.WriteLine("Phone number is required.");
 		}
 		else
-			edittingDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+		{
+			editingDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+		}
 
-		// Save
+		// Save to DB
 		if (entity is not null)
 		{
-			entity.ClientID = edittingDeceased.ClientID;
-			entity.Director = edittingDeceased.Director;
-			entity.FirstName = edittingDeceased.FirstName;
-			entity.LastName = edittingDeceased.LastName;
-			entity.MiddleName = edittingDeceased.MiddleName;
-			entity.Title = edittingDeceased.Title;
-			entity.Suffix = edittingDeceased.Suffix;
-			entity.Status = edittingDeceased.Status;
-			entity.StreetAddress = edittingDeceased.StreetAddress;
-			entity.City = edittingDeceased.City;
-			entity.State = edittingDeceased.State;
-			entity.ZipCode = edittingDeceased.ZipCode;
-			entity.ContractBalance = edittingDeceased.ContractBalance;
-			entity.DoD = edittingDeceased.DoD;
-			entity.TimeOfDeath = edittingDeceased.TimeOfDeath;
-			entity.SSN = edittingDeceased.SSN;
-			entity.Gender = edittingDeceased.Gender;
-			entity.MaidenName = edittingDeceased.MaidenName;
-			entity.Alias = edittingDeceased.Alias;
-			entity.Vet = edittingDeceased.Vet;
-			entity.War = edittingDeceased.War;
-			entity.InformantName = edittingDeceased.InformantName;
-			entity.IStreetAddress = edittingDeceased.IStreetAddress;
-			entity.ICity = edittingDeceased.ICity;
-			entity.IState = edittingDeceased.IState;
-			entity.IZipCode = edittingDeceased.IZipCode;
-			entity.IPhoneNumber = edittingDeceased.IPhoneNumber;
-			entity.InformantEmail = edittingDeceased.InformantEmail;
-			entity.InfoNotified = edittingDeceased.InfoNotified;
-			entity.Notes = edittingDeceased.Notes;
-			entity.Image = edittingDeceased.Image;
-			entity.InformantRelation = edittingDeceased.InformantRelation;
+			entity.ClientID = editingDeceased.ClientID;
+			entity.Director = editingDeceased.Director;
+			entity.FirstName = editingDeceased.FirstName;
+			entity.LastName = editingDeceased.LastName;
+			entity.MiddleName = editingDeceased.MiddleName;
+			entity.Title = editingDeceased.Title;
+			entity.Suffix = editingDeceased.Suffix;
+			entity.Status = editingDeceased.Status;
+			entity.StreetAddress = editingDeceased.StreetAddress;
+			entity.City = editingDeceased.City;
+			entity.State = editingDeceased.State;
+			entity.ZipCode = editingDeceased.ZipCode;
+			entity.ContractBalance = editingDeceased.ContractBalance;
+			entity.DoD = editingDeceased.DoD;
+			entity.TimeOfDeath = editingDeceased.TimeOfDeath;
+			entity.SSN = editingDeceased.SSN;
+			entity.Gender = editingDeceased.Gender;
+			entity.MaidenName = editingDeceased.MaidenName;
+			entity.Alias = editingDeceased.Alias;
+			entity.Vet = editingDeceased.Vet;
+			entity.War = editingDeceased.War;
+			entity.InformantName = editingDeceased.InformantName;
+			entity.IStreetAddress = editingDeceased.IStreetAddress;
+			entity.ICity = editingDeceased.ICity;
+			entity.IState = editingDeceased.IState;
+			entity.IZipCode = editingDeceased.IZipCode;
+			entity.IPhoneNumber = editingDeceased.IPhoneNumber;
+			entity.InformantEmail = editingDeceased.InformantEmail;
+			entity.InfoNotified = editingDeceased.InfoNotified;
+			entity.Notes = editingDeceased.Notes;
+			entity.Image = editingDeceased.Image;
+			entity.InformantRelation = editingDeceased.InformantRelation;
+
+			await Context.SaveChangesAsync();
 		}
-		await Context.SaveChangesAsync();
-	}
-
-	<!-- Page Navigation -->
-	private void NavigateToContract()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Contract?currentRecordString={edittingDeceased.ClientID}");
-	}
-
-	private void NavigateToMilitary()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Military?currentRecordString={edittingDeceased.ClientID}");
-	}
-
-	private void NavigateToPlaceOfDeath()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/PlaceOfDeath?currentRecordString={edittingDeceased.ClientID}");
-	}
-	private void NavigateToObituary()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Obituary?currentRecordString={edittingDeceased.ClientID}");
-	}
-	private void NavigateToEmbalmer()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Embalmer?currentRecordString={edittingDeceased.ClientID}");
-	}
-	private void NavigateToSuvivor()
-	{
-		if (edittingDeceased?.ClientID > 0)
-			NavigationManager.NavigateTo($"/Suvivor?currentRecordString={edittingDeceased.ClientID}");
 	}
 }
 
 <style>
-	.title-bar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
+.title-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 
-	.navigation-controls {
-		display: flex;
-		gap: .5rem;
-	}
+.SubmitRecordButton {
+	display: flex;
+	justify-content: flex-end;
+}
 
-	.DeceasedForm, .ContractForm {
-		border-radius: 6px;
-		padding-left: .25rem;
-		padding-top: .05rem;
-		margin: .5rem auto;
-		background-color: rgb(187, 188, 188);
-	}
+.SaveButtonFirst {
+	display: flex;
+}
 
-	.ContactForm {
-		border-radius: 6px;
-		padding-left: .25rem;
-		padding-top: .25rem;
-		background-color: rgb(187, 188, 188);
-	}
+.btn-submit {
+	color: white;
+	font-size: 1em;
+	border-radius: 5px;
+	background-color: #936091;
+}
 
-	.InformantForm {
-		border-radius: 6px;
-		padding-left: .25rem;
-		padding-top: .05rem;
-		margin: .5rem auto;
-		background-color: rgb(187, 188, 188);
-	}
+.TabForm {
+	display: inline-block;
+	max-width: 100%;
+	background-color: rgb(187, 188, 188);
+	border-radius: 5px;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 1;
+	margin-top: .5rem;
+}
 
-	.FirstCall-group {
-		display: flex;
-		flex-wrap: wrap;
-	}
+.tab-buttons {
+	display: flex;
+	gap: 10px;
+	margin: 5px .25rem 5px .25rem;
+}
 
-	.FirstCall-group1 {
-		display: flex;
-		flex-direction: column;
-		margin-right: 1rem;
-		margin-bottom: .5rem;
-	}
+.tab-button {
+	background-color: #e0e0e0;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px 5px 0 0;
+	font-weight: bold;
+	cursor: pointer;
+}
 
-	.fcall {
-		border: 2px solid rgb(253, 251, 251);
-		border-radius: 0.2rem;
-		padding: .5rem;
-		box-sizing: border-box;
-		max-height: 36px;
-	}
+.tab-button.active {
+	background-color: #936091;
+	color: white;
+}
 
-	.numcall1 {
-		border: 2px solid rgb(253, 251, 251);
-		border-radius: 0.2rem;
-		padding: 0.5rem;
-		box-sizing: border-box;
-		max-height: 36px;
-		width: 50px;
-	}
+.Tabinfoform {
+	position: relative;
+	top: 2.5rem;
+	border-radius: 6px;
+	padding-left: 0.5rem;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	background-color: rgb(187, 188, 188);
+}
 
-	.numcall2 {
-		border: 2px solid rgb(253, 251, 251);
-		border-radius: 0.2rem;
-		padding: 0.5rem;
-		box-sizing: border-box;
-		max-height: 36px;
-		width: 45px;
-	}
+.suffix-container {
+	display: flex;
+	padding-top: 0rem;
+}
 
-	.numcall3 {
-		border: 2px solid rgb(253, 251, 251);
-		border-radius: 0.2rem;
-		padding: 0.5rem;
-		box-sizing: border-box;
-		max-height: 36px;
-		width: 55px;
-	}
+.suffix-container {
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+	margin-bottom: .5rem;
+}
 
-	.zipcall {
-		border: 2px solid rgb(253, 251, 251);
-		border-radius: 0.2rem;
-		padding: 0.5rem;
-		box-sizing: border-box;
-		max-height: 36px;
-		width: 100px;
-	}
+.IState-container {
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+}
 
-	.genderlabel {
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-	}
+.gender-group {
+	display: flex;
+	flex-direction: column;;
+}
 
-	.gender-container {
-		margin-bottom: 15px;
-		padding-right: 1rem;
-	}
+.gender-container {
+	margin-bottom: 15px;
+	padding-right: 1rem;;
+}
 
-	.gender-group {
-		display: flex;
-		flex-direction: column;
-	}
+.ContactForm, .DeceasedForm, .InformantForm {
+	border-radius: 6px;
+	padding-left: .rem;
+	padding-top: 0rem;
+	background-color: rgb(187, 188, 188);
+	margin-top: 0rem;
+	margin-bottom: 0rem;
+	margin-left: 0rem;
+	margin-right: 0rem;
+}
 
-	.suffix-container, .IState-container {
-		margin-bottom: 15px;
-		display: flex;
-		flex-direction: column;
-		margin-right: 1rem;
-	}
+.FirstCall-group {
+	display: flex;
+	flex-wrap: wrap;
+}
 
-	.suffix-group {
-		display: flex;
-		flex-direction: column;
-	}
+.FirstCall-group1 {
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+	margin-bottom: .5rem;
+}
+
+.fcall {
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: .5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+}
+
+.ShowImage {
+	margin-left: auto;
+}
+
+.FirstCallTop-group {
+	display: flex;
+	padding-right: 1rem;
+}
 
 	.notes-field {
+		width: 100%;
 		min-height: 6rem;
-		padding-right: 17rem;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
-	.ShowImage {
-		margin-left: auto;
+	.notes-container {
+		flex: 1 1 100%; /* forces a full row in a wrap-enabled flex parent */
+		max-width: 50%;
 	}
 
-	.FirstCallTop-group {
-		display: flex;
-		padding-right: 1rem;
-	}
+.ImageUpload {
+	max-width: 14rem;
+}
 
-	.ImageUpload {
-		max-width: 14rem;
-	}
-	.homebuttons {
-		display: flex;
-		justify-content: space-around;
-		white-space: nowrap;
-		margin: 1rem;
-		padding: 1rem;
-		border-radius: 8px;
-		gap: 1rem;
-		padding-top: 3rem;
-		flex-wrap: wrap;
-	}
+.numcall1, .numcall2, .numcall3 {
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+}
 
-	.btn {
-		border: 1px solid transparent;
-		padding: .375rem .75rem;
-		font-size: 1rem;
-		border-radius: .25rem;
-	}
+.numcall1 { width: 50px; }
+.numcall2 { width: 45px; }
+.numcall3 { width: 55px; }
+
+.zipcall {
+	border: 2px solid rgb(253, 251, 251);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	max-height: 36px;
+	width: 100px;
+}
 </style>
