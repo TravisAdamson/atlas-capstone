@@ -162,7 +162,6 @@
 				maxlength="5"
 				oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
-
 			<!-- SSN -->
 			<div class="FirstCall-group1">
 				<label for="SSN">SSN:</label>
@@ -203,12 +202,12 @@
 				</InputSelect>
 			</div>
 			<!-- Notes -->
-			<div class="FirstCall-group1">
+			<div class="FirstCall-group1 notes-container">
 				<label for="Notes">Notes:</label>
 				<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="currentDeceased.Notes" />
 			</div>
 			<!-- Image Upload -->
-			<div class="FirstCall-group1">
+			<div class="FirstCall-group1 upload-container">
 				<label for="ImageUpload">Upload Image:</label>
 				<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
 			</div>
@@ -478,7 +477,15 @@
 		justify-content: space-between;
 	}
 
-	.DeceasedForm, .ContractForm, .InformantForm {
+	.ContractForm, .InformantForm {
+		border-radius: 6px;
+		padding-left: .25rem;
+		padding-top: .05rem;
+		margin: .5rem auto;
+		background-color: rgb(187, 188, 188);
+	}
+
+	.DeceasedForm {
 		border-radius: 6px;
 		padding-left: .25rem;
 		padding-top: .05rem;
@@ -592,10 +599,18 @@
 		flex-direction: column;
 	}
 
-	.notes-field {
-		min-height: 6rem;
-		padding-right: 17rem;;
-	}
+.notes-field {
+    width: 100%;          /* Fill container horizontally */
+    min-height: 6rem;     /* Big enough vertically */
+    max-width: 100%;      /* So it won't exceed parent, no overlap */
+    box-sizing: border-box;
+    resize: vertical;     /* optional: user can drag to expand vertically */
+}
+
+.notes-container {
+    flex: 1 1 100%;  /* This forces a full row in a wrap-enabled flex parent */
+    max-width: 50%; /* Guarantee it doesn't exceed the container width */
+}
 
 	.ImageUpload {
 		max-width: 14rem;
