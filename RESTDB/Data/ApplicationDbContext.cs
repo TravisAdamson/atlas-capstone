@@ -30,6 +30,13 @@ public class ApplicationDbContext : DbContext
 		optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 	}
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Deceased>()
+            .HasIndex(e => e.ServiceID)
+            .IsUnique();
+    }
+
 	[STAThread]
 	static void Main()
 	{

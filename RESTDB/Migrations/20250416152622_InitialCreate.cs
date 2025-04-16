@@ -55,8 +55,8 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Relationship = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsPrimaryBuyer = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    SendBill = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    IsPrimaryBuyer = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    SendBill = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,6 +145,8 @@ namespace RESTDB.Migrations
                 {
                     ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Director = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FirstName = table.Column<string>(type: "longtext", nullable: true)
@@ -156,6 +158,8 @@ namespace RESTDB.Migrations
                     Title = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Suffix = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Need = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Status = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -202,6 +206,43 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Image = table.Column<byte[]>(type: "longblob", nullable: true),
                     InformantRelation = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DoB = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Age = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BCity = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BZip = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BCounty = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BState = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BCountry = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MStatus = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MDate = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MPlace = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Church = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RPreference = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Clergy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    HighSchool = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    HYoE = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    HEL = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    College = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CYoE = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CEL = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -216,8 +257,8 @@ namespace RESTDB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PermissionToEmbalm = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Embalmed = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    PermissionToEmbalm = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Embalmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     EmbalmedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     EmbalmedTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     EmbalmedBy = table.Column<string>(type: "longtext", nullable: true)
@@ -303,10 +344,10 @@ namespace RESTDB.Migrations
                     Media = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DateSent = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Primary = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    IncludePrimaryPhoto = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ShowSurvivorAddresses = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ShowSurvivorRelationships = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    Primary = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IncludePrimaryPhoto = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ShowSurvivorAddresses = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ShowSurvivorRelationships = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     RelationshipCount = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WordCount = table.Column<string>(type: "longtext", nullable: true)
@@ -358,7 +399,7 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Country = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    InCityLimits = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    InCityLimits = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DirectorNotifyDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     DirectorNotifedTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     AdmissionDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -454,7 +495,7 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Relationship = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsLiving = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    IsLiving = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -511,6 +552,12 @@ namespace RESTDB.Migrations
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Deceased_ServiceID",
+                table: "Deceased",
+                column: "ServiceID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_MilitaryStint_MilitaryId",
