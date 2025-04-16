@@ -35,7 +35,7 @@
             <!-- inner NavLink only active when enabled -->
             @if (IsRecordSelected)
             {
-                <NavLink class="nav-link" href="Modify Records">
+                <NavLink class="nav-link">
                     <span class="nav-icon bi bi-wrench-fill-nav-menu"></span>
                     <span class="nav-text">Modify Records</span>
                     <span class="ms-auto @(isModifiedOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></span>
@@ -54,7 +54,7 @@
         @if (isModifiedOpen && IsRecordSelected)
         {
             <ul class="nav flex-column ms-4">
-			    <li class="nav-item"><NavLink class="nav-link" href="Cause of Death">• Deceased Information</NavLink></li>
+				<li class="nav-item"><NavLink class="nav-link" href="Modify Records">• Deceased Info</NavLink></li>
                 <li class="nav-item"><NavLink class="nav-link" href="Cause of Death">• Cause of Death</NavLink></li>
                 <li class="nav-item"><NavLink class="nav-link" href="Place of Death">• Place of Death</NavLink></li>
                 <li class="nav-item"><NavLink class="nav-link" href="Military">• Military</NavLink></li>
