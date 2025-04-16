@@ -144,7 +144,7 @@
 				}
 			}
 
-			editingObituary = CloneObituary(currentRecordIndex > 0 ? obituaryList[currentRecordIndex - 1] : obituaryList.Last());
+			editingObituary = CloneObituary(obituaryList[GlobalState.clientID - 1]);
 		}
 	}
 
