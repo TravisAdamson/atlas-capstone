@@ -138,35 +138,38 @@ namespace RESTDB.Migrations
                     b.Property<string>("AnatGift")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("AnatGiftConsidered")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("AnatGiftConsidered")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Biopsy")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("Biopsy")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("CauseFactors")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("CommDisease")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("CommDisease")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("DContributed")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("ContributingFactor")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("DefferedDiag")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("DContributed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("DefferedDiag")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Diabetic")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("DonationConsented")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("DonationConsented")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("DonationConsidered")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("DonationConsidered")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Hospitalized")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("Hospitalized")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Manner")
                         .HasColumnType("longtext");
@@ -177,14 +180,14 @@ namespace RESTDB.Migrations
                     b.Property<string>("OtherFactors")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("PrimaryFactor")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("TobaccoUse")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TypeofFactor")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Viewed")
-                        .HasColumnType("longtext");
+                    b.Property<bool>("Viewed")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

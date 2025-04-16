@@ -102,32 +102,23 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OtherFactors = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TypeofFactor = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PrimaryFactor = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ContributingFactor = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Diabetic = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DContributed = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DContributed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     TobaccoUse = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AlcoholUse = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Hospitalized = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DefferedDiag = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CommDisease = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DonationConsidered = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DonationConsented = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AnatGiftConsidered = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Viewed = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Biopsy = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Hospitalized = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DefferedDiag = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CommDisease = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DonationConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DonationConsented = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AnatGiftConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Viewed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Biopsy = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AnatGift = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
