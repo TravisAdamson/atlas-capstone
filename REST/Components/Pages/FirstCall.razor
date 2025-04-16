@@ -467,21 +467,21 @@
 		currentDeceased = new RESTDB.Models.Deceased();
 		PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
 		SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
-    }
-    catch (DbUpdateException ex)
-    {
-        // You can inspect the inner exception to make sure it's a duplicate key error
-        if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
-        {
-            errorMessage = "A record with this Service ID already exists.";
-        }
-        else
-        {
-            errorMessage = "An unexpected error occurred while saving.";
-        }
+	}
+	catch (DbUpdateException ex)
+	{
+		// You can inspect the inner exception to make sure it's a duplicate key error
+		if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
+		{
+			errorMessage = "A record with this Service ID already exists.";
+		}
+		else
+		{
+			errorMessage = "An unexpected error occurred while saving.";
+		}
 
-        Console.WriteLine($"Error saving record: {ex.Message}");
-    }
+		Console.WriteLine($"Error saving record: {ex.Message}");
+	}
 
 	}
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)
