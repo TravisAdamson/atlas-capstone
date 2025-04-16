@@ -102,7 +102,7 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OtherFactors = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrimaryFactor = table.Column<string>(type: "longtext", nullable: true)
+                    TypeofFactor = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Diabetic = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
