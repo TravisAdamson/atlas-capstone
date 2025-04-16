@@ -12,7 +12,7 @@ using RESTDB.Data;
 namespace RESTDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416185722_InitialCreate")]
+    [Migration("20250416190614_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -153,9 +153,6 @@ namespace RESTDB.Migrations
                     b.Property<bool>("CommDisease")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("ContributingFactor")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<bool>("DContributed")
                         .HasColumnType("tinyint(1)");
 
@@ -183,8 +180,8 @@ namespace RESTDB.Migrations
                     b.Property<string>("OtherFactors")
                         .HasColumnType("longtext");
 
-                    b.Property<bool>("PrimaryFactor")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("PrimaryFactor")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("TobaccoUse")
                         .HasColumnType("longtext");
