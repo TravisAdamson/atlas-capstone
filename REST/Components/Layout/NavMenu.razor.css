@@ -161,6 +161,6 @@
 
 /* dimmed look while disabled (keeps 1 rem left padding) */
 .disabled-nav {
-    opacity: .45;
-    cursor: not-allowed;
+	opacity: .45;
+	cursor: not-allowed;
 }
