@@ -121,7 +121,9 @@
 </div>
 
 @code {
-	private Military editingMilitary = new();
+	private List<Military> militaryList = new List<Military>();
+	private Military editingMilitary = new Military();
+	private Military currentMilitary = new Military();
 	private MilitaryStint editingStint = new();
 	private WarsServed editingWar = new();
 	private FlagApplication editingFlag = new();
@@ -137,14 +139,12 @@
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
-		var militaryList = await Db.Military.ToListAsync();
+		militaryList = await Db.Military.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		if (militaryList.Any())
-		{
-			editingMilitary = militaryList.First(); // Or adjust this to load by ID if needed
-		}
+		editingMilitary = CloneMilitary(militaryList[GlobalState.clientID - 1]);
 	}
+
 	private Deceased CloneDeceased(Deceased original)
 	{
 		return new Deceased
@@ -205,11 +205,24 @@
 		};
 	}
 
+	private Military CloneMilitary(Military original)
+	{
+		return new Military
+		{
+			Id = original.Id,
+			Branch = original.Branch,
+			ServiceNumber = original.ServiceNumber,
+			StartDate = original.StartDate,
+			EndDate = original.EndDate
+		};
+	}
+
 	private async Task SaveMilitaryRecord()
 	{
 		var entity = await Db.Military.FirstOrDefaultAsync(m => m.Id == editingMilitary.Id);
 		if (entity is not null)
 		{
+			entity.Id = editingMilitary.Id;
 			entity.Branch = editingMilitary.Branch;
 			entity.ServiceNumber = editingMilitary.ServiceNumber;
 			entity.StartDate = editingMilitary.StartDate;
