@@ -40,33 +40,33 @@
 	</div>
 </div>
 
-<div class="CauseForm">
+<div class="Causeform">
 	<EditForm Model="@editingCause">
 		<h5>Cause of Death Information</h5>
 		<div class="Cause-group">
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Manner</label>
 				<InputText class="form-control" @bind-Value="editingCause.Manner" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Other</label>
 				<InputText class="form-control" @bind-Value="editingCause.Other" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Type Of Factor</label>
 				<InputText class="form-control" @bind-Value="editingCause.TypeofFactor" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Cause Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.CauseFactors" />
 			</div
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Other Factors</label>
 				<InputText class="form-control" @bind-Value="editingCause.OtherFactors" />
 			</div>
 		</div>
 		<div class="Cause-group">
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Diabetic</label>
 				<InputText class="form-control" @bind-Value="editingCause.Diabetic" />
 			</div>
@@ -74,51 +74,51 @@
 				<label>Diabetes Contributed</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DContributed" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Tobacco Use</label>
 				<InputText class="form-control" @bind-Value="editingCause.TobaccoUse" />
 			</div>
-			<div class="Form-group">
+			<div class="form-group">
 				<label>Alcohol Use</label>
 				<InputText class="form-control" @bind-Value="editingCause.AlcoholUse" />
 			</div>
 		</div>
 		<div class="Cause-group">
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Hospitalized</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Hospitalized" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Deffered Diagnosis</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DefferedDiag" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Communicable Disease</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.CommDisease" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Organ or Tisue donation considered</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DonationConsidered" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Consent for Donation</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.DonationConsented" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Deceased Viewed</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Viewed" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Biopsy</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.Biopsy" />
 			</div>
 		</div>
-		<div class="Form">
-			<div class="Form-group">
+		<div class="form">
+			<div class="form-group">
 				<label>Anatomical Gift</label>
 				<InputText class="form-control" @bind-Value="editingCause.AnatGift" />
 			</div>
-			<div class="Form-group-check">
+			<div class="form-group-check">
 				<label>Anatomical Gift Considered</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingCause.AnatGiftConsidered" />
 			</div>
@@ -276,12 +276,12 @@
 }
 
 <style>
-	.CauserForm h5 {
+	.Causeform h5 {
 		font-size: 1.7em;
 		padding-left: .25rem;
 	}
 
-	.CauseForm {
+	.Causeform {
 		border-radius: 6px;
 		padding-top: .25rem;
 		padding-left: .5rem;
@@ -295,21 +295,20 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
-		padding: .25rem;
 	}
 
-	.Form-group {
+	.form-group {
 		display: flex;
 		flex-direction: column;
 		margin-bottom: .5rem;
 	}
 
-	.Form {
+	.form {
 		display: flex;
 		gap: 1rem;
 	}
 
-	.Form-group2 {
+	.form-group2 {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -326,6 +325,14 @@
 		padding: .5rem;
 		box-sizing: border-box;
 		max-height: 36px;
+	}
+
+	.form-group-check {
+		display: auto;
+	}
+
+	.form-check-input {
+		display: flex;
 	}
 
 	.title-bar {
