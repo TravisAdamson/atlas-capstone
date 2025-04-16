@@ -17,12 +17,10 @@
 			}
 		</select>
 	</div>
-
 	<div class="mb-3">
 		<input type="text" @bind="searchTerm" placeholder="Enter search term..." class="form-control" />
 	</div>
-
-	<button type="submit" class="btn btn-primary">Search</button>
+	<button type="submit" class="btn btn-submit btn-primary" style="background-color: #936091; color: white; border: none">Search</button>
 </form>
 
 @if (isLoading)
