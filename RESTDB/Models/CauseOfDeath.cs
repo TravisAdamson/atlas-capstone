@@ -17,7 +17,7 @@ public class CauseOfDeath
 
 	public string? OtherFactors { get; set; }
 
-	public string? PrimaryFactor { get; set; }
+	public string? TypeofFactor { get; set; }
 
 	public string? Diabetic { get; set; }
 
