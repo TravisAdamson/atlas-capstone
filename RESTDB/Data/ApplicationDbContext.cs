@@ -24,6 +24,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<Products> Products { get; set; }
 	public DbSet<MilitaryStint> MilitaryStint { get; set; }
 	public DbSet<WarsServed> WarsServed { get; set; }
+	public DbSet<CauseOfDeath> CauseOfDeath { get; set; }
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{

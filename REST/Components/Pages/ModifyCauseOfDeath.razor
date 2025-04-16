@@ -1,0 +1,457 @@
+@page "/Cause of Death"
+@inject RESTDB.Data.ApplicationDbContext Db
+@inject NavigationManager NavigationManager
+@inject REST.Services.GlobalState GlobalState
+@using RESTDB.Models
+@using RESTDB.Migrations
+@using RESTDB.Data
+@using REST.Components.Shared
+@inherits LayoutComponentBase
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.WebUtilities
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<ActiveService
+	Director="@editingDeceased.Director"
+	FirstName="@editingDeceased.FirstName"
+	MiddleName="@editingDeceased.MiddleName"
+	LastName="@editingDeceased.LastName"
+	Title="@editingDeceased.Title"
+	Status="@editingDeceased.Status"
+	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
+	Photo="@editingDeceased.Image" />
+
+<PageTitle>Place of Death</PageTitle>
+
+<div class="title-bar">
+	<h1>Place of Death</h1>
+	<div class="SubmitRecordButton">
+		<EditForm Model="@editingPlace" OnValidSubmit="SavePlaceRecord">
+			<div class="SaveButtonFirst">
+				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
+			</div>
+		</EditForm>
+	</div>
+</div>
+
+	<EditForm Model="@editingPlace">
+	<div class="ContractForm">
+		<div class="pod-field-container">
+			<div class="FirstCall-group1"><label>Name</label><InputText class="form-control" @bind-Value="editingPlace.Name" /></div>
+			<div class="FirstCall-group1"><label>Medical Record Number</label><InputText class="form-control" @bind-Value="editingPlace.MedicalRecordNumber" /></div>
+			<div class="FirstCall-group1"><label>Street Address</label><InputText class="form-control" @bind-Value="editingPlace.StreetAddress" /></div>
+			<div class="FirstCall-group1"><label>Apt Number</label><InputText class="form-control" @bind-Value="editingPlace.AptNumber" /></div>
+			<div class="FirstCall-group1"><label>Type of Facility</label><InputText class="form-control" @bind-Value="editingPlace.TypeOfFacility" /></div>
+			<div class="FirstCall-group1"><label>Call Taken By</label><InputText class="form-control" @bind-Value="editingPlace.CallTakenBy" /></div>
+			<div class="FirstCall-group1"><label>Zip Code</label><InputText class="form-control" @bind-Value="editingPlace.ZipCode" /></div>
+			<div class="FirstCall-group1"><label>Locality Type</label><InputText class="form-control" @bind-Value="editingPlace.LocalityType" /></div>
+			<div class="FirstCall-group1"><label>Township</label><InputText class="form-control" @bind-Value="editingPlace.Township" /></div>
+			<div class="FirstCall-group1"><label>Locality</label><InputText class="form-control" @bind-Value="editingPlace.Locality" /></div>
+			<div class="FirstCall-group1"><label>State</label><InputText class="form-control" @bind-Value="editingPlace.State" /></div>
+			<div class="FirstCall-group1"><label>County</label><InputText class="form-control" @bind-Value="editingPlace.County" /></div>
+			<div class="FirstCall-group1"><label>Country</label><InputText class="form-control" @bind-Value="editingPlace.Country" /></div>
+			<div class="FirstCall-group1"><label>In City Limits</label><InputCheckbox class="form-check-input" @bind-Value="editingPlace.InCityLimits" /></div>
+			<div class="FirstCall-group1"><label>Director Notify Date</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifyDate" /></div>
+			<div class="FirstCall-group1"><label>Director Notified Time</label><InputDate class="form-control" @bind-Value="editingPlace.DirectorNotifedTime" /></div>
+			<div class="FirstCall-group1"><label>Admission Date</label><InputDate class="form-control" @bind-Value="editingPlace.AdmissionDate" /></div>
+			<div class="FirstCall-group1"><label>Body Release Time</label><InputDate class="form-control" @bind-Value="editingPlace.BodyReleaseTime" /></div>
+		</div>
+	</div>
+	</EditForm>
+
+<!-- Tabs Navigation -->
+	<div class="TabForm">
+		<div class="tab-buttons">
+			<button @onclick="@(() => SelectTab("Airline"))" class="tab-button @(selectedTab == "Airline" ? "active" : "")">Airline</button>
+			<button @onclick="@(() => SelectTab("Shipping Contaner"))" class="tab-button @(selectedTab == "Shipping Contaner" ? "active" : "")">Shipping Container</button>
+			<button @onclick="@(() => SelectTab("Tab3"))" class="tab-button @(selectedTab == "Tab3" ? "active" : "")">Personal Effects</button>
+		</div>
+	</div>
+	<div class="Tabinfoform">
+		@if (selectedTab == "Airline")
+		{
+			<h5>Airline Information</h5>
+			<div class="FirstCall-group">
+				<div class="FirstCall-group1">
+					<label>Airline Name</label>
+					<InputText class="fcall" @bind-Value="editingAirline.AirlineName" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Country</label>
+					<InputText class="fcall" @bind-Value="editingAirline.Country" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Founded</label>
+					<InputDate class="fcall" @bind-Value="editingAirline.Founded" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>IATA</label>
+					<InputText class="fcall" @bind-Value="editingAirline.IATA" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>ICAO</label>
+					<InputText class="fcall" @bind-Value="editingAirline.ICAO" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Fleet Size</label>
+					<InputText class="fcall" @bind-Value="editingAirline.FleetSize" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Logo URL</label>
+					<InputText class="fcall" @bind-Value="editingAirline.LogoUrl" />
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Shipping Contaner")
+		{
+			<h5>Shipping Container</h5>
+			<div class="FirstCall-group">
+				<div class="FirstCall-group1">
+					<label>Ship From</label>
+					<InputText class="form-control" @bind-Value="shippingInfo.ShipFrom" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Ship To</label>
+					<InputText class="form-control" @bind-Value="shippingInfo.ShipTo" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Ship From Name</label>
+					<InputText class="form-control" @bind-Value="shippingInfo.ShipFromName" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Ship To Name</label>
+					<InputText class="form-control" @bind-Value="shippingInfo.ShipToName" />
+				</div>
+				<div class="FirstCall-group1">
+					<label>Notes</label>
+					<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+				</div>
+			</div>
+		}
+		else if (selectedTab == "Tab3")
+		{
+			<h5>Personal Effects</h5>
+			<div class="FirstCall-group">
+			<div class="FirstCall-group1">
+				<label>Item</label>
+				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+			</div>
+			<div class="FirstCall-group1">
+				<label>Qty</label>
+				<InputTextArea class="form-control" @bind-Value="shippingInfo.Notes" />
+			</div>
+			</div>
+		}
+	</div>
+
+@code {
+	private List<Airline> airlineList = new();
+	private Airline editingAirline = new();
+	private int currentRecordIndex = 0;
+	private string? currentRecordString;
+	private bool preVis = true, nexVis = true;
+	private string selectedTab = "Airline";
+	private ContainerShipping shippingInfo = new();
+	private List<PlaceOfDeath> placeList = new();
+	private PlaceOfDeath editingPlace = new();
+	private List<Deceased> deceasedList = new List<Deceased>();
+	private Deceased currentDeceased = new Deceased();
+	private Deceased editingDeceased = new Deceased();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var uri = NavigationManager.Uri;
+		var query = new Uri(uri).Query;
+		var queryParameters = QueryHelpers.ParseQuery(query);
+
+		airlineList = await Db.Airline.ToListAsync();
+		placeList = await Db.PlaceOfDeath.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
+		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+
+		int index = GlobalState.clientID - 1;
+
+		if (index >= 0 && index < deceasedList.Count) // ensure index is valid before access
+		{
+			editingDeceased = CloneDeceased(deceasedList[index]);
+		}
+		else
+		{
+			// handle by pick first record, show an error, etc.
+			editingDeceased = deceasedList.Any() ? CloneDeceased(deceasedList.First()) : new Deceased(); // or some fallback
+		}
+
+		if (airlineList.Any())
+		{
+			if (queryParameters.TryGetValue("currentRecordString", out var value))
+			{
+				currentRecordString = value;
+				if (int.TryParse(currentRecordString, out var currentRecord))
+				{
+					currentRecordIndex = currentRecord;
+					preVis = currentRecord > 1;
+					nexVis = currentRecord < airlineList.Count;
+				}
+			}
+			editingAirline = CloneAirline(currentRecordIndex > 0 ? airlineList[currentRecordIndex - 1] : airlineList.Last());
+		}
+
+		if (placeList.Any())
+		{
+			editingPlace = ClonePlace(currentRecordIndex > 0 ? placeList[currentRecordIndex - 1] : placeList.Last());
+		}
+	}
+
+	private Airline CloneAirline(Airline original)
+	{
+		return new Airline
+		{
+			Id = original.Id,
+			AirlineName = original.AirlineName,
+			Country = original.Country,
+			Founded = original.Founded,
+			IATA = original.IATA,
+			ICAO = original.ICAO,
+			FleetSize = original.FleetSize,
+			LogoUrl = original.LogoUrl
+		};
+	}
+	private Deceased CloneDeceased(Deceased original)
+	{
+		return new Deceased
+		{
+			ClientID = original.ClientID,
+			Director = original.Director,
+			FirstName = original.FirstName,
+			LastName = original.LastName,
+			MiddleName = original.MiddleName,
+			Title = original.Title,
+			Suffix = original.Suffix,
+			Status = original.Status,
+			StreetAddress = original.StreetAddress,
+			City = original.City,
+			State = original.State,
+			ZipCode = original.ZipCode,
+			ContractBalance = original.ContractBalance,
+			DoD = original.DoD,
+			TimeOfDeath = original.TimeOfDeath,
+			SSN = original.SSN,
+			Gender = original.Gender,
+			MaidenName = original.MaidenName,
+			Alias = original.Alias,
+			Vet = original.Vet,
+			War = original.War,
+			InformantName = original.InformantName,
+			IStreetAddress = original.IStreetAddress,
+			ICity = original.ICity,
+			IState = original.IState,
+			IZipCode = original.IZipCode,
+			IPhoneNumber = original.IPhoneNumber,
+			InformantEmail = original.InformantEmail,
+			InfoNotified = original.InfoNotified,
+			Notes = original.Notes,
+			Image = original.Image,
+			InformantRelation = original.InformantRelation
+		};
+	}
+
+	private PlaceOfDeath ClonePlace(PlaceOfDeath original)
+	{
+		return new PlaceOfDeath
+		{
+			Id = original.Id,
+			Name = original.Name,
+			MedicalRecordNumber = original.MedicalRecordNumber,
+			StreetAddress = original.StreetAddress,
+			AptNumber = original.AptNumber,
+			TypeOfFacility = original.TypeOfFacility,
+			CallTakenBy = original.CallTakenBy,
+			ZipCode = original.ZipCode,
+			LocalityType = original.LocalityType,
+			Township = original.Township,
+			Locality = original.Locality,
+			State = original.State,
+			County = original.County,
+			Country = original.Country,
+			InCityLimits = original.InCityLimits,
+			DirectorNotifyDate = original.DirectorNotifyDate,
+			DirectorNotifedTime = original.DirectorNotifedTime,
+			AdmissionDate = original.AdmissionDate,
+			BodyReleaseTime = original.BodyReleaseTime
+		};
+	}
+
+	private async Task SavePlaceRecord()
+	{
+		var entity = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
+		if (entity is not null)
+		{
+			entity.Name = editingPlace.Name;
+			entity.MedicalRecordNumber = editingPlace.MedicalRecordNumber;
+			entity.StreetAddress = editingPlace.StreetAddress;
+			entity.AptNumber = editingPlace.AptNumber;
+			entity.TypeOfFacility = editingPlace.TypeOfFacility;
+			entity.CallTakenBy = editingPlace.CallTakenBy;
+			entity.ZipCode = editingPlace.ZipCode;
+			entity.LocalityType = editingPlace.LocalityType;
+			entity.Township = editingPlace.Township;
+			entity.Locality = editingPlace.Locality;
+			entity.State = editingPlace.State;
+			entity.County = editingPlace.County;
+			entity.Country = editingPlace.Country;
+			entity.InCityLimits = editingPlace.InCityLimits;
+			entity.DirectorNotifyDate = editingPlace.DirectorNotifyDate;
+			entity.DirectorNotifedTime = editingPlace.DirectorNotifedTime;
+			entity.AdmissionDate = editingPlace.AdmissionDate;
+			entity.BodyReleaseTime = editingPlace.BodyReleaseTime;
+
+			await Db.SaveChangesAsync();
+		}
+	}
+
+	private void SelectTab(string tabName)
+	{
+		selectedTab = tabName;
+	}
+}
+
+<style>
+.tab-buttons {
+	display: flex;
+	gap: 10px;
+	margin: 5px .25rem 5px .25rem;
+}
+
+.tab-button {
+	background-color: #e0e0e0;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px 5px 0 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.tab-button.active {
+	background-color: #936091;
+	color: white;
+}
+
+.TabForm {
+	display: inline-block;
+	max-width: 100%;
+	background-color: rgb(187, 188, 188);
+	border-radius: 5px;
+	position: absolute;
+	z-index: 1; /* optional, just in case */
+	margin-top: .5rem;
+}
+
+.Tabinfoform {
+	position: relative;
+	top: 2.5rem; /* pulls form down over tab bar */
+	border-radius: 6px;
+	padding-left: 0.5rem;
+	margin-top: 1rem;
+	padding-top: 1rem; /* adds space above the heading */
+	background-color: rgb(187, 188, 188);
+}
+
+.FirstCall-group1 {
+	margin-bottom: 15px;
+}
+
+
+.form-control { /* fields under place of death but above the tabs */
+	width: 100%;
+	font-size: 1em;
+	border-radius: 4px;
+	border: none;
+}
+
+.title-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ContractForm {
+	border-radius: 5px;
+	padding-left: .25rem;
+	padding-top: .05rem;
+	background-color: rgb(187, 188, 188);
+}
+
+.FirstCall-group {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.FirstCall-group1 {
+	display: flex;
+	flex-direction: column;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+	margin-top: .25rem;
+
+}
+
+.fcall {
+	border: none;
+	border-radius: 0.2rem;
+	padding: .5rem;
+	max-height: 36px;
+}
+
+.pod-field-container {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: .25rem;
+}
+
+.genderlabel {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}
+
+.gender-container {
+	margin-bottom: 15px;
+	padding-right: 1rem;
+}
+
+.gender-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.suffix-container, .IState-container {
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+}
+
+.suffix-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.notes-field {
+	min-height: 6rem;
+	padding-right: 17rem;
+}
+
+.ShowImage {
+	margin-left: auto;
+}
+
+.FirstCallTop-group {
+	display: flex;
+	padding-right: 1rem;
+}
+
+.ImageUpload {
+	max-width: 14rem;
+}
+</style>

@@ -124,6 +124,73 @@ namespace RESTDB.Migrations
                     b.ToTable("CashAdvance");
                 });
 
+            modelBuilder.Entity("RESTDB.Models.CauseOfDeath", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("AlcoholUse")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AnatGift")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AnatGiftConsidered")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Biopsy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CauseFactors")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CommDisease")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DContributed")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DefferedDiag")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Diabetic")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DonationConsented")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DonationConsidered")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Hospitalized")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Manner")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OtherFactors")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TobaccoUse")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TypeofFactor")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Viewed")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CauseOfDeath");
+                });
+
             modelBuilder.Entity("RESTDB.Models.ContainerShipping", b =>
                 {
                     b.Property<int?>("Id")
