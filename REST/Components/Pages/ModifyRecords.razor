@@ -216,11 +216,11 @@
 							<option value="Female">Female</option>
 						</InputSelect>
 					</div>
-					<div class="FirstCall-group1">
+					<div class="FirstCall-group1 notes-container">
 						<label for="Notes">Notes:</label>
 						<InputTextArea id="Notes" class="fcall notes-field" @bind-Value="editingDeceased.Notes" />
 					</div>
-					<div class="FirstCall-group1">
+					<div class="FirstCall-group1 upload-container">
 						<label for="ImageUpload">Upload Image:</label>
 						<InputFile id="ImageUpload" OnChange="HandleImageUpload" class="ImageUpload" />
 					</div>
@@ -690,10 +690,17 @@
 	padding-right: 1rem;
 }
 
-.notes-field {
-	min-height: 6rem;
-	padding-right: 17rem;
-}
+	.notes-field {
+		width: 100%;
+		min-height: 6rem;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	.notes-container {
+		flex: 1 1 100%; /* forces a full row in a wrap-enabled flex parent */
+		max-width: 50%;
+	}
 
 .ImageUpload {
 	max-width: 14rem;

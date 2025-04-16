@@ -372,9 +372,6 @@
 	private List<RESTDB.Models.WarsServed> WarsServed = new List<RESTDB.Models.WarsServed>();
 	private RESTDB.Models.WarsServed currentWarsServed = new RESTDB.Models.WarsServed();
 
-
-
-
 	// Phone and SSN part bindings
 	private string? PhonePart1 { get; set; }
 	private string? PhonePart2 { get; set; }
@@ -599,18 +596,17 @@
 		flex-direction: column;
 	}
 
-.notes-field {
-    width: 100%;          /* Fill container horizontally */
-    min-height: 6rem;     /* Big enough vertically */
-    max-width: 100%;      /* So it won't exceed parent, no overlap */
-    box-sizing: border-box;
-    resize: vertical;     /* optional: user can drag to expand vertically */
-}
+	.notes-field {
+		width: 100%;
+		min-height: 6rem;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
 
-.notes-container {
-    flex: 1 1 100%;  /* This forces a full row in a wrap-enabled flex parent */
-    max-width: 50%; /* Guarantee it doesn't exceed the container width */
-}
+	.notes-container {
+		flex: 1 1 100%; /* forces a full row in a wrap-enabled flex parent */
+		max-width: 50%;
+	}
 
 	.ImageUpload {
 		max-width: 14rem;
@@ -621,6 +617,6 @@
 	}
 
 	.SaveButtonFirst {
-
+		display: flex;
 	}
 </style>
