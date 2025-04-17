@@ -94,11 +94,10 @@
 
 /* Style the caret icon */
 .nav-item button span.ms-auto {
-	font-size: 1.2rem; /* Adjust icon size */
+	font-size: 1.2rem;
 	transition: transform 0.3s ease;
 }
 
-/* Rotate the caret when the menu is open */
 .nav-item.open button span.ms-auto {
 	transform: rotate(180deg);
 }
