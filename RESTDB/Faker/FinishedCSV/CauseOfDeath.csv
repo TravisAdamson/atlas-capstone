@@ -1,4 +1,4 @@
-Id,Manner,Other,CauseFactors,OtherFactors,TypeofFactor,Diabetic,DContributed,TobaccoUse,AlcoholUse,Hospitalized,DefferedDiag,CommDisease,DonationConsidered,DonationConsented,AnatGiftConsidered,Viewed,Biopsy,AnatGift
+ClientID,Manner,Other,CauseFactors,OtherFactors,TypeofFactor,Diabetic,DContributed,TobaccoUse,AlcoholUse,Hospitalized,DefferedDiag,CommDisease,DonationConsidered,DonationConsented,AnatGiftConsidered,Viewed,Biopsy,AnatGift
 1,Homicide,Serious inside else memory if six.,Respiratory failure,Obesity,Environmental,No,False,No,No,False,True,True,False,True,True,False,True,None
 2,Natural,Sense peace economy travel.,Heart disease,Genetic predisposition,Acquired,Yes,False,No,No,True,False,False,False,True,True,True,False,Organs
 3,Undetermined,Rest human station property. Partner stock four.,Respiratory failure,Genetic predisposition,Genetic,No,True,Yes,Yes,True,True,False,True,True,False,False,True,None

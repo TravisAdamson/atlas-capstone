@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class Military
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 	public string? Branch { get; set; } // Example: Army, Navy, Air Force, etc.
 	public string? Rank { get; set; }
 	public string? ServiceNumber { get; set; }

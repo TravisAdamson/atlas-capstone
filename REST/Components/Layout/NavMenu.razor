@@ -1,5 +1,7 @@
 ﻿@rendermode InteractiveServer
+
 @using Microsoft.AspNetCore.Components.Routing
+
 @inject NavigationManager Nav
 @inject REST.Services.GlobalState GlobalState
 
@@ -78,7 +80,7 @@
 @code
 {
 	// state helpers
-	private bool IsRecordSelected => GlobalState.clientID > 0;
+	private bool IsRecordSelected => GlobalState.ClientID > 0;
 	private string DisabledCss => IsRecordSelected ? "" : "disabled-nav";
 	private bool isModifiedOpen;
 

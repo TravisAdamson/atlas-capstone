@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class ObituaryData
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The format of the obituary distribution (e.g., print, online)
 	public string? DistributionFormat { get; set; }

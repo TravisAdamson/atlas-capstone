@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class Airline
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	public string? AirlineName { get; set; }
 

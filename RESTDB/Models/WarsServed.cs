@@ -6,7 +6,8 @@ namespace RESTDB.Models;
 public class WarsServed
 {
 	[Key]
-	public int? Id { get; set; }
+	public int ClientID { get; set; }
+
 	public string? WarName { get; set; } // Example: "World War II", "Vietnam War", etc.
 	public string? Description { get; set; } // Description of the war or specific involvement
 

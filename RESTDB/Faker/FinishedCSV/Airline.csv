@@ -1,4 +1,4 @@
-Id,AirlineName,Country,Founded,IATA,ICAO,FleetSize,LogoUrl
+ClientID,AirlineName,Country,Founded,IATA,ICAO,FleetSize,LogoUrl
 1,Air Horizon,Australia,2013-07-21,BZM,XVZJ,482,https://fakeimage.com/65.png
 2,Jetstream Air,India,2007-08-03,DCU,ZNSP,482,https://fakeimage.com/40.png
 3,Global Wings,Germany,1984-04-22,XRM,CLPX,482,https://fakeimage.com/57.png

@@ -101,7 +101,6 @@
 	private List<Survivors> survivorList = new();
 	private Survivors editingSurvivor = new();
 	private int currentRecordIndex = 0;
-	private string? currentRecordString;
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
@@ -109,27 +108,28 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
-
 		survivorList = await Db.Survivors.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 
-		if (survivorList.Any())
-		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
-			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < survivorList.Count;
-				}
-			}
-			editingSurvivor = CloneSurvivor(survivorList[GlobalState.clientID - 1]);
-			editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+		// if no valid ID or no survivors, bail.
+		if (GlobalState.ClientID <= 0 || !survivorList.Any())
+			return;
+
+		// find the survivor & deceased by matching ClientID
+		editingSurvivor = CloneSurvivor(
+			survivorList.FirstOrDefault(s => s.ClientID == GlobalState.ClientID)
+			?? new Survivors());
+		editingDeceased = CloneDeceased(
+			deceasedList.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
+			?? new Deceased());
+
+		// locate this one in the overall survivor list
+		var idx = survivorList.FindIndex(s => s.ClientID == GlobalState.ClientID);
+		if (idx >= 0)
+		{ // lists are zero‑based, "records" are 1‑based, we should consider unifying the two
+			currentRecordIndex = idx + 1;
+			preVis = currentRecordIndex > 1;
+			nexVis = currentRecordIndex < survivorList.Count;
 		}
 	}
 
@@ -137,7 +137,7 @@
 	{
 		return new Survivors
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			SurvivorRelation = original.SurvivorRelation,
 			Name = original.Name,
 			Address = original.Address,
@@ -214,7 +214,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.Survivors.FirstOrDefaultAsync(s => s.Id == editingSurvivor.Id);
+		var entity = await Db.Survivors.FirstOrDefaultAsync(s => s.ClientID == editingSurvivor.ClientID);
 		if (entity is not null)
 		{
 			entity.SurvivorRelation = editingSurvivor.SurvivorRelation;

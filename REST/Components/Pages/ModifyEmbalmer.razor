@@ -85,7 +85,6 @@
 	private List<Embalmer> embalmerList = new();
 	private Embalmer editingEmbalmer = new();
 	private int currentRecordIndex = 0;
-	private string? currentRecordString;
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
@@ -93,26 +92,25 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
 		embalmerList = await Db.Embalmer.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		if (embalmerList.Any())
-		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
-			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < embalmerList.Count;
-				}
-			}
 
-			editingEmbalmer = CloneEmbalmer(embalmerList[GlobalState.clientID - 1]);
+		if (GlobalState.ClientID <= 0 || !embalmerList.Any())
+			return;
+
+		// bind the desired Deceased and Embalmer
+		editingDeceased = CloneDeceased(deceasedList.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
+			?? new Deceased());
+		editingEmbalmer = CloneEmbalmer(embalmerList.FirstOrDefault(e => e.ClientID == GlobalState.ClientID)
+			?? new Embalmer());
+
+		// find its index in the embalmerList so prev/next work
+		var idx = embalmerList.FindIndex(e => e.ClientID == GlobalState.ClientID);
+		if (idx >= 0)
+		{
+			currentRecordIndex = idx + 1;
+			preVis = currentRecordIndex > 1;
+			nexVis = currentRecordIndex < embalmerList.Count;
 		}
 	}
 
@@ -120,7 +118,7 @@
 	{
 		return new Embalmer
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			PermissionToEmbalm = original.PermissionToEmbalm,
 			Embalmed = original.Embalmed,
 			EmbalmedDate = original.EmbalmedDate,
@@ -191,7 +189,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.Id == editingEmbalmer.Id);
+		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.ClientID == editingEmbalmer.ClientID);
 		if (entity is not null)
 		{
 			entity.PermissionToEmbalm = editingEmbalmer.PermissionToEmbalm;
@@ -205,6 +203,7 @@
 		}
 	}
 }
+
 <style>
 	.EmbalmerForm h5 {
 		font-size: 1.7em;

@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class FlagApplication
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	public string? ApplicantName { get; set; }
 

@@ -6,7 +6,8 @@ namespace RESTDB.Models;
 public class Services
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The category of the service (e.g., embalming, casket purchase)
 	public string? Category { get; set; }

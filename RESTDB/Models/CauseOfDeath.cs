@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class CauseOfDeath
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The manner of death
 	public string? Manner { get; set; }

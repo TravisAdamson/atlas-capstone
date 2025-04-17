@@ -1,4 +1,4 @@
-Id,Branch,Rank,ServiceNumber,StartDate,EndDate
+ClientID,Branch,Rank,ServiceNumber,StartDate,EndDate
 1,Space Force,Colonel,GF6604,2003-01-09,
 2,Marine Corps,Captain,Ln6475,2011-06-19,2020-03-10
 3,Navy,Corporal,Wg8242,1982-09-23,2002-02-24

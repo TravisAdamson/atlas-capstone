@@ -6,7 +6,8 @@ namespace RESTDB.Models;
 public class ServiceContract
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The date the buyer made the purchase or signed the contract
 	public DateTime? ContractDate { get; set; }

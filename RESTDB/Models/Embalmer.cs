@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class Embalmer
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// Whether permission has been given for embalming
 	public bool PermissionToEmbalm { get; set; }

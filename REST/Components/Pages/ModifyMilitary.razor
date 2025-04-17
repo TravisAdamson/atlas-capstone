@@ -137,17 +137,26 @@
 	private string selectedTab = "Stints";
 
 
-	protected override async Task OnInitializedAsync()
-	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
+protected override async Task OnInitializedAsync()
+{
+	militaryList = await Db.Military.ToListAsync();
+	deceasedList = await Db.Deceased.ToListAsync();
 
-		militaryList = await Db.Military.ToListAsync();
-		deceasedList = await Db.Deceased.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		editingMilitary = CloneMilitary(militaryList[GlobalState.clientID - 1]);
+	if (GlobalState.ClientID <= 0)
+	{
+		NavigationManager.NavigateTo("/Search%20Records");
+		return;
 	}
+
+	editingDeceased = deceasedList
+		.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
+		?? new Deceased();
+
+	editingMilitary = militaryList
+		.FirstOrDefault(m => m.ClientID == GlobalState.ClientID)
+		?? new Military();
+}
+
 
 	private Deceased CloneDeceased(Deceased original)
 	{
@@ -213,7 +222,7 @@
 	{
 		return new Military
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			Branch = original.Branch,
 			ServiceNumber = original.ServiceNumber,
 			StartDate = original.StartDate,
@@ -223,10 +232,10 @@
 
 	private async Task SaveMilitaryRecord()
 	{
-		var entity = await Db.Military.FirstOrDefaultAsync(m => m.Id == editingMilitary.Id);
+		var entity = await Db.Military.FirstOrDefaultAsync(m => m.ClientID == editingMilitary.ClientID);
 		if (entity is not null)
 		{
-			entity.Id = editingMilitary.Id;
+			entity.ClientID = editingMilitary.ClientID;
 			entity.Branch = editingMilitary.Branch;
 			entity.ServiceNumber = editingMilitary.ServiceNumber;
 			entity.StartDate = editingMilitary.StartDate;
