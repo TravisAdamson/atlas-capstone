@@ -1,16 +1,20 @@
 @page "/Military"
+
 @inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
 @using REST.Components.Shared
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
 
 <ActiveService
 	Director="@editingDeceased.Director"

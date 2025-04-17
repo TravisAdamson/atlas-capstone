@@ -1,6 +1,6 @@
 ﻿@page "/Modify Records"
 
-@inject RESTDB.Data.ApplicationDbContext Context
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
 
@@ -527,7 +527,7 @@
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
-		Deceased = await Context.Deceased.ToListAsync();
+		Deceased = await Db.Deceased.ToListAsync();
 		if (Deceased.Any())
 		{
 			if (queryParameters.TryGetValue("currentRecordString", out var value))
@@ -657,7 +657,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.Deceased.FirstOrDefaultAsync(d => d.ClientID == editingDeceased.ClientID);
+		var entity = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == editingDeceased.ClientID);
 
 		// Basic validation
 		if (string.IsNullOrEmpty(editingDeceased.FirstName) || string.IsNullOrEmpty(editingDeceased.LastName))
@@ -724,7 +724,7 @@
 				entity.Image = editingDeceased.Image;
 				entity.InformantRelation = editingDeceased.InformantRelation;
 
-				await Context.SaveChangesAsync();
+				await Db.SaveChangesAsync();
 			}
 			catch (DbUpdateException ex)
 			{

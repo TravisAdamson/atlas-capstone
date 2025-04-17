@@ -1,16 +1,20 @@
 @page "/Place of Death"
+
 @inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
 @using REST.Components.Shared
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
 
 <ActiveService
 	Director="@editingDeceased.Director"
@@ -362,7 +366,6 @@
 			entityA.LogoUrl = editingAirline.LogoUrl;
 		}
 			await Db.SaveChangesAsync();
-
 	}
 
 	private void SelectTab(string tabName)
@@ -372,11 +375,11 @@
 }
 
 <style>
-.tab-buttons {
-	display: flex;
-	gap: 10px;
-	margin: 5px .25rem 5px .25rem;
-}
+	.tab-buttons {
+		display: flex;
+		gap: 10px;
+		margin: 5px .25rem 5px .25rem;
+	}
 
 .tab-button {
 	background-color: #e0e0e0;
@@ -415,7 +418,6 @@
 .FirstCall-group1 {
 	margin-bottom: 15px;
 }
-
 
 .form-control { /* fields under place of death but above the tabs */
 	width: 100%;
