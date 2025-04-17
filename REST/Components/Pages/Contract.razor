@@ -1,17 +1,21 @@
 @page "/Contract"
+
 @inject RESTDB.Data.ApplicationDbContext Db
-@inject RESTDB.Data.ApplicationDbContext Context
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @using REST.Components.Shared
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
+
 @namespace REST.Components
 
 <PageTitle>Contract Record</PageTitle>

@@ -1,8 +1,12 @@
 ﻿@page "/Search Records"
-@inject RESTDB.Data.ApplicationDbContext Db
+
 @using RESTDB.Models
+
+@inject RESTDB.Data.ApplicationDbContext Db
+
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @rendermode InteractiveServer
 
 <h3>Search Deceased Records</h3>

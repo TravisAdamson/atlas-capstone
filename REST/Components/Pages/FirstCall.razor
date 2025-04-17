@@ -1,6 +1,9 @@
 ﻿@page "/First Call"
-@inject RESTDB.Data.ApplicationDbContext Context
+
+@inject RESTDB.Data.ApplicationDbContext Db
+
 @rendermode InteractiveServer
+
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 
@@ -174,12 +177,12 @@
 			<div class="FirstCall-group1">
 				<label for="ZipCode">Zip Code:</label>
 				<InputText id="ZipCode"
-				class="zipcall"
-				@bind-Value="currentDeceased.ZipCode"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				maxlength="5"
-				oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+					class="zipcall"
+					@bind-Value="currentDeceased.ZipCode"
+					inputmode="numeric"
+					pattern="[0-9]*"
+					maxlength="5"
+					oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 			</div>
 			<!-- SSN -->
 			<div class="FirstCall-group1">
@@ -407,12 +410,12 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		Deceased = await Context.Deceased.ToListAsync();
+		Deceased = await Db.Deceased.ToListAsync();
 	}
 
 	private int GetNextClientID()
 	{
-		var lastDeceased = Context.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
+		var lastDeceased = Db.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
 		return lastDeceased?.ClientID + 1 ?? 1;
 	}
 
@@ -438,52 +441,53 @@
 			Console.WriteLine("Phone number is required.");
 		}
 		else
+		{
 			currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
+		}
 
 		// Save
-	try
-	{
-		currentDeceased.ClientID = GetNextClientID();
-		Context.Deceased.Add(currentDeceased);
-		Context.Airline.Add(currentAirline);
-		Context.Buyer.Add(currentBuyer);
-		Context.CashAdvance.Add(currentCashAdvance);
-		Context.Embalmer.Add(currentEmbalmer);
-		Context.ContainerShipping.Add(currentContainerShipping);
-		Context.FlagApplication.Add(currentFlagApplication);
-		Context.Military.Add(currentMilitary);
-		Context.MilitaryStint.Add(currentMilitaryStint);
-		Context.Monument.Add(currentMonument);
-		Context.ObituaryData.Add(currentObituaryData);
-		Context.PlaceOfDeath.Add(currentPlaceOfDeath);
-		Context.Products.Add(currentProducts);
-		Context.ServiceContract.Add(currentServiceContract);
-		Context.Services.Add(currentServices);
-		Context.Survivors.Add(currentSurvivors);
-		Context.WarsServed.Add(currentWarsServed);
-
-		await Context.SaveChangesAsync();
-
-		currentDeceased = new RESTDB.Models.Deceased();
-		PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
-		SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
-	}
-	catch (DbUpdateException ex)
-	{
-		// You can inspect the inner exception to make sure it's a duplicate key error
-		if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
+		try
 		{
-			errorMessage = "A record with this Service ID already exists.";
+			currentDeceased.ClientID = GetNextClientID();
+			Db.Deceased.Add(currentDeceased);
+			Db.Airline.Add(currentAirline);
+			Db.Buyer.Add(currentBuyer);
+			Db.CashAdvance.Add(currentCashAdvance);
+			Db.Embalmer.Add(currentEmbalmer);
+			Db.ContainerShipping.Add(currentContainerShipping);
+			Db.FlagApplication.Add(currentFlagApplication);
+			Db.Military.Add(currentMilitary);
+			Db.MilitaryStint.Add(currentMilitaryStint);
+			Db.Monument.Add(currentMonument);
+			Db.ObituaryData.Add(currentObituaryData);
+			Db.PlaceOfDeath.Add(currentPlaceOfDeath);
+			Db.Products.Add(currentProducts);
+			Db.ServiceContract.Add(currentServiceContract);
+			Db.Services.Add(currentServices);
+			Db.Survivors.Add(currentSurvivors);
+			Db.WarsServed.Add(currentWarsServed);
+
+			await Db.SaveChangesAsync();
+
+			currentDeceased = new RESTDB.Models.Deceased();
+			PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
+			SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
 		}
-		else
+		catch (DbUpdateException ex)
 		{
-			errorMessage = "An unexpected error occurred while saving.";
+			// You can inspect the inner exception to make sure it's a duplicate key error
+			if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
+			{
+				errorMessage = "A record with this Service ID already exists.";
+			}
+			else
+			{
+				errorMessage = "An unexpected error occurred while saving.";
+			}
+			Console.WriteLine($"Error saving record: {ex.Message}");
 		}
-
-		Console.WriteLine($"Error saving record: {ex.Message}");
 	}
 
-	}
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)
 	{
 		var file = e.File;
