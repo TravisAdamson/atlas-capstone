@@ -1,0 +1,101 @@
+Id,Manner,Other,CauseFactors,OtherFactors,TypeofFactor,Diabetic,DContributed,TobaccoUse,AlcoholUse,Hospitalized,DefferedDiag,CommDisease,DonationConsidered,DonationConsented,AnatGiftConsidered,Viewed,Biopsy,AnatGift
+1,Homicide,Serious inside else memory if six.,Respiratory failure,Obesity,Environmental,No,False,No,No,False,True,True,False,True,True,False,True,None
+2,Natural,Sense peace economy travel.,Heart disease,Genetic predisposition,Acquired,Yes,False,No,No,True,False,False,False,True,True,True,False,Organs
+3,Undetermined,Rest human station property. Partner stock four.,Respiratory failure,Genetic predisposition,Genetic,No,True,Yes,Yes,True,True,False,True,True,False,False,True,None
+4,Undetermined,Language ball floor meet usually board necessary.,Stroke,Obesity,Environmental,Yes,False,No,Yes,False,False,True,False,True,True,True,True,None
+5,Homicide,Party prevent live.,Heart disease,Obesity,Genetic,Yes,True,Yes,No,False,True,True,False,False,False,False,False,Organs
+6,Suicide,Together type music hospital.,Kidney failure,Obesity,Acquired,No,True,Yes,Yes,False,True,True,False,True,False,False,True,Organs
+7,Accident,Manage political record word group food break.,Cancer,Obesity,Lifestyle,Yes,True,Yes,Yes,False,True,False,True,True,True,True,True,Organs
+8,Homicide,Beyond chair recently and.,Cancer,Obesity,Lifestyle,No,True,No,Yes,True,True,False,False,False,True,True,False,Organs
+9,Undetermined,Hospital have wonder already.,Heart disease,Environmental factors,Genetic,No,False,No,Yes,True,True,True,True,False,False,True,False,Tissue
+10,Natural,Author feeling job article level.,Respiratory failure,Environmental factors,Environmental,No,False,No,Yes,True,False,True,False,True,False,True,True,Cornea
+11,Suicide,Whom around put suddenly garden.,Kidney failure,Genetic predisposition,Environmental,Yes,False,No,No,True,True,True,False,True,True,True,False,Cornea
+12,Undetermined,Themselves true power home price check real.,Respiratory failure,Obesity,Acquired,No,True,Yes,No,True,False,True,False,False,True,True,False,None
+13,Suicide,Pull opportunity throughout take car.,Respiratory failure,Obesity,Acquired,Yes,True,Yes,Yes,False,False,False,True,True,True,True,True,Tissue
+14,Natural,I reduce industry. Close ask reduce.,Kidney failure,Sedentary lifestyle,Environmental,No,True,Yes,No,False,True,True,False,False,True,False,True,None
+15,Natural,Anyone state wind indeed nature white without.,Cancer,Genetic predisposition,Lifestyle,Yes,True,Yes,No,False,False,True,False,False,False,False,True,Tissue
+16,Homicide,Add senior woman put partner.,Kidney failure,Genetic predisposition,Lifestyle,Yes,True,No,No,False,False,True,False,True,True,False,True,Tissue
+17,Undetermined,Little type physical against.,Stroke,Genetic predisposition,Acquired,Yes,False,Yes,No,True,True,False,True,True,False,False,False,None
+18,Homicide,Everything affect American race.,Heart disease,Obesity,Acquired,No,False,No,Yes,False,True,False,False,True,False,False,True,Tissue
+19,Undetermined,Republican total policy head Mrs debate onto.,Respiratory failure,Obesity,Lifestyle,Yes,True,Yes,Yes,False,True,True,False,False,False,False,True,Cornea
+20,Natural,Responsibility full per among clearly word.,Stroke,Sedentary lifestyle,Environmental,Yes,False,Yes,No,True,True,True,False,True,True,False,False,None
+21,Accident,Film tax rock.,Heart disease,Sedentary lifestyle,Genetic,Yes,True,No,No,False,True,True,False,True,False,False,False,None
+22,Homicide,Front something speech buy break marriage also.,Respiratory failure,Sedentary lifestyle,Genetic,Yes,False,No,No,True,True,False,True,False,False,False,True,Organs
+23,Undetermined,Assume be seek article. Better news face.,Heart disease,Obesity,Genetic,Yes,True,No,Yes,False,False,True,True,False,False,False,True,Organs
+24,Undetermined,Issue grow ask tell. Total later quality.,Kidney failure,Obesity,Acquired,Yes,False,No,No,False,True,True,True,True,False,False,False,Organs
+25,Homicide,Perhaps bit learn gun still.,Stroke,Genetic predisposition,Acquired,No,False,Yes,Yes,True,True,False,False,True,True,False,False,Tissue
+26,Homicide,There many true follow marriage material.,Kidney failure,Obesity,Genetic,No,False,Yes,No,False,False,True,True,False,True,True,True,Tissue
+27,Suicide,Stand along chance either six success.,Heart disease,Genetic predisposition,Genetic,No,False,Yes,Yes,False,False,True,False,True,False,False,True,Tissue
+28,Natural,Address such former claim chance.,Respiratory failure,Environmental factors,Environmental,Yes,False,No,Yes,True,True,False,False,True,True,True,True,Cornea
+29,Undetermined,Wrong section town deal movement out stay lot.,Stroke,Obesity,Genetic,No,False,Yes,Yes,False,True,True,False,True,True,False,False,Cornea
+30,Natural,Medical effort assume teacher wall.,Respiratory failure,Genetic predisposition,Environmental,Yes,False,Yes,Yes,False,True,False,False,True,True,True,False,Organs
+31,Undetermined,Expert stop area along individual.,Cancer,Sedentary lifestyle,Lifestyle,Yes,True,Yes,No,False,True,True,True,True,False,True,False,None
+32,Suicide,Hit another likely character allow pay picture.,Cancer,Obesity,Genetic,No,False,No,No,False,False,True,True,True,False,True,False,Tissue
+33,Accident,Book art red pass value practice wide.,Cancer,Genetic predisposition,Genetic,Yes,True,No,No,False,True,True,True,False,True,True,True,Cornea
+34,Suicide,Million size country site.,Kidney failure,Environmental factors,Genetic,No,False,No,Yes,True,False,False,True,False,False,True,False,None
+35,Homicide,Main too war.,Cancer,Genetic predisposition,Environmental,No,True,Yes,Yes,False,True,True,False,False,True,False,False,Tissue
+36,Accident,Medical watch certainly through instead base.,Respiratory failure,Genetic predisposition,Genetic,No,False,Yes,No,True,False,True,False,False,True,True,False,Organs
+37,Suicide,Social issue indicate.,Kidney failure,Sedentary lifestyle,Acquired,No,True,No,Yes,False,False,True,True,False,True,True,False,Cornea
+38,Undetermined,Concern store discover hand others century.,Kidney failure,Environmental factors,Acquired,Yes,False,No,No,True,True,True,True,False,False,False,True,Tissue
+39,Accident,Security fall ready usually.,Heart disease,Environmental factors,Environmental,No,True,Yes,Yes,False,False,False,False,False,False,True,True,Organs
+40,Natural,Agreement decade friend which.,Respiratory failure,Environmental factors,Acquired,Yes,False,No,No,False,True,False,False,False,False,True,False,None
+41,Accident,Mouth film heavy chair. Source firm drug senior.,Respiratory failure,Obesity,Genetic,Yes,False,No,No,True,True,True,False,True,False,True,True,Organs
+42,Suicide,Car federal indicate unit.,Stroke,Sedentary lifestyle,Genetic,No,True,Yes,No,False,False,False,True,False,False,False,True,Cornea
+43,Accident,While top kid he weight before.,Kidney failure,Genetic predisposition,Genetic,Yes,True,No,No,False,False,False,False,True,True,False,True,Organs
+44,Homicide,Up control instead company where future model.,Heart disease,Sedentary lifestyle,Lifestyle,Yes,False,Yes,Yes,True,False,True,False,False,False,False,True,Cornea
+45,Undetermined,Question set discussion seven.,Respiratory failure,Environmental factors,Environmental,No,True,No,No,True,True,True,True,False,True,False,True,Tissue
+46,Natural,Moment ok how bill education exist.,Respiratory failure,Sedentary lifestyle,Acquired,Yes,False,Yes,No,True,True,False,False,False,False,False,True,Organs
+47,Accident,Phone most improve play idea sing small.,Stroke,Obesity,Genetic,No,True,Yes,No,False,False,False,False,False,False,True,True,None
+48,Undetermined,Major maybe manage when know central many.,Heart disease,Obesity,Acquired,No,False,Yes,No,False,False,False,True,True,True,True,True,Tissue
+49,Homicide,According American per yourself their record.,Cancer,Environmental factors,Lifestyle,No,False,Yes,Yes,True,False,True,True,False,False,False,False,Organs
+50,Undetermined,Firm decade cost glass work interview man.,Stroke,Sedentary lifestyle,Environmental,No,False,No,No,True,True,True,True,True,False,True,True,None
+51,Natural,Doctor be cost. Sea quality do father.,Kidney failure,Environmental factors,Lifestyle,Yes,False,No,Yes,False,True,False,True,True,True,False,False,Tissue
+52,Suicide,In approach recent program possible natural.,Respiratory failure,Genetic predisposition,Genetic,Yes,True,No,No,True,True,False,True,True,True,True,True,Cornea
+53,Undetermined,Glass face according as.,Cancer,Sedentary lifestyle,Genetic,Yes,False,No,Yes,False,True,True,False,False,False,False,True,Tissue
+54,Undetermined,Paper beat five movie.,Cancer,Environmental factors,Acquired,No,True,No,Yes,False,True,False,False,False,True,True,True,None
+55,Accident,Economy rock feeling might his.,Stroke,Environmental factors,Genetic,No,False,Yes,No,True,False,True,True,False,True,False,True,Organs
+56,Accident,True include management.,Heart disease,Obesity,Genetic,No,True,Yes,No,False,True,True,False,False,True,False,False,Tissue
+57,Suicide,Partner stand next though house where.,Respiratory failure,Environmental factors,Lifestyle,No,False,No,Yes,True,False,False,True,True,True,True,True,None
+58,Accident,Blue tonight particular smile represent since.,Cancer,Sedentary lifestyle,Lifestyle,Yes,True,Yes,No,True,False,True,True,False,False,False,True,Organs
+59,Homicide,Eat expect save process score middle.,Heart disease,Genetic predisposition,Environmental,Yes,False,Yes,No,True,False,False,False,False,False,True,False,None
+60,Undetermined,Grow push region produce develop story drive.,Respiratory failure,Obesity,Environmental,Yes,False,No,Yes,False,False,False,True,True,False,True,False,None
+61,Accident,Foreign one agent candidate how wish member.,Kidney failure,Genetic predisposition,Acquired,No,True,Yes,No,True,False,True,True,False,True,True,True,None
+62,Suicide,Dog car do his part. Pick too blue street.,Stroke,Genetic predisposition,Environmental,No,False,No,Yes,True,True,True,False,True,False,True,False,None
+63,Undetermined,National region bad case I course first.,Cancer,Obesity,Acquired,No,True,Yes,Yes,True,True,False,False,False,False,False,True,Cornea
+64,Suicide,Ground much run. Government make article drop.,Stroke,Genetic predisposition,Environmental,Yes,False,Yes,Yes,True,False,False,False,True,False,True,True,None
+65,Undetermined,General professional career two.,Cancer,Sedentary lifestyle,Environmental,No,True,Yes,Yes,False,True,False,True,False,True,False,True,Tissue
+66,Accident,Through move source wonder relate service.,Respiratory failure,Obesity,Acquired,No,False,No,No,False,False,True,False,True,False,True,False,Tissue
+67,Homicide,Bag down stock computer. What to sea.,Respiratory failure,Environmental factors,Acquired,Yes,False,No,Yes,False,False,True,False,False,True,True,True,None
+68,Suicide,Leader medical class send.,Heart disease,Obesity,Genetic,Yes,False,Yes,No,True,False,False,True,False,False,True,True,Cornea
+69,Suicide,Significant now energy. Lay return identify.,Kidney failure,Obesity,Genetic,Yes,True,No,Yes,True,False,True,False,True,True,True,False,Tissue
+70,Suicide,Several might history strong economy.,Stroke,Genetic predisposition,Environmental,No,True,No,Yes,True,True,True,False,True,True,False,True,Cornea
+71,Undetermined,Purpose mouth then class test check suffer star.,Cancer,Genetic predisposition,Genetic,No,True,Yes,No,True,True,True,False,False,False,False,False,None
+72,Natural,A cell analysis call. We lose water.,Cancer,Genetic predisposition,Lifestyle,Yes,True,Yes,No,True,True,False,True,False,False,True,True,None
+73,Natural,Morning as police often.,Respiratory failure,Obesity,Acquired,No,False,No,No,False,True,True,False,False,True,False,True,None
+74,Natural,Watch Mrs never wrong couple.,Heart disease,Obesity,Environmental,Yes,True,No,Yes,False,False,False,False,True,True,False,False,Organs
+75,Undetermined,His less already treatment PM sometimes set.,Heart disease,Obesity,Environmental,No,True,No,Yes,True,False,True,True,False,False,True,True,Tissue
+76,Accident,Piece physical market room eat.,Cancer,Sedentary lifestyle,Environmental,Yes,False,No,Yes,True,True,False,False,True,True,False,True,Tissue
+77,Homicide,Tell time special beyond could key assume.,Respiratory failure,Genetic predisposition,Genetic,No,True,Yes,Yes,False,True,True,True,True,False,True,True,Organs
+78,Natural,Film manage several dark.,Kidney failure,Sedentary lifestyle,Genetic,No,True,No,No,False,True,True,False,True,False,True,True,Cornea
+79,Undetermined,Great notice north everything state huge TV.,Stroke,Obesity,Acquired,No,True,No,No,True,False,True,False,False,True,False,False,None
+80,Undetermined,Response provide likely fire subject.,Heart disease,Environmental factors,Genetic,No,True,No,No,True,True,True,False,True,False,False,False,Organs
+81,Homicide,Image central challenge term memory.,Kidney failure,Environmental factors,Genetic,Yes,False,No,No,True,False,True,False,False,True,False,False,Organs
+82,Accident,Role mind statement.,Stroke,Sedentary lifestyle,Environmental,No,False,Yes,No,False,True,False,False,False,True,False,True,Tissue
+83,Natural,Red effect else very your choice.,Kidney failure,Genetic predisposition,Genetic,Yes,False,No,No,True,True,False,True,True,True,True,True,Tissue
+84,Natural,Cover social particularly speech.,Kidney failure,Sedentary lifestyle,Acquired,No,False,No,Yes,False,False,True,False,False,True,False,False,Tissue
+85,Homicide,Able simple billion parent now from.,Stroke,Environmental factors,Acquired,No,False,No,Yes,True,True,True,True,True,True,False,True,Cornea
+86,Natural,Affect though cover including.,Heart disease,Obesity,Lifestyle,No,False,No,Yes,False,False,False,False,True,True,True,True,Organs
+87,Accident,Group strong back approach.,Kidney failure,Environmental factors,Genetic,No,False,No,Yes,True,False,True,False,True,False,True,False,None
+88,Accident,Air sort couple hold.,Kidney failure,Environmental factors,Lifestyle,No,True,No,No,False,False,False,True,True,False,True,False,Tissue
+89,Homicide,Lead network the many ball appear.,Heart disease,Obesity,Acquired,No,False,Yes,No,False,True,True,False,True,False,True,True,Organs
+90,Accident,Grow better why child might source. A front war.,Kidney failure,Sedentary lifestyle,Lifestyle,Yes,False,No,Yes,False,False,False,True,True,True,True,False,None
+91,Suicide,Goal clear inside guy north.,Cancer,Obesity,Acquired,No,False,Yes,Yes,False,False,True,False,False,True,True,False,Tissue
+92,Homicide,Affect station member although.,Stroke,Genetic predisposition,Acquired,Yes,True,No,No,False,True,False,False,False,False,False,False,None
+93,Natural,Industry nothing rather.,Respiratory failure,Genetic predisposition,Lifestyle,No,True,No,Yes,True,False,False,True,True,False,False,False,Cornea
+94,Undetermined,Probably whom it job likely different house.,Kidney failure,Sedentary lifestyle,Acquired,No,False,Yes,No,True,True,False,False,False,True,False,True,Organs
+95,Homicide,Certain hotel should.,Heart disease,Genetic predisposition,Genetic,No,True,Yes,Yes,False,True,True,True,True,False,True,True,Organs
+96,Undetermined,Opportunity you exist me.,Kidney failure,Sedentary lifestyle,Lifestyle,No,True,Yes,No,True,True,True,True,False,False,False,True,Cornea
+97,Accident,Computer on fast play fact.,Respiratory failure,Obesity,Environmental,Yes,False,No,No,False,True,True,False,True,True,False,True,Tissue
+98,Undetermined,Close issue huge away represent race.,Cancer,Environmental factors,Genetic,No,True,No,Yes,True,False,True,False,False,True,False,False,Tissue
+99,Homicide,Ground think save respond friend budget while.,Stroke,Environmental factors,Lifestyle,No,True,No,Yes,False,False,False,True,False,True,False,False,Tissue
+100,Homicide,Treatment worker season figure.,Cancer,Genetic predisposition,Acquired,No,True,Yes,No,False,False,False,True,True,True,False,True,Organs

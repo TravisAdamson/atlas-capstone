@@ -1,0 +1,101 @@
+Id,AirlineName,Country,Founded,IATA,ICAO,FleetSize,LogoUrl
+1,Air Horizon,Australia,2013-07-21,BZM,XVZJ,482,https://fakeimage.com/65.png
+2,Jetstream Air,India,2007-08-03,DCU,ZNSP,482,https://fakeimage.com/40.png
+3,Global Wings,Germany,1984-04-22,XRM,CLPX,482,https://fakeimage.com/57.png
+4,Pacific Airlines,India,1973-02-25,BXX,CVSU,482,https://fakeimage.com/79.png
+5,Sunset Airlines,China,1990-07-26,GIW,EOGZ,482,https://fakeimage.com/12.png
+6,Global Wings,China,1983-03-25,WZM,HHDI,482,https://fakeimage.com/78.png
+7,Pacific Airlines,Japan,2009-05-15,HCU,IGEV,482,https://fakeimage.com/79.png
+8,Silver Eagle Airlines,UK,1976-03-20,BRD,DBCS,482,https://fakeimage.com/91.png
+9,Pacific Airlines,India,1988-03-04,NGF,RVKH,482,https://fakeimage.com/85.png
+10,TransAir,Germany,1995-07-17,ICP,IEAH,482,https://fakeimage.com/48.png
+11,Jetstream Air,China,2017-12-12,LBU,WFVQ,482,https://fakeimage.com/4.png
+12,Global Wings,Brazil,1990-02-10,POK,JZAA,482,https://fakeimage.com/92.png
+13,Global Wings,UK,1974-09-26,FUY,ALCG,482,https://fakeimage.com/10.png
+14,Silver Eagle Airlines,China,2007-06-10,LBM,PSKG,482,https://fakeimage.com/73.png
+15,Jetstream Air,Brazil,1997-12-15,ZBR,VIGP,482,https://fakeimage.com/86.png
+16,Jetstream Air,USA,1972-07-29,MKO,NIJV,482,https://fakeimage.com/20.png
+17,Pacific Airlines,USA,2018-01-22,LCT,ODTM,482,https://fakeimage.com/87.png
+18,TransAir,Japan,2023-02-06,YQQ,SKKQ,482,https://fakeimage.com/77.png
+19,Clouds Airways,China,2011-03-12,EFL,SRWA,482,https://fakeimage.com/99.png
+20,SkyFly Airlines,Canada,2017-07-15,LGE,NMOT,482,https://fakeimage.com/64.png
+21,TransAir,India,1976-09-09,VBV,ZKOZ,482,https://fakeimage.com/93.png
+22,Jetstream Air,USA,2005-08-24,KRI,FSAV,482,https://fakeimage.com/25.png
+23,Global Wings,Japan,2017-04-22,QWH,ZCWK,482,https://fakeimage.com/3.png
+24,Silver Eagle Airlines,UK,2002-06-26,UDG,QVQC,482,https://fakeimage.com/36.png
+25,SkyFly Airlines,USA,1987-11-13,BRO,YYXB,482,https://fakeimage.com/92.png
+26,Sunset Airlines,Australia,1962-03-29,JNF,PADI,482,https://fakeimage.com/92.png
+27,Global Wings,China,1985-03-31,UAH,DPJZ,482,https://fakeimage.com/38.png
+28,Global Wings,UK,1997-06-09,SYI,WSHV,482,https://fakeimage.com/54.png
+29,Global Wings,Germany,2018-04-14,OMI,UVDD,482,https://fakeimage.com/55.png
+30,SkyFly Airlines,India,2021-12-25,IRE,EOUZ,482,https://fakeimage.com/9.png
+31,Global Wings,Brazil,1988-03-15,TBA,KNLM,482,https://fakeimage.com/55.png
+32,Global Wings,China,2014-12-29,FZP,EECV,482,https://fakeimage.com/68.png
+33,Sunset Airlines,Brazil,1973-04-06,DKF,BYFD,482,https://fakeimage.com/59.png
+34,Air Horizon,China,2010-11-01,ODZ,ZDKR,482,https://fakeimage.com/87.png
+35,TransAir,UK,1993-02-23,ZQW,OYAS,482,https://fakeimage.com/42.png
+36,SkyFly Airlines,France,1956-04-05,DGU,VPSU,482,https://fakeimage.com/11.png
+37,Pacific Airlines,USA,2004-12-12,BDH,TLWU,482,https://fakeimage.com/48.png
+38,Pacific Airlines,Australia,1982-10-22,XNO,RUTZ,482,https://fakeimage.com/97.png
+39,Clouds Airways,India,2012-03-14,NPV,MUKP,482,https://fakeimage.com/85.png
+40,SkyFly Airlines,Canada,2001-05-23,HOI,MGVU,482,https://fakeimage.com/50.png
+41,SkyFly Airlines,Canada,1955-05-16,QDH,VBAK,482,https://fakeimage.com/78.png
+42,Global Wings,Canada,1989-05-06,VJA,MLCU,482,https://fakeimage.com/5.png
+43,Jetstream Air,China,2015-02-25,COJ,JUMW,482,https://fakeimage.com/79.png
+44,TransAir,Germany,1972-02-13,ZSH,WYKH,482,https://fakeimage.com/67.png
+45,Clouds Airways,USA,1977-09-23,ULT,LUBB,482,https://fakeimage.com/63.png
+46,Silver Eagle Airlines,USA,2015-05-08,YRO,FCVX,482,https://fakeimage.com/65.png
+47,Silver Eagle Airlines,Germany,1968-06-22,DXK,CCBK,482,https://fakeimage.com/94.png
+48,SkyFly Airlines,UK,1994-06-12,LKM,WIGJ,482,https://fakeimage.com/46.png
+49,SkyFly Airlines,China,1971-10-03,JAZ,VBXF,482,https://fakeimage.com/85.png
+50,Global Wings,USA,2022-01-17,HRY,GDLM,482,https://fakeimage.com/17.png
+51,SkyFly Airlines,Brazil,2010-09-15,JMH,YYQE,482,https://fakeimage.com/14.png
+52,Pacific Airlines,Japan,1986-03-14,IJD,DFNG,482,https://fakeimage.com/38.png
+53,TransAir,Australia,1960-11-03,RWP,KSDH,482,https://fakeimage.com/95.png
+54,Jetstream Air,Japan,1977-05-16,KQC,LJYB,482,https://fakeimage.com/2.png
+55,Air Horizon,China,1990-05-03,LJY,CECC,482,https://fakeimage.com/90.png
+56,Sunset Airlines,Australia,2019-08-27,EKE,YINJ,482,https://fakeimage.com/62.png
+57,Clouds Airways,India,1962-10-25,ASQ,AHTQ,482,https://fakeimage.com/55.png
+58,Sunset Airlines,Germany,1993-04-29,RTG,THZD,482,https://fakeimage.com/1.png
+59,Silver Eagle Airlines,Australia,2004-01-16,NPK,CGHT,482,https://fakeimage.com/77.png
+60,Global Wings,USA,1993-01-23,BGN,DWXT,482,https://fakeimage.com/54.png
+61,Silver Eagle Airlines,India,2011-06-27,NOQ,NKQK,482,https://fakeimage.com/38.png
+62,Sunset Airlines,China,1992-07-26,ODD,DKMO,482,https://fakeimage.com/46.png
+63,Sunset Airlines,Australia,2021-10-16,FMN,MYLD,482,https://fakeimage.com/7.png
+64,Clouds Airways,USA,1996-11-27,JKZ,WZRC,482,https://fakeimage.com/1.png
+65,TransAir,USA,1995-11-01,DAH,QHXD,482,https://fakeimage.com/25.png
+66,Global Wings,Australia,1985-12-29,LIE,KXLL,482,https://fakeimage.com/68.png
+67,TransAir,Canada,1996-06-07,FEJ,ZLMS,482,https://fakeimage.com/57.png
+68,Clouds Airways,Japan,1981-11-05,SXA,QWJT,482,https://fakeimage.com/30.png
+69,Silver Eagle Airlines,Japan,1995-01-03,CWT,UWKB,482,https://fakeimage.com/75.png
+70,Sunset Airlines,UK,1975-04-28,GMI,BBJH,482,https://fakeimage.com/18.png
+71,Global Wings,Australia,1968-05-11,RZK,XLIC,482,https://fakeimage.com/41.png
+72,TransAir,France,1968-03-05,LIA,BJFN,482,https://fakeimage.com/26.png
+73,Silver Eagle Airlines,India,1997-07-27,IWG,ISBY,482,https://fakeimage.com/2.png
+74,Sunset Airlines,UK,2000-08-06,SBV,ZLDC,482,https://fakeimage.com/98.png
+75,Jetstream Air,Australia,1988-03-03,WFP,VOXK,482,https://fakeimage.com/32.png
+76,Sunset Airlines,Brazil,1961-06-27,DWY,ILOH,482,https://fakeimage.com/92.png
+77,Silver Eagle Airlines,UK,2007-07-25,NMQ,HAPS,482,https://fakeimage.com/94.png
+78,Air Horizon,Brazil,2015-10-14,FWZ,ANLB,482,https://fakeimage.com/83.png
+79,Silver Eagle Airlines,Germany,2019-01-01,ZOF,SOHT,482,https://fakeimage.com/9.png
+80,Pacific Airlines,India,2013-06-01,RGQ,HEVO,482,https://fakeimage.com/47.png
+81,SkyFly Airlines,Canada,2017-04-05,WEE,ZDFX,482,https://fakeimage.com/73.png
+82,Clouds Airways,Brazil,2018-12-24,TVT,JPQX,482,https://fakeimage.com/79.png
+83,SkyFly Airlines,France,1992-08-03,PMI,YOEW,482,https://fakeimage.com/70.png
+84,TransAir,Germany,1982-04-16,GPS,VUJB,482,https://fakeimage.com/41.png
+85,Clouds Airways,China,2003-12-14,WRR,FIEA,482,https://fakeimage.com/94.png
+86,Jetstream Air,China,1974-04-23,AQA,BFRB,482,https://fakeimage.com/45.png
+87,Air Horizon,Canada,2011-04-16,XFL,JEIZ,482,https://fakeimage.com/49.png
+88,SkyFly Airlines,Australia,2013-11-25,XNU,ZSTO,482,https://fakeimage.com/53.png
+89,Air Horizon,Canada,2017-01-16,ADW,NTDI,482,https://fakeimage.com/32.png
+90,SkyFly Airlines,Canada,1995-12-26,TVO,SLWC,482,https://fakeimage.com/91.png
+91,Jetstream Air,Japan,2020-10-27,PGU,TAYA,482,https://fakeimage.com/46.png
+92,Silver Eagle Airlines,Canada,1995-04-15,LNE,TIUY,482,https://fakeimage.com/40.png
+93,Pacific Airlines,India,1986-05-18,OZU,OGRL,482,https://fakeimage.com/52.png
+94,TransAir,UK,2000-11-04,BHZ,GRSY,482,https://fakeimage.com/98.png
+95,Pacific Airlines,France,2024-01-11,IZZ,FOIZ,482,https://fakeimage.com/76.png
+96,Pacific Airlines,China,2018-07-22,EWD,WVPB,482,https://fakeimage.com/45.png
+97,TransAir,India,2010-01-10,QIU,PZAD,482,https://fakeimage.com/57.png
+98,Jetstream Air,China,1960-12-22,YYM,YVUT,482,https://fakeimage.com/9.png
+99,Pacific Airlines,Australia,1997-07-27,HVN,BQPY,482,https://fakeimage.com/97.png
+100,Air Horizon,India,1988-11-07,IAU,VHGN,482,https://fakeimage.com/44.png

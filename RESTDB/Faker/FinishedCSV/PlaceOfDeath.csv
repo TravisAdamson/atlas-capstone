@@ -1,0 +1,154 @@
+Id,Name,MedicalRecordNumber,StreetAddress,AptNumber,TypeOfFacility,CallTakenBy,ZipCode,LocalityType,Township,Locality,State,County,Country,InCityLimits,DirectorNotifyDate,DirectorNotifedTime,AdmissionDate,BodyReleaseTime
+1,,,"48764 Howard Forge Apt. 421
+Vanessaside, VT 79393",,,,,,,West Corey,New York,Los Angeles,,True,1912-12-03 00:00:00,2025-04-16 15:35:06,1955-06-20 00:00:00,
+2,,,,57815,Hospital,,57408,,,Cherylborough,,Cook,Canada,True,1911-02-11 00:00:00,2025-04-16 03:19:35,1990-02-18 00:00:00,2025-04-16 17:13:51
+3,,,"Unit 7784 Box 0801
+DPO AP 52775",,,Rachel Garrett,,Urban,Claytonmouth,Lake Mark,,,USA,True,,,,2025-04-16 22:33:17
+4,Lee PLC,fu-332871,,,,,,Rural,Rodriguezside,,,Cook,Mexico,True,,2025-04-16 05:21:27,,
+5,Mann-Kelley,Cf-839894,"9342 Lori Bypass Suite 711
+East Sandra, MP 11019",868,Hospital,Robert Atkinson,89561,,Rileymouth,,California,Cook,USA,False,,,,2025-04-16 19:06:53
+6,,FL-751591,"04135 Marvin Via
+North Kristabury, AZ 75718",891,,,,Urban,,North Cynthiashire,Florida,Harris,,False,,,,
+7,Myers LLC,,,09032,,Karen Acosta,08507,,,,,,,True,,2025-04-16 23:05:21,,2025-04-16 04:15:48
+8,,,,,Nursing Home,,,Urban,New Ronaldville,,Texas,Maricopa,,False,,2025-04-16 22:36:26,,
+9,,Bl-413145,,87091,,,92162,Rural,,,,Maricopa,Australia,True,,,2021-11-14 00:00:00,2025-04-16 00:13:00
+10,Gonzalez-Howard,kv-792302,"720 Maldonado Port
+Deborahfurt, MP 86696",2807,Nursing Home,,97700,Rural,,West Joanneside,New York,,Mexico,True,1914-03-09 00:00:00,,,
+11,Taylor-Gill,,,,Private Residence,,,,Bellport,Brittanyberg,,,Canada,True,1942-06-26 00:00:00,2025-04-16 22:05:21,,
+12,,mS-466109,"76960 Savage Port
+Bartonton, GA 58874",,,,08874,,Jacquelinemouth,,California,,Australia,True,1951-06-10 00:00:00,2025-04-16 03:06:35,1960-06-27 00:00:00,2025-04-16 03:30:07
+13,,,"900 Nguyen Villages Suite 063
+Port Jessicatown, MO 89435",,,Aaron Smith,99428,,Port Emmaville,North Charlene,Texas,Los Angeles,,True,,2025-04-16 17:33:18,2017-08-26 00:00:00,
+14,,zO-344217,,04714,,Joseph Curtis,,Rural,Darinberg,Melissaton,Illinois,,USA,False,1932-04-21 00:00:00,,,
+15,Harris LLC,PF-855909,,,,Stephanie Bowman,49318,,East Nicholas,,,,,False,1981-11-28 00:00:00,,,
+16,,,,0224,Nursing Home,Richard Higgins,,,,Kimberlyton,Illinois,Los Angeles,Canada,True,1901-08-11 00:00:00,,,2025-04-16 11:32:24
+17,Nelson and Sons,sh-945682,"42814 Houston Hills
+Rodriguezside, PW 63569",,Nursing Home,,,,Rogersmouth,South Darrenfort,Texas,,,False,,2025-04-16 08:52:19,1949-07-02 00:00:00,
+18,Johnson-Rogers,Zf-229611,,,Hospital,,,Rural,Lake Jeffrey,Smithfurt,,,Australia,False,1958-01-04 00:00:00,2025-04-16 04:01:02,,2025-04-16 03:44:35
+19,,TR-884779,,,Hospital,,,Rural,South Christopher,,,Miami-Dade,USA,False,1947-04-15 00:00:00,2025-04-16 20:04:02,,2025-04-16 08:57:01
+20,Hinton LLC,eS-926351,"317 Scott Row Apt. 392
+East Stephenstad, ND 20336",,,Kyle Freeman,74413,,,Littlechester,Florida,Los Angeles,,True,,2025-04-16 13:43:26,,2025-04-16 10:46:16
+21,"Simpson, Stark and Morris",,"389 Alec Squares Suite 508
+Port Jonathan, WY 20935",9471,,Kellie Sexton,,,East Davidport,Port Meganmouth,New York,Miami-Dade,Canada,True,,,,2025-04-16 11:44:01
+22,Owen Ltd,cK-758688,"634 Petersen Orchard
+Lawsonbury, PR 03185",,Private Residence,,,Urban,Lake Hunterhaven,,,,,False,1923-10-03 00:00:00,,1920-07-05 00:00:00,
+23,"Scott, Jones and Heath",,"USNV Barton
+FPO AA 50790",22345,Nursing Home,,,Urban,North Timothyberg,,California,Maricopa,,False,,2025-04-16 09:40:22,,
+24,,,"256 Cheryl Lights
+Williamsfort, WI 20341",,,Kyle Anderson,,,,Danielside,,,,True,,,1914-09-20 00:00:00,
+25,,,"7109 Mendez Junction
+Lake Jenniferport, WY 17161",,,Jasmine Carter,98252,,,New Michelleborough,,,UK,True,1900-12-15 00:00:00,2025-04-16 00:13:19,,2025-04-16 17:38:09
+26,,,"5375 Sue Canyon Suite 408
+East Clayton, GU 82739",,Private Residence,,66353,Rural,Hunterville,South Patricia,,,,False,,2025-04-16 11:18:55,,
+27,Livingston-Walls,YC-611620,,,,Jason Crawford,43033,Urban,,,,Miami-Dade,Australia,True,2022-11-18 00:00:00,2025-04-16 23:49:57,1937-08-12 00:00:00,
+28,"King, Gomez and Martinez",xe-055203,"03104 Norris Rapids
+Port Donald, NH 15232",,,,62982,,,,,Maricopa,,False,1983-01-15 00:00:00,2025-04-16 04:47:31,,
+29,Zimmerman-Scott,,,,Hospital,Daniel Rogers,,Rural,Kennethside,Jackland,New York,,Canada,False,,,1958-12-11 00:00:00,2025-04-16 05:21:26
+30,,ji-189426,,58332,,Jason Williams,17833,Rural,,,,,,True,,2025-04-16 06:37:45,,2025-04-16 01:14:40
+31,"Smith, Miller and Jones",Bt-648629,,513,Hospice,,58803,,,,,Miami-Dade,,False,1932-12-16 00:00:00,,1934-01-02 00:00:00,
+32,"Wood, Rush and Brown",,"573 Carter Mountains Apt. 214
+New Catherineberg, WY 92591",,Hospice,James Saunders,,Rural,Thompsonmouth,,New York,Miami-Dade,Mexico,False,2014-06-09 00:00:00,,,
+33,,EW-582571,"797 Jeffery Crescent
+Amyberg, NE 93076",,Hospice,,,,,,,,USA,False,,,1963-12-15 00:00:00,
+34,,,,,Hospital,Anna Jimenez,30957,Urban,,Ramireztown,,Maricopa,,True,,,1928-03-27 00:00:00,2025-04-16 11:20:27
+35,Nelson Ltd,,"8967 Julie Knoll Suite 391
+North Lauraport, ND 45051",,,,,,New Micheleburgh,South Michelleport,Illinois,Cook,,True,,2025-04-16 23:42:00,2009-01-04 00:00:00,2025-04-16 20:17:07
+36,,gA-829838,,864,Hospital,,,Rural,,,Texas,Miami-Dade,,False,,,1919-03-17 00:00:00,
+37,Ramos-Carroll,LD-221166,,84576,Hospice,John Mason,,,Pearsonton,,Illinois,Miami-Dade,,False,1939-01-08 00:00:00,,2003-12-16 00:00:00,2025-04-16 22:54:05
+38,,nb-742709,,7608,,,,Urban,Lake Michellefurt,,New York,,Mexico,False,,2025-04-16 00:22:36,,
+39,,rO-050190,,432,Hospice,Donna Garcia,60911,Rural,Patrickmouth,Wongchester,,,Canada,False,1918-06-10 00:00:00,,1993-12-14 00:00:00,2025-04-16 00:26:57
+40,,,"523 Sean Turnpike
+Simmonsfort, MS 96155",37390,,,51402,Urban,East Cynthiaburgh,Brianburgh,,Cook,USA,True,,,2018-10-04 00:00:00,2025-04-16 22:09:39
+41,Bishop PLC,,,,Hospital,,11855,,,Kelseystad,,Miami-Dade,,True,1943-05-26 00:00:00,2025-04-16 12:00:19,1970-08-02 00:00:00,2025-04-16 21:02:29
+42,,LD-670886,,,,Michael Lewis III,06242,,East Michaelport,,,Miami-Dade,,False,1926-02-19 00:00:00,2025-04-16 07:37:43,1920-03-11 00:00:00,
+43,"Smith, Brown and Patterson",mv-396837,,,,,,,,,California,Miami-Dade,UK,True,2018-01-24 00:00:00,2025-04-16 21:52:42,1995-10-07 00:00:00,
+44,,,"5875 Johnson Cape
+West Christopher, VI 69250",3344,Hospice,Scott Scott,,,,,,Maricopa,,False,1943-04-23 00:00:00,2025-04-16 04:54:00,,2025-04-16 11:29:02
+45,,aD-530481,"67771 Christopher Courts Apt. 637
+Port Ronaldfurt, AZ 24144",,Hospice,,,Urban,South Jeffrey,,Florida,Miami-Dade,,True,2010-09-26 00:00:00,,,
+46,,sN-455618,,,,,,,,Lake Kenneth,,Maricopa,Mexico,True,1949-07-25 00:00:00,2025-04-16 22:56:52,,2025-04-16 11:53:36
+47,Palmer-Murray,,,443,,,02671,Urban,,,California,Los Angeles,,True,2018-01-11 00:00:00,2025-04-16 04:48:40,1952-11-05 00:00:00,
+48,,,"63340 Trevino Crossing
+Brewerville, WA 74513",3843,Hospice,,97477,Rural,North April,,California,Harris,Mexico,False,2000-05-17 00:00:00,2025-04-16 04:48:57,1970-03-02 00:00:00,
+49,"Murphy, Brooks and Castillo",,"88559 Lisa Wells
+Mooreburgh, NY 10522",37933,,Rose Wolf,,Rural,Charlotteberg,,Illinois,Miami-Dade,,True,,,1977-06-19 00:00:00,2025-04-16 10:53:24
+50,,wF-719089,"82778 Padilla Common
+Derrickfurt, VT 25544",,Hospice,Rachel Cruz,08257,,North Leslie,West Michelle,,Harris,,True,,2025-04-16 02:26:03,1945-10-20 00:00:00,2025-04-16 21:19:36
+51,,,"5240 Berry Centers
+West Andrew, SC 08538",30035,,,09223,,West Teresachester,,California,Harris,Canada,False,,2025-04-16 14:50:35,1960-02-28 00:00:00,
+52,,,"6254 Debra Stream
+Reyeschester, MH 35070",870,Nursing Home,,74521,,South Stephanieburgh,New Devonhaven,,Los Angeles,,False,,,,
+53,"Lyons, Miller and Young",Tf-230282,,9197,,,93576,Urban,,,Texas,,Canada,False,1946-10-05 00:00:00,2025-04-16 18:49:00,,
+54,,ZV-299045,"071 Carter Drive
+Youngstad, GA 96904",5476,Nursing Home,Joseph Roberts,61962,Urban,Port Amandaside,Sarahton,,Maricopa,,False,,,1965-04-18 00:00:00,2025-04-16 02:08:26
+55,,db-761657,,,Private Residence,,36290,,West Erinshire,,,Harris,,False,,2025-04-16 07:17:02,2011-07-21 00:00:00,
+56,"Parsons, Roberts and Parks",nh-388564,,539,,,,Rural,,Franciscoberg,New York,,,True,1997-09-04 00:00:00,2025-04-16 11:09:40,1998-08-21 00:00:00,
+57,Mathis-Wilkins,,"255 Garrett Islands
+Pattonchester, GA 00633",,,,18950,,,South Davidtown,,,,True,1917-03-04 00:00:00,2025-04-16 05:01:27,1959-02-21 00:00:00,
+58,,Br-749318,"USNS Moreno
+FPO AE 86859",291,Hospice,Lynn Daniels,50924,Rural,,,,Maricopa,,True,1980-09-11 00:00:00,,1994-12-18 00:00:00,2025-04-16 07:56:58
+59,,,,,,,,Urban,Bakerport,South Kimberlyview,Texas,Harris,UK,True,,,,2025-04-16 23:30:20
+60,Medina-Spencer,,,,,Cheryl Patton PhD,01277,Urban,Port Donna,Wardton,,Maricopa,,False,,,1921-08-19 00:00:00,
+61,,Hk-869305,,,Private Residence,Lynn Burton,,Rural,,,,,Canada,False,,2025-04-16 19:53:58,,2025-04-16 02:04:30
+62,,,"342 Miller Mission
+Lake Jennifer, VI 67203",,,Rita Garcia,25179,,South Sandra,,Texas,Cook,USA,True,1971-12-25 00:00:00,2025-04-16 22:44:06,1971-06-28 00:00:00,2025-04-16 03:43:00
+63,Walters-Shepard,tb-465951,,,,Phillip Harris MD,57597,,,,California,,,True,2023-07-28 00:00:00,,,2025-04-16 06:47:49
+64,,,,,Hospital,,,,Terryton,,,,,False,1998-12-10 00:00:00,,2015-05-04 00:00:00,2025-04-16 04:22:59
+65,"Marshall, Gallegos and Martinez",ic-450678,,,Hospital,,,,,New Michellestad,,,,True,1966-11-01 00:00:00,,1940-07-08 00:00:00,2025-04-16 01:36:49
+66,Jones Ltd,,"50562 Russell Divide Apt. 648
+East Davidberg, PW 63532",,Nursing Home,Michelle Cummings,96158,Rural,Port Angelafurt,West Lauren,California,,Canada,True,,,1925-01-17 00:00:00,2025-04-16 02:34:11
+67,Miller and Sons,HD-434544,,,,Mrs. Stephanie Tran MD,,Rural,Lake William,,Illinois,,,False,1982-03-20 00:00:00,,2020-02-23 00:00:00,
+68,,ZD-513793,"278 Amy View Suite 011
+Lawsonshire, NV 44515",8512,,Alexander Gross,,Rural,West Normaborough,South Deannaport,,Miami-Dade,,False,,2025-04-16 17:21:08,1932-07-03 00:00:00,2025-04-16 07:29:15
+69,,,,0925,,Tammy Russell,,,Kellyview,,New York,,,True,,2025-04-16 09:23:41,1976-03-27 00:00:00,
+70,"Collins, Sweeney and Chavez",,"3615 David Keys Apt. 269
+West Stephenside, WA 91576",7108,Nursing Home,Rachel Garrison,,Rural,,Anthonyhaven,,,Canada,False,,2025-04-16 21:53:33,,2025-04-16 05:33:59
+71,,cj-115517,,400,,Christopher Kelley,19753,,,East Kimberly,California,Cook,UK,True,,2025-04-16 20:40:18,1963-11-07 00:00:00,
+72,,,,,,,,Urban,Lake Erin,Sonyafort,Florida,,Mexico,True,,2025-04-16 06:05:54,1974-10-28 00:00:00,2025-04-16 17:13:40
+73,"Gregory, Williams and Allen",kA-452353,,,,Shawn Taylor,74545,,East Sarahtown,Higginsburgh,,,,True,,,,2025-04-16 04:29:16
+74,Smith LLC,,,000,,,,Rural,New Cherylberg,Frenchchester,New York,,Australia,False,1940-07-24 00:00:00,,,2025-04-16 19:42:59
+75,Bradley-Parks,ze-325838,"66376 Sabrina Garden Suite 691
+Whitneyhaven, MN 71586",99734,,Frank Yates,82565,,,,New York,,,True,,2025-04-16 16:35:00,,2025-04-16 00:40:55
+76,,,"60666 Jennifer Rapids
+Martinmouth, NJ 54384",,Private Residence,Thomas Hancock,,Urban,West Michaelstad,,Illinois,Harris,Australia,True,,,1925-10-23 00:00:00,2025-04-16 11:10:17
+77,,UL-780342,"048 Johnson Loop Suite 635
+East Daniel, MI 22227",,,Kenneth Ford,,Urban,,,,Los Angeles,Mexico,True,,2025-04-16 06:32:35,2010-08-03 00:00:00,2025-04-16 16:34:53
+78,,jn-168822,"275 Moran Isle
+Port Sydneychester, WI 34811",,,Grace Mason,,Rural,,Amandaberg,California,,Mexico,False,1906-12-08 00:00:00,,1976-01-26 00:00:00,2025-04-16 13:17:37
+79,Rollins-Manning,,,,,Spencer Riddle,,,Peterfort,Tamichester,Florida,,Canada,True,1912-03-05 00:00:00,2025-04-16 00:57:48,1967-07-04 00:00:00,
+80,,,,,,,13308,Rural,East Adam,Lake Kimberlyborough,Texas,,Canada,False,,,,2025-04-16 22:10:15
+81,"Newman, Holden and Rodriguez",hx-926100,"1759 Estrada Valleys Apt. 288
+Port Melissaburgh, AK 84808",,Private Residence,Sherry Holmes,80226,,South Jean,,,Maricopa,,True,,,,
+82,Baker-Matthews,Zf-627906,,,,,,,,Cookhaven,Illinois,Cook,USA,True,1931-08-23 00:00:00,,1901-10-05 00:00:00,2025-04-16 21:22:23
+83,,,"9148 Pierce Lock
+Bakerbury, ND 48253",49271,,Karen Knight,,,,,,Maricopa,,False,2009-11-20 00:00:00,2025-04-16 12:37:25,1986-10-27 00:00:00,
+84,Hawkins-Baker,,"2512 Mackenzie Dam
+North Antonio, MO 73675",,Hospice,,,,,,,Cook,,False,,,,
+85,,Xv-971785,"37443 Tyler Pass
+Christopherport, OK 55851",56234,Nursing Home,,26625,Urban,Kellerstad,,Florida,,,False,,2025-04-16 03:44:01,,
+86,,,"65873 Chen Knolls
+Ramirezfurt, WI 94134",,Nursing Home,Sharon Castillo MD,58957,,West Sarah,,California,Maricopa,Canada,True,1939-06-21 00:00:00,,,2025-04-16 04:20:42
+87,,,,,,Tara Morgan,,Urban,,,,,Australia,False,,,,
+88,,,"7879 Emma Parkway Suite 735
+North Thomasfurt, MH 30303",,,,57039,,New Kelseychester,West Jamesmouth,Illinois,Cook,UK,False,2013-01-11 00:00:00,,,2025-04-16 20:37:47
+89,Wilson Ltd,Ia-503006,"73089 Jones Fall
+East Sarah, MS 62718",,Hospital,,00549,,,,Florida,Miami-Dade,Canada,True,,2025-04-16 09:17:16,,2025-04-16 21:00:55
+90,Clark-Cherry,Tx-094095,"298 Johnathan Cove Apt. 402
+South Jamie, TN 42383",,Hospice,Jordan Martinez,14333,,Martinezmouth,,New York,Los Angeles,,True,1957-06-22 00:00:00,2025-04-16 15:34:33,,
+91,,,,,,,62078,Urban,,,California,Cook,UK,True,,2025-04-16 18:19:22,1951-10-27 00:00:00,2025-04-16 23:42:57
+92,,,"64619 Wilkins Wall Apt. 735
+Rowechester, AK 59090",086,,,,Urban,Walkerbury,,New York,,Australia,True,,,1905-06-06 00:00:00,2025-04-16 08:31:30
+93,,sx-477237,"134 Sophia Drives
+Benjaminburgh, WI 61921",,,Cody Crawford,22457,,Williamsmouth,,,,USA,False,,2025-04-16 10:37:20,1972-11-05 00:00:00,2025-04-16 12:15:23
+94,,,"528 Hernandez Spurs
+Nolanshire, IL 78890",0379,,Kristi Gonzalez,,,North Dennismouth,,New York,Cook,,True,,2025-04-16 15:13:44,,2025-04-16 19:15:45
+95,"Bishop, Guerrero and Rodriguez",,"Unit 8645 Box 7325
+DPO AP 47232",,,,94545,,,,California,Cook,Australia,False,,2025-04-16 16:18:44,1953-06-28 00:00:00,2025-04-16 01:55:58
+96,Myers-Branch,Wj-571231,,7835,,,,,,,California,Los Angeles,Australia,False,,,,
+97,"Williams, Sullivan and Miller",,"302 Parker Plains Apt. 197
+East Robertstad, ME 11473",,Hospice,,,Urban,Port Lindseytown,Ericview,Texas,,,False,,2025-04-16 06:05:08,2021-03-07 00:00:00,
+98,,,"3668 Perez Ramp Suite 102
+Courtneyshire, NM 08797",,Nursing Home,Kelsey Graham,51033,Urban,North Ryanberg,,Texas,,Australia,False,,,1940-11-15 00:00:00,
+99,,Or-201630,"4593 Matthew Plaza
+East Rebeccatown, SC 34298",,,,,,Devinville,,,Cook,,True,,,1918-07-09 00:00:00,
+100,"Hoffman, Moses and Chang",iF-491819,,,,,05043,,,,Illinois,Los Angeles,,False,1926-08-07 00:00:00,2025-04-16 02:06:34,1915-09-22 00:00:00,2025-04-16 23:41:10
