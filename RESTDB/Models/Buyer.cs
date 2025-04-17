@@ -5,7 +5,8 @@ namespace RESTDB.Models;
 public class Buyer
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The name of the individual involved in the sales contract
 	public string? Name { get; set; }

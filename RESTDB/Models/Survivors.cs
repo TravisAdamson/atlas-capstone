@@ -5,7 +5,7 @@ namespace RESTDB.Models;
 public class Survivors
 {
 	[Key]
-	public int? Id { get; set; }
+	public int ClientID { get; set; }
 
 	// The type of survivor (e.g., spouse, child, grandchild)
 	public string? SurvivorRelation { get; set; }

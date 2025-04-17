@@ -5,7 +5,7 @@ namespace RESTDB.Models;
 public class PlaceOfDeath
 {
 	[Key]
-	public int? Id { get; set; }
+	public int ClientID { get; set; }
 
 	// The name of the facility or place where death occurred
 	public string? Name { get; set; }

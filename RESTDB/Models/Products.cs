@@ -6,7 +6,8 @@ namespace RESTDB.Models;
 public class Products
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// The category of the product (e.g., casket, jewelry)
 	public string? Category { get; set; }

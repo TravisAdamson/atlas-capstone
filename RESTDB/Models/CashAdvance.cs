@@ -6,7 +6,8 @@ namespace RESTDB.Models;
 public class CashAdvance
 {
 	[Key]
-	public int? Id { get; set; }
+
+	public int ClientID { get; set; }
 
 	// A description of the cash advance
 	public string? Description { get; set; }

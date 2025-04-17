@@ -5,7 +5,7 @@ namespace RESTDB.Models;
 public class ContainerShipping
 {
 	[Key]
-	public int? Id { get; set; }
+	public int ClientID { get; set; }
 
 	// The location from which the shipment is being made
 	public string? ShipFrom { get; set; }

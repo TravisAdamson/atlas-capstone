@@ -19,7 +19,7 @@ namespace RESTDB.Migrations
                 name: "Airline",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     AirlineName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -37,7 +37,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Airline", x => x.Id);
+                    table.PrimaryKey("PK_Airline", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -45,7 +45,7 @@ namespace RESTDB.Migrations
                 name: "Buyer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -60,7 +60,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Buyer", x => x.Id);
+                    table.PrimaryKey("PK_Buyer", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -68,7 +68,7 @@ namespace RESTDB.Migrations
                 name: "CashAdvance",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -84,7 +84,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CashAdvance", x => x.Id);
+                    table.PrimaryKey("PK_CashAdvance", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -92,7 +92,7 @@ namespace RESTDB.Migrations
                 name: "CauseOfDeath",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Manner = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -124,7 +124,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CauseOfDeath", x => x.Id);
+                    table.PrimaryKey("PK_CauseOfDeath", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -132,7 +132,7 @@ namespace RESTDB.Migrations
                 name: "ContainerShipping",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ShipFrom = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -175,7 +175,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContainerShipping", x => x.Id);
+                    table.PrimaryKey("PK_ContainerShipping", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -294,7 +294,7 @@ namespace RESTDB.Migrations
                 name: "Embalmer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PermissionToEmbalm = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Embalmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
@@ -307,7 +307,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Embalmer", x => x.Id);
+                    table.PrimaryKey("PK_Embalmer", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -315,7 +315,7 @@ namespace RESTDB.Migrations
                 name: "FlagApplication",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ApplicantName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -327,7 +327,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FlagApplication", x => x.Id);
+                    table.PrimaryKey("PK_FlagApplication", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -335,7 +335,7 @@ namespace RESTDB.Migrations
                 name: "Military",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Branch = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -348,7 +348,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Military", x => x.Id);
+                    table.PrimaryKey("PK_Military", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -356,7 +356,7 @@ namespace RESTDB.Migrations
                 name: "Monument",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MonumentType = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -368,7 +368,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Monument", x => x.Id);
+                    table.PrimaryKey("PK_Monument", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -376,7 +376,7 @@ namespace RESTDB.Migrations
                 name: "ObituaryData",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DistributionFormat = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -402,7 +402,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ObituaryData", x => x.Id);
+                    table.PrimaryKey("PK_ObituaryData", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -410,7 +410,7 @@ namespace RESTDB.Migrations
                 name: "PlaceOfDeath",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -446,7 +446,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlaceOfDeath", x => x.Id);
+                    table.PrimaryKey("PK_PlaceOfDeath", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -454,7 +454,7 @@ namespace RESTDB.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Category = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -465,7 +465,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -473,7 +473,7 @@ namespace RESTDB.Migrations
                 name: "ServiceContract",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ContractDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     SalesPackage = table.Column<string>(type: "longtext", nullable: true)
@@ -485,7 +485,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceContract", x => x.Id);
+                    table.PrimaryKey("PK_ServiceContract", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -493,7 +493,7 @@ namespace RESTDB.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Category = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -504,7 +504,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.PrimaryKey("PK_Services", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -512,7 +512,7 @@ namespace RESTDB.Migrations
                 name: "Survivors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SurvivorRelation = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -538,7 +538,7 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Survivors", x => x.Id);
+                    table.PrimaryKey("PK_Survivors", x => x.ClientID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -546,7 +546,7 @@ namespace RESTDB.Migrations
                 name: "MilitaryStint",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -554,16 +554,16 @@ namespace RESTDB.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     StintMilitaryId = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MilitaryId = table.Column<int>(type: "int", nullable: true)
+                    MilitaryClientID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MilitaryStint", x => x.Id);
+                    table.PrimaryKey("PK_MilitaryStint", x => x.ClientID);
                     table.ForeignKey(
-                        name: "FK_MilitaryStint_Military_MilitaryId",
-                        column: x => x.MilitaryId,
+                        name: "FK_MilitaryStint_Military_MilitaryClientID",
+                        column: x => x.MilitaryClientID,
                         principalTable: "Military",
-                        principalColumn: "Id");
+                        principalColumn: "ClientID");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -571,7 +571,7 @@ namespace RESTDB.Migrations
                 name: "WarsServed",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClientID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     WarName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -579,16 +579,16 @@ namespace RESTDB.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WarMilitaryId = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MilitaryId = table.Column<int>(type: "int", nullable: true)
+                    MilitaryClientID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WarsServed", x => x.Id);
+                    table.PrimaryKey("PK_WarsServed", x => x.ClientID);
                     table.ForeignKey(
-                        name: "FK_WarsServed_Military_MilitaryId",
-                        column: x => x.MilitaryId,
+                        name: "FK_WarsServed_Military_MilitaryClientID",
+                        column: x => x.MilitaryClientID,
                         principalTable: "Military",
-                        principalColumn: "Id");
+                        principalColumn: "ClientID");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -599,14 +599,14 @@ namespace RESTDB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MilitaryStint_MilitaryId",
+                name: "IX_MilitaryStint_MilitaryClientID",
                 table: "MilitaryStint",
-                column: "MilitaryId");
+                column: "MilitaryClientID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WarsServed_MilitaryId",
+                name: "IX_WarsServed_MilitaryClientID",
                 table: "WarsServed",
-                column: "MilitaryId");
+                column: "MilitaryClientID");
         }
 
         /// <inheritdoc />
