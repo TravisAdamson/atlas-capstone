@@ -138,33 +138,45 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var uri = NavigationManager.Uri;
+		causeList	= await Db.CauseOfDeath.ToListAsync();
+		deceasedList = await Db.Deceased	 .ToListAsync();
+
+		editingDeceased = deceasedList
+			.FirstOrDefault(d => d.ClientID == GlobalState.ClientID); // possible null reference that might be taken care of immediately after but still could be an issue
+
+		if (editingDeceased is null)
+		{
+			NavigationManager.NavigateTo("/Search%20Records");
+			return;
+		}
+
+		var uri   = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
-		causeList = await Db.CauseOfDeath.ToListAsync();
-		deceasedList = await Db.Deceased.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
+
 		if (causeList.Any())
 		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
+			if (queryParameters.TryGetValue("currentRecordString", out var value) &&
+				int.TryParse(value, out var currentRecord))
 			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < causeList.Count;
-				}
+				currentRecordIndex = currentRecord;
+				preVis = currentRecord > 1;
+				nexVis = currentRecord < causeList.Count;
 			}
-			editingCause = CloneCause(currentRecordIndex > 0 ? causeList[currentRecordIndex - 1] : causeList.Last());
+
+			editingCause = CloneCause(
+				currentRecordIndex > 0
+					? causeList[currentRecordIndex - 1]
+					: causeList.Last());
 		}
 	}
+
 
 	private CauseOfDeath CloneCause(CauseOfDeath original)
 	{
 		return new CauseOfDeath
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			Manner = original.Manner,
 			Other = original.Other,
 			CauseFactors = original.CauseFactors,
@@ -247,10 +259,10 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.CauseOfDeath.FirstOrDefaultAsync(e => e.Id == editingCause.Id);
+		var entity = await Db.CauseOfDeath.FirstOrDefaultAsync(e => e.ClientID == editingCause.ClientID);
 		if (entity is not null)
 		{
-			entity.Id = editingCause.Id;
+			entity.ClientID = editingCause.ClientID;
 			entity.Manner = editingCause.Manner;
 			entity.Other = editingCause.Other;
 			entity.CauseFactors = editingCause.CauseFactors;
