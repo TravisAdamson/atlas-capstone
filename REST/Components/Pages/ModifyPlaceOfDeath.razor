@@ -167,25 +167,40 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
-
+		deceasedList = await Db.Deceased.ToListAsync();
 		airlineList = await Db.Airline.ToListAsync();
 		placeList = await Db.PlaceOfDeath.ToListAsync();
-		deceasedList = await Db.Deceased.ToListAsync();
 		shippingList = await Db.ContainerShipping.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		editingAirline = CloneAirline(airlineList[GlobalState.clientID - 1]);
-		editingPlace = ClonePlace(placeList[GlobalState.clientID - 1]);
-		editingShipping = CloneShipping(shippingList[GlobalState.clientID - 1]);
+
+		if (GlobalState.ClientID <= 0)
+		{
+			NavigationManager.NavigateTo("/Search%20Records");
+			return;
+		}
+
+		editingDeceased = deceasedList
+			.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
+			?? new Deceased();
+
+		editingAirline = airlineList
+			.FirstOrDefault(a => a.ClientID == GlobalState.ClientID)
+			?? new Airline();
+
+		editingPlace = placeList
+			.FirstOrDefault(p => p.ClientID == GlobalState.ClientID)
+			?? new PlaceOfDeath();
+
+		editingShipping = shippingList
+			.FirstOrDefault(s => s.ClientID == GlobalState.ClientID)
+			?? new ContainerShipping();
 	}
+
 
 	private ContainerShipping CloneShipping(ContainerShipping original)
 	{
 		return new ContainerShipping
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			ShipFrom = original.ShipFrom,
 			ShipTo = original.ShipTo,
 			ShipToName = original.ShipToName,
@@ -210,7 +225,7 @@
 	{
 		return new Airline
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			AirlineName = original.AirlineName,
 			Country = original.Country,
 			Founded = original.Founded,
@@ -284,7 +299,7 @@
 	{
 		return new PlaceOfDeath
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			Name = original.Name,
 			MedicalRecordNumber = original.MedicalRecordNumber,
 			StreetAddress = original.StreetAddress,
@@ -308,7 +323,7 @@
 
 	private async Task SavePlaceRecord()
 	{
-		var entityP = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.Id == editingPlace.Id);
+		var entityP = await Db.PlaceOfDeath.FirstOrDefaultAsync(p => p.ClientID == editingPlace.ClientID);
 		if (entityP is not null)
 		{
 			entityP.Name = editingPlace.Name;
@@ -331,10 +346,10 @@
 			entityP.BodyReleaseTime = editingPlace.BodyReleaseTime;
 		}
 
-		var entityS = await Db.ContainerShipping.FirstOrDefaultAsync(s => s.Id == editingShipping.Id);
+		var entityS = await Db.ContainerShipping.FirstOrDefaultAsync(s => s.ClientID == editingShipping.ClientID);
 		if (entityS is not null)
 		{
-			entityS.Id = editingShipping.Id;
+			entityS.ClientID = editingShipping.ClientID;
 			entityS.ShipFrom = editingShipping.ShipFrom;
 			entityS.ShipTo = editingShipping.ShipTo;
 			entityS.ShipToName = editingShipping.ShipToName;
@@ -353,10 +368,10 @@
 			entityS.ShipToCounty = editingShipping.ShipToCounty;
 			entityS.Notes = editingShipping.Notes;
 		}
-		var entityA = await Db.Airline.FirstOrDefaultAsync(a => a.Id == editingAirline.Id);
+		var entityA = await Db.Airline.FirstOrDefaultAsync(a => a.ClientID == editingAirline.ClientID);
 		if (entityA is not null)
 		{
-			entityA.Id = editingAirline.Id;
+			entityA.ClientID = editingAirline.ClientID;
 			entityA.AirlineName = editingAirline.AirlineName;
 			entityA.Country = editingAirline.Country;
 			entityA.Founded = editingAirline.Founded;

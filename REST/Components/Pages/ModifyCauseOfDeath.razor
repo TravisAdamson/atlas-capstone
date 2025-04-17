@@ -142,7 +142,7 @@
 		deceasedList = await Db.Deceased	 .ToListAsync();
 
 		editingDeceased = deceasedList
-			.FirstOrDefault(d => d.ClientID == GlobalState.ClientID); // possible null reference that might be taken care of immediately after but still could be an issue
+			.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)!; // null ref that is handled immediately after
 
 		if (editingDeceased is null)
 		{
@@ -150,7 +150,7 @@
 			return;
 		}
 
-		var uri   = NavigationManager.Uri;
+		var uri = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
@@ -170,7 +170,6 @@
 					: causeList.Last());
 		}
 	}
-
 
 	private CauseOfDeath CloneCause(CauseOfDeath original)
 	{

@@ -130,16 +130,16 @@ else if (searched)
 		searched = true;
 	}
 
-	private void StartEdit(int clientID)
+	private void StartEdit(int ClientID)
 	{
-		GlobalState.clientID = clientID;
-		Console.WriteLine($"ClientID: {GlobalState.clientID}");
-		NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={clientID}");
+		GlobalState.ClientID = ClientID;
+		Console.WriteLine($"ClientID: {GlobalState.ClientID}");
+		NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={ClientID}");
 	}
 
-	private void ShowConfirmDelete(int clientId)
+	private void ShowConfirmDelete(int ClientID)
 	{
-		ConfirmingDeleteId = clientId;
+		ConfirmingDeleteId = ClientID;
 	}
 
 	private void CancelDelete()
@@ -147,22 +147,50 @@ else if (searched)
 		ConfirmingDeleteId = null;
 	}
 
-	private async Task ConfirmDelete(int clientId)
+	private async Task ConfirmDelete(int ClientID)
 	{
-		var deceasedToDelete = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == clientId);
-		if (deceasedToDelete is null) return;
+		/* use one DB‑transaction so every table is cleaned together */
+		await using var tx = await Db.Database.BeginTransactionAsync();
 
-		Db.Deceased.Remove(deceasedToDelete);
-		await Db.SaveChangesAsync();
+		try
+		{
+			// remove the parent record
+			var deceased = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == ClientID);
+			if (deceased != null)
+				Db.Deceased.Remove(deceased);
 
-		// refresh grid
-		results = await Db.Deceased.ToListAsync();
+			// remove every child row created in First Call
+			Db.Airline.RemoveRange(          Db.Airline.          Where(r => r.ClientID == ClientID));
+			Db.Buyer.RemoveRange(            Db.Buyer.            Where(r => r.ClientID == ClientID));
+			Db.CashAdvance.RemoveRange(      Db.CashAdvance.      Where(r => r.ClientID == ClientID));
+			Db.ContainerShipping.RemoveRange(Db.ContainerShipping.Where(r => r.ClientID == ClientID));
+			Db.Embalmer.RemoveRange(         Db.Embalmer.         Where(r => r.ClientID == ClientID));
+			Db.FlagApplication.RemoveRange(  Db.FlagApplication.  Where(r => r.ClientID == ClientID));
+			Db.Military.RemoveRange(         Db.Military.         Where(r => r.ClientID == ClientID));
+			Db.MilitaryStint.RemoveRange(    Db.MilitaryStint.    Where(r => r.ClientID == ClientID));
+			Db.Monument.RemoveRange(         Db.Monument.         Where(r => r.ClientID == ClientID));
+			Db.ObituaryData.RemoveRange(     Db.ObituaryData.     Where(r => r.ClientID == ClientID));
+			Db.PlaceOfDeath.RemoveRange(     Db.PlaceOfDeath.     Where(r => r.ClientID == ClientID));
+			Db.Products.RemoveRange(         Db.Products.         Where(r => r.ClientID == ClientID));
+			Db.ServiceContract.RemoveRange(  Db.ServiceContract.  Where(r => r.ClientID == ClientID));
+			Db.Services.RemoveRange(         Db.Services.         Where(r => r.ClientID == ClientID));
+			Db.Survivors.RemoveRange(        Db.Survivors.        Where(r => r.ClientID == ClientID));
+			Db.WarsServed.RemoveRange(       Db.WarsServed.       Where(r => r.ClientID == ClientID));
 
-		// if the user just deleted the active record, clear it
-		if (GlobalState.clientID == clientId)
-			GlobalState.clientID = 0;
+			await Db.SaveChangesAsync();
+			await tx.CommitAsync();
+		}
+		catch
+		{
+			await tx.RollbackAsync();
+			throw; // let the Blazor error boundary show a useful message
+		}
+		results = await Db.Deceased.ToListAsync(); // refresh the grid
 
-		ConfirmingDeleteId = null;
+		if (GlobalState.ClientID == ClientID) // if delete the active record
+			GlobalState.ClientID = 0; // grey‑out Modify Records again
+
+		ConfirmingDeleteId = null; // collapse the inline confirm panel
 	}
 }
 

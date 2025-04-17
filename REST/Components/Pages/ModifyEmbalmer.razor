@@ -93,34 +93,41 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
+		// grab the selected client ID (0 if none)
+		var id = GlobalState.ClientID;
+
+		// 2. load the full lists
 		embalmerList = await Db.Embalmer.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		if (embalmerList.Any())
-		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
-			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < embalmerList.Count;
-				}
-			}
 
-			editingEmbalmer = CloneEmbalmer(embalmerList[GlobalState.clientID - 1]);
+		// if no valid ID or no embalmers, nothing to do
+		if (id <= 0 || !embalmerList.Any())
+			return;
+
+		// bind the Deceased and Embalmer we actually want
+		editingDeceased = CloneDeceased(
+			deceasedList.FirstOrDefault(d => d.ClientID == id)
+			?? new Deceased());
+		editingEmbalmer = CloneEmbalmer(
+			embalmerList.FirstOrDefault(e => e.ClientID == id)
+			?? new Embalmer());
+
+		// find its index in the embalmerList so prev/next work
+		var idx = embalmerList.FindIndex(e => e.ClientID == id);
+		if (idx >= 0)
+		{
+			currentRecordIndex = idx + 1;
+			preVis             = currentRecordIndex > 1;
+			nexVis             = currentRecordIndex < embalmerList.Count;
 		}
 	}
+
 
 	private Embalmer CloneEmbalmer(Embalmer original)
 	{
 		return new Embalmer
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			PermissionToEmbalm = original.PermissionToEmbalm,
 			Embalmed = original.Embalmed,
 			EmbalmedDate = original.EmbalmedDate,
@@ -191,7 +198,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.Id == editingEmbalmer.Id);
+		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.ClientID == editingEmbalmer.ClientID);
 		if (entity is not null)
 		{
 			entity.PermissionToEmbalm = editingEmbalmer.PermissionToEmbalm;

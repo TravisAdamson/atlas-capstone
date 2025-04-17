@@ -122,37 +122,40 @@
 	private Deceased currentDeceased = new Deceased();
 	private Deceased editingDeceased = new Deceased();
 
-	protected override async Task OnInitializedAsync()
+protected override async Task OnInitializedAsync()
+{
+	obituaryList = await Db.ObituaryData.ToListAsync();
+	deceasedList = await Db.Deceased.ToListAsync();
+
+	// 3) if no valid selection or empty list, bail
+	if (GlobalState.ClientID <= 0 || !obituaryList.Any())
+		return;
+
+	// bind exactly the matching Deceased and ObituaryData, or a new one
+	editingDeceased = CloneDeceased(
+		deceasedList.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
+		?? new Deceased());
+	editingObituary = CloneObituary(
+		obituaryList.FirstOrDefault(o => o.ClientID == editingObituary.ClientID)
+		?? new ObituaryData());
+
+	// find zero‑based index in the obituaryList
+	var idx = obituaryList.FindIndex(o => o.ClientID == editingObituary.ClientID);
+
+	if (idx >= 0)
 	{
-		var uri = NavigationManager.Uri;
-		var query = new Uri(uri).Query;
-		var queryParameters = QueryHelpers.ParseQuery(query);
-
-		obituaryList = await Db.ObituaryData.ToListAsync();
-		deceasedList = await Db.Deceased.ToListAsync();
-		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
-		if (obituaryList.Any())
-		{
-			if (queryParameters.TryGetValue("currentRecordString", out var value))
-			{
-				currentRecordString = value;
-				if (int.TryParse(currentRecordString, out var currentRecord))
-				{
-					currentRecordIndex = currentRecord;
-					preVis = currentRecord > 1;
-					nexVis = currentRecord < obituaryList.Count;
-				}
-			}
-
-			editingObituary = CloneObituary(obituaryList[GlobalState.clientID - 1]);
-		}
+		currentRecordIndex = idx + 1;
+		preVis = currentRecordIndex > 1;
+		nexVis = currentRecordIndex < obituaryList.Count;
 	}
+}
+
 
 	private ObituaryData CloneObituary(ObituaryData original)
 	{
 		return new ObituaryData
 		{
-			Id = original.Id,
+			ClientID = original.ClientID,
 			DistributionFormat = original.DistributionFormat,
 			Media = original.Media,
 			DateSent = original.DateSent,
@@ -230,7 +233,7 @@ private Deceased CloneDeceased(Deceased original)
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.ObituaryData.FirstOrDefaultAsync(o => o.Id == editingObituary.Id);
+		var entity = await Db.ObituaryData.FirstOrDefaultAsync(o => o.ClientID == editingObituary.ClientID);
 		if (entity is not null)
 		{
 			entity.DistributionFormat = editingObituary.DistributionFormat;
