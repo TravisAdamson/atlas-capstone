@@ -1,16 +1,21 @@
 @page "/Survivor"
-@inject RESTDB.Data.ApplicationDbContext Context
+
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @using REST.Components.Shared
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
+
 @namespace REST.Components
 
 <ActiveService
@@ -108,8 +113,8 @@
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
-		survivorList = await Context.Survivors.ToListAsync();
-		deceasedList = await Context.Deceased.ToListAsync();
+		survivorList = await Db.Survivors.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
 
 		if (survivorList.Any())
 		{
@@ -209,7 +214,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.Survivors.FirstOrDefaultAsync(s => s.Id == editingSurvivor.Id);
+		var entity = await Db.Survivors.FirstOrDefaultAsync(s => s.Id == editingSurvivor.Id);
 		if (entity is not null)
 		{
 			entity.SurvivorRelation = editingSurvivor.SurvivorRelation;
@@ -224,7 +229,7 @@
 			entity.Relationship = editingSurvivor.Relationship;
 			entity.IsLiving = editingSurvivor.IsLiving;
 
-			await Context.SaveChangesAsync();
+			await Db.SaveChangesAsync();
 		}
 	}
 }

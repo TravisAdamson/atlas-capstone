@@ -1,5 +1,5 @@
 @page "/Obituary"
-@inject RESTDB.Data.ApplicationDbContext Context
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
 @using REST.Components.Shared
@@ -128,8 +128,8 @@
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
 
-		obituaryList = await Context.ObituaryData.ToListAsync();
-		deceasedList = await Context.Deceased.ToListAsync();
+		obituaryList = await Db.ObituaryData.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (obituaryList.Any())
 		{
@@ -230,7 +230,7 @@ private Deceased CloneDeceased(Deceased original)
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.ObituaryData.FirstOrDefaultAsync(o => o.Id == editingObituary.Id);
+		var entity = await Db.ObituaryData.FirstOrDefaultAsync(o => o.Id == editingObituary.Id);
 		if (entity is not null)
 		{
 			entity.DistributionFormat = editingObituary.DistributionFormat;
@@ -247,7 +247,7 @@ private Deceased CloneDeceased(Deceased original)
 			entity.LastAtneedId = editingObituary.LastAtneedId;
 			entity.Obituary = editingObituary.Obituary;
 
-			await Context.SaveChangesAsync();
+			await Db.SaveChangesAsync();
 		}
 	}
 }

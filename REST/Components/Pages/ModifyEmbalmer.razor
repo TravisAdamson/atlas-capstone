@@ -1,16 +1,20 @@
 @page "/Embalmer"
-@inject RESTDB.Data.ApplicationDbContext Context
+
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
 @using REST.Components.Shared
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
 
 <ActiveService
 	Director="@editingDeceased.Director"
@@ -92,8 +96,8 @@
 		var uri = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
-		embalmerList = await Context.Embalmer.ToListAsync();
-		deceasedList = await Context.Deceased.ToListAsync();
+		embalmerList = await Db.Embalmer.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (embalmerList.Any())
 		{
@@ -187,7 +191,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.Embalmer.FirstOrDefaultAsync(e => e.Id == editingEmbalmer.Id);
+		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.Id == editingEmbalmer.Id);
 		if (entity is not null)
 		{
 			entity.PermissionToEmbalm = editingEmbalmer.PermissionToEmbalm;
@@ -197,7 +201,7 @@
 			entity.EmbalmedBy = editingEmbalmer.EmbalmedBy;
 			entity.EmbalmingAuthorizor = editingEmbalmer.EmbalmingAuthorizor;
 
-			await Context.SaveChangesAsync();
+			await Db.SaveChangesAsync();
 		}
 	}
 }

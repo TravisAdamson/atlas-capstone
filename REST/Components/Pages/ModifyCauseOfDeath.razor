@@ -10,7 +10,7 @@
 
 @inherits LayoutComponentBase
 
-@inject RESTDB.Data.ApplicationDbContext Context
+@inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
 
@@ -141,8 +141,8 @@
 		var uri = NavigationManager.Uri;
 		var query = new Uri(uri).Query;
 		var queryParameters = QueryHelpers.ParseQuery(query);
-		causeList = await Context.CauseOfDeath.ToListAsync();
-		deceasedList = await Context.Deceased.ToListAsync();
+		causeList = await Db.CauseOfDeath.ToListAsync();
+		deceasedList = await Db.Deceased.ToListAsync();
 		editingDeceased = CloneDeceased(deceasedList[GlobalState.clientID - 1]);
 		if (causeList.Any())
 		{
@@ -247,7 +247,7 @@
 
 	private async Task SaveRecord()
 	{
-		var entity = await Context.CauseOfDeath.FirstOrDefaultAsync(e => e.Id == editingCause.Id);
+		var entity = await Db.CauseOfDeath.FirstOrDefaultAsync(e => e.Id == editingCause.Id);
 		if (entity is not null)
 		{
 			entity.Id = editingCause.Id;
@@ -270,7 +270,7 @@
 			entity.Biopsy = editingCause.Biopsy;
 			entity.AnatGift = editingCause.AnatGift;
 
-			await Context.SaveChangesAsync();
+			await Db.SaveChangesAsync();
 		}
 	}
 }
