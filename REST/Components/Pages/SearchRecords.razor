@@ -124,10 +124,8 @@ else if (searched)
 				_ => query
 			};
 		}
-
 		query = query.OrderByDescending(d => d.DoD);
 		results = await query.ToListAsync();
-
 		isLoading = false;
 		searched = true;
 	}
@@ -169,17 +167,15 @@ else if (searched)
 }
 
 <style>
+	.Spacing {
+		padding: .25rem;
+	}
 
-.Spacing {
-	padding: .25rem;
-}
+	.form-select {
+		max-width: 10%;
+	}
 
-.form-select {
-	max-width: 10%;
-}
-
-.form-control {
-	max-width: 20%;
-}
-
+	.form-control {
+		max-width: 20%;
+	}
 </style>
