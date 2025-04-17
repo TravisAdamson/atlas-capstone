@@ -40,18 +40,18 @@
 	</div>
 </div>
 
-	<!-- Main Contract Fields -->
-	<EditForm Model="@editingContract">
-		<div class="ContractForm">
-			<div class="pod-field-container">
-				<div class="FirstCall-group1"><label>Contract Date</label><InputDate class="form-control" @bind-Value="editingContract.ContractDate" /></div>
-				<div class="FirstCall-group1"><label>Sales Package</label><InputText class="form-control" @bind-Value="editingContract.SalesPackage" /></div>
-				<div class="FirstCall-group1"><label>Estate Owner</label><InputText class="form-control" @bind-Value="editingContract.EstateOwner" /></div>
-				<div class="FirstCall-group1"><label>Balance</label><InputNumber class="form-control" @bind-Value="editingContract.Balance" /></div>
-				<div class="FirstCall-group1"><label>Distributed Charges</label><InputNumber class="form-control" @bind-Value="editingContract.DistributedCharges" /></div>
-			</div>
+<!-- Main Contract Fields -->
+<EditForm Model="@editingContract">
+	<div class="ContractForm">
+		<div class="pod-field-container">
+			<div class="FirstCall-group1"><label>Contract Date</label><InputDate class="form-control" @bind-Value="editingContract.ContractDate" /></div>
+			<div class="FirstCall-group1"><label>Sales Package</label><InputText class="form-control" @bind-Value="editingContract.SalesPackage" /></div>
+			<div class="FirstCall-group1"><label>Estate Owner</label><InputText class="form-control" @bind-Value="editingContract.EstateOwner" /></div>
+			<div class="FirstCall-group1"><label>Balance</label><InputNumber class="form-control" @bind-Value="editingContract.Balance" /></div>
+			<div class="FirstCall-group1"><label>Distributed Charges</label><InputNumber class="form-control" @bind-Value="editingContract.DistributedCharges" /></div>
 		</div>
-	</EditForm>
+	</div>
+</EditForm>
 
 <!-- Tabs Navigation -->
 <div class="TabForm">
@@ -174,7 +174,7 @@
 		servicesList = await Db.Services.ToListAsync();
 		buyerList = await Db.Buyer.ToListAsync();
 
-		// if the user hasn't selected a record yet, send them back
+		// if the user hasn't selected a record yet, send them back.         protective and possibly redundant
 		if (GlobalState.ClientID <= 0)
 		{
 			NavigationManager.NavigateTo("/Search%20Records");
@@ -202,7 +202,6 @@
 			.FirstOrDefault(p => p.ClientID == GlobalState.ClientID)
 			?? new Products();
 	}
-
 
 	private Deceased CloneDeceased(Deceased original)
 	{

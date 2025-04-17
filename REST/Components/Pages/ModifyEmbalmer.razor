@@ -85,7 +85,6 @@
 	private List<Embalmer> embalmerList = new();
 	private Embalmer editingEmbalmer = new();
 	private int currentRecordIndex = 0;
-	private string? currentRecordString;
 	private bool preVis = true, nexVis = true;
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased currentDeceased = new Deceased();
@@ -93,35 +92,27 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		// grab the selected client ID (0 if none)
-		var id = GlobalState.ClientID;
-
-		// 2. load the full lists
 		embalmerList = await Db.Embalmer.ToListAsync();
 		deceasedList = await Db.Deceased.ToListAsync();
 
-		// if no valid ID or no embalmers, nothing to do
-		if (id <= 0 || !embalmerList.Any())
+		if (GlobalState.ClientID <= 0 || !embalmerList.Any())
 			return;
 
-		// bind the Deceased and Embalmer we actually want
-		editingDeceased = CloneDeceased(
-			deceasedList.FirstOrDefault(d => d.ClientID == id)
+		// bind the desired Deceased and Embalmer
+		editingDeceased = CloneDeceased(deceasedList.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
 			?? new Deceased());
-		editingEmbalmer = CloneEmbalmer(
-			embalmerList.FirstOrDefault(e => e.ClientID == id)
+		editingEmbalmer = CloneEmbalmer(embalmerList.FirstOrDefault(e => e.ClientID == GlobalState.ClientID)
 			?? new Embalmer());
 
 		// find its index in the embalmerList so prev/next work
-		var idx = embalmerList.FindIndex(e => e.ClientID == id);
+		var idx = embalmerList.FindIndex(e => e.ClientID == GlobalState.ClientID);
 		if (idx >= 0)
 		{
 			currentRecordIndex = idx + 1;
-			preVis             = currentRecordIndex > 1;
-			nexVis             = currentRecordIndex < embalmerList.Count;
+			preVis = currentRecordIndex > 1;
+			nexVis = currentRecordIndex < embalmerList.Count;
 		}
 	}
-
 
 	private Embalmer CloneEmbalmer(Embalmer original)
 	{
@@ -212,6 +203,7 @@
 		}
 	}
 }
+
 <style>
 	.EmbalmerForm h5 {
 		font-size: 1.7em;
