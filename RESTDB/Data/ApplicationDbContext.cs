@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using RESTDB.Models;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RESTDB.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<AppUser>
 {
 	static readonly string connectionString = "Server=localhost; User ID=travis; Password=travis; Database=restdb";
 
@@ -30,6 +32,11 @@ public class ApplicationDbContext : DbContext
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 		optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+	}
+
+	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+		: base(options)
+	{
 	}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -139,6 +146,8 @@ public class ApplicationDbContext : DbContext
             p => p.Deceased,
             d => d.WarsServed
         );
+
+		base.OnModelCreating(modelBuilder);
     }
 
 	private void ConfigureDeceasedRelationship<TEntity>(

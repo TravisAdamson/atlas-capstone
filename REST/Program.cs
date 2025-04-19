@@ -5,11 +5,8 @@ using REST.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<GlobalState>();
-builder.Services.AddRazorComponents()
-	.AddInteractiveServerComponents(); // Razor components contain antiforgery
+builder.Services.AddScoped<UserState>();
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
@@ -19,21 +16,44 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 		new MySqlServerVersion(new Version(8, 0, 36)) // Update to match system
 	));
 
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireNonAlphanumeric = false; // Customize as needed
+    options.Password.RequireUppercase = false;
+    options.User.RequireUniqueEmail = false;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication()
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login"; // Path to the login page
+        options.AccessDeniedPath = "/AccessDenied"; // Handle access denial
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
 var app = builder.Build();
 
-// Configure HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // Default HSTS value = 30 days, might be altered for production https://aka.ms/aspnetcore-hsts
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
-app.UseAntiforgery();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
