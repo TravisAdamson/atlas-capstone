@@ -1,35 +1,30 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class CashAdvance
 {
 	[Key]
+	public int RecordID { get; set; }
 
-	public int ClientID { get; set; }
-
-	// A description of the cash advance
+	public string? ServiceID { get; set; }
 	public string? Description { get; set; }
 
-	// The tax amount associated with the advance
 	[Precision(18, 2)]
 	public decimal? Tax { get; set; }
-
-	// The quantity of the items associated with the cash advance (limited to numbers)
 	public string? Quantity { get; set; }
 
-	// The price per item or service
 	[Precision(18, 2)]
 	public decimal? Price { get; set; }
 
-	// The total price calculated as Price * Quantity
 	[Precision(18, 2)]
 	public decimal? PriceExtended { get; set; }
-
-	// The ID of the last preneed transaction
 	public string? LastPreneedId { get; set; }
-
-	// The ID of the last atneed transaction
 	public string? LastAtneedId { get; set; }
+
+	//Navigation Properties back to Primary Key
+	[ForeignKey(nameof(ServiceID))]
+    public Deceased? Deceased { get; set; }
 }

@@ -16,176 +16,10 @@ namespace RESTDB.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Airline",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AirlineName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Country = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Founded = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IATA = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ICAO = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FleetSize = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LogoUrl = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Airline", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Buyer",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Address = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Relationship = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsPrimaryBuyer = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    SendBill = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Buyer", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "CashAdvance",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Tax = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    Quantity = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    PriceExtended = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    LastPreneedId = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastAtneedId = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CashAdvance", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "CauseOfDeath",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Manner = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Other = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CauseFactors = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OtherFactors = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TypeofFactor = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Diabetic = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DContributed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    TobaccoUse = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AlcoholUse = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Hospitalized = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DefferedDiag = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CommDisease = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DonationConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DonationConsented = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AnatGiftConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Viewed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Biopsy = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AnatGift = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CauseOfDeath", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "ContainerShipping",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ShipFrom = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipTo = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromStreet = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromZip = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromTownship = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromLocality = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromState = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromCountry = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipFromCounty = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToStreet = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToZip = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToTownship = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToLocality = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToState = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToCountry = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShipToCounty = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Notes = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ContainerShipping", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Deceased",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Director = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -286,7 +120,211 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Deceased", x => x.ClientID);
+                    table.PrimaryKey("PK_Deceased", x => x.ServiceID);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Airline",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AirlineName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Country = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Founded = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IATA = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ICAO = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FleetSize = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LogoUrl = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Airline", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Airline_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Buyer",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Address = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Relationship = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsPrimaryBuyer = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    SendBill = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buyer", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Buyer_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "CashAdvance",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Tax = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    Quantity = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    PriceExtended = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    LastPreneedId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastAtneedId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CashAdvance", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_CashAdvance_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "CauseOfDeath",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Manner = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Other = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CauseFactors = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OtherFactors = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TypeofFactor = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Diabetic = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DContributed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TobaccoUse = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AlcoholUse = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Hospitalized = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DefferedDiag = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CommDisease = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DonationConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DonationConsented = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AnatGiftConsidered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Viewed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Biopsy = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AnatGift = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CauseOfDeath", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_CauseOfDeath_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ContainerShipping",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFrom = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipTo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromStreet = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromZip = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromTownship = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromLocality = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromState = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromCountry = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipFromCounty = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToStreet = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToZip = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToTownship = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToLocality = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToState = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToCountry = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ShipToCounty = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Notes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContainerShipping", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_ContainerShipping_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -294,8 +332,10 @@ namespace RESTDB.Migrations
                 name: "Embalmer",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     PermissionToEmbalm = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Embalmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     EmbalmedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -307,7 +347,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Embalmer", x => x.ClientID);
+                    table.PrimaryKey("PK_Embalmer", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Embalmer_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -315,8 +361,10 @@ namespace RESTDB.Migrations
                 name: "FlagApplication",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ApplicantName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RelationshipToDeceased = table.Column<string>(type: "longtext", nullable: true)
@@ -327,7 +375,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FlagApplication", x => x.ClientID);
+                    table.PrimaryKey("PK_FlagApplication", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_FlagApplication_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -335,8 +389,10 @@ namespace RESTDB.Migrations
                 name: "Military",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Branch = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Rank = table.Column<string>(type: "longtext", nullable: true)
@@ -348,7 +404,40 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Military", x => x.ClientID);
+                    table.PrimaryKey("PK_Military", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Military_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "MilitaryStint",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StintDescription = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    StintMilitaryId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MilitaryStint", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_MilitaryStint_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -356,8 +445,10 @@ namespace RESTDB.Migrations
                 name: "Monument",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     MonumentType = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Material = table.Column<string>(type: "longtext", nullable: true)
@@ -368,7 +459,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Monument", x => x.ClientID);
+                    table.PrimaryKey("PK_Monument", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Monument_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -376,8 +473,10 @@ namespace RESTDB.Migrations
                 name: "ObituaryData",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     DistributionFormat = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Media = table.Column<string>(type: "longtext", nullable: true)
@@ -402,7 +501,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ObituaryData", x => x.ClientID);
+                    table.PrimaryKey("PK_ObituaryData", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_ObituaryData_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -410,8 +515,10 @@ namespace RESTDB.Migrations
                 name: "PlaceOfDeath",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MedicalRecordNumber = table.Column<string>(type: "longtext", nullable: true)
@@ -446,7 +553,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlaceOfDeath", x => x.ClientID);
+                    table.PrimaryKey("PK_PlaceOfDeath", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_PlaceOfDeath_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -454,8 +567,10 @@ namespace RESTDB.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Category = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Item = table.Column<string>(type: "longtext", nullable: true)
@@ -465,7 +580,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ClientID);
+                    table.PrimaryKey("PK_Products", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Products_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -473,8 +594,10 @@ namespace RESTDB.Migrations
                 name: "ServiceContract",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ContractDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     SalesPackage = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -485,7 +608,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceContract", x => x.ClientID);
+                    table.PrimaryKey("PK_ServiceContract", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_ServiceContract_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -493,8 +622,10 @@ namespace RESTDB.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Category = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Item = table.Column<string>(type: "longtext", nullable: true)
@@ -504,7 +635,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Services", x => x.ClientID);
+                    table.PrimaryKey("PK_Services", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Services_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -512,8 +649,10 @@ namespace RESTDB.Migrations
                 name: "Survivors",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     SurvivorRelation = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: true)
@@ -538,32 +677,13 @@ namespace RESTDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Survivors", x => x.ClientID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "MilitaryStint",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    StintMilitaryId = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MilitaryClientID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MilitaryStint", x => x.ClientID);
+                    table.PrimaryKey("PK_Survivors", x => x.RecordID);
                     table.ForeignKey(
-                        name: "FK_MilitaryStint_Military_MilitaryClientID",
-                        column: x => x.MilitaryClientID,
-                        principalTable: "Military",
-                        principalColumn: "ClientID");
+                        name: "FK_Survivors_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -571,26 +691,53 @@ namespace RESTDB.Migrations
                 name: "WarsServed",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
+                    RecordID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ServiceID = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     WarName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WarMilitaryId = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MilitaryClientID = table.Column<int>(type: "int", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WarsServed", x => x.ClientID);
+                    table.PrimaryKey("PK_WarsServed", x => x.RecordID);
                     table.ForeignKey(
-                        name: "FK_WarsServed_Military_MilitaryClientID",
-                        column: x => x.MilitaryClientID,
-                        principalTable: "Military",
-                        principalColumn: "ClientID");
+                        name: "FK_WarsServed_Deceased_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Deceased",
+                        principalColumn: "ServiceID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Airline_ServiceID",
+                table: "Airline",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Buyer_ServiceID",
+                table: "Buyer",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CashAdvance_ServiceID",
+                table: "CashAdvance",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CauseOfDeath_ServiceID",
+                table: "CauseOfDeath",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContainerShipping_ServiceID",
+                table: "ContainerShipping",
+                column: "ServiceID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Deceased_ServiceID",
@@ -599,14 +746,64 @@ namespace RESTDB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MilitaryStint_MilitaryClientID",
-                table: "MilitaryStint",
-                column: "MilitaryClientID");
+                name: "IX_Embalmer_ServiceID",
+                table: "Embalmer",
+                column: "ServiceID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WarsServed_MilitaryClientID",
+                name: "IX_FlagApplication_ServiceID",
+                table: "FlagApplication",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Military_ServiceID",
+                table: "Military",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MilitaryStint_ServiceID",
+                table: "MilitaryStint",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Monument_ServiceID",
+                table: "Monument",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ObituaryData_ServiceID",
+                table: "ObituaryData",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlaceOfDeath_ServiceID",
+                table: "PlaceOfDeath",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ServiceID",
+                table: "Products",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceContract_ServiceID",
+                table: "ServiceContract",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_ServiceID",
+                table: "Services",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Survivors_ServiceID",
+                table: "Survivors",
+                column: "ServiceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WarsServed_ServiceID",
                 table: "WarsServed",
-                column: "MilitaryClientID");
+                column: "ServiceID");
         }
 
         /// <inheritdoc />
@@ -628,13 +825,13 @@ namespace RESTDB.Migrations
                 name: "ContainerShipping");
 
             migrationBuilder.DropTable(
-                name: "Deceased");
-
-            migrationBuilder.DropTable(
                 name: "Embalmer");
 
             migrationBuilder.DropTable(
                 name: "FlagApplication");
+
+            migrationBuilder.DropTable(
+                name: "Military");
 
             migrationBuilder.DropTable(
                 name: "MilitaryStint");
@@ -664,7 +861,7 @@ namespace RESTDB.Migrations
                 name: "WarsServed");
 
             migrationBuilder.DropTable(
-                name: "Military");
+                name: "Deceased");
         }
     }
 }

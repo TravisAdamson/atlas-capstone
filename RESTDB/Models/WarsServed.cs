@@ -1,17 +1,19 @@
-// Models/WarsServed.cs
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class WarsServed
 {
 	[Key]
-	public int ClientID { get; set; }
+	public int RecordID { get; set; }
 
-	public string? WarName { get; set; } // Example: "World War II", "Vietnam War", etc.
-	public string? Description { get; set; } // Description of the war or specific involvement
-
-	// Needs to be limited to numbers possibly
+	public string? ServiceID { get; set; }
+	public string? WarName { get; set; }
+	public string? Description { get; set; }
 	public string? WarMilitaryId { get; set; }
-	public Military? Military { get; set; } // Navigation property to the Military class
+
+	//Navigation Properties back to Primary Key
+	[ForeignKey(nameof(ServiceID))]
+    public Deceased? Deceased { get; set; }
 }
