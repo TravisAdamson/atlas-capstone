@@ -150,6 +150,7 @@
 	private PlaceOfDeath editingPlace = new PlaceOfDeath();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
+	private Deceased existingDeceased = new Deceased();
 
 	private void SelectTab(string tabName)
 	{
@@ -160,7 +161,7 @@
 	{
 		if (UserState.ServiceID != "None")
 		{
-			var  existingDeceased = await Db.Deceased
+			existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
 				.Include(d => d.Buyer)
 				.Include(d => d.CashAdvance)
@@ -182,13 +183,13 @@
 
 			if (existingDeceased != null)
 			{
-				editingDeceased = CloneDeceased(existingDeceased)
-				ContainerShipping = editingDeceased.ContainerShipping;
-				editingShipping => ContainerShipping.FirstOrDefault();
-				Airline = editingDeceased.Airline;
-				editingAirline => Airline.FirstOrDefault();
-				PlaceOfDeath = editingDeceased.PlaceOfDeath;
-				editingPlace => PlaceOfDeath.FirstOrDefault();
+				editingDeceased = CloneDeceased(existingDeceased);
+				ContainerShipping = editingDeceased.ContainerShipping.ToList()!;
+				editingShipping = ContainerShipping.FirstOrDefault()!;
+				Airline = editingDeceased.Airline.ToList()!;
+				editingAirline = Airline.FirstOrDefault()!;
+				PlaceOfDeath = editingDeceased.PlaceOfDeath.ToList()!;
+				editingPlace = PlaceOfDeath.FirstOrDefault()!;
 			}
 		}
 	}

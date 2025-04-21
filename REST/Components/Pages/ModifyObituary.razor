@@ -105,15 +105,16 @@
 </div>
 
 @code {
-	private List<ObituaryData> ObituaryData = new List<>();
-	private ObituaryData editingObituary = new();
+	private List<ObituaryData> ObituaryData = new List<ObituaryData>();
+	private ObituaryData editingObituary = new ObituaryData();
 	private Deceased editingDeceased = new Deceased();
+	private Deceased existingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
 		if (UserState.ServiceID != "None")
 		{
-			var  existingDeceased = await Db.Deceased
+			existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
 				.Include(d => d.Buyer)
 				.Include(d => d.CashAdvance)
@@ -136,8 +137,8 @@
 			if (existingDeceased != null)
 			{
 				editingDeceased = CloneDeceased(existingDeceased);
-				ObituaryData = editingDeceased.ObituaryData;
-				editingObituary => ObituaryData.FirstOrDefault();
+				ObituaryData = editingDeceased.ObituaryData.ToList()!;
+				editingObituary = ObituaryData.FirstOrDefault()!;
 			}
 		}
 	}

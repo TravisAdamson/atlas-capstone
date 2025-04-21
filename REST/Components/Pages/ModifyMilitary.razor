@@ -23,7 +23,7 @@
 <div class="title-bar">
 	<h1>Military Record</h1>
 	<div class="SubmitRecordButton">
-		<EditForm Model="@editingMilitary" OnValidSubmit="SaveMilitaryRecord">
+		<EditForm Model="@editingMilitary" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
 				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
 			</div>
@@ -117,11 +117,16 @@
 @code {
 	private List<Military> Military = new List<Military>();
 	private Military editingMilitary = new Military();
+	private List<MilitaryStint> MilitaryStint = new List<MilitaryStint>();
 	private MilitaryStint editingStint = new MilitaryStint();
+	private List<WarsServed> WarsServed = new List<WarsServed>();
 	private WarsServed editingWar = new WarsServed();
+	private List<FlagApplication> FlagApplication = new List<FlagApplication>();
 	private FlagApplication editingFlag = new FlagApplication();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
+	private Deceased existingDeceased = new Deceased();
+
 	private string selectedTab = "Stints";
 
 	private void SelectTab(string tabName)
@@ -133,7 +138,7 @@
 	{
 		if (UserState.ServiceID != "None")
 		{
-			var  existingDeceased = await Db.Deceased
+			existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
 				.Include(d => d.Buyer)
 				.Include(d => d.CashAdvance)
@@ -156,14 +161,14 @@
 			if (existingDeceased != null)
 			{
 				editingDeceased = CloneDeceased(existingDeceased);
-				Military = editingDeceased.Military;
-				editingMilitary => Military.FirstOrDefault();
-				MilitaryStint = editingDeceased.MilitaryStint;
-				editingMStint => MilitaryStint.FirstOrDefault();
-				FlagApplication = editingDeceased.FlagApplication;
-				editingFlag => FlagApplication.FirstOrDefault();
-				WarsServed = editingDeceased.WarsServed;
-				editingWar => WarsServed.FirstOrDefault();
+				Military = editingDeceased.Military.ToList()!;
+				editingMilitary = Military.FirstOrDefault()!;
+				MilitaryStint = editingDeceased.MilitaryStint.ToList()!;
+				editingStint = MilitaryStint.FirstOrDefault()!;
+				FlagApplication = editingDeceased.FlagApplication.ToList()!;
+				editingFlag = FlagApplication.FirstOrDefault()!;
+				WarsServed = editingDeceased.WarsServed.ToList()!;
+				editingWar = WarsServed.FirstOrDefault()!;
 
 			}
 		}
@@ -435,17 +440,12 @@
         };
 	}
 
-	private async Task SaveMilitaryRecord()
+	private async Task SaveRecord()
 	{
 		ReplaceCollection(existingDeceased.Military, editingDeceased.Military);
 		ReplaceCollection(existingDeceased.MilitaryStint, editingDeceased.MilitaryStint);
 		ReplaceCollection(existingDeceased.FlagApplication, editingDeceased.FlagApplication);
 		ReplaceCollection(existingDeceased.WarsServed, editingDeceased.WarsServed);
-	}
-
-	private void SelectTab(string tabName)
-	{
-		selectedTab = tabName;
 	}
 
 	private void ReplaceCollection<T>(ICollection<T> original, ICollection<T> updated) where T : class

@@ -514,7 +514,7 @@
 
 	protected override void OnInitialized() // This prevents direct URL access when no records exist.
 	{
-		if (UserState.ServiceID = "None") {NavigationManager.NavigateTo("Search Records");}
+		if (UserState.ServiceID == "None") {NavigationManager.NavigateTo("Search Records");}
 	}
 
 	protected override async Task OnInitializedAsync()
@@ -767,12 +767,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

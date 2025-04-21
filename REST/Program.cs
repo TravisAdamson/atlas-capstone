@@ -21,19 +21,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
-    options.Password.RequireNonAlphanumeric = false; // Customize as needed
+    options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.User.RequireUniqueEmail = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders()
+.AddDefaultUI();
 
-builder.Services.AddAuthentication()
-    .AddCookie(options =>
-    {
-        options.LoginPath = "/Login"; // Path to the login page
-        options.AccessDeniedPath = "/AccessDenied"; // Handle access denial
-    });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login"; // ✅ This is the missing part
+    options.AccessDeniedPath = "/AccessDenied";
+});
 
 builder.Services.AddAuthorization(options =>
 {
@@ -57,6 +57,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

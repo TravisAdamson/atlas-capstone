@@ -92,6 +92,7 @@
 	private Survivors editingSurvivors = new Survivors();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
+	private Deceased existingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -119,9 +120,9 @@
 
 			if (existingDeceased != null)
 			{
-				editingDeceased = CloneDeceased(existingDeceased)
-				Survivors = editingDeceased.Survivor;
-				editingSurvivors => Survivors.FirstOrDefault();
+				editingDeceased = CloneDeceased(existingDeceased);
+				Survivors = editingDeceased.Survivors?.ToList()!;
+				editingSurvivors = Survivors.FirstOrDefault()!;
 			}
 		}
 	}
@@ -345,12 +346,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

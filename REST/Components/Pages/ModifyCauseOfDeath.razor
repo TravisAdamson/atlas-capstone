@@ -150,8 +150,8 @@
 			if (existingDeceased != null)
 			{
 				editingDeceased = CloneDeceased(existingDeceased);
-				CauseOfDeath = editingDeceased.CauseOfDeath;
-				editingCause => CauseOfDeath.FirstOrDefault();
+				CauseOfDeath = editingDeceased.CauseOfDeath.ToList()!;
+				editingCause = CauseOfDeath.FirstOrDefault()!;
 			}
 		}
 	}
