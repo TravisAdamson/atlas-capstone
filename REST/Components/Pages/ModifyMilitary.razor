@@ -136,7 +136,6 @@
 	private Deceased editingDeceased = new Deceased();
 	private string selectedTab = "Stints";
 
-
 protected override async Task OnInitializedAsync()
 {
 	militaryList = await Db.Military.ToListAsync();
@@ -156,7 +155,6 @@ protected override async Task OnInitializedAsync()
 		.FirstOrDefault(m => m.ClientID == GlobalState.ClientID)
 		?? new Military();
 }
-
 
 	private Deceased CloneDeceased(Deceased original)
 	{
