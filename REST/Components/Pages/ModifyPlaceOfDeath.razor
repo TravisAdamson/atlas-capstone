@@ -22,7 +22,7 @@
 <div class="title-bar">
 	<h1>Place of Death</h1>
 	<div class="SubmitRecordButton">
-		<EditForm Model="@editingPlace" OnValidSubmit="SavePlaceRecord">
+		<EditForm Model="@editingPlace" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
 				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
 			</div>
@@ -153,7 +153,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		If (UserState.ServiceID != "None")
+		if (UserState.ServiceID != "None")
 		{
 			var  existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)

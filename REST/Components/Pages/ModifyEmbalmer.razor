@@ -73,17 +73,21 @@
 	private Deceased editingDeceased = new Deceased();
 	private List<Embalmer> Embalmer = new List<Embalmer>();
 	private Embalmer editingEmbalmer = new Embalmer();
+	private Deceased existingDeceased; // Add this field
 
 	protected override void OnInitialized() // This prevents direct URL access when no records exist.
 	{
-		if (UserState.ServiceID = "None") {NavigationManager.NavigateTo("Search Records");}
+		if (UserState.ServiceID == "None") 
+		{
+			NavigationManager.NavigateTo("Search Records");
+		}
 	}
 
 	protected override async Task OnInitializedAsync()
 	{
-		If (UserState.ServiceID != "None")
+		if (UserState.ServiceID != "None")
 		{
-			var  existingDeceased = await Db.Deceased
+			existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
 				.Include(d => d.Buyer)
 				.Include(d => d.CashAdvance)
@@ -105,9 +109,9 @@
 
 			if (existingDeceased != null)
 			{
-				editingDeceased = CloneDeceased(existingDeceased)
-				Embalmer = editingDeceased.Embalmer;
-				editingEmbalmer => Embalmer.FirstOrDefault();
+				editingDeceased = CloneDeceased(existingDeceased);
+				Embalmer = (editingDeceased.Embalmer ?? new List<Embalmer>()).ToList();
+				editingEmbalmer = Embalmer.FirstOrDefault();
 			}
 		}
 	}
@@ -331,12 +335,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

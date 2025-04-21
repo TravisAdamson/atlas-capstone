@@ -409,7 +409,7 @@
 		// Save
 		try
 		{
-            currentDeceased.ServiceID = ServiceID?.Trim();
+			currentDeceased.ServiceID = currentDeceased.ServiceID?.Trim();
 
             // These objects will inherit the ServiceID via the navigation relationship
             currentDeceased.Airline = new List<Airline> { new Airline() };

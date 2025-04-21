@@ -22,7 +22,7 @@
 <div class="title-bar">
 	<h1>Contract Record</h1>
 	<div class="SubmitRecordButton">
-		<EditForm Model="@editingContract" OnValidSubmit="SaveContractRecord">
+		<EditForm Model="@editingContract" OnValidSubmit="SaveRecord">
 				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
 		</EditForm>
 	</div>
@@ -151,7 +151,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		If (UserState.ServiceID != "None")
+		if (UserState.ServiceID != "None")
 		{
 			var  existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
@@ -176,14 +176,14 @@
 			if (existingDeceased != null)
 			{
 				editingDeceased = CloneDeceased(existingDeceased);
-				ServiceContract = editingDeceased.ServiceContract;
-				editingContract => ServiceContract.FirstOrDefault();
-				Services = editingDeceased.Services;
-				editingServices => Services.FirstOrDefault();
-				Products = editingDeceased.Products;
-				editingProducts => Products.FirstOrDefault();
-				Buyer = editingDeceased.Buyer;
-				editingBuyer => Buyer.FirstOrDefault();
+				ServiceContract = editingDeceased.ServiceContract?.ToList() ?? new List<ServiceContract>();
+				editingContract = ServiceContract.FirstOrDefault();
+				Services = editingDeceased.Services?.ToList() ?? new List<Services>();
+				editingServices = Services.FirstOrDefault();
+				Products = editingDeceased.Products?.ToList() ?? new List<Products>();
+				editingProducts = Products?.FirstOrDefault();
+				Buyer = editingDeceased.Buyer?.ToList() ?? new List<Buyer>();
+				editingBuyer = Buyer.FirstOrDefault();
 			}
 		}
 	}
@@ -407,12 +407,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

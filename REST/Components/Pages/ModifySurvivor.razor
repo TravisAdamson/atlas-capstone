@@ -24,7 +24,7 @@
 <div class="title-bar">
 	<h1>Modify Survivor Record</h1>
 	<div class="SubmitRecordButton">
-		<EditForm Model="@editingSurvivor" OnValidSubmit="SaveRecord">
+		<EditForm Model="@editingSurvivors" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
 				<button type="submit" class="btn btn-primary btn-submit">Save</button>
 			</div>
@@ -33,55 +33,55 @@
 </div>
 
 <div class="SurvivorForm">
-	<EditForm Model="@editingSurvivor">
+	<EditForm Model="@editingSurvivors">
 		<h5>Survivor Information</h5>
 		<div class="Survivor-group">
 			<div class="Form-group">
 				<label>Survivor Relation</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.SurvivorRelation" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.SurvivorRelation" />
 			</div>
 			<div class="Form-group">
 				<label>Name</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.Name" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.Name" />
 			</div>
 			<div class="Form-group">
 				<label>Address</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.Address" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.Address" />
 			</div>
 			<div class="Form-group">
 				<label>Children Count</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.GreatGrandChildrenCount" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.GreatGrandChildrenCount" />
 			</div>
 			<div class="Form-group">
 				<label>Grandchildren Count</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.GrandChildrenCount" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.GrandChildrenCount" />
 			</div>
 			<div class="Form-group">
 				<label>Great Grandchildren Count</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGrandChildrenCount" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.GreatGreatGrandChildrenCount" />
 			</div>
 			<div class="Form-group">
 				<label>Great Great Grandchildren Count</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.GreatGreatGreatGrandChildrenCount" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.GreatGreatGreatGrandChildrenCount" />
 			</div>
 			<div class="Form-group">
 				<label>Great Great Great Grandchildren Count</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.ChildrenCount" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.ChildrenCount" />
 			</div>
 		</div>
 
 		<div class="Survivor-group">
 			<div class="Form-group">
 				<label>Phone Number</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.PhoneNumber" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.PhoneNumber" />
 			</div>
 			<div class="Form-group">
 				<label>Relationship</label>
-				<InputText class="form-control" @bind-Value="editingSurvivor.Relationship" />
+				<InputText class="form-control" @bind-Value="editingSurvivors.Relationship" />
 			</div>
 			<div class="Form-group">
 				<label>Is Living</label>
-				<InputCheckbox class="form-control" @bind-Value="editingSurvivor.IsLiving" />
+				<InputCheckbox class="form-control" @bind-Value="editingSurvivors.IsLiving" />
 			</div>
 		</div>
 	</EditForm>
@@ -95,7 +95,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		If (UserState.ServiceID != "None")
+		if (UserState.ServiceID != "None")
 		{
 			var  existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)

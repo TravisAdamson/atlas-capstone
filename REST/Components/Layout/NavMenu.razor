@@ -78,7 +78,7 @@
 @code
 {
 	// state helpers
-	private bool IsRecordSelected => UserState.ClientID > 0;
+	private bool IsRecordSelected => UserState.ServiceID != null;
 	private string DisabledCss => IsRecordSelected ? "" : "disabled-nav";
 	private bool isModifiedOpen;
 

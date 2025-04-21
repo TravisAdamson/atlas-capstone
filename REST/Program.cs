@@ -2,6 +2,9 @@ using REST.Components;
 using RESTDB.Data;
 using Microsoft.EntityFrameworkCore;
 using REST.Services;
+using RESTDB.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 

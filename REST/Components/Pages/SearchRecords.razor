@@ -53,18 +53,18 @@ else if (results != null && results.Any())
 					<td>@item.City</td>
 					<td>@item.DoD?.ToString("MM-dd-yyyy")</td>
 					<td>
-						<button type="button" @onclick="() => StartEdit(item.ServiceID ?? -1)">Edit</button>
+						<button type="button" @onclick="() => StartEdit(item.ServiceID ?? null)">Edit</button>
 						<span class="Spacing"></span>
 						@if (ConfirmingDeleteId == @item.ServiceID)
 						{
 							<div class="mt-1">
-								<button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ServiceID ?? -1)">Confirm Delete</button>
+								<button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ServiceID ?? null)">Confirm Delete</button>
 								<button type="button" class="btn btn-success" @onclick="CancelDelete">Cancel</button>
 							</div>
 						}
 						else
 						{
-							<button type="button" @onclick="() => ShowConfirmDelete(item.ServiceID ?? -1)">Delete</button>
+							<button type="button" @onclick="() => ShowConfirmDelete(item.ServiceID ?? null)">Delete</button>
 						}
 					</td>
 				</tr>
@@ -84,7 +84,7 @@ else if (searched)
 	private Deceased deceased = new Deceased();
 	private bool isLoading = false;
 	private bool searched = false;
-	private int? ConfirmingDeleteId = null;
+	private string? ConfirmingDeleteId = null;
 	private Dictionary<string, string> searchFields = new()
 	{
 		{ "First Name", "FirstName" },
@@ -124,7 +124,7 @@ else if (searched)
 				.Include(d => d.ServiceContract)
 				.Include(d => d.Services)
 				.Include(d => d.Survivors)
-				.Include(d => d.WarsServed)
+				.Include(d => d.WarsServed);
 
 		if (!string.IsNullOrWhiteSpace(searchTerm))
 		{
@@ -148,14 +148,14 @@ else if (searched)
 		searched = true;
 	}
 
-	private void StartEdit(int ServiceID)
+	private void StartEdit(string ServiceID)
 	{
 		UserState.ServiceID = ServiceID;
 		Console.WriteLine($"ClientID: {UserState.ServiceID}");
 		NavigationManager.NavigateTo("/Modify%20Records");
 	}
 
-	private void ShowConfirmDelete(int ServiceID)
+	private void ShowConfirmDelete(string ServiceID)
 	{
 		ConfirmingDeleteId = ServiceID;
 	}
@@ -165,7 +165,7 @@ else if (searched)
 		ConfirmingDeleteId = null;
 	}
 
-	private async Task ConfirmDelete(int DeleteID)
+	private async Task ConfirmDelete(string DeleteID)
 	{
 		deceased = await Db.Deceased
 			.Include(d => d.Airline)

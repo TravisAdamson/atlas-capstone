@@ -519,7 +519,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		If (UserState.ServiceID != "None")
+		if (UserState.ServiceID != "None")
 		{
 			var  existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
