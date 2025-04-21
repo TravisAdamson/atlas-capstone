@@ -100,18 +100,19 @@
 		isModifiedOpen = Nav.Uri.Contains("Modify%20Records", StringComparison.OrdinalIgnoreCase)
 					|| Nav.Uri.Contains("/Place%20of%20Death", StringComparison.OrdinalIgnoreCase)
 					|| Nav.Uri.Contains("/Cause%20of%20Death", StringComparison.OrdinalIgnoreCase)
-					|| Nav.Uri.Contains("/Military",		   StringComparison.OrdinalIgnoreCase)
-					|| Nav.Uri.Contains("/Contract",		   StringComparison.OrdinalIgnoreCase)
-					|| Nav.Uri.Contains("/Survivor",		   StringComparison.OrdinalIgnoreCase)
-					|| Nav.Uri.Contains("/Embalmer",		   StringComparison.OrdinalIgnoreCase)
-					|| Nav.Uri.Contains("/Obituary",		   StringComparison.OrdinalIgnoreCase);
+					|| Nav.Uri.Contains("/Military", StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Contract", StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Survivor", StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Embalmer", StringComparison.OrdinalIgnoreCase)
+					|| Nav.Uri.Contains("/Obituary", StringComparison.OrdinalIgnoreCase);
 		StateHasChanged();
 	}
 
 	// UI actions
 	private void ToggleModified()
 	{
-		if (!IsRecordSelected) return;	 // ignore clicks when disabled
+		if (!IsRecordSelected) 
+			return;	 // ignore clicks when disabled
 		isModifiedOpen = !isModifiedOpen;
 	}
 }

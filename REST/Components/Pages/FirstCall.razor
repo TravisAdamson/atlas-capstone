@@ -429,21 +429,14 @@
 
 		// Format SSN
 		if (string.IsNullOrEmpty(SSNPart1) || string.IsNullOrEmpty(SSNPart2) || string.IsNullOrEmpty(SSNPart3))
-		{
 			Console.WriteLine("SSN is required.");
-		}
 		else
 			currentDeceased.SSN = $"{SSNPart1}-{SSNPart2}-{SSNPart3}";
-
 		// Format Phone Number
 		if (string.IsNullOrEmpty(PhonePart1) || string.IsNullOrEmpty(PhonePart2) || string.IsNullOrEmpty(PhonePart3))
-		{
 			Console.WriteLine("Phone number is required.");
-		}
 		else
-		{
 			currentDeceased.IPhoneNumber = $"({PhonePart1}){PhonePart2}-{PhonePart3}";
-		}
 
 		// Save
 		try
@@ -477,13 +470,9 @@
 		{
 			// You can inspect the inner exception to make sure it's a duplicate key error
 			if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
-			{
 				errorMessage = "A record with this Service ID already exists.";
-			}
 			else
-			{
 				errorMessage = "An unexpected error occurred while saving.";
-			}
 			Console.WriteLine($"Error saving record: {ex.Message}");
 		}
 	}

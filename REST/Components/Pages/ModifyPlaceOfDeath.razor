@@ -195,7 +195,6 @@
 			?? new ContainerShipping();
 	}
 
-
 	private ContainerShipping CloneShipping(ContainerShipping original)
 	{
 		return new ContainerShipping
@@ -345,7 +344,6 @@
 			entityP.AdmissionDate = editingPlace.AdmissionDate;
 			entityP.BodyReleaseTime = editingPlace.BodyReleaseTime;
 		}
-
 		var entityS = await Db.ContainerShipping.FirstOrDefaultAsync(s => s.ClientID == editingShipping.ClientID);
 		if (entityS is not null)
 		{

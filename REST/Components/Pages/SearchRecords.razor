@@ -148,13 +148,11 @@ else if (searched)
 	}
 
 	private async Task ConfirmDelete(int ClientID)
-	{
-		/* use one DB‑transaction so every table is cleaned together */
+	{ /* use one DB‑transaction so every table is cleaned together */
 		await using var tx = await Db.Database.BeginTransactionAsync();
 
 		try
-		{
-			// remove the parent record
+		{ // remove the parent record
 			var deceased = await Db.Deceased.FirstOrDefaultAsync(d => d.ClientID == ClientID);
 			if (deceased != null)
 				Db.Deceased.Remove(deceased);

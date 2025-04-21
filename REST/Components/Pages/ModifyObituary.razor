@@ -1,14 +1,18 @@
 @page "/Obituary"
+
 @inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
 @inject REST.Services.GlobalState GlobalState
+
+@inherits LayoutComponentBase
+
+@rendermode InteractiveServer
+
 @using REST.Components.Shared
 @using RESTDB.Models
 @using RESTDB.Migrations
 @using RESTDB.Data
 @using REST.Components.Pages
-@inherits LayoutComponentBase
-@rendermode InteractiveServer
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -24,7 +28,6 @@
 	Status="@editingDeceased.Status"
 	ContractBalance="@Convert.ToDecimal(editingDeceased.ContractBalance)"
 	Photo="@editingDeceased.Image" />
-
 
 <PageTitle>Obituary</PageTitle>
 
@@ -42,68 +45,55 @@
 <div class="MilitaryForm">
 	<EditForm Model="@editingObituary">
 		<h5>Obituary Details</h5>
-
 		<div class="Military-flex">
 			<div class="Form-group">
 				<label>Distribution Format</label>
 				<InputText class="form-control" @bind-Value="editingObituary.DistributionFormat" />
 			</div>
-
 			<div class="Form-group">
 				<label>Media</label>
 				<InputText class="form-control" @bind-Value="editingObituary.Media" />
 			</div>
-
 			<div class="Form-group">
 				<label>Date Sent</label>
 				<InputDate class="form-control" @bind-Value="editingObituary.DateSent" />
 			</div>
-
 			<div class="form-group-check">
 				<label>Primary</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingObituary.Primary" />
 			</div>
-
 			<div class="form-group-check">
 				<label>Include Primary Photo</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingObituary.IncludePrimaryPhoto" />
 			</div>
-
 			<div class="form-group-check">
 				<label>Show Survivor Addresses</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorAddresses" />
 			</div>
-
 			<div class="form-group-check">
 				<label>Show Survivor Relationships</label>
 				<InputCheckbox class="form-check-input" @bind-Value="editingObituary.ShowSurvivorRelationships" />
 			</div>
-
 			<div class="Form-group">
 				<label>Relationship Count</label>
 				<InputText class="form-control" @bind-Value="editingObituary.RelationshipCount" />
 			</div>
-
 			<div class="Form-group">
 				<label>Word Count</label>
 				<InputText class="form-control" @bind-Value="editingObituary.WordCount" />
 			</div>
-
 			<div class="Form-group">
 				<label>Obituary Notes</label>
 				<InputTextArea class="form-control" @bind-Value="editingObituary.ObitNotes" />
 			</div>
-
 			<div class="Form-group">
 				<label>Last Preneed ID</label>
 				<InputText class="form-control" @bind-Value="editingObituary.LastPreneedId" />
 			</div>
-
 			<div class="Form-group">
 				<label>Last Atneed ID</label>
 				<InputText class="form-control" @bind-Value="editingObituary.LastAtneedId" />
 			</div>
-
 			<div class="Form-group">
 				<label>Obituary</label>
 				<InputTextArea class="form-control" @bind-Value="editingObituary.Obituary" />
@@ -148,7 +138,6 @@ protected override async Task OnInitializedAsync()
 		nexVis = currentRecordIndex < obituaryList.Count;
 	}
 }
-
 
 	private ObituaryData CloneObituary(ObituaryData original)
 	{
@@ -255,11 +244,11 @@ private Deceased CloneDeceased(Deceased original)
 }
 
 <style>
-.MilitaryForm {
-	border-radius: 6px;
-	padding: .25rem;
-	background-color: rgb(187, 188, 188);
-}
+	.MilitaryForm {
+		border-radius: 6px;
+		padding: .25rem;
+		background-color: rgb(187, 188, 188);
+	}
 
 .Military-flex {
 	display: flex;
@@ -297,7 +286,6 @@ private Deceased CloneDeceased(Deceased original)
 	justify-content: flex-end;
 }
 
-
 .btn-submit, .btn-secondary {
 	color: white;
 	font-size: 1em;
@@ -312,7 +300,7 @@ private Deceased CloneDeceased(Deceased original)
 	background-color: #6c757d;
 }
 
-.SaveButtonFirst button:hover {
-	cursor: pointer;
-}
+	.SaveButtonFirst button:hover {
+		cursor: pointer;
+	}
 </style>
