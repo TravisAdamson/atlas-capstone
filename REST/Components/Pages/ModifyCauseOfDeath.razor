@@ -375,12 +375,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

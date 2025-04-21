@@ -151,6 +151,11 @@
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
 
+	private void SelectTab(string tabName)
+	{
+		selectedTab = tabName;
+	}
+
 	protected override async Task OnInitializedAsync()
 	{
 		if (UserState.ServiceID != "None")
@@ -407,12 +412,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{

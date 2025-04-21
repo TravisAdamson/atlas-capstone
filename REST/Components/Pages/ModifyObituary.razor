@@ -105,7 +105,7 @@
 </div>
 
 @code {
-	private List<ObituaryData> ObituaryData = new List<();
+	private List<ObituaryData> ObituaryData = new List<>();
 	private ObituaryData editingObituary = new();
 	private Deceased editingDeceased = new Deceased();
 
@@ -135,7 +135,7 @@
 
 			if (existingDeceased != null)
 			{
-				editingDeceased = CloneDeceased(existingDeceased)
+				editingDeceased = CloneDeceased(existingDeceased);
 				ObituaryData = editingDeceased.ObituaryData;
 				editingObituary => ObituaryData.FirstOrDefault();
 			}
@@ -361,12 +361,10 @@
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
-				ProductName = p.ProductName,
-				ProductDescription = p.ProductDescription,
-				Quantity = p.Quantity,
-				UnitPrice = p.UnitPrice,
-				TotalPrice = p.TotalPrice,
-				ProductCategory = p.ProductCategory
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
 			}).ToList(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{
