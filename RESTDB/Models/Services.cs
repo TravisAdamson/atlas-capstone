@@ -6,20 +6,13 @@ namespace RESTDB.Models;
 public class Services
 {
 	[Key]
-
 	public int ClientID { get; set; }
+	public string? Category { get; set; } // The category of the service (e.g., embalming, casket purchase)
+	public string? Item { get; set; } // The specific item or service being provided
 
-	// The category of the service (e.g., embalming, casket purchase)
-	public string? Category { get; set; }
-
-	// The specific item or service being provided
-	public string? Item { get; set; }
-
-	// The tax rate applied to the service
-	[Precision(18, 2)]
+	[Precision(18, 2)] // The tax rate applied to the service
 	public decimal? Tax { get; set; }
 
-	// The price of the service or item
-	[Precision(18, 2)]
+	[Precision(18, 2)] // The price of the service or item
 	public decimal? Price { get; set; }
 }
