@@ -1,4 +1,3 @@
-// Models/WarsServed.cs
 using System.ComponentModel.DataAnnotations;
 
 namespace RESTDB.Models;
@@ -10,8 +9,6 @@ public class WarsServed
 
 	public string? WarName { get; set; } // Example: "World War II", "Vietnam War", etc.
 	public string? Description { get; set; } // Description of the war or specific involvement
-
-	// Needs to be limited to numbers possibly
-	public string? WarMilitaryId { get; set; }
+	public string? WarMilitaryId { get; set; } // Needs to be limited to numbers possibly
 	public Military? Military { get; set; } // Navigation property to the Military class
 }
