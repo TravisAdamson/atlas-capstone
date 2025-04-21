@@ -2,19 +2,7 @@
 
 @using REST.Services
 
-@inject REST.Services.GlobalState GlobalState
-
-@code {
-	[Parameter] public string? Director { get; set; }
-	[Parameter] public string? ServiceID { get; set; }
-	[Parameter] public string? FirstName { get; set; }
-	[Parameter] public string? MiddleName { get; set; }
-	[Parameter] public string? LastName { get; set; }
-	[Parameter] public string? Need { get; set; }
-	[Parameter] public string? Status { get; set; }
-	[Parameter] public decimal? ContractBalance { get; set; }
-	[Parameter] public byte[]? Photo { get; set; }
-}
+@inject UserState UserState
 
 <div class="active-service-row">
 	<div class="active-service-field">
@@ -43,6 +31,18 @@
 		}
 	</div>
 </div>
+
+@code {
+	[Parameter] public string? Director { get; set; }
+	[Parameter] public string? ServiceID { get; set; }
+	[Parameter] public string? FirstName { get; set; }
+	[Parameter] public string? MiddleName { get; set; }
+	[Parameter] public string? LastName { get; set; }
+	[Parameter] public string? Need { get; set; }
+	[Parameter] public string? Status { get; set; }
+	[Parameter] public decimal? ContractBalance { get; set; }
+	[Parameter] public byte[]? Photo { get; set; }
+}
 
 <style>
 	.active-service-row {

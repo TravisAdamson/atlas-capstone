@@ -1,8 +1,7 @@
 @page "/Register"
-@using Microsoft.AspNetCore.Identity
 @inject UserManager<AppUser> UserManager
 @inject NavigationManager NavigationManager
-@layout null
+@layout _EmptyLayout
 @attribute [AllowAnonymous]
 
 <h3>Register</h3>
@@ -13,17 +12,17 @@
 
     <div class="form-group">
         <label for="username">Username</label>
-        <InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
+        <InputText id="username" class="form-control" @bind="registerModel.UserName" />
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
-        <InputPassword id="password" class="form-control" @bind-Value="registerModel.Password" />
+        <InputPassword id="password" class="form-control" @bind="registerModel.Password" />
     </div>
 
     <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
-        <InputPassword id="confirmPassword" class="form-control" @bind-Value="registerModel.ConfirmPassword" />
+        <InputPassword id="confirmPassword" class="form-control" @bind="registerModel.ConfirmPassword" />
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
@@ -47,7 +46,7 @@
         {
             // Optionally, log the user in after registration
             await SignInManager.SignInAsync(user, isPersistent: false);
-            NavigationManager.NavigateTo("/");  // Redirect to the homepage
+            NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
         }
         else
         {
