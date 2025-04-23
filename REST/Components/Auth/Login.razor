@@ -11,7 +11,7 @@
 
 <h3>Login</h3>
 
-<EditForm Model="loginModel" OnValidSubmit="HandleLogin" FormName="LoginForm">
+<EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="LoginForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -29,7 +29,6 @@
 </EditForm>
 
 @code {
-	[SupplyParameterFromForm(FormName = "LoginForm")]
     private LoginModel loginModel { get; set; } = new LoginModel();
 
 	protected override void OnInitialized() => loginModel ??= new();
@@ -43,18 +42,18 @@
 		}
         else
 		{
-			var result = await SignInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
-
-			if (result.Succeeded)
+			var user = await UserManager.FindByNameAsync(loginModel.UserName);
+			if (user != null)
 			{
-				UserState.UserName = loginModel.UserName;
-				NavigationManager.NavigateTo("/Home");  // Redirect to home page
+				var validPassword = await UserManager.CheckPasswordAsync(user, loginModel.Password);
+				if (validPassword)
+				{
+					UserState.UserName = loginModel.UserName;
+					await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));
+					return;
+				}
 			}
-			else
-			{
-				// Handle login failure (show an error message)
-				Console.WriteLine("Invalid login attempt.");
-			}
+			Console.WriteLine("Invalid login.");
 		}
     }
 

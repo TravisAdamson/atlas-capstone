@@ -59,9 +59,7 @@
 			if (result.Succeeded)
 			{
 				UserState.UserName = registerModel.UserName;
-				// Optionally, log the user in after registration
-				await SignInManager.SignInAsync(user, isPersistent: false);
-				NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
+				await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));  // Redirect to the homepage
 			}
 			else
 			{
