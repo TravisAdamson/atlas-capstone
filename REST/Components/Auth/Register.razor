@@ -8,27 +8,31 @@
 @attribute [AllowAnonymous]
 @rendermode InteractiveServer
 
-<h3>Register</h3>
 
 <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" FormName="RegisterForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <div class="form-group">
-        <label for="username">Username</label>
-        <InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
-    </div>
+	<div class="reg-container">
+		<div class="reg-form">
+			<h3>Register</h3>
+			<div class="form-group">
+				<label for="username" class="username">Username</label>
+				<InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
+			</div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <InputText id="password" class="form-control" type="password" @bind-Value="registerModel.Password" />
-    </div>
-	<div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <InputText id="confirmPassword" class="form-control" type="password" @bind-Value="registerModel.ConfirmPassword" />
-    </div>
+			<div class="form-group">
+				<label for="password" class="password">Password</label>
+				<InputText id="password" class="form-control" type="password" @bind-Value="registerModel.Password" />
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword" class="password">Confirm Password</label>
+				<InputText id="confirmPassword" class="form-control" type="password" @bind-Value="registerModel.ConfirmPassword" />
+			</div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
+			<button type="submit" class="btn btn-primary">Log in</button>
+		</div>
+	</div>
 </EditForm>
 
 @code {
@@ -81,3 +85,64 @@
 		public string? ConfirmPassword { get; set; }
     }
 }
+
+<style>
+    .reg-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f0f0f0;
+    }
+
+    .reg-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 55vh;
+        width: 40vh;
+        padding-top: 1rem;
+        border-radius: 5px;
+        border: 2px solid #000000;
+        background-color: #ffffff;
+    }
+    
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0.5rem;
+    }
+
+    .username {
+        text-align: start;
+        width: 15rem;
+    }
+
+    .password {
+        text-align: start;
+        width: 15rem;
+    }
+
+    .form-control {
+        width: 15rem;
+        border: 1px solid #000000;
+    }
+    
+    .btn-primary {
+        background-color: #552f7a;
+        border-color: #552f7a;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a0647;
+        border-color: #3a0647;
+    }
+</style>
