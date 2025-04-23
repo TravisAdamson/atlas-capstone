@@ -9,7 +9,7 @@
 @attribute [AllowAnonymous]
 @rendermode InteractiveServer
 
-<h3>Register</h3>
+<h3>Login</h3>
 
 <EditForm Model="loginModel" OnValidSubmit="HandleLogin" FormName="LoginForm">
     <DataAnnotationsValidator />
@@ -30,30 +30,39 @@
 
 @code {
 	[SupplyParameterFromForm(FormName = "LoginForm")]
-    private LoginModel? loginModel { get; set; }
+    private LoginModel loginModel { get; set; } = new LoginModel();
 
 	protected override void OnInitialized() => loginModel ??= new();
+
     private async Task HandleLogin()
     {
-        var result = await SignInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
-
-        if (result.Succeeded)
-        {
-			UserState.UserName = loginModel.UserName;
-            NavigationManager.NavigateTo("/Home");  // Redirect to home page
-        }
+		if (loginModel == null || loginModel.UserName == null || loginModel.Password == null)
+		{
+			Console.WriteLine("All fields are required");
+			return;
+		}
         else
-        {
-            // Handle login failure (show an error message)
-            Console.WriteLine("Invalid login attempt.");
-        }
+		{
+			var result = await SignInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
+
+			if (result.Succeeded)
+			{
+				UserState.UserName = loginModel.UserName;
+				NavigationManager.NavigateTo("/Home");  // Redirect to home page
+			}
+			else
+			{
+				// Handle login failure (show an error message)
+				Console.WriteLine("Invalid login attempt.");
+			}
+		}
     }
 
     public class LoginModel
     {
 		[Required]
         public string? UserName { get; set; }
-        
+
 		[Required]
 		public string? Password { get; set; }
     }

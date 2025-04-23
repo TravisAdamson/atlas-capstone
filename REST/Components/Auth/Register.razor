@@ -2,6 +2,7 @@
 @inject UserManager<AppUser> UserManager
 @inject NavigationManager NavigationManager
 @inject SignInManager<AppUser> SignInManager
+@inject UserState UserState
 @using Microsoft.AspNetCore.Components
 @layout _EmptyLayout
 @attribute [AllowAnonymous]
@@ -32,11 +33,7 @@
 
 @code {
 	[SupplyParameterFromForm(FormName = "RegisterForm")]
-    private RegisterModel? registerModel { get; set; }
-
-	private string? UserName;
-	private string? Password;
-	private string? ConfirmPassword;
+    private RegisterModel registerModel { get; set; } = new RegisterModel();
 
 	protected override void OnInitialized()
 	{
@@ -44,27 +41,35 @@
 	}
 	private async Task HandleRegistration()
     {
-		if (registerModel.Password != registerModel.ConfirmPassword)
+		if (registerModel == null || registerModel.Password == null || registerModel.UserName == null || registerModel.ConfirmPassword == null)
+		{
+			Console.WriteLine("All fields are required");
+			return;
+		}
+		else if (registerModel.Password != registerModel.ConfirmPassword)
 		{
 			Console.WriteLine("Passwords do not match.");
 			return;
 		}
-
-		var user = new AppUser { UserName = registerModel.UserName };
-		var result = await UserManager.CreateAsync(user, registerModel.Password);
-
-		if (result.Succeeded)
-		{
-			// Optionally, log the user in after registration
-			await SignInManager.SignInAsync(user, isPersistent: false);
-			NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
-		}
 		else
 		{
-			// Handle registration failure (show an error message)
-			Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+			var user = new AppUser { UserName = registerModel.UserName };
+			var result = await UserManager.CreateAsync(user, registerModel.Password);
+
+			if (result.Succeeded)
+			{
+				UserState.UserName = registerModel.UserName;
+				// Optionally, log the user in after registration
+				await SignInManager.SignInAsync(user, isPersistent: false);
+				NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
+			}
+			else
+			{
+				// Handle registration failure (show an error message)
+				Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+			}
 		}
-    }
+	}
 
     public class RegisterModel
     {
