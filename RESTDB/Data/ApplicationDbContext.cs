@@ -153,7 +153,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
 	private void ConfigureDeceasedRelationship<TEntity>(
 		ModelBuilder modelBuilder,
 		Expression<Func<TEntity, Deceased?>> deceasedNav,
-		Expression<Func<Deceased, IEnumerable<TEntity>>> deceasedCollection
+		Expression<Func<Deceased, IEnumerable<TEntity>?>> deceasedCollection
 	) where TEntity : class
 	{
 		modelBuilder.Entity<TEntity>()
