@@ -2,15 +2,15 @@
 @inject UserManager<AppUser> UserManager
 @inject NavigationManager NavigationManager
 @inject SignInManager<AppUser> SignInManager
-@layout _EmptyLayout
+@using Microsoft.AspNetCore.Components
 @attribute [AllowAnonymous]
+@rendermode InteractiveServer
 
 <h3>Register</h3>
 
 <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" FormName="RegisterForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <AntiforgeryToken />
 
     <div class="form-group">
         <label for="username">Username</label>
@@ -30,36 +30,48 @@
 </EditForm>
 
 @code {
-    private RegisterModel registerModel = new RegisterModel();
+	[SupplyParameterFromForm(FormName = "RegisterForm")]
+    private RegisterModel? registerModel { get; set; }
 
-    private async Task HandleRegistration()
+	private string? UserName;
+	private string? Password;
+	private string? ConfirmPassword;
+
+	protected override void OnInitialized()
+	{
+		registerModel ??= new();
+	}
+	private async Task HandleRegistration()
     {
-        if (registerModel.Password != registerModel.ConfirmPassword)
-        {
-            Console.WriteLine("Passwords do not match.");
-            return;
-        }
+		if (registerModel.Password != registerModel.ConfirmPassword)
+		{
+			Console.WriteLine("Passwords do not match.");
+			return;
+		}
 
-        var user = new AppUser { UserName = registerModel.UserName };
-        var result = await UserManager.CreateAsync(user, registerModel.Password);
+		var user = new AppUser { UserName = registerModel.UserName };
+		var result = await UserManager.CreateAsync(user, registerModel.Password);
 
-        if (result.Succeeded)
-        {
-            // Optionally, log the user in after registration
-            await SignInManager.SignInAsync(user, isPersistent: false);
-            NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
-        }
-        else
-        {
-            // Handle registration failure (show an error message)
-            Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
-        }
+		if (result.Succeeded)
+		{
+			// Optionally, log the user in after registration
+			await SignInManager.SignInAsync(user, isPersistent: false);
+			NavigationManager.NavigateTo("/Home");  // Redirect to the homepage
+		}
+		else
+		{
+			// Handle registration failure (show an error message)
+			Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+		}
     }
 
     public class RegisterModel
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+		[Required]
+        public string? UserName { get; set; }
+        [Required]
+		public string? Password { get; set; }
+        [Required]
+		public string? ConfirmPassword { get; set; }
     }
 }
