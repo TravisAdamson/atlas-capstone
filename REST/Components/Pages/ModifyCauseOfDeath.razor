@@ -121,11 +121,11 @@
 	private CauseOfDeath editingCause = new CauseOfDeath();
 	private List<Deceased> deceasedList = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
-	private Deceased existingDeceased = new Deceased();
+	private Deceased? existingDeceased = new Deceased();
 
 	protected override async Task OnInitializedAsync()
 	{
-		if (UserState.ServiceID != "None")
+		if (UserState != null && Db != null && UserState.ServiceID != "None")
 		{
 			existingDeceased = await Db.Deceased
 				.Include(d => d.Airline)
@@ -158,6 +158,8 @@
 
 	private Deceased CloneDeceased(Deceased source)
 	{
+		if(source == null) return new Deceased();
+
         return new Deceased
         {
 			ServiceID = source.ServiceID,
@@ -223,7 +225,7 @@
 				ICAO = a.ICAO,
 				FleetSize = a.FleetSize,
 				LogoUrl = a.LogoUrl
-			}).ToList(),
+			}).ToList() ?? new List<Airline>(),
 			Buyer = source.Buyer?.Select(b => new Buyer
 			{
 				ServiceID = b.ServiceID,
@@ -233,7 +235,7 @@
 				Relationship = b.Relationship,
 				IsPrimaryBuyer = b.IsPrimaryBuyer,
 				SendBill = b.SendBill
-			}).ToList(),
+			}).ToList() ?? new List<Buyer>(),
 			CashAdvance = source.CashAdvance?.Select(ca => new CashAdvance
 			{
 				ServiceID = ca.ServiceID,
@@ -244,7 +246,7 @@
 				PriceExtended = ca.PriceExtended,
 				LastPreneedId = ca.LastPreneedId,
 				LastAtneedId = ca.LastAtneedId
-			}).ToList(),
+			}).ToList() ?? new List<CashAdvance>(),
 			CauseOfDeath = source.CauseOfDeath?.Select(cod => new CauseOfDeath
 			{
 				ServiceID = cod.ServiceID,
@@ -266,7 +268,7 @@
 				Viewed = cod.Viewed,
 				Biopsy = cod.Biopsy,
 				AnatGift = cod.AnatGift
-			}).ToList(),
+			}).ToList() ?? new List<CauseOfDeath>(),
 			ContainerShipping = source.ContainerShipping?.Select(cs => new ContainerShipping
 			{
 				ServiceID = cs.ServiceID,
@@ -289,7 +291,7 @@
 				ShipToCountry = cs.ShipToCountry,
 				ShipToCounty = cs.ShipToCounty,
 				Notes = cs.Notes
-			}).ToList(),
+			}).ToList() ?? new List<ContainerShipping>(),
 			Embalmer = source.Embalmer?.Select(e => new Embalmer
 			{
 				ServiceID = e.ServiceID,
@@ -299,7 +301,7 @@
 				EmbalmedTime = e.EmbalmedTime,
 				EmbalmedBy = e.EmbalmedBy,
 				EmbalmingAuthorizor = e.EmbalmingAuthorizor
-			}).ToList(),
+			}).ToList() ?? new List<Embalmer>(),
 			FlagApplication = source.FlagApplication?.Select(fa => new FlagApplication
 			{
 				ServiceID = fa.ServiceID,
@@ -307,7 +309,7 @@
 				RelationshipToDeceased = fa.RelationshipToDeceased,
 				FlagType = fa.FlagType,
 				ApplicationDate = fa.ApplicationDate
-			}).ToList(),
+			}).ToList() ?? new List<FlagApplication>(),
 			Military = source.Military?.Select(m => new Military
 			{
 				ServiceID = m.ServiceID,
@@ -316,7 +318,7 @@
 				ServiceNumber = m.ServiceNumber,
 				StartDate = m.StartDate,
 				EndDate = m.EndDate
-			}).ToList(),
+			}).ToList() ?? new List<Military>(),
 			MilitaryStint = source.MilitaryStint?.Select(ms => new MilitaryStint
 			{
 				ServiceID = ms.ServiceID,
@@ -324,7 +326,7 @@
 				StartDate = ms.StartDate,
 				EndDate = ms.EndDate,
 				StintMilitaryId = ms.StintMilitaryId
-			}).ToList(),
+			}).ToList() ?? new List<MilitaryStint>(),
 			Monument = source.Monument?.Select(m => new Monument
 			{
 				ServiceID = m.ServiceID,
@@ -332,7 +334,7 @@
 				Material = m.Material,
 				Engraving = m.Engraving,
 				CreatedAt = m.CreatedAt
-			}).ToList(),
+			}).ToList() ?? new List<Monument>(),
 			ObituaryData = source.ObituaryData?.Select(od => new ObituaryData
 			{
 				ServiceID = od.ServiceID,
@@ -349,7 +351,7 @@
 				LastPreneedId = od.LastPreneedId,
 				LastAtneedId = od.LastAtneedId,
 				Obituary = od.Obituary
-			}).ToList(),
+			}).ToList() ?? new List<ObituaryData>(),
 			PlaceOfDeath = source.PlaceOfDeath?.Select(p => new PlaceOfDeath
 			{
 				ServiceID = p.ServiceID,
@@ -371,7 +373,7 @@
 				DirectorNotifedTime = p.DirectorNotifedTime,
 				AdmissionDate = p.AdmissionDate,
 				BodyReleaseTime = p.BodyReleaseTime
-			}).ToList(),
+			}).ToList() ?? new List<PlaceOfDeath>(),
 			Products = source.Products?.Select(p => new Products
 			{
 				ServiceID = p.ServiceID,
@@ -379,7 +381,7 @@
 				Item = p.Item,
 				Tax = p.Tax,
 				Price = p.Price
-			}).ToList(),
+			}).ToList() ?? new List<Products>(),
 			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
 			{
 				ServiceID = sc.ServiceID,
@@ -388,7 +390,7 @@
 				EstateOwner = sc.EstateOwner,
 				Balance = sc.Balance,
 				DistributedCharges = sc.DistributedCharges
-			}).ToList(),
+			}).ToList() ?? new List<ServiceContract>(),
 			Services = source.Services?.Select(s => new Services
 			{
 				ServiceID = s.ServiceID,
@@ -396,7 +398,7 @@
 				Item = s.Item,
 				Tax = s.Tax,
 				Price = s.Price
-			}).ToList(),
+			}).ToList() ?? new List<Services>(),
 			Survivors = source.Survivors?.Select(s => new Survivors
 			{
 				ServiceID = s.ServiceID,
@@ -411,21 +413,24 @@
 				PhoneNumber = s.PhoneNumber,
 				Relationship = s.Relationship,
 				IsLiving = s.IsLiving
-			}).ToList(),
+			}).ToList() ?? new List<Survivors>(),
 			WarsServed = source.WarsServed?.Select(w => new WarsServed
 			{
 				ServiceID = w.ServiceID,
 				WarName = w.WarName,
 				Description = w.Description,
 				WarMilitaryId = w.WarMilitaryId
-			}).ToList(),
+			}).ToList()  ?? new List<WarsServed>(),
         };
 	}
 
 	private async Task SaveRecord()
 	{
-		ReplaceCollection(existingDeceased.CauseOfDeath, editingDeceased.CauseOfDeath);
-		await Db.SaveChangesAsync();
+		if (existingDeceased != null && editingDeceased != null && existingDeceased.CauseOfDeath != null && editingDeceased.CauseOfDeath != null)
+		{
+			ReplaceCollection(existingDeceased.CauseOfDeath, editingDeceased.CauseOfDeath);
+			await Db.SaveChangesAsync();
+		}
 	}
 
 	private void ReplaceCollection<T>(ICollection<T> original, ICollection<T> updated) where T : class
