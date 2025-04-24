@@ -1,11 +1,16 @@
 @page "/Register"
+
 @inject UserManager<AppUser> UserManager
 @inject NavigationManager NavigationManager
 @inject SignInManager<AppUser> SignInManager
 @inject UserState UserState
+
 @using Microsoft.AspNetCore.Components
+
 @layout _EmptyLayout
+
 @attribute [AllowAnonymous]
+
 @rendermode InteractiveServer
 
 <h3>Register</h3>
@@ -14,8 +19,7 @@
 <p><strong>Username (live):</strong> @registerModel.UserName</p>
 <p><strong>Password (live):</strong> @registerModel.Password</p>
 
-
-<EditForm Model="registerModel" OnValidSubmit="HandleRegistration" FormName="RegisterForm">
+<EditForm Model="registerModel" OnValidSubmit="@HandleRegistration" FormName="RegisterForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -64,11 +68,10 @@
 			if (result.Succeeded)
 			{
 				UserState.UserName = registerModel.UserName;
-				await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));  // Redirect to the homepage
+				await InvokeAsync(() => NavigationManager.NavigateTo("/Home")); // Redirect to the homepage
 			}
 			else
-			{
-				// Handle registration failure (show an error message)
+			{ // Handle registration failure (show an error message)
 				Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
 			}
 		}

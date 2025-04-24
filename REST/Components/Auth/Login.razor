@@ -1,12 +1,17 @@
 @page "/Login"
+
 @using REST.Services
 @using Microsoft.AspNetCore.Components
+
 @inject UserManager<AppUser> UserManager
 @inject NavigationManager NavigationManager
 @inject SignInManager<AppUser> SignInManager
 @inject UserState UserState
+
 @layout _EmptyLayout
+
 @attribute [AllowAnonymous]
+
 @rendermode InteractiveServer
 
 <h3>Login</h3>
@@ -41,7 +46,7 @@
 
     private async Task HandleLogin()
     {
-		Console.WriteLine("I got here");
+		Console.WriteLine("handlelogin called");
 		if (loginModel == null || loginModel.UserName == null || loginModel.Password == null)
 		{
 			Console.WriteLine("All fields are required");
@@ -51,11 +56,13 @@
 		{
 			var user = await UserManager.FindByNameAsync(loginModel.UserName);
 			Console.WriteLine($"Invalid login. {UserState.UserName} {loginModel.UserName} {user}");
+
 			if (user != null)
 			{
 				Console.WriteLine($"User {user} Pass {loginModel.Password}");
 				var validPassword = await UserManager.CheckPasswordAsync(user, loginModel.Password);
 				Console.WriteLine($"validPassword {validPassword}");
+
 				if (validPassword)
 				{
 					UserState.UserName = loginModel.UserName;
@@ -70,10 +77,7 @@
 
     public class LoginModel
     {
-		[Required]
-        public string? UserName { get; set; }
-
-		[Required]
-		public string? Password { get; set; }
+		[Required] public string? UserName { get; set; }
+		[Required] public string? Password { get; set; }
     }
 }
