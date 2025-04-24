@@ -5,10 +5,13 @@ using REST.Services;
 using RESTDB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<UserState>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+builder.Services.AddAuthorizationCore();
 
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();

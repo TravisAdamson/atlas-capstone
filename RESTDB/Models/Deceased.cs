@@ -62,21 +62,21 @@ public class Deceased
 	public string? CEL { get; set; }
 
 	//Navigation Properties for Foreign Key
-    public ICollection<Airline>? Airline { get; set; }
-    public ICollection<Buyer>? Buyer { get; set; }
-    public ICollection<CashAdvance>? CashAdvance { get; set; }
-    public ICollection<CauseOfDeath>? CauseOfDeath { get; set; }
-    public ICollection<ContainerShipping>? ContainerShipping { get; set; }
-    public ICollection<Embalmer>? Embalmer { get; set; }
-    public ICollection<FlagApplication>? FlagApplication { get; set; }
-    public ICollection<Military>? Military { get; set; }
-    public ICollection<MilitaryStint>? MilitaryStint { get; set; }
-    public ICollection<Monument>? Monument { get; set; }
-    public ICollection<ObituaryData>? ObituaryData { get; set; }
-    public ICollection<PlaceOfDeath>? PlaceOfDeath { get; set; }
-    public ICollection<Products>? Products { get; set; }
-    public ICollection<ServiceContract>? ServiceContract { get; set; }
-    public ICollection<Services>? Services { get; set; }
-    public ICollection<Survivors>? Survivors { get; set; }
-    public ICollection<WarsServed>? WarsServed { get; set; }
+    public ICollection<Airline> Airline { get; set; } = new List<Airline>();
+    public ICollection<Buyer> Buyer { get; set; } = new List<Buyer>();
+    public ICollection<CashAdvance> CashAdvance { get; set; } = new List<CashAdvance>();
+    public ICollection<CauseOfDeath> CauseOfDeath { get; set; }= new List<CauseOfDeath>();
+    public ICollection<ContainerShipping> ContainerShipping { get; set; } = new List<ContainerShipping>();
+    public ICollection<Embalmer> Embalmer { get; set; } = new List<Embalmer>();
+    public ICollection<FlagApplication> FlagApplication { get; set; } = new List<FlagApplication>();
+    public ICollection<Military> Military { get; set; } = new List<Military>();
+    public ICollection<MilitaryStint> MilitaryStint { get; set; } = new List<MilitaryStint>();
+    public ICollection<Monument> Monument { get; set; } = new List<Monument>();
+    public ICollection<ObituaryData> ObituaryData { get; set; } = new List<ObituaryData>();
+    public ICollection<PlaceOfDeath> PlaceOfDeath { get; set; } = new List<PlaceOfDeath>();
+    public ICollection<Products> Products { get; set; } = new List<Products>();
+    public ICollection<ServiceContract> ServiceContract { get; set; } = new List<ServiceContract>();
+    public ICollection<Services> Services { get; set; } = new List<Services>();
+    public ICollection<Survivors> Survivors { get; set; } = new List<Survivors>();
+    public ICollection<WarsServed> WarsServed { get; set; } = new List<WarsServed>();
 }

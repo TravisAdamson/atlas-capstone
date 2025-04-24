@@ -11,6 +11,9 @@
 
 <h3>Login</h3>
 
+<p><strong>Username (live):</strong> @loginModel.UserName</p>
+<p><strong>Password (live):</strong> @loginModel.Password</p>
+
 <EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="LoginForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -31,10 +34,14 @@
 @code {
     private LoginModel loginModel { get; set; } = new LoginModel();
 
-	protected override void OnInitialized() => loginModel ??= new();
+	protected override void OnInitialized()
+	{
+		loginModel ??= new();
+	}
 
     private async Task HandleLogin()
     {
+		Console.WriteLine("I got here");
 		if (loginModel == null || loginModel.UserName == null || loginModel.Password == null)
 		{
 			Console.WriteLine("All fields are required");
@@ -43,12 +50,16 @@
         else
 		{
 			var user = await UserManager.FindByNameAsync(loginModel.UserName);
+			Console.WriteLine($"Invalid login. {UserState.UserName} {loginModel.UserName} {user}");
 			if (user != null)
 			{
+				Console.WriteLine($"User {user} Pass {loginModel.Password}");
 				var validPassword = await UserManager.CheckPasswordAsync(user, loginModel.Password);
+				Console.WriteLine($"validPassword {validPassword}");
 				if (validPassword)
 				{
 					UserState.UserName = loginModel.UserName;
+					Console.WriteLine($"User State Name {UserState.UserName}");
 					await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));
 					return;
 				}

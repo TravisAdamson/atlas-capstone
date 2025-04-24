@@ -1,9 +1,13 @@
 ﻿@page "/Home"
-
+@using REST.Services
+@inject UserState UserState
+@attribute [Authorize]
 <PageTitle>Home</PageTitle>
 
 <div>
 	<h1>Start Page</h1>
+
+	<h2>Welcome @UserState.UserName</h2>
 
 	<!-- Link tab -->
 	<div class="homebuttons">
