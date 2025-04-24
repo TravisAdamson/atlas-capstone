@@ -7,15 +7,11 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
                 <NotAuthorized>
-                    <LayoutView Layout="@typeof(Layout.MainLayout)">
-                        <p>You must log in to access this page.</p>
-                        <a href="/Login">Go to Login</a>
-                    </LayoutView>
+                    <p>You must log in to access this page.</p>
+                    <a href="/Login">Go to Login</a>
                 </NotAuthorized>
                 <Authorizing>
-                    <LayoutView Layout="@typeof(Layout.MainLayout)">
-                        <p>Checking authorization...</p>
-                    </LayoutView>
+                    <p>Checking authorization...</p>
                 </Authorizing>
             </AuthorizeRouteView>
         </Found>

@@ -5,6 +5,7 @@
 @inject NavigationManager NavigationManager
 @inject SignInManager<AppUser> SignInManager
 @inject UserState UserState
+@inject AuthenticationStateProvider AuthStateProvider
 @layout _EmptyLayout
 @attribute [AllowAnonymous]
 @rendermode InteractiveServer
@@ -33,10 +34,12 @@
 
 @code {
     private LoginModel loginModel { get; set; } = new LoginModel();
+	private CustomAuthProvider? _customAuthProvider;
 
 	protected override void OnInitialized()
 	{
 		loginModel ??= new();
+		_customAuthProvider = AuthStateProvider as CustomAuthProvider;
 	}
 
     private async Task HandleLogin()
@@ -59,7 +62,11 @@
 				if (validPassword)
 				{
 					UserState.UserName = loginModel.UserName;
+
+					_customAuthProvider?.NotifyAuthenticationChanged();  // 👈 THIS is what updates the Blazor auth system
+
 					Console.WriteLine($"User State Name {UserState.UserName}");
+
 					await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));
 					return;
 				}
