@@ -1,15 +1,13 @@
 ﻿@rendermode InteractiveServer
 
-@using Microsoft.AspNetCore.Components.Routing
-
 @inject NavigationManager Nav
-@inject REST.Services.GlobalState GlobalState
+@inject UserState UserState
 
 <div class="nav-bar-object">
 
 	<!-- Home -->
 	<div class="nav-item px-3">
-		<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+		<NavLink class="nav-link" href="Home" Match="NavLinkMatch.All">
 			<span class="nav-icon bi bi-house-door-fill-nav-menu"></span>
 			<span class="nav-text">Home</span>
 		</NavLink>
@@ -80,7 +78,7 @@
 @code
 {
 	// state helpers
-	private bool IsRecordSelected => GlobalState.ClientID > 0;
+	private bool IsRecordSelected => UserState.ServiceID != null;
 	private string DisabledCss => IsRecordSelected ? "" : "disabled-nav";
 	private bool isModifiedOpen;
 

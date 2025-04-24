@@ -22,13 +22,145 @@ namespace RESTDB.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("RESTDB.Models.Airline", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Airline", b =>
+                {
+                    b.Property<int>("RecordID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("AirlineName")
                         .HasColumnType("longtext");
@@ -51,18 +183,87 @@ namespace RESTDB.Migrations
                     b.Property<string>("LogoUrl")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Airline");
                 });
 
+            modelBuilder.Entity("RESTDB.Models.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("RESTDB.Models.Buyer", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
@@ -82,18 +283,23 @@ namespace RESTDB.Migrations
                     b.Property<bool>("SendBill")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Buyer");
                 });
 
             modelBuilder.Entity("RESTDB.Models.CashAdvance", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
@@ -115,22 +321,27 @@ namespace RESTDB.Migrations
                     b.Property<string>("Quantity")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<decimal?>("Tax")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("CashAdvance");
                 });
 
             modelBuilder.Entity("RESTDB.Models.CauseOfDeath", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("AlcoholUse")
                         .HasColumnType("longtext");
@@ -177,6 +388,9 @@ namespace RESTDB.Migrations
                     b.Property<string>("OtherFactors")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("TobaccoUse")
                         .HasColumnType("longtext");
 
@@ -186,21 +400,26 @@ namespace RESTDB.Migrations
                     b.Property<bool>("Viewed")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("CauseOfDeath");
                 });
 
             modelBuilder.Entity("RESTDB.Models.ContainerShipping", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ShipFrom")
                         .HasColumnType("longtext");
@@ -256,18 +475,17 @@ namespace RESTDB.Migrations
                     b.Property<string>("ShipToZip")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("ContainerShipping");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Deceased", b =>
                 {
-                    b.Property<int?>("ClientID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int?>("ClientID"));
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Age")
                         .HasColumnType("longtext");
@@ -395,9 +613,6 @@ namespace RESTDB.Migrations
                     b.Property<string>("SSN")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ServiceID")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("State")
                         .HasColumnType("longtext");
 
@@ -425,7 +640,7 @@ namespace RESTDB.Migrations
                     b.Property<string>("ZipCode")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("ServiceID");
 
                     b.HasIndex("ServiceID")
                         .IsUnique();
@@ -435,11 +650,11 @@ namespace RESTDB.Migrations
 
             modelBuilder.Entity("RESTDB.Models.Embalmer", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<bool>("Embalmed")
                         .HasColumnType("tinyint(1)");
@@ -459,18 +674,23 @@ namespace RESTDB.Migrations
                     b.Property<bool>("PermissionToEmbalm")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Embalmer");
                 });
 
             modelBuilder.Entity("RESTDB.Models.FlagApplication", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("ApplicantName")
                         .HasColumnType("longtext");
@@ -484,18 +704,23 @@ namespace RESTDB.Migrations
                     b.Property<string>("RelationshipToDeceased")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("FlagApplication");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Military", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Branch")
                         .HasColumnType("longtext");
@@ -506,54 +731,59 @@ namespace RESTDB.Migrations
                     b.Property<string>("Rank")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ServiceNumber")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Military");
                 });
 
             modelBuilder.Entity("RESTDB.Models.MilitaryStint", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("MilitaryClientID")
-                        .HasColumnType("int");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("StintDescription")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("StintMilitaryId")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
 
-                    b.HasIndex("MilitaryClientID");
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("MilitaryStint");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Monument", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -567,18 +797,23 @@ namespace RESTDB.Migrations
                     b.Property<string>("MonumentType")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Monument");
                 });
 
             modelBuilder.Entity("RESTDB.Models.ObituaryData", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<DateTime?>("DateSent")
                         .HasColumnType("datetime(6)");
@@ -610,6 +845,9 @@ namespace RESTDB.Migrations
                     b.Property<string>("RelationshipCount")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<bool>("ShowSurvivorAddresses")
                         .HasColumnType("tinyint(1)");
 
@@ -619,18 +857,20 @@ namespace RESTDB.Migrations
                     b.Property<string>("WordCount")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("ObituaryData");
                 });
 
             modelBuilder.Entity("RESTDB.Models.PlaceOfDeath", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<DateTime?>("AdmissionDate")
                         .HasColumnType("datetime(6)");
@@ -671,6 +911,9 @@ namespace RESTDB.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("State")
                         .HasColumnType("longtext");
 
@@ -686,18 +929,20 @@ namespace RESTDB.Migrations
                     b.Property<string>("ZipCode")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("PlaceOfDeath");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Products", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Category")
                         .HasColumnType("longtext");
@@ -709,22 +954,27 @@ namespace RESTDB.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<decimal?>("Tax")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("RESTDB.Models.ServiceContract", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<decimal?>("Balance")
                         .HasPrecision(18, 2)
@@ -743,18 +993,23 @@ namespace RESTDB.Migrations
                     b.Property<string>("SalesPackage")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("ServiceContract");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Services", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Category")
                         .HasColumnType("longtext");
@@ -766,22 +1021,27 @@ namespace RESTDB.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<decimal?>("Tax")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Services");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Survivors", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
@@ -813,27 +1073,32 @@ namespace RESTDB.Migrations
                     b.Property<string>("Relationship")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("SurvivorRelation")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("Survivors");
                 });
 
             modelBuilder.Entity("RESTDB.Models.WarsServed", b =>
                 {
-                    b.Property<int>("ClientID")
+                    b.Property<int>("RecordID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClientID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RecordID"));
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("MilitaryClientID")
-                        .HasColumnType("int");
+                    b.Property<string>("ServiceID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("WarMilitaryId")
                         .HasColumnType("longtext");
@@ -841,34 +1106,267 @@ namespace RESTDB.Migrations
                     b.Property<string>("WarName")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClientID");
+                    b.HasKey("RecordID");
 
-                    b.HasIndex("MilitaryClientID");
+                    b.HasIndex("ServiceID");
 
                     b.ToTable("WarsServed");
                 });
 
-            modelBuilder.Entity("RESTDB.Models.MilitaryStint", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("RESTDB.Models.Military", "Military")
-                        .WithMany("MilitaryStint")
-                        .HasForeignKey("MilitaryClientID");
-
-                    b.Navigation("Military");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("RESTDB.Models.WarsServed", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RESTDB.Models.Military", "Military")
-                        .WithMany("WarsServed")
-                        .HasForeignKey("MilitaryClientID");
+                    b.HasOne("RESTDB.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Navigation("Military");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("RESTDB.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RESTDB.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("RESTDB.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Airline", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Airline")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Buyer", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Buyer")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.CashAdvance", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("CashAdvance")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.CauseOfDeath", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("CauseOfDeath")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.ContainerShipping", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("ContainerShipping")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Embalmer", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Embalmer")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.FlagApplication", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("FlagApplication")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
                 });
 
             modelBuilder.Entity("RESTDB.Models.Military", b =>
                 {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Military")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.MilitaryStint", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("MilitaryStint")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Monument", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Monument")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.ObituaryData", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("ObituaryData")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.PlaceOfDeath", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("PlaceOfDeath")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Products", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Products")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.ServiceContract", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("ServiceContract")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Services", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Services")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Survivors", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("Survivors")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.WarsServed", b =>
+                {
+                    b.HasOne("RESTDB.Models.Deceased", "Deceased")
+                        .WithMany("WarsServed")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deceased");
+                });
+
+            modelBuilder.Entity("RESTDB.Models.Deceased", b =>
+                {
+                    b.Navigation("Airline");
+
+                    b.Navigation("Buyer");
+
+                    b.Navigation("CashAdvance");
+
+                    b.Navigation("CauseOfDeath");
+
+                    b.Navigation("ContainerShipping");
+
+                    b.Navigation("Embalmer");
+
+                    b.Navigation("FlagApplication");
+
+                    b.Navigation("Military");
+
                     b.Navigation("MilitaryStint");
+
+                    b.Navigation("Monument");
+
+                    b.Navigation("ObituaryData");
+
+                    b.Navigation("PlaceOfDeath");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("ServiceContract");
+
+                    b.Navigation("Services");
+
+                    b.Navigation("Survivors");
 
                     b.Navigation("WarsServed");
                 });

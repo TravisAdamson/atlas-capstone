@@ -1,0 +1,81 @@
+@page "/Register"
+@inject UserManager<AppUser> UserManager
+@inject NavigationManager NavigationManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserState UserState
+@using Microsoft.AspNetCore.Components
+@layout _EmptyLayout
+@attribute [AllowAnonymous]
+@rendermode InteractiveServer
+
+<h3>Register</h3>
+
+<EditForm Model="registerModel" OnValidSubmit="HandleRegistration" FormName="RegisterForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" type="password" @bind-Value="registerModel.Password" />
+    </div>
+	<div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <InputText id="confirmPassword" class="form-control" type="password" @bind-Value="registerModel.ConfirmPassword" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+	[SupplyParameterFromForm(FormName = "RegisterForm")]
+    private RegisterModel registerModel { get; set; } = new RegisterModel();
+
+	protected override void OnInitialized()
+	{
+		registerModel ??= new();
+	}
+	private async Task HandleRegistration()
+    {
+		if (registerModel == null || registerModel.Password == null || registerModel.UserName == null || registerModel.ConfirmPassword == null)
+		{
+			Console.WriteLine("All fields are required");
+			return;
+		}
+		else if (registerModel.Password != registerModel.ConfirmPassword)
+		{
+			Console.WriteLine("Passwords do not match.");
+			return;
+		}
+		else
+		{
+			var user = new AppUser { UserName = registerModel.UserName };
+			var result = await UserManager.CreateAsync(user, registerModel.Password);
+
+			if (result.Succeeded)
+			{
+				UserState.UserName = registerModel.UserName;
+				await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));  // Redirect to the homepage
+			}
+			else
+			{
+				// Handle registration failure (show an error message)
+				Console.WriteLine("Registration failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+			}
+		}
+	}
+
+    public class RegisterModel
+    {
+		[Required]
+        public string? UserName { get; set; }
+        [Required]
+		public string? Password { get; set; }
+        [Required]
+		public string? ConfirmPassword { get; set; }
+    }
+}

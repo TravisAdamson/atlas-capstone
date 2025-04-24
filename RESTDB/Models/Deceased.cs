@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class Deceased
 {
 	[Key]
-	public int? ClientID { get; set; }
+	[DatabaseGenerated(DatabaseGeneratedOption.None)] // this disables auto-increment
 	public string? ServiceID { get; set; }
+
 	public string? Director { get; set; }
 	public string? FirstName { get; set; }
 	public string? LastName { get; set; }
@@ -58,4 +60,23 @@ public class Deceased
 	public string? College { get; set; }
 	public string? CYoE { get; set; }
 	public string? CEL { get; set; }
+
+	//Navigation Properties for Foreign Key
+    public ICollection<Airline>? Airline { get; set; }
+    public ICollection<Buyer>? Buyer { get; set; }
+    public ICollection<CashAdvance>? CashAdvance { get; set; }
+    public ICollection<CauseOfDeath>? CauseOfDeath { get; set; }
+    public ICollection<ContainerShipping>? ContainerShipping { get; set; }
+    public ICollection<Embalmer>? Embalmer { get; set; }
+    public ICollection<FlagApplication>? FlagApplication { get; set; }
+    public ICollection<Military>? Military { get; set; }
+    public ICollection<MilitaryStint>? MilitaryStint { get; set; }
+    public ICollection<Monument>? Monument { get; set; }
+    public ICollection<ObituaryData>? ObituaryData { get; set; }
+    public ICollection<PlaceOfDeath>? PlaceOfDeath { get; set; }
+    public ICollection<Products>? Products { get; set; }
+    public ICollection<ServiceContract>? ServiceContract { get; set; }
+    public ICollection<Services>? Services { get; set; }
+    public ICollection<Survivors>? Survivors { get; set; }
+    public ICollection<WarsServed>? WarsServed { get; set; }
 }

@@ -1,18 +1,8 @@
 @page "/Embalmer"
 
-@inject RESTDB.Data.ApplicationDbContext Db
+@inject ApplicationDbContext Db
 @inject NavigationManager NavigationManager
-@inject REST.Services.GlobalState GlobalState
-
-@using RESTDB.Models
-@using RESTDB.Migrations
-@using RESTDB.Data
-@using REST.Components.Shared
-@using Microsoft.AspNetCore.WebUtilities
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web
-
-@inherits LayoutComponentBase
+@inject UserState UserState
 
 @rendermode InteractiveServer
 
@@ -58,150 +48,359 @@
 			<div>
 				<label>Embalmed Date</label>
 				<InputDate class="form-control" @bind-Value="editingEmbalmer.EmbalmedDate" />
-			</div
-
+			</div>
 			<div>
 				<label>Embalmed Time</label>
 				<InputDate class="form-control" @bind-Value="editingEmbalmer.EmbalmedTime" />
 			</div>
 		</div>
-
-	<div class="Form-group2">
-		<div>
-			<label>Embalmed By</label>
-			<InputText class="form-control" @bind-Value="editingEmbalmer.EmbalmedBy" />
+		<div class="Form-group2">
+			<div>
+				<label>Embalmed By</label>
+				<InputText class="form-control" @bind-Value="editingEmbalmer.EmbalmedBy" />
+			</div>
+			<div>
+				<label>Embalming Authorizor</label>
+				<InputText class="form-control" @bind-Value="editingEmbalmer.EmbalmingAuthorizor" />
+			</div>
 		</div>
-
-		<div>
-			<label>Embalming Authorizor</label>
-			<InputText class="form-control" @bind-Value="editingEmbalmer.EmbalmingAuthorizor" />
-		</div>
-	</div>
 	</EditForm>
 </div>
 
 
 @code {
-	private List<Embalmer> embalmerList = new();
-	private Embalmer editingEmbalmer = new();
-	private int currentRecordIndex = 0;
-	private bool preVis = true, nexVis = true;
-	private List<Deceased> deceasedList = new List<Deceased>();
-	private Deceased currentDeceased = new Deceased();
+	private List<Deceased> Deceased = new List<Deceased>();
 	private Deceased editingDeceased = new Deceased();
+	private List<Embalmer> Embalmer = new List<Embalmer>();
+	private Embalmer editingEmbalmer = new Embalmer();
+	private Deceased? existingDeceased; // Add this field
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized() // This prevents direct URL access when no records exist.
 	{
-		embalmerList = await Db.Embalmer.ToListAsync();
-		deceasedList = await Db.Deceased.ToListAsync();
-
-		if (GlobalState.ClientID <= 0 || !embalmerList.Any())
-			return;
-
-		// bind the desired Deceased and Embalmer
-		editingDeceased = CloneDeceased(deceasedList.FirstOrDefault(d => d.ClientID == GlobalState.ClientID)
-			?? new Deceased());
-		editingEmbalmer = CloneEmbalmer(embalmerList.FirstOrDefault(e => e.ClientID == GlobalState.ClientID)
-			?? new Embalmer());
-
-		// find its index in the embalmerList so prev/next work
-		var idx = embalmerList.FindIndex(e => e.ClientID == GlobalState.ClientID);
-		if (idx >= 0)
+		if (UserState.ServiceID == "None")
 		{
-			currentRecordIndex = idx + 1;
-			preVis = currentRecordIndex > 1;
-			nexVis = currentRecordIndex < embalmerList.Count;
+			NavigationManager.NavigateTo("Search Records");
 		}
 	}
 
-	private Embalmer CloneEmbalmer(Embalmer original)
+	protected override async Task OnInitializedAsync()
 	{
-		return new Embalmer
+		if (UserState != null && Db != null && UserState.ServiceID != "None")
 		{
-			ClientID = original.ClientID,
-			PermissionToEmbalm = original.PermissionToEmbalm,
-			Embalmed = original.Embalmed,
-			EmbalmedDate = original.EmbalmedDate,
-			EmbalmedTime = original.EmbalmedTime,
-			EmbalmedBy = original.EmbalmedBy,
-			EmbalmingAuthorizor = original.EmbalmingAuthorizor
-		};
+			existingDeceased = await Db.Deceased
+				.Include(d => d.Airline)
+				.Include(d => d.Buyer)
+				.Include(d => d.CashAdvance)
+				.Include(d => d.CauseOfDeath)
+				.Include(d => d.ContainerShipping)
+				.Include(d => d.Embalmer)
+				.Include(d => d.FlagApplication)
+				.Include(d => d.Military)
+				.Include(d => d.MilitaryStint)
+				.Include(d => d.Monument)
+				.Include(d => d.ObituaryData)
+				.Include(d => d.PlaceOfDeath)
+				.Include(d => d.Products)
+				.Include(d => d.ServiceContract)
+				.Include(d => d.Services)
+				.Include(d => d.Survivors)
+				.Include(d => d.WarsServed)
+				.FirstOrDefaultAsync(d => d.ServiceID == UserState.ServiceID);
+
+			if (existingDeceased != null)
+			{
+				editingDeceased = CloneDeceased(existingDeceased) ?? new Deceased();
+				Embalmer = (editingDeceased.Embalmer ?? new List<Embalmer>()).ToList();
+				editingEmbalmer = Embalmer.FirstOrDefault() ?? new Embalmer();
+			}
+		}
 	}
-	private Deceased CloneDeceased(Deceased original)
+
+	private Deceased CloneDeceased(Deceased source)
 	{
-		return new Deceased
-		{
-			ClientID = original.ClientID,
-			ServiceID = original.ServiceID,
-			Director = original.Director,
-			FirstName = original.FirstName,
-			LastName = original.LastName,
-			MiddleName = original.MiddleName,
-			Title = original.Title,
-			Suffix = original.Suffix,
-			Need = original.Need,
-			Status = original.Status,
-			StreetAddress = original.StreetAddress,
-			City = original.City,
-			State = original.State,
-			ZipCode = original.ZipCode,
-			ContractBalance = original.ContractBalance,
-			DoD = original.DoD,
-			TimeOfDeath = original.TimeOfDeath,
-			SSN = original.SSN,
-			Gender = original.Gender,
-			MaidenName = original.MaidenName,
-			Alias = original.Alias,
-			Vet = original.Vet,
-			War = original.War,
-			InformantName = original.InformantName,
-			IStreetAddress = original.IStreetAddress,
-			ICity = original.ICity,
-			IState = original.IState,
-			IZipCode = original.IZipCode,
-			IPhoneNumber = original.IPhoneNumber,
-			InformantEmail = original.InformantEmail,
-			InfoNotified = original.InfoNotified,
-			Notes = original.Notes,
-			Image = original.Image,
-			InformantRelation = original.InformantRelation,
-			DoB = original.DoB,
-			Age = original.Age,
-			BCity = original.BCity,
-			BZip = original.BZip,
-			BCounty = original.BCounty,
-			BState = original.BState,
-			BCountry = original.BCountry,
-			MStatus = original.MStatus,
-			MDate = original.MDate,
-			MPlace = original.MPlace,
-			Church = original.Church,
-			RPreference = original.RPreference,
-			Clergy = original.Clergy,
-			HighSchool = original.HighSchool,
-			HYoE = original.HYoE,
-			HEL = original.HEL,
-			College = original.College,
-			CYoE = original.CYoE,
-			CEL = original.CEL
-		};
+		if(source == null) return new Deceased();
+
+        return new Deceased
+        {
+			ServiceID = source.ServiceID,
+			Director = source.Director,
+			FirstName = source.FirstName,
+			LastName = source.LastName,
+			MiddleName = source.MiddleName,
+			Title = source.Title,
+			Suffix = source.Suffix,
+			Need = source.Need,
+			Status = source.Status,
+			StreetAddress = source.StreetAddress,
+			City = source.City,
+			State = source.State,
+			ZipCode = source.ZipCode,
+			ContractBalance = source.ContractBalance,
+			DoD = source.DoD,
+			TimeOfDeath = source.TimeOfDeath,
+			SSN = source.SSN,
+			Gender = source.Gender,
+			MaidenName = source.MaidenName,
+			Alias = source.Alias,
+			Vet = source.Vet,
+			War = source.War,
+			InformantName = source.InformantName,
+			IStreetAddress = source.IStreetAddress,
+			ICity = source.ICity,
+			IState = source.IState,
+			IZipCode = source.IZipCode,
+			IPhoneNumber = source.IPhoneNumber,
+			InformantEmail = source.InformantEmail,
+			InfoNotified = source.InfoNotified,
+			Notes = source.Notes,
+			Image = source.Image, // If deep copy is needed, you'll need to clone the byte[] separately
+			InformantRelation = source.InformantRelation,
+			DoB = source.DoB,
+			Age = source.Age,
+			BCity = source.BCity,
+			BZip = source.BZip,
+			BCounty = source.BCounty,
+			BState = source.BState,
+			BCountry = source.BCountry,
+			MStatus = source.MStatus,
+			MDate = source.MDate,
+			MPlace = source.MPlace,
+			Church = source.Church,
+			RPreference = source.RPreference,
+			Clergy = source.Clergy,
+			HighSchool = source.HighSchool,
+			HYoE = source.HYoE,
+			HEL = source.HEL,
+			College = source.College,
+			CYoE = source.CYoE,
+			CEL = source.CEL,
+            // Clone child collections too, if needed:
+			Airline = source.Airline?.Select(a => new Airline
+			{
+				ServiceID = a.ServiceID,
+				AirlineName = a.AirlineName,
+				Country = a.Country,
+				Founded = a.Founded,
+				IATA = a.IATA,
+				ICAO = a.ICAO,
+				FleetSize = a.FleetSize,
+				LogoUrl = a.LogoUrl
+			}).ToList() ?? new List<Airline>(),
+			Buyer = source.Buyer?.Select(b => new Buyer
+			{
+				ServiceID = b.ServiceID,
+				Name = b.Name,
+				Address = b.Address,
+				PhoneNumber = b.PhoneNumber,
+				Relationship = b.Relationship,
+				IsPrimaryBuyer = b.IsPrimaryBuyer,
+				SendBill = b.SendBill
+			}).ToList() ?? new List<Buyer>(),
+			CashAdvance = source.CashAdvance?.Select(ca => new CashAdvance
+			{
+				ServiceID = ca.ServiceID,
+				Description = ca.Description,
+				Tax = ca.Tax,
+				Quantity = ca.Quantity,
+				Price = ca.Price,
+				PriceExtended = ca.PriceExtended,
+				LastPreneedId = ca.LastPreneedId,
+				LastAtneedId = ca.LastAtneedId
+			}).ToList() ?? new List<CashAdvance>(),
+			CauseOfDeath = source.CauseOfDeath?.Select(cod => new CauseOfDeath
+			{
+				ServiceID = cod.ServiceID,
+				Manner = cod.Manner,
+				Other = cod.Other,
+				CauseFactors = cod.CauseFactors,
+				OtherFactors = cod.OtherFactors,
+				TypeofFactor = cod.TypeofFactor,
+				Diabetic = cod.Diabetic,
+				DContributed = cod.DContributed,
+				TobaccoUse = cod.TobaccoUse,
+				AlcoholUse = cod.AlcoholUse,
+				Hospitalized = cod.Hospitalized,
+				DefferedDiag = cod.DefferedDiag,
+				CommDisease = cod.CommDisease,
+				DonationConsidered = cod.DonationConsidered,
+				DonationConsented = cod.DonationConsented,
+				AnatGiftConsidered = cod.AnatGiftConsidered,
+				Viewed = cod.Viewed,
+				Biopsy = cod.Biopsy,
+				AnatGift = cod.AnatGift
+			}).ToList() ?? new List<CauseOfDeath>(),
+			ContainerShipping = source.ContainerShipping?.Select(cs => new ContainerShipping
+			{
+				ServiceID = cs.ServiceID,
+				ShipFrom = cs.ShipFrom,
+				ShipTo = cs.ShipTo,
+				ShipToName = cs.ShipToName,
+				ShipFromName = cs.ShipFromName,
+				ShipFromStreet = cs.ShipFromStreet,
+				ShipFromZip = cs.ShipFromZip,
+				ShipFromTownship = cs.ShipFromTownship,
+				ShipFromLocality = cs.ShipFromLocality,
+				ShipFromState = cs.ShipFromState,
+				ShipFromCountry = cs.ShipFromCountry,
+				ShipFromCounty = cs.ShipFromCounty,
+				ShipToStreet = cs.ShipToStreet,
+				ShipToZip = cs.ShipToZip,
+				ShipToTownship = cs.ShipToTownship,
+				ShipToLocality = cs.ShipToLocality,
+				ShipToState = cs.ShipToState,
+				ShipToCountry = cs.ShipToCountry,
+				ShipToCounty = cs.ShipToCounty,
+				Notes = cs.Notes
+			}).ToList() ?? new List<ContainerShipping>(),
+			Embalmer = source.Embalmer?.Select(e => new Embalmer
+			{
+				ServiceID = e.ServiceID,
+				PermissionToEmbalm = e.PermissionToEmbalm,
+				Embalmed = e.Embalmed,
+				EmbalmedDate = e.EmbalmedDate,
+				EmbalmedTime = e.EmbalmedTime,
+				EmbalmedBy = e.EmbalmedBy,
+				EmbalmingAuthorizor = e.EmbalmingAuthorizor
+			}).ToList() ?? new List<Embalmer>(),
+			FlagApplication = source.FlagApplication?.Select(fa => new FlagApplication
+			{
+				ServiceID = fa.ServiceID,
+				ApplicantName = fa.ApplicantName,
+				RelationshipToDeceased = fa.RelationshipToDeceased,
+				FlagType = fa.FlagType,
+				ApplicationDate = fa.ApplicationDate
+			}).ToList() ?? new List<FlagApplication>(),
+			Military = source.Military?.Select(m => new Military
+			{
+				ServiceID = m.ServiceID,
+				Branch = m.Branch,
+				Rank = m.Rank,
+				ServiceNumber = m.ServiceNumber,
+				StartDate = m.StartDate,
+				EndDate = m.EndDate
+			}).ToList() ?? new List<Military>(),
+			MilitaryStint = source.MilitaryStint?.Select(ms => new MilitaryStint
+			{
+				ServiceID = ms.ServiceID,
+				StintDescription = ms.StintDescription,
+				StartDate = ms.StartDate,
+				EndDate = ms.EndDate,
+				StintMilitaryId = ms.StintMilitaryId
+			}).ToList() ?? new List<MilitaryStint>(),
+			Monument = source.Monument?.Select(m => new Monument
+			{
+				ServiceID = m.ServiceID,
+				MonumentType = m.MonumentType,
+				Material = m.Material,
+				Engraving = m.Engraving,
+				CreatedAt = m.CreatedAt
+			}).ToList() ?? new List<Monument>(),
+			ObituaryData = source.ObituaryData?.Select(od => new ObituaryData
+			{
+				ServiceID = od.ServiceID,
+				DistributionFormat = od.DistributionFormat,
+				Media = od.Media,
+				DateSent = od.DateSent,
+				Primary = od.Primary,
+				IncludePrimaryPhoto = od.IncludePrimaryPhoto,
+				ShowSurvivorAddresses = od.ShowSurvivorAddresses,
+				ShowSurvivorRelationships = od.ShowSurvivorRelationships,
+				RelationshipCount = od.RelationshipCount,
+				WordCount = od.WordCount,
+				ObitNotes = od.ObitNotes,
+				LastPreneedId = od.LastPreneedId,
+				LastAtneedId = od.LastAtneedId,
+				Obituary = od.Obituary
+			}).ToList() ?? new List<ObituaryData>(),
+			PlaceOfDeath = source.PlaceOfDeath?.Select(p => new PlaceOfDeath
+			{
+				ServiceID = p.ServiceID,
+				Name = p.Name,
+				MedicalRecordNumber = p.MedicalRecordNumber,
+				StreetAddress = p.StreetAddress,
+				AptNumber = p.AptNumber,
+				TypeOfFacility = p.TypeOfFacility,
+				CallTakenBy = p.CallTakenBy,
+				ZipCode = p.ZipCode,
+				LocalityType = p.LocalityType,
+				Township = p.Township,
+				Locality = p.Locality,
+				State = p.State,
+				County = p.County,
+				Country = p.Country,
+				InCityLimits = p.InCityLimits,
+				DirectorNotifyDate = p.DirectorNotifyDate,
+				DirectorNotifedTime = p.DirectorNotifedTime,
+				AdmissionDate = p.AdmissionDate,
+				BodyReleaseTime = p.BodyReleaseTime
+			}).ToList() ?? new List<PlaceOfDeath>(),
+			Products = source.Products?.Select(p => new Products
+			{
+				ServiceID = p.ServiceID,
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
+			}).ToList() ?? new List<Products>(),
+			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
+			{
+				ServiceID = sc.ServiceID,
+				ContractDate = sc.ContractDate,
+				SalesPackage = sc.SalesPackage,
+				EstateOwner = sc.EstateOwner,
+				Balance = sc.Balance,
+				DistributedCharges = sc.DistributedCharges
+			}).ToList() ?? new List<ServiceContract>(),
+			Services = source.Services?.Select(s => new Services
+			{
+				ServiceID = s.ServiceID,
+				Category = s.Category,
+				Item = s.Item,
+				Tax = s.Tax,
+				Price = s.Price
+			}).ToList() ?? new List<Services>(),
+			Survivors = source.Survivors?.Select(s => new Survivors
+			{
+				ServiceID = s.ServiceID,
+				SurvivorRelation = s.SurvivorRelation,
+				Name = s.Name,
+				Address = s.Address,
+				GreatGrandChildrenCount = s.GreatGrandChildrenCount,
+				GreatGreatGrandChildrenCount = s.GreatGreatGrandChildrenCount,
+				GreatGreatGreatGrandChildrenCount = s.GreatGreatGreatGrandChildrenCount,
+				ChildrenCount = s.ChildrenCount,
+				GrandChildrenCount = s.GrandChildrenCount,
+				PhoneNumber = s.PhoneNumber,
+				Relationship = s.Relationship,
+				IsLiving = s.IsLiving
+			}).ToList() ?? new List<Survivors>(),
+			WarsServed = source.WarsServed?.Select(w => new WarsServed
+			{
+				ServiceID = w.ServiceID,
+				WarName = w.WarName,
+				Description = w.Description,
+				WarMilitaryId = w.WarMilitaryId
+			}).ToList()  ?? new List<WarsServed>(),
+        };
 	}
 
 	private async Task SaveRecord()
 	{
-		var entity = await Db.Embalmer.FirstOrDefaultAsync(e => e.ClientID == editingEmbalmer.ClientID);
-		if (entity is not null)
+		if (existingDeceased != null && editingDeceased != null && existingDeceased.Embalmer != null && editingDeceased.Embalmer != null)
 		{
-			entity.PermissionToEmbalm = editingEmbalmer.PermissionToEmbalm;
-			entity.Embalmed = editingEmbalmer.Embalmed;
-			entity.EmbalmedDate = editingEmbalmer.EmbalmedDate;
-			entity.EmbalmedTime = editingEmbalmer.EmbalmedTime;
-			entity.EmbalmedBy = editingEmbalmer.EmbalmedBy;
-			entity.EmbalmingAuthorizor = editingEmbalmer.EmbalmingAuthorizor;
-
+			ReplaceCollection(existingDeceased.Embalmer, editingDeceased.Embalmer);
 			await Db.SaveChangesAsync();
 		}
 	}
+
+	private void ReplaceCollection<T>(ICollection<T> original, ICollection<T> updated) where T : class
+    {
+        original.Clear();
+        foreach (var item in updated)
+        {
+            original.Add(item);
+        }
+    }
 }
 
 <style>

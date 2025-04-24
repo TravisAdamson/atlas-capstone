@@ -2,17 +2,7 @@
 
 @inject RESTDB.Data.ApplicationDbContext Db
 @inject NavigationManager NavigationManager
-@inject REST.Services.GlobalState GlobalState
-
-@using RESTDB.Models
-@using RESTDB.Migrations
-@using RESTDB.Data
-@using REST.Components.Shared
-@using Microsoft.AspNetCore.WebUtilities
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web
-
-@inherits LayoutComponentBase
+@inject UserState UserState
 
 @rendermode InteractiveServer
 
@@ -33,7 +23,7 @@
 <div class="title-bar">
 	<h1>Military Record</h1>
 	<div class="SubmitRecordButton">
-		<EditForm Model="@editingMilitary" OnValidSubmit="SaveMilitaryRecord">
+		<EditForm Model="@editingMilitary" OnValidSubmit="SaveRecord">
 			<div class="SaveButtonFirst">
 				<button type="submit" class="btn btn-primary btn-submit" style="background-color: #936091;">Save</button>
 			</div>
@@ -68,11 +58,11 @@
 	<div class="FirstCall-group1">
 		@if (selectedTab == "Stints")
 		{
-		<h5>Military Stints</h5>
+			<h5>Military Stints</h5>
 			<div class="tab-content">
 				<div class="FirstCall-group1">
-					<label>Description</label>
-					<InputText class="fcall" @bind-Value="editingStint.Description" />
+					<label>Stint Description</label>
+					<InputText class="fcall" @bind-Value="editingStint.StintDescription" />
 				</div>
 				<div class="FirstCall-group1">
 					<label>Start Date</label>
@@ -125,17 +115,21 @@
 </div>
 
 @code {
-	private List<Military> militaryList = new List<Military>();
+	private List<Military> Military = new List<Military>();
 	private Military editingMilitary = new Military();
-	private Military currentMilitary = new Military();
-	private MilitaryStint editingStint = new();
-	private WarsServed editingWar = new();
-	private FlagApplication editingFlag = new();
+	private List<MilitaryStint> MilitaryStint = new List<MilitaryStint>();
+	private MilitaryStint editingStint = new MilitaryStint();
+	private List<WarsServed> WarsServed = new List<WarsServed>();
+	private WarsServed editingWar = new WarsServed();
+	private List<FlagApplication> FlagApplication = new List<FlagApplication>();
+	private FlagApplication editingFlag = new FlagApplication();
 	private List<Deceased> deceasedList = new List<Deceased>();
-	private Deceased currentDeceased = new Deceased();
 	private Deceased editingDeceased = new Deceased();
+	private Deceased? existingDeceased = new Deceased();
+
 	private string selectedTab = "Stints";
 
+<<<<<<< HEAD
 protected override async Task OnInitializedAsync()
 {
 	militaryList = await Db.Military.ToListAsync();
@@ -243,10 +237,346 @@ protected override async Task OnInitializedAsync()
 		}
 	}
 
+=======
+>>>>>>> 4dd8b124d9da03867f5576e14f24419fe484a57b
 	private void SelectTab(string tabName)
 	{
 		selectedTab = tabName;
 	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (UserState != null && Db != null && UserState.ServiceID != "None")
+		{
+			existingDeceased = await Db.Deceased
+				.Include(d => d.Airline)
+				.Include(d => d.Buyer)
+				.Include(d => d.CashAdvance)
+				.Include(d => d.CauseOfDeath)
+				.Include(d => d.ContainerShipping)
+				.Include(d => d.Embalmer)
+				.Include(d => d.FlagApplication)
+				.Include(d => d.Military)
+				.Include(d => d.MilitaryStint)
+				.Include(d => d.Monument)
+				.Include(d => d.ObituaryData)
+				.Include(d => d.PlaceOfDeath)
+				.Include(d => d.Products)
+				.Include(d => d.ServiceContract)
+				.Include(d => d.Services)
+				.Include(d => d.Survivors)
+				.Include(d => d.WarsServed)
+				.FirstOrDefaultAsync(d => d.ServiceID == UserState.ServiceID);
+
+			if (existingDeceased != null)
+			{
+				editingDeceased = CloneDeceased(existingDeceased) ?? new Deceased();
+				Military = editingDeceased.Military.ToList() ?? new List<Military>();
+				editingMilitary = Military.FirstOrDefault() ?? new Military();
+				MilitaryStint = editingDeceased.MilitaryStint.ToList() ?? new List<MilitaryStint>();
+				editingStint = MilitaryStint.FirstOrDefault() ?? new MilitaryStint();
+				FlagApplication = editingDeceased.FlagApplication.ToList() ?? new List<FlagApplication>();
+				editingFlag = FlagApplication.FirstOrDefault() ?? new FlagApplication();
+				WarsServed = editingDeceased.WarsServed.ToList() ?? new List<WarsServed>();
+				editingWar = WarsServed.FirstOrDefault() ?? new WarsServed();
+
+			}
+		}
+	}
+
+	private Deceased CloneDeceased(Deceased source)
+	{
+		if(source == null) return new Deceased();
+
+        return new Deceased
+        {
+			ServiceID = source.ServiceID,
+			Director = source.Director,
+			FirstName = source.FirstName,
+			LastName = source.LastName,
+			MiddleName = source.MiddleName,
+			Title = source.Title,
+			Suffix = source.Suffix,
+			Need = source.Need,
+			Status = source.Status,
+			StreetAddress = source.StreetAddress,
+			City = source.City,
+			State = source.State,
+			ZipCode = source.ZipCode,
+			ContractBalance = source.ContractBalance,
+			DoD = source.DoD,
+			TimeOfDeath = source.TimeOfDeath,
+			SSN = source.SSN,
+			Gender = source.Gender,
+			MaidenName = source.MaidenName,
+			Alias = source.Alias,
+			Vet = source.Vet,
+			War = source.War,
+			InformantName = source.InformantName,
+			IStreetAddress = source.IStreetAddress,
+			ICity = source.ICity,
+			IState = source.IState,
+			IZipCode = source.IZipCode,
+			IPhoneNumber = source.IPhoneNumber,
+			InformantEmail = source.InformantEmail,
+			InfoNotified = source.InfoNotified,
+			Notes = source.Notes,
+			Image = source.Image, // If deep copy is needed, you'll need to clone the byte[] separately
+			InformantRelation = source.InformantRelation,
+			DoB = source.DoB,
+			Age = source.Age,
+			BCity = source.BCity,
+			BZip = source.BZip,
+			BCounty = source.BCounty,
+			BState = source.BState,
+			BCountry = source.BCountry,
+			MStatus = source.MStatus,
+			MDate = source.MDate,
+			MPlace = source.MPlace,
+			Church = source.Church,
+			RPreference = source.RPreference,
+			Clergy = source.Clergy,
+			HighSchool = source.HighSchool,
+			HYoE = source.HYoE,
+			HEL = source.HEL,
+			College = source.College,
+			CYoE = source.CYoE,
+			CEL = source.CEL,
+            // Clone child collections too, if needed:
+			Airline = source.Airline?.Select(a => new Airline
+			{
+				ServiceID = a.ServiceID,
+				AirlineName = a.AirlineName,
+				Country = a.Country,
+				Founded = a.Founded,
+				IATA = a.IATA,
+				ICAO = a.ICAO,
+				FleetSize = a.FleetSize,
+				LogoUrl = a.LogoUrl
+			}).ToList() ?? new List<Airline>(),
+			Buyer = source.Buyer?.Select(b => new Buyer
+			{
+				ServiceID = b.ServiceID,
+				Name = b.Name,
+				Address = b.Address,
+				PhoneNumber = b.PhoneNumber,
+				Relationship = b.Relationship,
+				IsPrimaryBuyer = b.IsPrimaryBuyer,
+				SendBill = b.SendBill
+			}).ToList() ?? new List<Buyer>(),
+			CashAdvance = source.CashAdvance?.Select(ca => new CashAdvance
+			{
+				ServiceID = ca.ServiceID,
+				Description = ca.Description,
+				Tax = ca.Tax,
+				Quantity = ca.Quantity,
+				Price = ca.Price,
+				PriceExtended = ca.PriceExtended,
+				LastPreneedId = ca.LastPreneedId,
+				LastAtneedId = ca.LastAtneedId
+			}).ToList() ?? new List<CashAdvance>(),
+			CauseOfDeath = source.CauseOfDeath?.Select(cod => new CauseOfDeath
+			{
+				ServiceID = cod.ServiceID,
+				Manner = cod.Manner,
+				Other = cod.Other,
+				CauseFactors = cod.CauseFactors,
+				OtherFactors = cod.OtherFactors,
+				TypeofFactor = cod.TypeofFactor,
+				Diabetic = cod.Diabetic,
+				DContributed = cod.DContributed,
+				TobaccoUse = cod.TobaccoUse,
+				AlcoholUse = cod.AlcoholUse,
+				Hospitalized = cod.Hospitalized,
+				DefferedDiag = cod.DefferedDiag,
+				CommDisease = cod.CommDisease,
+				DonationConsidered = cod.DonationConsidered,
+				DonationConsented = cod.DonationConsented,
+				AnatGiftConsidered = cod.AnatGiftConsidered,
+				Viewed = cod.Viewed,
+				Biopsy = cod.Biopsy,
+				AnatGift = cod.AnatGift
+			}).ToList() ?? new List<CauseOfDeath>(),
+			ContainerShipping = source.ContainerShipping?.Select(cs => new ContainerShipping
+			{
+				ServiceID = cs.ServiceID,
+				ShipFrom = cs.ShipFrom,
+				ShipTo = cs.ShipTo,
+				ShipToName = cs.ShipToName,
+				ShipFromName = cs.ShipFromName,
+				ShipFromStreet = cs.ShipFromStreet,
+				ShipFromZip = cs.ShipFromZip,
+				ShipFromTownship = cs.ShipFromTownship,
+				ShipFromLocality = cs.ShipFromLocality,
+				ShipFromState = cs.ShipFromState,
+				ShipFromCountry = cs.ShipFromCountry,
+				ShipFromCounty = cs.ShipFromCounty,
+				ShipToStreet = cs.ShipToStreet,
+				ShipToZip = cs.ShipToZip,
+				ShipToTownship = cs.ShipToTownship,
+				ShipToLocality = cs.ShipToLocality,
+				ShipToState = cs.ShipToState,
+				ShipToCountry = cs.ShipToCountry,
+				ShipToCounty = cs.ShipToCounty,
+				Notes = cs.Notes
+			}).ToList() ?? new List<ContainerShipping>(),
+			Embalmer = source.Embalmer?.Select(e => new Embalmer
+			{
+				ServiceID = e.ServiceID,
+				PermissionToEmbalm = e.PermissionToEmbalm,
+				Embalmed = e.Embalmed,
+				EmbalmedDate = e.EmbalmedDate,
+				EmbalmedTime = e.EmbalmedTime,
+				EmbalmedBy = e.EmbalmedBy,
+				EmbalmingAuthorizor = e.EmbalmingAuthorizor
+			}).ToList() ?? new List<Embalmer>(),
+			FlagApplication = source.FlagApplication?.Select(fa => new FlagApplication
+			{
+				ServiceID = fa.ServiceID,
+				ApplicantName = fa.ApplicantName,
+				RelationshipToDeceased = fa.RelationshipToDeceased,
+				FlagType = fa.FlagType,
+				ApplicationDate = fa.ApplicationDate
+			}).ToList() ?? new List<FlagApplication>(),
+			Military = source.Military?.Select(m => new Military
+			{
+				ServiceID = m.ServiceID,
+				Branch = m.Branch,
+				Rank = m.Rank,
+				ServiceNumber = m.ServiceNumber,
+				StartDate = m.StartDate,
+				EndDate = m.EndDate
+			}).ToList() ?? new List<Military>(),
+			MilitaryStint = source.MilitaryStint?.Select(ms => new MilitaryStint
+			{
+				ServiceID = ms.ServiceID,
+				StintDescription = ms.StintDescription,
+				StartDate = ms.StartDate,
+				EndDate = ms.EndDate,
+				StintMilitaryId = ms.StintMilitaryId
+			}).ToList() ?? new List<MilitaryStint>(),
+			Monument = source.Monument?.Select(m => new Monument
+			{
+				ServiceID = m.ServiceID,
+				MonumentType = m.MonumentType,
+				Material = m.Material,
+				Engraving = m.Engraving,
+				CreatedAt = m.CreatedAt
+			}).ToList() ?? new List<Monument>(),
+			ObituaryData = source.ObituaryData?.Select(od => new ObituaryData
+			{
+				ServiceID = od.ServiceID,
+				DistributionFormat = od.DistributionFormat,
+				Media = od.Media,
+				DateSent = od.DateSent,
+				Primary = od.Primary,
+				IncludePrimaryPhoto = od.IncludePrimaryPhoto,
+				ShowSurvivorAddresses = od.ShowSurvivorAddresses,
+				ShowSurvivorRelationships = od.ShowSurvivorRelationships,
+				RelationshipCount = od.RelationshipCount,
+				WordCount = od.WordCount,
+				ObitNotes = od.ObitNotes,
+				LastPreneedId = od.LastPreneedId,
+				LastAtneedId = od.LastAtneedId,
+				Obituary = od.Obituary
+			}).ToList() ?? new List<ObituaryData>(),
+			PlaceOfDeath = source.PlaceOfDeath?.Select(p => new PlaceOfDeath
+			{
+				ServiceID = p.ServiceID,
+				Name = p.Name,
+				MedicalRecordNumber = p.MedicalRecordNumber,
+				StreetAddress = p.StreetAddress,
+				AptNumber = p.AptNumber,
+				TypeOfFacility = p.TypeOfFacility,
+				CallTakenBy = p.CallTakenBy,
+				ZipCode = p.ZipCode,
+				LocalityType = p.LocalityType,
+				Township = p.Township,
+				Locality = p.Locality,
+				State = p.State,
+				County = p.County,
+				Country = p.Country,
+				InCityLimits = p.InCityLimits,
+				DirectorNotifyDate = p.DirectorNotifyDate,
+				DirectorNotifedTime = p.DirectorNotifedTime,
+				AdmissionDate = p.AdmissionDate,
+				BodyReleaseTime = p.BodyReleaseTime
+			}).ToList() ?? new List<PlaceOfDeath>(),
+			Products = source.Products?.Select(p => new Products
+			{
+				ServiceID = p.ServiceID,
+				Category = p.Category,
+				Item = p.Item,
+				Tax = p.Tax,
+				Price = p.Price
+			}).ToList() ?? new List<Products>(),
+			ServiceContract = source.ServiceContract?.Select(sc => new ServiceContract
+			{
+				ServiceID = sc.ServiceID,
+				ContractDate = sc.ContractDate,
+				SalesPackage = sc.SalesPackage,
+				EstateOwner = sc.EstateOwner,
+				Balance = sc.Balance,
+				DistributedCharges = sc.DistributedCharges
+			}).ToList() ?? new List<ServiceContract>(),
+			Services = source.Services?.Select(s => new Services
+			{
+				ServiceID = s.ServiceID,
+				Category = s.Category,
+				Item = s.Item,
+				Tax = s.Tax,
+				Price = s.Price
+			}).ToList() ?? new List<Services>(),
+			Survivors = source.Survivors?.Select(s => new Survivors
+			{
+				ServiceID = s.ServiceID,
+				SurvivorRelation = s.SurvivorRelation,
+				Name = s.Name,
+				Address = s.Address,
+				GreatGrandChildrenCount = s.GreatGrandChildrenCount,
+				GreatGreatGrandChildrenCount = s.GreatGreatGrandChildrenCount,
+				GreatGreatGreatGrandChildrenCount = s.GreatGreatGreatGrandChildrenCount,
+				ChildrenCount = s.ChildrenCount,
+				GrandChildrenCount = s.GrandChildrenCount,
+				PhoneNumber = s.PhoneNumber,
+				Relationship = s.Relationship,
+				IsLiving = s.IsLiving
+			}).ToList() ?? new List<Survivors>(),
+			WarsServed = source.WarsServed?.Select(w => new WarsServed
+			{
+				ServiceID = w.ServiceID,
+				WarName = w.WarName,
+				Description = w.Description,
+				WarMilitaryId = w.WarMilitaryId
+			}).ToList()  ?? new List<WarsServed>(),
+        };
+	}
+
+	private async Task SaveRecord()
+	{
+		if (existingDeceased != null && editingDeceased != null
+			&& existingDeceased.Military != null && editingDeceased.Military != null
+			&& existingDeceased.MilitaryStint != null && editingDeceased.MilitaryStint != null
+			&& existingDeceased.FlagApplication != null && editingDeceased.FlagApplication != null
+			&& existingDeceased.WarsServed != null && editingDeceased.WarsServed != null)
+		{
+			ReplaceCollection(existingDeceased.Military, editingDeceased.Military);
+			ReplaceCollection(existingDeceased.MilitaryStint, editingDeceased.MilitaryStint);
+			ReplaceCollection(existingDeceased.FlagApplication, editingDeceased.FlagApplication);
+			ReplaceCollection(existingDeceased.WarsServed, editingDeceased.WarsServed);
+		}
+
+		await Db.SaveChangesAsync();
+	}
+
+	private void ReplaceCollection<T>(ICollection<T> original, ICollection<T> updated) where T : class
+    {
+        original.Clear();
+        foreach (var item in updated)
+        {
+            original.Add(item);
+        }
+    }
 }
 
 <style>

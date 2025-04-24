@@ -1,10 +1,8 @@
 ﻿@page "/Search Records"
 
-@using RESTDB.Models
-
-@inject RESTDB.Data.ApplicationDbContext Db
+@inject ApplicationDbContext Db
 @inject NavigationManager NavigationManager
-@inject REST.Services.GlobalState GlobalState
+@inject UserState UserState
 
 @rendermode InteractiveServer
 
@@ -35,7 +33,7 @@ else if (results != null && results.Any())
 	<table class="table table-striped mt-3">
 		<thead>
 			<tr>
-				<th>Client ID</th>
+				<th>Service ID</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Director</th>
@@ -47,29 +45,32 @@ else if (results != null && results.Any())
 		<tbody>
 			@foreach (var item in results)
 			{
-				<tr>
-					<td>@item.ClientID</td>
-					<td>@item.FirstName</td>
-					<td>@item.LastName</td>
-					<td>@item.Director</td>
-					<td>@item.City</td>
-					<td>@item.DoD?.ToString("MM-dd-yyyy")</td>
-					<td>
-						<button type="button" @onclick="() => StartEdit(item.ClientID ?? -1)">Edit</button>
-						<span class="Spacing"></span>
-						@if (ConfirmingDeleteId == @item.ClientID)
-						{
-							<div class="mt-1">
-								<button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ClientID ?? -1)">Confirm Delete</button>
-								<button type="button" class="btn btn-success" @onclick="CancelDelete">Cancel</button>
-							</div>
-						}
-						else
-						{
-							<button type="button" @onclick="() => ShowConfirmDelete(item.ClientID ?? -1)">Delete</button>
-						}
-					</td>
-				</tr>
+				if (item != null && item.ServiceID != null)
+				{
+					<tr>
+						<td>@item.ServiceID</td>
+						<td>@item.FirstName</td>
+						<td>@item.LastName</td>
+						<td>@item.Director</td>
+						<td>@item.City</td>
+						<td>@item.DoD?.ToString("MM-dd-yyyy")</td>
+						<td>
+							<button type="button" @onclick="() => StartEdit(item.ServiceID)">Edit</button>
+							<span class="Spacing"></span>
+							@if (ConfirmingDeleteId == @item.ServiceID)
+							{
+								<div class="mt-1">
+									<button type="button" class="btn btn-danger me-2" @onclick="() => ConfirmDelete(item.ServiceID)">Confirm Delete</button>
+									<button type="button" class="btn btn-success" @onclick="CancelDelete">Cancel</button>
+								</div>
+							}
+							else
+							{
+								<button type="button" @onclick="() => ShowConfirmDelete(item.ServiceID)">Delete</button>
+							}
+						</td>
+					</tr>
+				}
 			}
 		</tbody>
 	</table>
@@ -83,9 +84,10 @@ else if (searched)
 	private string searchTerm = string.Empty;
 	private string selectedField = "FirstName";
 	private List<Deceased> results = new();
+	private Deceased? deceased = new Deceased();
 	private bool isLoading = false;
 	private bool searched = false;
-	private int? ConfirmingDeleteId = null;
+	private string? ConfirmingDeleteId = null;
 	private Dictionary<string, string> searchFields = new()
 	{
 		{ "First Name", "FirstName" },
@@ -95,7 +97,8 @@ else if (searched)
 		{ "Status", "Status" },
 		{ "SSN", "SSN" },
 		{ "Gender", "Gender" },
-		{ "Maiden Name", "MaidenName" }
+		{ "Maiden Name", "MaidenName" },
+		{ "Buyer's Name", "Buyer.Name"}
 	};
 	private async Task HandleSubmit()
 	{
@@ -107,7 +110,24 @@ else if (searched)
 		isLoading = true;
 		searched = false;
 
-		IQueryable<Deceased> query = Db.Deceased;
+		IQueryable<Deceased> query = Db.Deceased
+				.Include(d => d.Airline)
+				.Include(d => d.Buyer)
+				.Include(d => d.CashAdvance)
+				.Include(d => d.CauseOfDeath)
+				.Include(d => d.ContainerShipping)
+				.Include(d => d.Embalmer)
+				.Include(d => d.FlagApplication)
+				.Include(d => d.Military)
+				.Include(d => d.MilitaryStint)
+				.Include(d => d.Monument)
+				.Include(d => d.ObituaryData)
+				.Include(d => d.PlaceOfDeath)
+				.Include(d => d.Products)
+				.Include(d => d.ServiceContract)
+				.Include(d => d.Services)
+				.Include(d => d.Survivors)
+				.Include(d => d.WarsServed);
 
 		if (!string.IsNullOrWhiteSpace(searchTerm))
 		{
@@ -121,6 +141,7 @@ else if (searched)
 				"SSN" => query.Where(d => d.SSN != null && d.SSN.Contains(searchTerm)),
 				"Gender" => query.Where(d => d.Gender != null && d.Gender.Contains(searchTerm)),
 				"MaidenName" => query.Where(d => d.MaidenName != null && d.MaidenName.Contains(searchTerm)),
+				"Buyer.Name" => query.Where(d => d.Buyer.Any(b => b.Name != null && b.Name.Contains(searchTerm))),
 				_ => query
 			};
 		}
@@ -130,16 +151,16 @@ else if (searched)
 		searched = true;
 	}
 
-	private void StartEdit(int ClientID)
+	private void StartEdit(string ServiceID)
 	{
-		GlobalState.ClientID = ClientID;
-		Console.WriteLine($"ClientID: {GlobalState.ClientID}");
-		NavigationManager.NavigateTo($"/Modify%20Records?currentRecordString={ClientID}");
+		UserState.ServiceID = ServiceID;
+		Console.WriteLine($"ClientID: {UserState.ServiceID}");
+		NavigationManager.NavigateTo("/Modify%20Records");
 	}
 
-	private void ShowConfirmDelete(int ClientID)
+	private void ShowConfirmDelete(string ServiceID)
 	{
-		ConfirmingDeleteId = ClientID;
+		ConfirmingDeleteId = ServiceID;
 	}
 
 	private void CancelDelete()
@@ -147,6 +168,7 @@ else if (searched)
 		ConfirmingDeleteId = null;
 	}
 
+<<<<<<< HEAD
 	private async Task ConfirmDelete(int ClientID)
 	{ /* use one DB‑transaction so every table is cleaned together */
 		await using var tx = await Db.Database.BeginTransactionAsync();
@@ -174,19 +196,41 @@ else if (searched)
 			Db.Services.RemoveRange(         Db.Services.         Where(r => r.ClientID == ClientID));
 			Db.Survivors.RemoveRange(        Db.Survivors.        Where(r => r.ClientID == ClientID));
 			Db.WarsServed.RemoveRange(       Db.WarsServed.       Where(r => r.ClientID == ClientID));
-
-			await Db.SaveChangesAsync();
-			await tx.CommitAsync();
-		}
-		catch
+=======
+	private async Task ConfirmDelete(string DeleteID)
+	{
+		if (DeleteID != null)
 		{
-			await tx.RollbackAsync();
-			throw; // let the Blazor error boundary show a useful message
+			deceased = await Db.Deceased
+				.Include(d => d.Airline)
+				.Include(d => d.Buyer)
+				.Include(d => d.CashAdvance)
+				.Include(d => d.CauseOfDeath)
+				.Include(d => d.ContainerShipping)
+				.Include(d => d.Embalmer)
+				.Include(d => d.FlagApplication)
+				.Include(d => d.Military)
+				.Include(d => d.MilitaryStint)
+				.Include(d => d.Monument)
+				.Include(d => d.ObituaryData)
+				.Include(d => d.PlaceOfDeath)
+				.Include(d => d.Products)
+				.Include(d => d.ServiceContract)
+				.Include(d => d.Services)
+				.Include(d => d.Survivors)
+				.Include(d => d.WarsServed)
+				.FirstOrDefaultAsync(d => d.ServiceID == DeleteID);
 		}
-		results = await Db.Deceased.ToListAsync(); // refresh the grid
+>>>>>>> 4dd8b124d9da03867f5576e14f24419fe484a57b
 
-		if (GlobalState.ClientID == ClientID) // if delete the active record
-			GlobalState.ClientID = 0; // grey‑out Modify Records again
+		if (deceased != null)
+		{
+			Db.Deceased.Remove(deceased);
+			await Db.SaveChangesAsync();
+		}
+
+		if (UserState.ServiceID == DeleteID) // if delete the active record
+			UserState.ServiceID = "None"; // grey‑out Modify Records again
 
 		ConfirmingDeleteId = null; // collapse the inline confirm panel
 	}

@@ -1,11 +1,10 @@
 ﻿@page "/First Call"
-
-@inject RESTDB.Data.ApplicationDbContext Db
-
-@rendermode InteractiveServer
-
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+
+@inject ApplicationDbContext Db
+
+@rendermode InteractiveServer
 
 <PageTitle>First Call</PageTitle>
 
@@ -29,7 +28,7 @@
 			<div class="FirstCall-group1">
 				<label for="Director">Director</label>
 				<InputSelect @bind-Value="currentDeceased.Director" class="State-group" TValue="string">
-						<option value="Select">Select</option>
+						<option disabled value="">Select</option>
 						<option value="Denise Adamson">Denise Adamson</option>
 						<option value="Jon Hoopert">Jon Hoopert</option>
 						<option value="James Groesbeck">James Groesbeck</option>
@@ -39,7 +38,7 @@
 			<div class="FirstCall-group1">
 				<label for="Need">Pre-Need or At-Need:</label>
 				<InputSelect id="Need" class="State-group" TValue="string" @bind-Value="currentDeceased.Need">
-						<option value="Select">Select</option>
+						<option disabled value="">Select</option>
 						<option value="Pre-Need">Pre-Need</option>
 						<option value="At-Need">At-Need</option>
 				</InputSelect>
@@ -47,7 +46,7 @@
 			<div class="FirstCall-group1">
 				<label for="Status">Case Status:</label>
 				<InputSelect id="Status" class="State-group" TValue="string" @bind-Value="currentDeceased.Status">
-						<option value="Select">Select</option>
+						<option disabled value="">Select</option>
 						<option value="Pending">Pending</option>
 						<option value="Closed">Closed</option>
 						<option value="Charged off">Charged off</option>
@@ -119,7 +118,7 @@
 			<div class="IState-container">
 				<label for="State">Select State:</label>
 				<InputSelect @bind-Value="currentDeceased.State" class="State-group" TValue="string">
-					<option value="Select">Select</option>
+					<option disabled value="Select">Select</option>
 					<option value="Alabama">Alabama</option>
 					<option value="Alaska">Alaska</option>
 					<option value="Arizona">Arizona</option>
@@ -219,9 +218,10 @@
 			<div class="gender-container">
 				<label>Gender:</label>
 				<InputSelect @bind-Value="currentDeceased.Gender" class="gender-group" TValue="string">
-						<option value="Select">Select</option>
+						<option disabled value="">Select</option>
 						<option value="Male">Male</option>
 						<option value="Female">Female</option>
+						<option value="Other">Other</option>
 				</InputSelect>
 			</div>
 			<!-- Notes -->
@@ -261,7 +261,7 @@
 			<div class="IState-container">
 				<label for="IState">Select State:</label>
 				<InputSelect @bind-Value="currentDeceased.IState" class="IState-group" TValue="string">
-					<option value="Select">Select</option>
+					<option disabled value="">Select</option>
 					<option value="Alabama">Alabama</option>
 					<option value="Alaska">Alaska</option>
 					<option value="Arizona">Arizona</option>
@@ -361,41 +361,8 @@
 </div>
 
 @code {
-	private List<RESTDB.Models.Deceased> Deceased = new List<RESTDB.Models.Deceased>();
-	private RESTDB.Models.Deceased currentDeceased = new RESTDB.Models.Deceased();
-	private List<RESTDB.Models.Airline> Airline = new List<RESTDB.Models.Airline>();
-	private RESTDB.Models.Airline currentAirline = new RESTDB.Models.Airline();
-	private List<RESTDB.Models.Buyer> Buyer = new List<RESTDB.Models.Buyer>();
-	private RESTDB.Models.Buyer currentBuyer = new RESTDB.Models.Buyer();
-	private List<RESTDB.Models.CashAdvance> CashAdvance = new List<RESTDB.Models.CashAdvance>();
-	private RESTDB.Models.CashAdvance currentCashAdvance = new RESTDB.Models.CashAdvance();
-	private List<RESTDB.Models.ContainerShipping> ContainerShipping = new List<RESTDB.Models.ContainerShipping>();
-	private RESTDB.Models.ContainerShipping currentContainerShipping = new RESTDB.Models.ContainerShipping();
-	private List<RESTDB.Models.Embalmer> Embalmer = new List<RESTDB.Models.Embalmer>();
-	private RESTDB.Models.Embalmer currentEmbalmer = new RESTDB.Models.Embalmer();
-	private List<RESTDB.Models.FlagApplication> FlagApplication = new List<RESTDB.Models.FlagApplication>();
-	private RESTDB.Models.FlagApplication currentFlagApplication = new RESTDB.Models.FlagApplication();
-	private List<RESTDB.Models.Military> Military = new List<RESTDB.Models.Military>();
-	private RESTDB.Models.Military currentMilitary = new RESTDB.Models.Military();
-	private List<RESTDB.Models.MilitaryStint> MilitaryStint = new List<RESTDB.Models.MilitaryStint>();
-	private RESTDB.Models.MilitaryStint currentMilitaryStint = new RESTDB.Models.MilitaryStint();
-	private List<RESTDB.Models.Monument> Monument = new List<RESTDB.Models.Monument>();
-	private RESTDB.Models.Monument currentMonument = new RESTDB.Models.Monument();
-	private List<RESTDB.Models.ObituaryData> ObituaryData = new List<RESTDB.Models.ObituaryData>();
-	private RESTDB.Models.ObituaryData currentObituaryData = new RESTDB.Models.ObituaryData();
-	private List<RESTDB.Models.PlaceOfDeath> PlaceOfDeath = new List<RESTDB.Models.PlaceOfDeath>();
-	private RESTDB.Models.PlaceOfDeath currentPlaceOfDeath = new RESTDB.Models.PlaceOfDeath();
-	private List<RESTDB.Models.Products> Products = new List<RESTDB.Models.Products>();
-	private RESTDB.Models.Products currentProducts = new RESTDB.Models.Products();
-	private List<RESTDB.Models.ServiceContract> ServiceContract = new List<RESTDB.Models.ServiceContract>();
-	private RESTDB.Models.ServiceContract currentServiceContract = new RESTDB.Models.ServiceContract();
-	private List<RESTDB.Models.Services> Services = new List<RESTDB.Models.Services>();
-	private RESTDB.Models.Services currentServices = new RESTDB.Models.Services();
-	private List<RESTDB.Models.Survivors> Survivors = new List<RESTDB.Models.Survivors>();
-	private RESTDB.Models.Survivors currentSurvivors = new RESTDB.Models.Survivors();
-	private List<RESTDB.Models.WarsServed> WarsServed = new List<RESTDB.Models.WarsServed>();
-	private RESTDB.Models.WarsServed currentWarsServed = new RESTDB.Models.WarsServed();
-
+	private List<Deceased> Deceased = new List<Deceased>();
+	private Deceased currentDeceased = new Deceased();
 	// Phone and SSN part bindings
 	private string? PhonePart1 { get; set; }
 	private string? PhonePart2 { get; set; }
@@ -411,12 +378,6 @@
 	protected override async Task OnInitializedAsync()
 	{
 		Deceased = await Db.Deceased.ToListAsync();
-	}
-
-	private int GetNextClientID()
-	{
-		var lastDeceased = Db.Deceased.OrderByDescending(d => d.ClientID).FirstOrDefault();
-		return lastDeceased?.ClientID + 1 ?? 1;
 	}
 
 	private async Task SaveRecord()
@@ -441,40 +402,47 @@
 		// Save
 		try
 		{
-			currentDeceased.ClientID = GetNextClientID();
-			Db.Deceased.Add(currentDeceased);
-			Db.Airline.Add(currentAirline);
-			Db.Buyer.Add(currentBuyer);
-			Db.CashAdvance.Add(currentCashAdvance);
-			Db.Embalmer.Add(currentEmbalmer);
-			Db.ContainerShipping.Add(currentContainerShipping);
-			Db.FlagApplication.Add(currentFlagApplication);
-			Db.Military.Add(currentMilitary);
-			Db.MilitaryStint.Add(currentMilitaryStint);
-			Db.Monument.Add(currentMonument);
-			Db.ObituaryData.Add(currentObituaryData);
-			Db.PlaceOfDeath.Add(currentPlaceOfDeath);
-			Db.Products.Add(currentProducts);
-			Db.ServiceContract.Add(currentServiceContract);
-			Db.Services.Add(currentServices);
-			Db.Survivors.Add(currentSurvivors);
-			Db.WarsServed.Add(currentWarsServed);
+			currentDeceased.ServiceID = currentDeceased.ServiceID?.Trim();
 
-			await Db.SaveChangesAsync();
+            // These objects will inherit the ServiceID via the navigation relationship
+            currentDeceased.Airline = new List<Airline> { new Airline() };
+            currentDeceased.Buyer = new List<Buyer> { new Buyer() };
+			currentDeceased.CashAdvance = new List<CashAdvance> { new CashAdvance() };
+			currentDeceased.CauseOfDeath = new List<CauseOfDeath> { new CauseOfDeath() };
+			currentDeceased.ContainerShipping = new List<ContainerShipping> { new ContainerShipping() };
+			currentDeceased.Embalmer = new List<Embalmer> { new Embalmer() };
+			currentDeceased.FlagApplication = new List<FlagApplication> { new FlagApplication() };
+			currentDeceased.Military = new List<Military> { new Military() };
+			currentDeceased.MilitaryStint = new List<MilitaryStint> { new MilitaryStint() };
+			currentDeceased.Monument = new List<Monument> { new Monument() };
+			currentDeceased.ObituaryData = new List<ObituaryData> { new ObituaryData() };
+			currentDeceased.PlaceOfDeath = new List<PlaceOfDeath> { new PlaceOfDeath() };
+			currentDeceased.Products = new List<Products> { new Products() };
+			currentDeceased.ServiceContract = new List<ServiceContract> { new ServiceContract() };
+			currentDeceased.Services = new List<Services> { new Services() };
+			currentDeceased.Survivors = new List<Survivors> { new Survivors() };
+			currentDeceased.WarsServed = new List<WarsServed> { new WarsServed() };
 
-			currentDeceased = new RESTDB.Models.Deceased();
-			PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
-			SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
+            Db.Deceased.Add(currentDeceased);
+            await Db.SaveChangesAsync();
 		}
 		catch (DbUpdateException ex)
 		{
-			// You can inspect the inner exception to make sure it's a duplicate key error
 			if (ex.InnerException != null && ex.InnerException.Message.Contains("Duplicate"))
 				errorMessage = "A record with this Service ID already exists.";
 			else
 				errorMessage = "An unexpected error occurred while saving.";
+<<<<<<< HEAD
+=======
+			}
+
+>>>>>>> 4dd8b124d9da03867f5576e14f24419fe484a57b
 			Console.WriteLine($"Error saving record: {ex.Message}");
 		}
+
+		currentDeceased = new RESTDB.Models.Deceased();
+		PhonePart1 = PhonePart2 = PhonePart3 = string.Empty;
+		SSNPart1 = SSNPart2 = SSNPart3 = string.Empty;
 	}
 
 	private async Task HandleImageUpload(InputFileChangeEventArgs e)

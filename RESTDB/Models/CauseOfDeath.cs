@@ -1,14 +1,22 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class CauseOfDeath
 {
 	[Key]
+	public int RecordID { get; set; }
 
+<<<<<<< HEAD
 	public int ClientID { get; set; }
 	public string? Manner { get; set; } // The manner of death
 	public string? Other { get; set; } // Other cause of death
+=======
+	public string? ServiceID { get; set; }
+	public string? Manner { get; set; }
+	public string? Other { get; set; }
+>>>>>>> 4dd8b124d9da03867f5576e14f24419fe484a57b
 	public string? CauseFactors { get; set; }
 	public string? OtherFactors { get; set; }
 	public string? TypeofFactor { get; set; }
@@ -25,4 +33,8 @@ public class CauseOfDeath
 	public bool Viewed { get; set; }
 	public bool Biopsy { get; set; }
 	public string? AnatGift { get; set; }
+
+	//Navigation Properties back to Primary Key
+	[ForeignKey(nameof(ServiceID))]
+    public Deceased? Deceased { get; set; }
 }

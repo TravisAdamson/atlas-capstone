@@ -1,0 +1,68 @@
+@page "/Login"
+@using REST.Services
+@using Microsoft.AspNetCore.Components
+@inject UserManager<AppUser> UserManager
+@inject NavigationManager NavigationManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserState UserState
+@layout _EmptyLayout
+@attribute [AllowAnonymous]
+@rendermode InteractiveServer
+
+<h3>Login</h3>
+
+<EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="LoginForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <InputText id="username" class="form-control" @bind-Value="loginModel.UserName" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" type="password" @bind-Value="loginModel.Password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+    private LoginModel loginModel { get; set; } = new LoginModel();
+
+	protected override void OnInitialized() => loginModel ??= new();
+
+    private async Task HandleLogin()
+    {
+		if (loginModel == null || loginModel.UserName == null || loginModel.Password == null)
+		{
+			Console.WriteLine("All fields are required");
+			return;
+		}
+        else
+		{
+			var user = await UserManager.FindByNameAsync(loginModel.UserName);
+			if (user != null)
+			{
+				var validPassword = await UserManager.CheckPasswordAsync(user, loginModel.Password);
+				if (validPassword)
+				{
+					UserState.UserName = loginModel.UserName;
+					await InvokeAsync(() => NavigationManager.NavigateTo("/Home"));
+					return;
+				}
+			}
+			Console.WriteLine("Invalid login.");
+		}
+    }
+
+    public class LoginModel
+    {
+		[Required]
+        public string? UserName { get; set; }
+
+		[Required]
+		public string? Password { get; set; }
+    }
+}

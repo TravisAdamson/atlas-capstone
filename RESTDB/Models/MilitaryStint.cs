@@ -1,17 +1,20 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class MilitaryStint
 {
 	[Key]
+	public int RecordID { get; set; }
 
-	public int ClientID { get; set; }
-	public string? Description { get; set; } // Example: "Deployed in Afghanistan"
+	public string? ServiceID { get; set; }
+	public string? StintDescription { get; set; }
 	public DateTime? StartDate { get; set; }
 	public DateTime? EndDate { get; set; }
-
-	// Needs to be limited to a number possibly
 	public string? StintMilitaryId { get; set; }
-	public Military? Military { get; set; } // Navigation property to the Military class
+
+	//Navigation Properties back to Primary Key
+	[ForeignKey(nameof(ServiceID))]
+    public Deceased? Deceased { get; set; }
 }

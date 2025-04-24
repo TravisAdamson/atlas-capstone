@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTDB.Models;
 
 public class PlaceOfDeath
 {
 	[Key]
+<<<<<<< HEAD
 	public int ClientID { get; set; }
 	public string? Name { get; set; } // The name of the facility or place where death occurred
 	public string? MedicalRecordNumber { get; set; } // The medical record number associated with the deceased
@@ -24,4 +26,31 @@ public class PlaceOfDeath
 	public DateTime? DirectorNotifedTime { get; set; } // The time the director was notified about the death
 	public DateTime? AdmissionDate { get; set; } // The date the deceased was admitted to the place of death
 	public DateTime? BodyReleaseTime { get; set; } // The time when the body was released
+=======
+	public int RecordID { get; set; }
+
+	public string? ServiceID { get; set; }
+	public string? Name { get; set; }
+	public string? MedicalRecordNumber { get; set; }
+	public string? StreetAddress { get; set; }
+	public string? AptNumber { get; set; }
+	public string? TypeOfFacility { get; set; }
+	public string? CallTakenBy { get; set; }
+	public string? ZipCode { get; set; }
+	public string? LocalityType { get; set; }
+	public string? Township { get; set; }
+	public string? Locality { get; set; }
+	public string? State { get; set; }
+	public string? County { get; set; }
+	public string? Country { get; set; }
+	public bool InCityLimits { get; set; }
+	public DateTime? DirectorNotifyDate { get; set; }
+	public DateTime? DirectorNotifedTime { get; set; }
+	public DateTime? AdmissionDate { get; set; }
+	public DateTime? BodyReleaseTime { get; set; }
+
+	//Navigation Properties back to Primary Key
+	[ForeignKey(nameof(ServiceID))]
+    public Deceased? Deceased { get; set; }
+>>>>>>> 4dd8b124d9da03867f5576e14f24419fe484a57b
 }
