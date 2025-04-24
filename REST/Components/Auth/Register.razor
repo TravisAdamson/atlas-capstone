@@ -20,36 +20,33 @@
 <p><strong>Password (live):</strong> @registerModel.Password</p>
 
 <EditForm Model="registerModel" OnValidSubmit="@HandleRegistration" FormName="RegisterForm">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label for="username">Username</label>
-        <InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
-    </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <InputText id="password" class="form-control" type="password" @bind-Value="registerModel.Password" />
-    </div>
+	<DataAnnotationsValidator />
+	<ValidationSummary />
 	<div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <InputText id="confirmPassword" class="form-control" type="password" @bind-Value="registerModel.ConfirmPassword" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
+		<label for="username">Username</label>
+		<InputText id="username" class="form-control" @bind-Value="registerModel.UserName" />
+	</div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<InputText id="password" class="form-control" type="password" @bind-Value="registerModel.Password" />
+	</div>
+	<div class="form-group">
+		<label for="confirmPassword">Confirm Password</label>
+		<InputText id="confirmPassword" class="form-control" type="password" @bind-Value="registerModel.ConfirmPassword" />
+	</div>
+	<button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
 
 @code {
 	[SupplyParameterFromForm(FormName = "RegisterForm")]
-    private RegisterModel registerModel { get; set; } = new RegisterModel();
+	private RegisterModel registerModel { get; set; } = new RegisterModel();
 
 	protected override void OnInitialized()
 	{
 		registerModel ??= new();
 	}
 	private async Task HandleRegistration()
-    {
+	{
 		if (registerModel == null || registerModel.Password == null || registerModel.UserName == null || registerModel.ConfirmPassword == null)
 		{
 			Console.WriteLine("All fields are required");
@@ -57,7 +54,7 @@
 		}
 		else if (registerModel.Password != registerModel.ConfirmPassword)
 		{
-			Console.WriteLine("Passwords do not match.");
+			Console.WriteLine("Passwords do not match");
 			return;
 		}
 		else
@@ -77,13 +74,10 @@
 		}
 	}
 
-    public class RegisterModel
-    {
-		[Required]
-        public string? UserName { get; set; }
-        [Required]
-		public string? Password { get; set; }
-        [Required]
-		public string? ConfirmPassword { get; set; }
-    }
+	public class RegisterModel
+	{
+		[Required] public string? UserName { get; set; }
+		[Required] public string? Password { get; set; }
+		[Required] public string? ConfirmPassword { get; set; }
+	}
 }
